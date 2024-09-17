@@ -107,32 +107,38 @@
       </nav>
     </aside>
 
-    <main>
-      <div class="content">
-        <div class="content-container">
-          <header class="board-header">
-            <div class="headline-container">
-              <h1>Board</h1>
-              <div class="headline-right-container">
+    <div class="content">
+      <div class="content-container">
+        <header class="board-header">
+          <div class="headline-container">
+            <h1>Board</h1>
+            <div class="headline-right-container">
+              <div class="input-container">
                 <input
                   type="search"
-                  name="find"
                   id="find-task"
                   placeholder="Find task"
                 />
-                <button class="add-task-button">
-                  Add task
-                  <img
-                    src="../assets/icons/add.png"
-                    alt="add task icon"
-                  />
-                </button>
+                <div class="input-seperator"></div>
+
+                <img
+                  src="../assets/icons/search.png"
+                  alt="search icon"
+                />
               </div>
+
+              <button class="add-task-button">
+                Add task
+                <img
+                  src="../assets/icons/add.png"
+                  alt="add task icon"
+                />
+              </button>
             </div>
-          </header>
-        </div>
+          </div>
+        </header>
       </div>
-    </main>
+    </div>
 
     <script src="../js/script.js"></script>
   </body>

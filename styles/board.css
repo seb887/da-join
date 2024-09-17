@@ -11,7 +11,6 @@
   display: flex;
   justify-content: space-between;
   width: 1056px;
-  border: 1px solid black;
 }
 
 .headline-right-container {
@@ -19,6 +18,27 @@
   justify-content: center;
   align-items: center;
   gap: 32px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  width: 312px;
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
+}
+
+.input-container input {
+  width: 200px;
+  border: none;
+}
+
+.input-seperator {
+  width: 1px;
+  height: 31px;
+  background-color: #a8a8a8;
 }
 
 .add-task-button {

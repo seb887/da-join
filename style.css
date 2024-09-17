@@ -52,6 +52,7 @@ h1 {
   box-shadow: 0 4px 4px -0 rgba(0, 0, 0, 0.2);
   position: absolute;
   left: 0;
+  z-index: 10;
 }
 
 .header-user-box {
@@ -109,7 +110,7 @@ h1 {
   background-color: var(--bg-secondary);
   color: var(--font-secondary);
   position: relative;
-  z-index: 1;
+  z-index: 99;
 }
 
 .sidebar-logo {
@@ -176,5 +177,4 @@ h1 {
   height: calc(100vh - 96px);
   position: relative;
   top: 96px;
-  z-index: -1;
 }
