@@ -139,15 +139,15 @@ h1 {
   padding: 8px 56px;
   gap: 8px;
   text-decoration: none;
+  color: var(--font-secondary);
 }
 
-.nav-links a {
+/* .nav-links a {
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: var(--font-secondary);
-}
+} */
 
 .nav-links img {
   width: 30px;
@@ -176,4 +176,5 @@ h1 {
   height: calc(100vh - 96px);
   position: relative;
   top: 96px;
+  z-index: -1;
 }

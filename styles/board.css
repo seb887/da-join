@@ -1,0 +1,41 @@
+.board-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 64px;
+  /* padding-right: 88px; */
+  height: 232px;
+}
+
+.headline-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1056px;
+  border: 1px solid black;
+}
+
+.headline-right-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.add-task-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 4px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--bg-secondary);
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-task-button img {
+  width: 19px;
+  height: 19px;
+}
