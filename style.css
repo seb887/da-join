@@ -82,7 +82,7 @@ h1 {
 }
 
 .user-initials {
-  color: #29abe2;
+  color: var(--accent-primary);
   font-size: 22px;
   font-weight: 700;
   display: flex;
@@ -90,7 +90,7 @@ h1 {
   align-items: center;
   width: 56px;
   height: 56px;
-  border: solid 3px #2a3647;
+  border: solid 3px var(--bg-secondary);
   border-radius: 100%;
 }
 
