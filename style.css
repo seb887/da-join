@@ -164,3 +164,16 @@ h1 {
   gap: 8px;
   width: 100%;
 }
+
+/*======================
+       Main
+=======================*/
+
+.content {
+  display: flex;
+  background-color: var(--bg-primary);
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  position: relative;
+  top: 96px;
+}
