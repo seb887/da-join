@@ -6,19 +6,23 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <title>Contacts - Join</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo-black.png">
     <link
       rel="stylesheet"
       href="../style.css"
     />
-    <title>Join</title>
-
+    <link
+    rel="stylesheet"
+    href="../styles/contacts.css"
+  />
     <link
       rel="stylesheet"
-      href="styles/log-in.css"
+      href="../styles/log-in.css"
     />
     <link
       rel="stylesheet"
-      href="styles/animation.css"
+      href="../styles/animation.css"
     />
   </head>
   <body>
@@ -26,7 +30,7 @@
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
-          <a href="html/help.html"
+          <a href="../html/help.html"
             ><img
               src="../assets/icons/help.png"
               alt=""
@@ -112,6 +116,15 @@
       </nav>
     </aside>
 
-    <script src="../js/script.js"></script>
+    <section class ="contact-list-container">
+      <div class="add-new-contacts">
+        <button onclick="addNewContact()">Add new contact</button>
+      </div>
+      <div id="contacts"> 
+          
+      </div>
+    </section>
+        
+    <script src="js/script.js"></script>
   </body>
 </html>
