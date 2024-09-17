@@ -1,0 +1,166 @@
+/*======================
+        General
+=======================*/
+
+@font-face {
+  font-family: inter;
+  src: url(assets/fonts/Inter-VariableFont_opsz_wght.ttf);
+}
+
+:root {
+  --bg-primary: #f6f7f8;
+  --bg-secondary: #2a3647;
+  --bg-hover: #091931;
+  --font-primary: #000000;
+  --font-secondary: #cdcdcd;
+  --accent-primary: #29abe2;
+}
+
+* {
+  font-family: inter;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  /* justify-content: center; */
+  max-width: 1920px;
+  width: 100%;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+/*======================
+        Header
+=======================*/
+
+.header {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 232px;
+  height: 96px;
+  width: 100%;
+  padding-left: 345px;
+  background-color: white;
+  box-shadow: 0 4px 4px -0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 0;
+}
+
+.header-user-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 104px;
+  height: 56px;
+  margin-right: 40px;
+}
+
+.help-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+}
+
+.help-logo img {
+  width: 20px;
+  height: 20px;
+}
+
+.help-logo img:hover {
+  width: 25px;
+  height: 25px;
+}
+
+.user-initials {
+  color: #29abe2;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  border: solid 3px #2a3647;
+  border-radius: 100%;
+}
+
+/*======================
+       Sidebar
+=======================*/
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  padding: 64px 0;
+  width: 232px;
+  height: 100vh;
+  background-color: var(--bg-secondary);
+  color: var(--font-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-logo {
+  width: 100px;
+  height: 122px;
+  margin-bottom: 120px;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+
+.nav-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  padding: 8px 56px;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--font-secondary);
+}
+
+.nav-links img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-links:hover {
+  background-color: var(--bg-hover);
+}
+
+.privacy-legal-notice-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
