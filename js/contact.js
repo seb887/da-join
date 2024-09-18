@@ -15,6 +15,7 @@ async function getContacts() {
 
 async function renderContacts() {
     let allContacts = Object.values(await getContacts());
+    allContacts.sort((a, b) => a.name.localeCompare(b.name));
     document.getElementById('contacts').innerHTML = '';
     allContacts.forEach((contact, index) =>{
         checkForExistingLetter(contact, index);
@@ -71,7 +72,9 @@ function nameHeaderContent(letter) {
         <div class="nameHeader" id ="${letter}">
             <h3>${letter}</h3>
         </div>
-        <div class = "seperator">
+        <div class="seperator">
+            <div class="line">
+            </div>
         </div>
     `
 }
