@@ -52,6 +52,7 @@ h1 {
   box-shadow: 0 4px 4px -0 rgba(0, 0, 0, 0.2);
   position: absolute;
   left: 0;
+  z-index: 10;
 }
 
 .header-user-box {
@@ -109,7 +110,7 @@ h1 {
   background-color: var(--bg-secondary);
   color: var(--font-secondary);
   position: relative;
-  z-index: 1;
+  z-index: 99;
 }
 
 .sidebar-logo {
@@ -139,15 +140,15 @@ h1 {
   padding: 8px 56px;
   gap: 8px;
   text-decoration: none;
+  color: var(--font-secondary);
 }
 
-.nav-links a {
+/* .nav-links a {
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: var(--font-secondary);
-}
+} */
 
 .nav-links img {
   width: 30px;
