@@ -17,6 +17,7 @@ async function renderContacts() {
     let allContacts = Object.values(await getContacts());
     document.getElementById('contacts').innerHTML = '';
     allContacts.forEach((contact, index) =>{
+        checkForExistingLetter(contact, index);
         document.getElementById('contacts').innerHTML += contactContent(index); 
         setDataOfContact(contact, index);
     })   
@@ -41,6 +42,15 @@ function generateInitials (name){
 }
 
 
+function checkForExistingLetter(contact, index) {
+    let name = contact.name.charAt(0);
+    let nameHeader = document.getElementById(name)
+    if(!nameHeader) {
+        document.getElementById('contacts').innerHTML += nameHeaderContent(name);
+    }
+}
+
+
 function contactContent (index){
     return `
         <div class="single-contact">
@@ -55,3 +65,13 @@ function contactContent (index){
     `
 }
 
+
+function nameHeaderContent(letter) {
+    return`
+        <div class="nameHeader" id ="${letter}">
+            <h3>${letter}</h3>
+        </div>
+        <div class = "seperator">
+        </div>
+    `
+}
