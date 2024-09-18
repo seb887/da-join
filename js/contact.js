@@ -8,14 +8,32 @@ async function getContacts() {
 }
 
 
-
-async function addNewContact() {
+async function renderContacts() {
     let allContacts = Object.values(await getContacts());
-    allContacts.forEach((contact) =>{
-        console.log(contact.name);
-    })
+    document.getElementById('contacts').innerHTML = '';
+    allContacts.forEach((contact, index) =>{
+        document.getElementById('contacts').innerHTML += contactContent(index); 
+        setDataOfContact(contact, index);
+    })   
+}
+
+
+async function setDataOfContact(contact, index) {
     
 }
 
 
-addNewContact()
+function contactContent (index){
+    return `
+        <div class="single-contact">
+          <div class="initials-container">
+            <span id="initials${index}"></span>
+          </div>
+          <div class="contact-data">
+            <h4 id="contactName${index}"></h4>
+            <a href="mailto:" id="contactMail${index}"></a>
+          </div>
+        </div>
+    `
+}
+

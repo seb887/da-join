@@ -1,3 +1,4 @@
+
 .contact-list-container {
     display: flex;
     justify-content: flex-start;
@@ -13,8 +14,6 @@
     width: 352px;
 }
 
-
-
 .initials-container{
     display: flex;
     justify-content: center;
@@ -23,5 +22,23 @@
     width: 42px;
     height: 42px;
     background-color: var(--accent-primary);
-    border-radius: 50px;
+    border-radius: 45px;
+    gap: 10px;
 }
+
+.single-contact{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 352px;
+}
+
+.contact-data{
+    display: flex;
+    flex-direction: column;
+    a{
+        text-decoration: none;
+        color: #007CEE;
+    }
+}
+
