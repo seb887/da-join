@@ -2,15 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 64px;
+  padding: 0 64px;
   /* padding-right: 88px; */
+  width: calc(100vw - 232px);
   height: 232px;
 }
 
 .headline-container {
   display: flex;
   justify-content: space-between;
-  width: 1056px;
+  width: 100%;
 }
 
 .headline-right-container {
@@ -31,8 +32,30 @@
 }
 
 .input-container input {
-  width: 200px;
+  width: 240px;
   border: none;
+  font-size: 20px;
+  font-weight: 400;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-img-container {
+  display: flex;
+  justify-content: end;
+  width: 48px;
+}
+
+.input-container img {
+  width: 18px;
+  height: 18px;
+  margin-left: 16px;
+}
+
+.input-seperator {
+  width: 1px;
+  height: 31px;
+  background-color: #a8a8a8;
 }
 
 .input-seperator {
@@ -43,9 +66,12 @@
 
 .add-task-button {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 8px 16px;
-  gap: 4px;
+  gap: 8px;
+  width: 160px;
+  height: 49px;
   border: none;
   border-radius: 10px;
   background-color: var(--bg-secondary);
@@ -58,4 +84,42 @@
 .add-task-button img {
   width: 19px;
   height: 19px;
+}
+
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 64px;
+  width: calc(100vw - 232px);
+  position: fixed;
+  top: calc(200px + 96px);
+  left: 232px;
+}
+
+.kanban-headline {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 700;
+  width: 244px;
+}
+
+.kanban-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 64px;
+  width: calc(100vw - 232px);
+  position: absolute;
+  top: calc(336px - 96px);
+}
+
+.kanban-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  width: 252px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 3px #00000014;
+  background-color: white;
 }

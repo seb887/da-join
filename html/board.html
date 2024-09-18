@@ -120,7 +120,6 @@
                   placeholder="Find task"
                 />
                 <div class="input-seperator"></div>
-
                 <img
                   src="../assets/icons/search.png"
                   alt="search icon"
@@ -137,6 +136,71 @@
             </div>
           </div>
         </header>
+
+        <section class="kanban-section">
+          <div class="kanban-header">
+            <div class="kanban-headline">
+              To do
+              <img
+                src="../assets/icons/plus-button.png"
+                alt="plus icon"
+              />
+            </div>
+            <div class="kanban-headline">
+              In progress
+              <img
+                src="../assets/icons/plus-button.png"
+                alt="plus icon"
+              />
+            </div>
+            <div class="kanban-headline">
+              Await feedback
+              <img
+                src="../assets/icons/plus-button.png"
+                alt="plus icon"
+              />
+            </div>
+            <div class="kanban-headline">
+              Done
+              <img
+                src="../assets/icons/plus-button.png"
+                alt="plus icon"
+              />
+            </div>
+          </div>
+          <div class="kanban-content">
+            <div
+              class="kanban-list"
+              id="kanban-todo"
+            ></div>
+            <div
+              class="kanban-list"
+              id="kanban-in-progress"
+            >
+              <div class="kanban-card">
+                <div class="card-label">User Story</div>
+                <div class="card-headline">Kochwelt Page</div>
+                <div class="card-info">
+                  Build start page with recipe recommendation...
+                </div>
+                <div class="tasks-progress-bar"></div>
+                <div class="tasks-progress-bar"></div>
+                <div class="card-footer">
+                  <div class="task-collaborators"></div>
+                  <div class="task-prio"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="kanban-list"
+              id="kanban-await"
+            ></div>
+            <div
+              class="kanban-list"
+              id="kanban-done"
+            ></div>
+          </div>
+        </section>
       </div>
     </div>
 
