@@ -1,4 +1,27 @@
 .contact-list-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     margin-top: 96px;
     height: calc(100vh - 96px);
+    width: 456px;
+}
+
+#contacts{
+    display: flex;
+    width: 352px;
+}
+
+
+
+.initials-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 42px;
+    height: 42px;
+    background-color: var(--accent-primary);
+    border-radius: 50px;
 }
