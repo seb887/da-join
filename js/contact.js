@@ -18,8 +18,21 @@ async function renderContacts() {
 }
 
 
-async function setDataOfContact(contact, index) {
-    
+function setDataOfContact(contact, index) {
+    document.getElementById(`initials${index}`).innerText = generateInitials(contact.name);
+    document.getElementById(`contactName${index}`).innerText = contact.name;
+    document.getElementById(`contactMail${index}`).textContent = contact.email;
+}
+
+
+function generateInitials (name){
+    let words = name.split(' ');
+    let firstInitial = words[0].charAt(0).toUpperCase();
+    let lastInitial = [];
+    if(words.length > 1){
+        lastInitial = words[words.length - 1].charAt(0).toUpperCase();
+    }
+    return firstInitial + lastInitial;      
 }
 
 

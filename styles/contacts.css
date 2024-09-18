@@ -11,7 +11,11 @@
 
 #contacts{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 352px;
+    
 }
 
 .initials-container{
@@ -28,7 +32,7 @@
 
 .single-contact{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     width: 352px;
 }
