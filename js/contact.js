@@ -9,7 +9,7 @@ function init() {
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();
-    return contacts
+    return contacts;
 }
 
 
@@ -45,16 +45,16 @@ function generateInitials (name){
 
 function checkForExistingLetter(contact, index) {
     let name = contact.name.charAt(0);
-    let nameHeader = document.getElementById(name)
+    let nameHeader = document.getElementById(name);
     if(!nameHeader) {
         document.getElementById('contacts').innerHTML += nameHeaderContent(name);
-    }
+    };
 }
 
 
 function contactContent (index){
     return `
-        <div class="single-contact">
+        <div onclick ="openContact('${index}')" class="single-contact">
           <div class="initials-container">
             <span id="initials${index}"></span>
           </div>
@@ -63,7 +63,7 @@ function contactContent (index){
             <a href="mailto:" id="contactMail${index}"></a>
           </div>
         </div>
-    `
+    `;
 }
 
 
