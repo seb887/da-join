@@ -1,6 +1,11 @@
 CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
 
 
+function init() {
+    renderContacts();
+}
+
+
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();

@@ -7,6 +7,7 @@
     margin-top: 96px;
     height: calc(100vh - 96px);
     width: 456px;
+    overflow-x: auto;
 }
 
 #contacts{
@@ -25,24 +26,42 @@
     color: white;
     width: 42px;
     height: 42px;
+    margin-right: 35px;
     background-color: var(--accent-primary);
     border-radius: 45px;
     gap: 10px;
+    span{
+        font-size: 12px;
+    }
 }
 
 .single-contact{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding: 15px 24px 15px 24px;
     width: 352px;
+    border-radius: 10px;
+}
+
+.single-contact:hover{
+    cursor: pointer;
+    background-color: #F6F7F8;
 }
 
 .contact-data{
     display: flex;
     flex-direction: column;
+    gap: 5px;
     a{
+        font-size: 16px;
         text-decoration: none;
         color: #007CEE;
+    }
+    h4{
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
     }
 }
 
