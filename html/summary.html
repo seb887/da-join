@@ -118,8 +118,69 @@
     </aside>
 
     <div class="summary-content">
-      <b>Join 360</b>
-      <h1>soadkf</h1>
+      <div class="summary-title">
+        <b>Join 360</b>
+          <div class="seperator"></div>
+        <p>Key Metrics at a Glance</p>
+      </div>
+      <div class="summary-overview">
+        <div class="summary-overview-tasks">
+          <div class="summary-overview-top">
+            <a class="to-do" href="board.html">
+              <img class="icons-top" src="/assets/icons/summary-todo.png">
+              <div style="flex-direction: column; display: flex;">
+                <span class="task-counter" id="to-do-tasks">1</span>
+                <span style="font-size: 20px;" class="task-description">To-Do</span>
+              </div>
+            </a>
+            <a class="to-do" href="board.html">
+              <img class="icons-top" src="/assets/icons/summary-done.png">
+              <div style="flex-direction: column; display: flex;">
+                <span class="task-counter" id="done-tasks">3</span>
+                <span style="font-size: 20px;" class="task-description">Done</span>
+              </div>
+            </a>
+          </div>
+          <a class="urgent-tasks-board" href="board.html">
+              <img class="icon" src="/assets/icons/summary-urgent.png">
+              <div class="urgent">
+                <div class="urgent-only-text">
+                  <span class="task-counter" id="urgent-tasks">5</span>
+                  <span class="task-description">Urgent</span>
+                </div>
+                <div class="second-seperator"></div>
+                <div class="deadline">
+                  <b id="deadline">3 January, 2025</b>
+                  <span>Upcoming Deadline</span>
+                </div>
+              </div>
+          </a>
+          <div class="summary-overview-bottom">
+            <a class="tasks-bottom" href="board.html">
+              <div style="flex-direction: column; display: flex;">
+                <span class="task-counter" id="tasks-in-board">2</span>
+                <span style="font-size: 20px;" class="task-description">Tasks in Board</span>
+              </div>
+            </a>
+            <a class="tasks-bottom" href="board.html">
+              <div style="flex-direction: column; display: flex;">
+                <span class="task-counter" id="tasks-in-progress">4</span>
+                <span style="font-size: 20px;" class="task-description">Tasks in Progress</span>
+              </div>
+            </a>
+            <a class="tasks-bottom" href="board.html">
+              <div style="flex-direction: column; display: flex;">
+                <span class="task-counter" id="awaiting-feedback">1</span>
+                <span style="font-size: 20px;" class="task-description">Awaiting Feedback</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="greeting">
+          <span id="time-of-the-day">Good Morning,</span>
+          <span id="name">Max Mustermann</span>
+        </div>
+      </div>
     </div>
 
     <script src="../js/script.js"></script>
