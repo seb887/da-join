@@ -137,3 +137,33 @@ body{
 .line{
     border: 1px solid #F6F7F8;
 }
+
+.contact-information{
+    display: flex;
+    margin-top: 96px;
+    width: calc(100% - 644px);
+    background-color: var(--bg-primary);
+}
+
+
+.contacts-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 0 0 40px;
+    height: 73px;
+    gap: 30px;
+    b{
+        font-size: 61px;
+    }
+    p{
+        font-size: 27px;
+    }
+}
+
+.seperator-contacts-title{
+    height: 59px;
+    border-radius: 50px;
+    width: 3px;
+    background-color: #29ABE2;
+}

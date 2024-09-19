@@ -60,7 +60,7 @@ function contactContent (index){
           </div>
           <div class="contact-data">
             <h4 id="contactName${index}"></h4>
-            <a href="mailto:" id="contactMail${index}"></a>
+            <a href="#" id="contactMail${index}"></a>
           </div>
         </div>
     `;
