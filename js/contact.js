@@ -16,7 +16,7 @@ async function getContacts() {
 async function renderContacts() {
     let allContacts = Object.values(await getContacts());
     allContacts.sort((a, b) => a.name.localeCompare(b.name));
-    document.getElementById('contacts').innerHTML = '';
+    document.getElementById('contacts').innerHTML = addNewContactsContent();
     allContacts.forEach((contact, index) =>{
         checkForExistingLetter(contact, index);
         document.getElementById('contacts').innerHTML += contactContent(index); 
@@ -60,7 +60,7 @@ function contactContent (index){
           </div>
           <div class="contact-data">
             <h4 id="contactName${index}"></h4>
-            <a href="mailto:" id="contactMail${index}"></a>
+            <a href="#" id="contactMail${index}"></a>
           </div>
         </div>
     `;
@@ -75,6 +75,15 @@ function nameHeaderContent(letter) {
         <div class="seperator">
             <div class="line">
             </div>
+        </div>
+    `
+}
+
+
+function addNewContactsContent () {
+    return `
+        <div class="add-new-contacts">
+            <button onclick="addNewContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
         </div>
     `
 }
