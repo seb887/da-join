@@ -40,12 +40,14 @@ body{
     }
 }
 
-.add-new-contacts{
+.add-new-contacts {
+    background-color: white;
     display: flex;
+    position: sticky;
+    top: 0;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
-    width: 456px;
+    width: 100%;
     height: 101px;
 }
 
