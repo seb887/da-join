@@ -2,10 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 64px;
+  padding: 80px 64px 55px 64px;
   /* padding-right: 88px; */
   width: calc(100vw - 232px);
-  height: 232px;
 }
 
 .headline-container {
@@ -86,31 +85,29 @@
   height: 19px;
 }
 
-.kanban-header {
+.kanban-section {
   display: flex;
   justify-content: space-between;
   padding: 0 64px;
   width: calc(100vw - 232px);
-  position: fixed;
   top: calc(200px + 96px);
   left: 232px;
+}
+
+.kanban-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 244px;
 }
 
 .kanban-headline {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
   font-size: 20px;
   font-weight: 700;
   width: 244px;
-}
-
-.kanban-content {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 64px;
-  width: calc(100vw - 232px);
-  position: absolute;
-  top: calc(336px - 96px);
 }
 
 .kanban-card {
@@ -122,8 +119,87 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 3px #00000014;
   background-color: white;
+  font-size: 16px;
+}
+
+.card-label-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .card-label {
+  display: flex;
+  padding: 4px 16px;
+  width: auto;
+  border-radius: 8px;
   background-color: aquamarine;
+}
+
+.card-headline {
+  font-weight: 700;
+}
+
+.card-info {
+  color: #a8a8a8;
+}
+
+.tasks-progress-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 16px;
+}
+
+.tasks-progress-bar {
+  border-radius: 8px;
+  width: 128px;
+  height: 8px;
+  background-color: #f4f4f4;
+}
+
+.tasks-progress-bar-done {
+  border-radius: 8px;
+  width: 64px;
+  height: 8px;
+  background-color: #4589ff;
+}
+
+.task-counter {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-collaborators {
+  display: flex;
+}
+
+.card-profile-badge-1,
+.card-profile-badge-2,
+.card-profile-badge-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid white;
+  border-radius: 100%;
+  font-size: 12px;
+  color: white;
+}
+.card-profile-badge-1 {
+  background-color: orange;
+}
+.card-profile-badge-2 {
+  margin-left: -6px;
+  background-color: green;
+}
+.card-profile-badge-3 {
+  margin-left: -6px;
+  background-color: blue;
 }

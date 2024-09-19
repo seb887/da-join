@@ -138,7 +138,7 @@
         </header>
 
         <section class="kanban-section">
-          <div class="kanban-header">
+          <div class="kanban-container">
             <div class="kanban-headline">
               To do
               <img
@@ -146,6 +146,13 @@
                 alt="plus icon"
               />
             </div>
+            <div
+              class="kanban-list"
+              id="kanban-todo"
+            ></div>
+          </div>
+
+          <div class="kanban-container">
             <div class="kanban-headline">
               In progress
               <img
@@ -153,6 +160,44 @@
                 alt="plus icon"
               />
             </div>
+            <div
+              class="kanban-list"
+              id="kanban-in-progress"
+            >
+              <div class="kanban-card">
+                <div class="card-label-container">
+                  <div class="card-label">User Story</div>
+                </div>
+                <div class="card-headline">
+                  Kochwelt Page & Recipe Recommender
+                </div>
+                <div class="card-info">
+                  Build start page with recipe recommendation...
+                </div>
+                <div class="tasks-progress-bar-container">
+                  <div class="tasks-progress-bar">
+                    <div class="tasks-progress-bar-done"></div>
+                  </div>
+                  <div class="task-counter">1/2 Subtasks</div>
+                </div>
+                <div class="card-footer">
+                  <div class="task-collaborators">
+                    <div class="card-profile-badge-1">AB</div>
+                    <div class="card-profile-badge-2">BC</div>
+                    <div class="card-profile-badge-3">CD</div>
+                  </div>
+                  <div class="task-prio">
+                    <img
+                      src="../assets/icons/prio-medium.svg"
+                      alt="prio icon"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="kanban-container">
             <div class="kanban-headline">
               Await feedback
               <img
@@ -160,6 +205,13 @@
                 alt="plus icon"
               />
             </div>
+            <div
+              class="kanban-list"
+              id="kanban-await"
+            ></div>
+          </div>
+
+          <div class="kanban-container">
             <div class="kanban-headline">
               Done
               <img
@@ -167,34 +219,6 @@
                 alt="plus icon"
               />
             </div>
-          </div>
-          <div class="kanban-content">
-            <div
-              class="kanban-list"
-              id="kanban-todo"
-            ></div>
-            <div
-              class="kanban-list"
-              id="kanban-in-progress"
-            >
-              <div class="kanban-card">
-                <div class="card-label">User Story</div>
-                <div class="card-headline">Kochwelt Page</div>
-                <div class="card-info">
-                  Build start page with recipe recommendation...
-                </div>
-                <div class="tasks-progress-bar"></div>
-                <div class="tasks-progress-bar"></div>
-                <div class="card-footer">
-                  <div class="task-collaborators"></div>
-                  <div class="task-prio"></div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="kanban-list"
-              id="kanban-await"
-            ></div>
             <div
               class="kanban-list"
               id="kanban-done"
