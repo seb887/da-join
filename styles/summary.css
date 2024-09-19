@@ -190,12 +190,12 @@ body {
     font-weight: 700; 
 }
 
-a {
+.task {
     transition: ease-in-out 80ms;
     color: black;
 }
 
-a:hover {
+.task:hover {
     background-color: #2A3647;
     color: #F6F7F8;
     transform: scale(1.1);

@@ -1,0 +1,106 @@
+body {
+    margin: 0%;
+    background: #F6F7F8;
+    height: 100vh;
+}
+
+.whole-body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 100.03px;
+    height: 121.97px;
+}
+
+.login-mask {
+    width: 652px;
+    height: 493px;
+    padding: 48px 115px 48px 115px;
+    border-radius: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-title {
+    font-family: Inter;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    text-align: center;
+}
+
+.login-seperator{
+    width: 0px;
+    height: 150px;
+    border: 3px;
+    rotate: 90deg;
+    border: 3px solid #29ABE2
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 422px;
+    height: 196px;
+    gap: 20px;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    padding: 12px 21px 12px 21px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    font-size: 20px;
+}
+
+.email-input {
+    background: url(/assets/icons/mail.png) no-repeat scroll 380px;
+}
+
+.password-input {
+    background: url(/assets/icons/lock.png) no-repeat scroll 380px;
+}
+
+::placeholder {
+    color: #D1D1D1;
+}
+
+.sign-up-top-right {
+    width: 400px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding-bottom: 900px;
+}
+
+.sign-up-top-right a {
+    text-decoration: none;
+    background: #2A3647;
+    width: 94px;
+    height: 49px;
+    padding: 15px 16px 15px 16px;
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    transition: ease-in-out 120ms;
+}
+
+.sign-up-top-right a:hover {
+    background: #29ABE2;
+    border: 0px;
+    cursor: pointer;
+    box-shadow: #8c8c8c 0px 5px 7px;
+}
