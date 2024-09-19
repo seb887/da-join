@@ -89,6 +89,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 64px;
+  gap: 26px;
   width: calc(100vw - 232px);
   top: calc(200px + 96px);
   left: 232px;
@@ -202,4 +203,18 @@
 .card-profile-badge-3 {
   margin-left: -6px;
   background-color: blue;
+}
+
+.no-tasks-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 246px;
+  height: 48px;
+  border: 1px dashed #a8a8a8;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+  font-size: 16px;
+  font-weight: 400;
+  color: #a8a8a8;
 }
