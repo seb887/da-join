@@ -13,6 +13,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+.aifs{
+    align-items: flex-start;
+    gap: 12px;
+}
 
 .contact-list-container {
     display: flex;
@@ -96,7 +100,6 @@ body{
     background-color: var(--accent-primary);
     border-radius: 50%;
     gap: 10px;
-    
     span{
         font-size: 12px;
     }
@@ -183,6 +186,7 @@ body{
 article{
     display: flex;
     position: relative;
+    flex-direction: column;
     top: 311px;
     right: 750px;
     width: 461px;
@@ -249,4 +253,9 @@ article{
 
 .contact-name{
     padding: 5px 0px;
+}
+.contact-information-header{
+    font-size: 20px;
+    padding: 59px 0px;
+    justify-content: flex-start;
 }
