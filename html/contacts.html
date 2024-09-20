@@ -108,7 +108,6 @@
       </nav>
     </aside>
     <section class ="contact-list-container">
-      
       <div id="contacts"> 
         <div class="add-new-contacts">
         <button onclick="addNewContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
@@ -118,7 +117,7 @@
             <span id="initials">TT
             </span>
           </div>
-          <div class="contact-data">
+          <div class="contact-name">
             <h4>Test Test</h4>
             <a href="mailto:">test.test@test.de</a>
           </div>
@@ -133,17 +132,26 @@
       </div>
     </section>
     <article>
-      <div class="initials-container">
-        <span id="initials0">A</span>
+      <div class="flex-d-r">
+        <div class="initials-container">
+          <span id="initials0">A</span>
+        </div>
+        <div class="article-name">
+          <div class="contact-name">
+            <h2>Test Test</h2>
+          </div>
+          <div class="article-edit-and-delete">
+            <div class="edit-contact flex-d-r">
+              <img src="/assets/icons/edit.png" alt="edit-icon">
+              <span>Edit</span>        
+            </div>
+            <div class="del-contact flex-d-r">
+              <img onclick="deleteContact()" src="/assets/icons/delete.png" alt="delete-icon">
+              <span>Delete</span>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-      <div class="contact-data">
-        <h2>Test Test</h2>
-      </div>  
-      <diiv>  
-        <a href="mailto:">test.test@test.de</a>
-      </div>
-    </div>
     </article>  
     <script src="../js/contact.js"></script>
   </body>

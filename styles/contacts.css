@@ -3,6 +3,20 @@ body{
     background-color: var(--bg-primary);
 }
 
+.flex-d-c{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.flex-d-r{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 .contact-list-container {
     display: flex;
     justify-content: flex-start;
@@ -189,4 +203,37 @@ article{
         }
     }
 
+}
+
+.article-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.article-edit-and-delete{
+    display: flex;
+    justify-content: space-start;
+    align-items: center;
+
+}
+
+.del-contact,
+.edit-contact{
+    height: 24px;
+    width: 62px;
+    font-size: 16px;
+    img{
+        height: 24px;
+        width: 24px;
+    }
+}
+.del-contact{
+    gap: 8px;
+}
+.edit-contact{
+    gap: 13px;
+    margin-right: 32px;
+}
+.contact-name{
+    padding: 5px 0px;
 }
