@@ -153,7 +153,7 @@
             </div>
             <div
               class="kanban-list"
-              id="kanban-todo"
+              id="kanban-list-todo"
             >
               <div class="no-tasks-card">No tasks</div>
             </div>
@@ -169,23 +169,21 @@
             </div>
             <div
               class="kanban-list"
-              id="kanban-in-progress"
+              id="kanban-list-in-progress"
             >
               <div class="kanban-card">
                 <div class="card-label-container">
                   <div class="card-label">User Story</div>
                 </div>
-                <div class="card-headline">
-                  Kochwelt Page & Recipe Recommender
-                </div>
-                <div class="card-info">
+                <div class="card-title">Kochwelt Page & Recipe Recommender</div>
+                <div class="card-description">
                   Build start page with recipe recommendation...
                 </div>
-                <div class="tasks-progress-bar-container">
-                  <div class="tasks-progress-bar">
-                    <div class="tasks-progress-bar-done"></div>
+                <div class="subtask-progress-bar-container">
+                  <div class="subtask-progress-bar">
+                    <div class="subtask-progress-bar-done"></div>
                   </div>
-                  <div class="task-counter">1/2 Subtasks</div>
+                  <div class="subtask-counter">1/2 Subtasks</div>
                 </div>
                 <div class="card-footer">
                   <div class="task-collaborators">
@@ -214,7 +212,7 @@
             </div>
             <div
               class="kanban-list"
-              id="kanban-await"
+              id="kanban-list-await-feedback"
             ></div>
           </div>
 
@@ -228,7 +226,7 @@
             </div>
             <div
               class="kanban-list"
-              id="kanban-done"
+              id="kanban-list-done"
             ></div>
           </div>
         </section>
@@ -236,5 +234,6 @@
     </div>
 
     <script src="../js/script.js"></script>
+    <script src="../js/board.js"></script>
   </body>
 </html>

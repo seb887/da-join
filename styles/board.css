@@ -1,3 +1,12 @@
+.content {
+  display: flex;
+  background-color: var(--bg-primary);
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  position: relative;
+  top: 96px;
+}
+
 .board-header {
   display: flex;
   justify-content: center;
@@ -93,6 +102,7 @@
   width: calc(100vw - 232px);
   top: calc(200px + 96px);
   left: 232px;
+  overflow-y: scroll;
 }
 
 .kanban-container {
@@ -111,6 +121,15 @@
   width: 244px;
 }
 
+.kanban-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 26px;
+  gap: 26px;
+  height: calc(100vh - 96px - 209px - 25px - 16px);
+  overflow-y: auto;
+}
+
 .kanban-card {
   display: flex;
   flex-direction: column;
@@ -122,6 +141,7 @@
   background-color: white;
   font-size: 16px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .card-label-container {
@@ -138,36 +158,37 @@
   background-color: aquamarine;
 }
 
-.card-headline {
+.card-title {
   font-weight: 700;
 }
 
-.card-info {
+.card-description {
   color: #a8a8a8;
 }
 
-.tasks-progress-bar-container {
+.subtask-progress-bar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 16px 0;
   height: 16px;
 }
 
-.tasks-progress-bar {
+.subtask-progress-bar {
   border-radius: 8px;
   width: 128px;
   height: 8px;
   background-color: #f4f4f4;
 }
 
-.tasks-progress-bar-done {
+.subtask-progress-bar-done {
   border-radius: 8px;
   width: 64px;
   height: 8px;
   background-color: #4589ff;
 }
 
-.task-counter {
+.subtask-counter {
   font-size: 12px;
   font-weight: 400;
 }
@@ -175,6 +196,7 @@
 .card-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .task-collaborators {
