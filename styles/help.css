@@ -1,0 +1,26 @@
+/* .help-content {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: calc(206px - 96px) calc(328px - 232px);
+  height: calc(100vh - 96px);
+  overflow-y: auto;
+  } */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: calc(206px - 96px) calc(328px - 232px);
+  gap: 24px;
+  background-color: var(--bg-primary);
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  position: relative;
+  top: 96px;
+  overflow-y: auto;
+}
+
+.headline {
+  margin-bottom: 35px;
+}
