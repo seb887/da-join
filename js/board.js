@@ -1,3 +1,4 @@
+// DOM ELEMENTS
 const kanbanListTodo = document.getElementById('kanban-list-todo');
 const kanbanListInProgress = document.getElementById('kanban-list-in-progress');
 const kanbanListAwaitFeedback = document.getElementById(
@@ -5,42 +6,47 @@ const kanbanListAwaitFeedback = document.getElementById(
 );
 const kanbanListDone = document.getElementById('kanban-list-done');
 
+// VARIABLES
+const BASE_URL =
+  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
+
 const tasks = [
-  {
-    category: 'User Story',
-    title: 'Kochwelt Page & Recipe Recommender',
-    description: 'Build start page with recipe recommendation...',
-    collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-    prio: 'medium',
-    board: 'in progress',
-  },
-  {
-    category: 'Technical Task',
-    title: 'HTML Base Template Creation',
-    description: 'Create reusable HTML base templates..',
-    collaborators: ['Anne Theke', 'Kara Mell'],
-    prio: 'low',
-    board: 'await feedback',
-  },
-  {
-    category: 'User Story',
-    title: 'Daily Kochwelt Recipe',
-    description: 'Implement daily recipe and portion calculator....',
-    collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-    prio: 'medium',
-    board: 'in progress',
-  },
-  {
-    category: 'Technical Task',
-    title: 'CSS Architecture Planning',
-    description: 'Define CSS naming conventions and structure...',
-    collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-    prio: 'urgent',
-    board: 'done',
-  },
+  // {
+  //   category: 'User Story',
+  //   title: 'Kochwelt Page & Recipe Recommender',
+  //   description: 'Build start page with recipe recommendation...',
+  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
+  //   prio: 'medium',
+  //   board: 'in progress',
+  // },
+  // {
+  //   category: 'Technical Task',
+  //   title: 'HTML Base Template Creation',
+  //   description: 'Create reusable HTML base templates..',
+  //   collaborators: ['Anne Theke', 'Kara Mell'],
+  //   prio: 'low',
+  //   board: 'await feedback',
+  // },
+  // {
+  //   category: 'User Story',
+  //   title: 'Daily Kochwelt Recipe',
+  //   description: 'Implement daily recipe and portion calculator....',
+  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
+  //   prio: 'medium',
+  //   board: 'in progress',
+  // },
+  // {
+  //   category: 'Technical Task',
+  //   title: 'CSS Architecture Planning',
+  //   description: 'Define CSS naming conventions and structure...',
+  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
+  //   prio: 'urgent',
+  //   board: 'done',
+  // },
 ];
 
 function render() {
+  loadTasksFromFirebase();
   clearKanbanLists();
   renderKanbanLists();
 }
@@ -86,7 +92,7 @@ function createCardHTML(task) {
             </div>
             <div class="task-prio">
             <img
-                src="../assets/icons/prio-medium.svg"
+                src="../assets/icons/prio-medium.png"
                 alt="prio icon"
             />
             </div>
@@ -119,5 +125,28 @@ function controlPrio(prioStatus) {
 //       console.log(parentNode);
 //   }
 // }
+
+async function loadTasksFromFirebase() {
+  let response = await fetch(BASE_URL + 'tasks' + '.json');
+  let tasksDataFromFirebase = await response.json();
+
+  if (tasksDataFromFirebase == null) {
+    return;
+  } else {
+    tasks.length = 0;
+    pushTasksFromFirebaseToArr(tasksDataFromFirebase);
+  }
+}
+
+function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
+  let objectKeys = Object.keys(tasksDataFromFirebase);
+
+  for (let i = 0; i < objectKeys.length; i++) {
+    tasks.push({
+      id: objectKeys[i],
+      task: tasksDataFromFirebase[objectKeys[i]],
+    });
+  }
+}
 
 render();

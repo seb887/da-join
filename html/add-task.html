@@ -178,9 +178,27 @@
             <div class="form-container date-container">
               <label for="prio">Prio</label>
               <div class="prio-buttons-container">
-                <button class="prio-buttons">Low</button>
-                <button class="prio-buttons">Medium</button>
-                <button class="prio-buttons">Urgent</button>
+                <button class="prio-buttons">
+                  Low
+                  <img
+                    src="../assets/icons/prio-low.png"
+                    alt="prio low icon"
+                  />
+                </button>
+                <button class="prio-buttons">
+                  Medium
+                  <img
+                    src="../assets/icons/prio-medium.png"
+                    alt="prio medium icon"
+                  />
+                </button>
+                <button class="prio-buttons">
+                  Urgent
+                  <img
+                    src="../assets/icons/prio-urgent.png"
+                    alt="prio urgent icon"
+                  />
+                </button>
               </div>
             </div>
 
@@ -223,9 +241,19 @@
             </div>
           </div>
         </form>
+        <div class="add-task-buttons-container">
+          <button class="add-task-cancel-button">Cancel</button>
+          <button
+            class="add-task-submit-button"
+            onclick="createNewTask()"
+          >
+            Create Task
+          </button>
+        </div>
       </section>
     </main>
 
     <script src="../js/script.js"></script>
+    <script src="../js/add-task.js"></script>
   </body>
 </html>
