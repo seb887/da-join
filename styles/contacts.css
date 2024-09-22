@@ -185,8 +185,8 @@ body {
 }
 
 article {
-  display: flex;
-  position: relative;
+  display: none;
+  position: absolute;
   flex-direction: column;
   top: 311px;
   right: 750px;
@@ -257,4 +257,27 @@ article {
   font-size: 20px;
   padding: 59px 0px;
   justify-content: flex-start;
+}
+
+.contactFadeAndSlideIn {
+  display: flex !important;
+  animation-name: fadeAndSlideIn;
+  animation-duration: 150ms;
+}
+
+
+
+
+
+
+
+@keyframes fadeAndSlideIn {
+    0% {
+      right: -500px;
+      opacity: 0;
+    }
+    100% {
+      right: 750px;
+      opacity: 1;
+    }
 }

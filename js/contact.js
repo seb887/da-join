@@ -1,5 +1,6 @@
 CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
 
+let contacts = [];
 
 function init() {
     renderContacts();
@@ -18,6 +19,7 @@ async function renderContacts() {
     allContacts.sort((a, b) => a.name.localeCompare(b.name));
     document.getElementById('contacts').innerHTML = addNewContactsContent();
     allContacts.forEach((contact, index) =>{
+        contacts.push(contact);
         checkForExistingLetter(contact, index);
         document.getElementById('contacts').innerHTML += contactContent(index); 
         setDataOfContact(contact, index);
@@ -52,7 +54,28 @@ function checkForExistingLetter(contact, index) {
 }
 
 
-function contactContent (index){
+function openContact(index) {
+    let container = document.getElementById('contactInformation');
+    if(document.getElementById('contactName').innerText == contacts[index].name){
+        console.log(document.getElementById('contactName').innerText + contacts[index].name);
+        container.classList.toggle('contactFadeAndSlideIn');
+    }else{
+        container.classList.remove('contactFadeAndSlideIn');
+        setTimeout(() => {
+            container.classList.add('contactFadeAndSlideIn');
+        }, 50);
+    }
+    setContactInformation(index)
+}
+
+
+function setContactInformation(index) {
+    document.getElementById('contactName').innerText = contacts[index].name
+
+}
+
+
+function contactContent(index) {
     return `
         <div onclick ="openContact('${index}')" class="single-contact">
           <div class="initials-container">
