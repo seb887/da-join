@@ -1,0 +1,104 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  width: calc(100vw - 232px);
+  height: calc(100vh - 96px);
+  position: relative;
+  top: 96px;
+}
+
+.add-task-header {
+  display: flex;
+  align-items: center;
+  padding: 80px 64px 55px 64px;
+  width: calc(100vw - 232px);
+  max-width: 1208px;
+}
+
+.add-task-content-section {
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 0 64px;
+  gap: 48px;
+  width: calc(100vw - 232px);
+  /* max-width: 1208px; */
+  top: calc(200px + 96px);
+  left: 232px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.add-task-form {
+  display: flex;
+  gap: 48px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-task-content-section input,
+.add-task-content-section textarea,
+.add-task-content-section select {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 12px 21px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.add-task-content-section input::placeholder,
+.add-task-content-section textarea::placeholder {
+  color: #d1d1d1;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 440px;
+  height: 376px;
+}
+
+.seperator {
+  width: 2px;
+  height: 424px;
+  background-color: #d1d1d1;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 440px;
+  height: 416px;
+}
+
+.required-marker {
+  color: red;
+}
+
+.prio-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prio-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 10px;
+  gap: 8px;
+  width: 136px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 4px 0 #0000001a;
+  font-size: 20px;
+  font-weight: 400;
+}

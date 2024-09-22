@@ -10,16 +10,16 @@
       rel="stylesheet"
       href="../style.css"
     />
-    <title>Join</title>
-
     <link
       rel="stylesheet"
-      href="styles/log-in.css"
+      href="../styles/add-task.css"
     />
     <link
-      rel="stylesheet"
-      href="styles/animation.css"
+      rel="icon"
+      type="image/png"
+      href="../assets/img/logo-white.png"
     />
+    <title>Add Task - Join</title>
   </head>
   <body>
     <header class="header">
@@ -111,6 +111,120 @@
         </div>
       </nav>
     </aside>
+
+    <main class="content">
+      <header class="add-task-header">
+        <h1>Add Task</h1>
+      </header>
+
+      <section class="add-task-content-section">
+        <form class="add-task-form">
+          <div class="left-container">
+            <div class="form-container title-container">
+              <label for="title"
+                >Title<span class="required-marker">*</span></label
+              >
+              <input
+                type="text"
+                id="input-title"
+                name="title"
+                placeholder="Enter a title"
+              />
+            </div>
+            <div class="form-container description-container">
+              <label for="description">Description</label>
+              <textarea
+                type="text"
+                id="input-description"
+                name="description"
+                rows="4"
+                placeholder="Enter a description"
+              ></textarea>
+            </div>
+            <div class="form-container assigned-to-container">
+              <label for="assigned to">Assigned to</label>
+              <select
+                type="text"
+                id="input-assigned-to"
+                name="assigned to"
+              >
+                <option
+                  value="No selection"
+                  disabled
+                  selected
+                  hidden
+                >
+                  Select contacts to assign
+                </option>
+                <option value="Jim Panse">Jim Panse</option>
+                <option value="Anne Theke">Anne Theke</option>
+                <option value="Kara Mell">Kara Mell</option>
+              </select>
+            </div>
+          </div>
+          <div class="seperator"></div>
+          <div class="right-container">
+            <div class="form-container date-container">
+              <label for="date"
+                >Due date<span class="required-marker">*</span></label
+              >
+              <input
+                type="date"
+                id="input-date"
+                name="date"
+              />
+            </div>
+
+            <div class="form-container date-container">
+              <label for="prio">Prio</label>
+              <div class="prio-buttons-container">
+                <button class="prio-buttons">Low</button>
+                <button class="prio-buttons">Medium</button>
+                <button class="prio-buttons">Urgent</button>
+              </div>
+            </div>
+
+            <div class="form-container category-container">
+              <label for="category"
+                >Category<span class="required-marker">*</span></label
+              >
+              <select
+                type="text"
+                id="input-category"
+                name="category"
+              >
+                <option
+                  value="No selection"
+                  disabled
+                  selected
+                  hidden
+                >
+                  Select task category
+                </option>
+                <option value="user story">User Story</option>
+                <option value="technical task">Technical Task</option>
+              </select>
+            </div>
+
+            <div class="form-container subtasks-container">
+              <label for="subtasks">Subtasks</label>
+              <div class="add-task-input">
+                <input
+                  type="subtasks"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                />
+                <img
+                  src="../assets/icons/add -subtasks.png"
+                  alt=""
+                  onclick="setInputFocus()"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
 
     <script src="../js/script.js"></script>
   </body>

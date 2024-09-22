@@ -7,28 +7,36 @@ const kanbanListDone = document.getElementById('kanban-list-done');
 
 const tasks = [
   {
-    label: 'User Story',
+    category: 'User Story',
     title: 'Kochwelt Page & Recipe Recommender',
     description: 'Build start page with recipe recommendation...',
     collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
     prio: 'medium',
-    category: 'in progress',
+    board: 'in progress',
   },
   {
-    label: 'Technical Task',
+    category: 'Technical Task',
     title: 'HTML Base Template Creation',
     description: 'Create reusable HTML base templates..',
     collaborators: ['Anne Theke', 'Kara Mell'],
-    prio: 'medium',
-    category: 'await feedback',
+    prio: 'low',
+    board: 'await feedback',
   },
   {
-    label: 'User Story',
-    title: 'Kochwelt Page & Recipe Recommender',
-    description: 'Build start page with recipe recommendation...',
+    category: 'User Story',
+    title: 'Daily Kochwelt Recipe',
+    description: 'Implement daily recipe and portion calculator....',
     collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
     prio: 'medium',
-    category: 'in progress',
+    board: 'in progress',
+  },
+  {
+    category: 'Technical Task',
+    title: 'CSS Architecture Planning',
+    description: 'Define CSS naming conventions and structure...',
+    collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
+    prio: 'urgent',
+    board: 'done',
   },
 ];
 
@@ -39,7 +47,7 @@ function render() {
 
 function renderKanbanLists() {
   for (let i = 0; i < tasks.length; i++) {
-    switch (tasks[i].category) {
+    switch (tasks[i].board) {
       case 'todo':
         kanbanListTodo.innerHTML += createCardHTML(tasks[i]);
         break;
@@ -60,7 +68,7 @@ function createCardHTML(task) {
   return `
     <div class="kanban-card">
         <div class="card-label-container">
-            <div class="card-label">${task.label}</div>
+            <div class="card-label">${task.category}</div>
         </div>
         <div class="card-title">${task.title}</div>
         <div class="card-description">${task.description}</div>
@@ -104,5 +112,12 @@ function controlPrio(prioStatus) {
       return '../assets/icons/prio-low.png';
   }
 }
+
+// function controlLabel(label) {
+//   switch (label) {
+//     case 'User Story':
+//       console.log(parentNode);
+//   }
+// }
 
 render();

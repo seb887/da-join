@@ -1,5 +1,6 @@
 .content {
   display: flex;
+  flex-direction: column;
   background-color: var(--bg-primary);
   width: calc(100vw - 232px);
   height: calc(100vh - 96px);
@@ -12,8 +13,8 @@
   justify-content: center;
   align-items: center;
   padding: 80px 64px 55px 64px;
-  /* padding-right: 88px; */
   width: calc(100vw - 232px);
+  max-width: 1208px;
 }
 
 .headline-container {
@@ -94,12 +95,13 @@
   height: 19px;
 }
 
-.kanban-section {
+.board-content-section {
   display: flex;
   justify-content: space-between;
   padding: 0 64px;
   gap: 26px;
   width: calc(100vw - 232px);
+  max-width: 1208px;
   top: calc(200px + 96px);
   left: 232px;
   overflow-y: scroll;
