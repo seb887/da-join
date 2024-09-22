@@ -57,7 +57,6 @@ function checkForExistingLetter(contact, index) {
 function openContact(index) {
     let container = document.getElementById('contactInformation');
     if(document.getElementById('contactName').innerText == contacts[index].name){
-        console.log(document.getElementById('contactName').innerText + contacts[index].name);
         container.classList.toggle('contactFadeAndSlideIn');
     }else{
         container.classList.remove('contactFadeAndSlideIn');
@@ -70,8 +69,11 @@ function openContact(index) {
 
 
 function setContactInformation(index) {
+    document.getElementById('bgInitials').style.backgroundColor = contacts[index].color;
     document.getElementById('contactName').innerText = contacts[index].name
-
+    document.getElementById('mailAddress').innerText = contacts[index].email
+    document.getElementById('phoneNumber').innerText = contacts[index].phone
+    document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name)
 }
 
 

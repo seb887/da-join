@@ -43,6 +43,7 @@ body {
     border: none;
     background-color: #2a3647;
     padding: 12px 0px 12px 0px;
+    transition: 150ms;
     img {
       height: 32px;
       width: 32px;
@@ -160,6 +161,7 @@ body {
   margin-top: 96px;
   width: calc(100% - 644px);
   background-color: var(--bg-primary);
+  
 }
 
 .contacts-title {
@@ -192,6 +194,9 @@ article {
   right: 750px;
   width: 461px;
   height: 364px;
+  a{
+    text-decoration: none;
+  }
   h2 {
     font-size: 47px;
     font-weight: 500;
@@ -264,7 +269,11 @@ article {
   animation-name: fadeAndSlideIn;
   animation-duration: 150ms;
 }
-
+#contactInformation{
+  a{
+    color: var(--accent-primary);
+  }
+}
 
 
 
