@@ -83,8 +83,10 @@ function setSelectedContactBackground(index) {
     let selectedContactDiv = document.querySelectorAll('.single-contact')[index];
     allContactDivs.forEach(div => {
         div.style.backgroundColor ='white'
+        div.style.color ='black'
     });
     selectedContactDiv.style.backgroundColor ='#2A3647';
+    selectedContactDiv.style.color ='white'
 }
 
 
