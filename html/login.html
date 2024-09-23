@@ -7,17 +7,17 @@
     <link rel="stylesheet"href="../style.css"/>
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="icon"type="image/png"href="../assets/img/logo-white.png"/>
-    <script src="login.js"></script>
+    <script src="../js/login.js"></script>
 </head>
-<body>
+<body onload="init()">
+    <div id="loading-overlay-id" class="loading-overlay"></div>
     <div class="headline">
-        <img class="logo" src="/assets/img/logo-black.png">
+        <img id="logo" class="logo" src="/assets/img/logo-black.png">
         <div class="sign-up-top-right">
             <span>Not a Join user?</span>
             <a href="sign-up.html">Sign up</a>
        </div>
     </div>
-
     <div class="whole-body">
         <div class="login-mask">
             <b class="login-title">Log in</b>

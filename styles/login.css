@@ -20,8 +20,12 @@ body {
 }
 
 .logo {
-    width: 100.03px;
-    height: 121.97px;
+    z-index: 5;
+    width: 250px;
+    transition: ease-in-out 750ms;
+    position: relative;
+    left: 41vw;
+    top: 35vh;
 }
 
 .login-mask {
@@ -200,4 +204,28 @@ footer a:hover {
     cursor: pointer;
     color: #29ABE2;
     font-weight: 700;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: #F6F7F8;
+    opacity: 100%;
+    transition: ease-in-out 750ms;
+}
+
+.loading-overlay-animation {
+    opacity: 0%;
+    z-index: -1;
+}
+
+.loading-logo-animation {
+    width: 100px;
+    z-index: 2;
+    top: 0;
+    left: 0;
 }
