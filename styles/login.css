@@ -29,7 +29,6 @@ body {
 }
 
 .login-mask {
-    width: 652px;
     height: 493px;
     padding: 48px 115px 48px 115px;
     border-radius: 30px;
@@ -41,7 +40,38 @@ body {
     flex-direction: column;
 }
 
-.login-title {
+.sign-up-mask {
+    height: 630px;
+    padding: 48px 115px 48px 115px;
+    border-radius: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sign-up-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-up-title img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    right: 150px;
+}
+
+.sign-up-title img:hover {
+    cursor: pointer;
+    background-color: #d1d1d199;
+    border-radius: 50%;
+    transform: scale(1.1);
+}
+
+.login-signup-title {
     font-family: Inter;
     font-size: 61px;
     font-weight: 700;
@@ -82,6 +112,10 @@ input {
     background: url(/assets/icons/lock.png) no-repeat scroll 380px;
 }
 
+.name-input {
+    background: url(/assets/icons/person.png) no-repeat scroll 380px;
+}
+
 ::placeholder {
     color: #D1D1D1;
 }
@@ -93,7 +127,7 @@ input {
     gap: 35px;
 }
 
-.sign-up-top-right a {
+.sign-up-top-right button {
     text-decoration: none;
     background: #2A3647;
     width: 94px;
@@ -107,7 +141,7 @@ input {
     transition: ease-in-out 120ms;
 }
 
-.sign-up-top-right a:hover {
+.sign-up-top-right button:hover {
     background: #29ABE2;
     border: 0px;
     cursor: pointer;
@@ -228,4 +262,8 @@ footer a:hover {
     z-index: 2;
     top: 0;
     left: 0;
+}
+
+.d-none {
+    display: none;
 }
