@@ -73,7 +73,18 @@ function setContactInformation(index) {
     document.getElementById('contactName').innerText = contacts[index].name
     document.getElementById('mailAddress').innerText = contacts[index].email
     document.getElementById('phoneNumber').innerText = contacts[index].phone
-    document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name)
+    document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name) 
+    setSelectedContactBackground(index);   
+}
+
+
+function setSelectedContactBackground(index) {
+    let allContactDivs = document.querySelectorAll('.single-contact');
+    let selectedContactDiv = document.querySelectorAll('.single-contact')[index];
+    allContactDivs.forEach(div => {
+        div.style.backgroundColor ='white'
+    });
+    selectedContactDiv.style.backgroundColor ='#2A3647';
 }
 
 
