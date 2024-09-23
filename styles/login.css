@@ -1,15 +1,20 @@
 body {
     margin: 0%;
     background: #F6F7F8;
-    height: 100vh;
+    flex-direction: column;
 }
 
 .whole-body {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.headline {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
 }
 
 .logo {
@@ -38,7 +43,7 @@ body {
     text-align: center;
 }
 
-.login-seperator{
+.login-seperator {
     width: 0px;
     height: 150px;
     border: 3px;
@@ -76,12 +81,11 @@ input {
 }
 
 .sign-up-top-right {
-    width: 400px;
     font-size: 20px;
     display: flex;
     align-items: center;
     gap: 35px;
-    padding-bottom: 900px;
+    width: 100%;
 }
 
 .sign-up-top-right a {
@@ -172,4 +176,24 @@ input {
     color: #29ABE2;
     cursor: pointer;
     box-shadow: #8c8c8c 0px 5px 7px;
+}
+
+.information {
+    font-size: 16px;
+    color: #A8A8A8;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.information span {
+    text-align: center;
+    padding: 8px;
+}
+
+.information span:hover {
+    cursor: pointer;
+    color: #29ABE2;
+    font-weight: 700;
 }
