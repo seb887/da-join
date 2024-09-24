@@ -352,14 +352,22 @@ article {
 
   width: 422px;
   height: 215px;
+  ::placeholder {
+    color: #D1D1D1;
+  }
   input{
     height: 50px ;
     width: 422px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    color: #D1D1D1;
     padding: 13px 21px 13px 21px;
     font-size: 20px;
+    
+    background-repeat: no-repeat;
+  }
+  input:focus{
+    border: 1px solid #29ABE2;
+    outline: none;
   }
   :nth-child(2){
     margin: 24px 0px;
@@ -367,8 +375,6 @@ article {
 }
 
 #closeAddContact{
-  width: 32px;
-  height: 32px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -380,7 +386,12 @@ article {
   :hover{
     background-color: var(--bg-primary);
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 50px;
+  }
+  img{
+    object-fit: scale-down;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -390,6 +401,55 @@ article {
   align-items: center;
   flex-direction: column;
 }
+
+#inputContactName{
+  background-image: url(/assets/icons/person.png);
+  background-position: 380px 15px; 
+  background-repeat: no-repeat;
+}
+#inputMailAddress{
+  background-image: url(/assets/icons/mail.png);
+  background-position: 380px 15px; 
+  background-repeat: no-repeat;
+}
+#inputPhoneNumber{
+  background-image: url(/assets/icons/phone.png);
+  background-position: 380px 15px; 
+  background-repeat: no-repeat;
+}
+.add-contact-modal-person{
+  padding: 0 80px;
+}
+
+.add-contact-button-bottom{
+  button{
+    height: 56px;
+    padding: 16px;
+    font-size: 20px;
+  }
+  :nth-child(1){
+    width: 126px;
+    background-color: white;
+    border: 1px solid black;
+    margin-right: 16px;
+    border-radius: 10px;
+    background-image: url(/assets/icons/close.png);
+    background-repeat: no-repeat;
+    background-position: 90px 16px;
+    text-align: left;
+  }
+  :nth-child(2){
+    width: 214px;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 10px;
+    background-image: url(/assets/icons/check.png);
+    background-repeat: no-repeat;
+    background-position: 170px 22px;
+    text-align: left;
+  }
+}
+
 @keyframes fadeAndSlideIn {
     0% {
       right: -500px;
