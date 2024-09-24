@@ -27,10 +27,10 @@ function renderLogIn() {
             <div class="login-seperator"></div>
             <div class="login-form">
                 <form>
-                    <input class="email-input" type="email" placeholder="Email" required> 
+                    <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
-                        <input id="password-id" class="password-input" type="password" placeholder="Password" required>
-                        <div id="icon-password" onclick="showLoginPassword()" class="password-icon"></div>
+                        <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
+                        <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="check-box">
                         <div onclick="rememberMe()" class="remember-true"></div>
@@ -57,14 +57,14 @@ function renderSignUp() {
         <div class="login-form">
             <form>
                 <input class="name-input" type="text" placeholder="Name" required> 
-                <input class="email-input" type="email" placeholder="Email" required> 
+                <input onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
-                        <input minlength="5" id="password-id" class="password-input" type="password" placeholder="Password" required>
-                        <div id="icon-password" onclick="showSignUpPassword()" class="password-icon"></div>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
+                        <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="password-input-wrapper">
-                        <input minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
-                        <div id="icon-password-confirm" onclick="showSignUpPassword()" class="password-icon"></div>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
+                        <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="rememberMe()" class="remember-true"></div>
@@ -79,13 +79,52 @@ function renderSignUp() {
 }
 
 function showLoginPassword() {
-    document.getElementById("password-id").type = "text";
+    document.getElementById("current-password").type = "text";
     document.getElementById("icon-password").classList.add("eye-password");
+    document.getElementById("icon-password").classList.remove("eye-password-non-visible");
 }
 
 function showSignUpPassword() {
-    document.getElementById("password-id").type = "text";
+    document.getElementById("password-id-sign-up").type = "text";
     document.getElementById("password-id-confirm").type = "text";
     document.getElementById("icon-password").classList.add("eye-password");
+    document.getElementById("icon-password").classList.remove("eye-password-non-visible");
     document.getElementById("icon-password-confirm").classList.add("eye-password");
+    document.getElementById("icon-password-confirm").classList.remove("eye-password-non-visible");
+}
+
+function hideLoginPassword() {
+    document.getElementById("current-password").type = "password";
+    document.getElementById("icon-password").classList.add("eye-password-non-visible");
+}
+
+function hideSignUpPassword() {
+    document.getElementById("password-id-sign-up").type = "password";
+    document.getElementById("password-id-confirm").type = "password";
+    document.getElementById("icon-password").classList.add("eye-password-non-visible");
+    document.getElementById("icon-password-confirm").classList.add("eye-password-non-visible");
+}
+
+function toggleLoginPasswordVisibility() {
+    let passwordField = document.getElementById("current-password");
+    if (passwordField.type === "password") {
+        showLoginPassword();
+    } else {
+        hideLoginPassword();
+    }
+}
+
+function toggleSignUpPasswordVisibility() {
+    let passwordField = document.getElementById("password-id-sign-up", "password-id-confirm");
+    if (passwordField.type === "password") {
+        showSignUpPassword();
+    } else {
+        hideSignUpPassword();
+    }
+}
+
+function disableSpacebar() {
+    if (event.keyCode == 32) {
+        return false;
+    }
 }

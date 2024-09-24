@@ -134,6 +134,10 @@ input {
     background: url(/assets/icons/visibility_off.svg) no-repeat center center;
 }
 
+.eye-password-non-visible {
+    background: url(/assets/icons/visibility.svg) no-repeat center center;
+}
+
 .name-input {
     background: url(/assets/icons/person.png) no-repeat scroll 380px;
 }
