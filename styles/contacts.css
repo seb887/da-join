@@ -347,11 +347,49 @@ article {
 
 .input-field-right{
   display: flex;
+  justify-content: center;
   flex-direction: column;
+
+  width: 422px;
+  height: 215px;
+  input{
+    height: 50px ;
+    width: 422px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    color: #D1D1D1;
+    padding: 13px 21px 13px 21px;
+    font-size: 20px;
+  }
+  :nth-child(2){
+    margin: 24px 0px;
+  }
 }
 
+#closeAddContact{
+  width: 32px;
+  height: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 40px;
+  background-color: white;
+  outline: none;
+  border: none;
+  :hover{
+    background-color: var(--bg-primary);
+    cursor: pointer;
+    border-radius: 50%;
+  }
+}
 
-
+.input-fields{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 @keyframes fadeAndSlideIn {
     0% {
       right: -500px;
