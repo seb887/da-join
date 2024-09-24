@@ -208,11 +208,11 @@
               >
               <select
                 type="text"
-                id="input-category"
+                id="select-category"
                 name="category"
               >
                 <option
-                  value="No selection"
+                  value="Select task category"
                   disabled
                   selected
                   hidden
@@ -241,7 +241,12 @@
           </div>
         </form>
         <div class="add-task-buttons-container">
-          <button class="add-task-cancel-button">Cancel</button>
+          <button
+            class="add-task-cancel-button"
+            onclick="clearInputs()"
+          >
+            Cancel
+          </button>
           <button
             class="add-task-submit-button"
             onclick="createNewTask()"
@@ -249,10 +254,10 @@
             Create Task
           </button>
         </div>
+        <div><span class="required-marker">*</span>This field is required</div>
       </section>
     </main>
 
-    <script src="../js/script.js"></script>
     <script src="../js/add-task.js"></script>
   </body>
 </html>

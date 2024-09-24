@@ -2,7 +2,7 @@
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
 const inputDate = document.getElementById('input-date');
-const inputCategory = document.getElementById('input-category');
+const selectCategory = document.getElementById('select-category');
 
 // VARIABLES
 const BASE_URL =
@@ -25,7 +25,7 @@ function createNewTask() {
     title: inputTitle.value,
     description: inputDescription.value,
     date: inputDate.value,
-    category: inputCategory.value,
+    category: selectCategory.value,
     board: 'todo',
   };
 
@@ -37,6 +37,5 @@ function createNewTask() {
 function clearInputs() {
   inputTitle.value = '';
   inputDescription.value = '';
-  inputDate.value = '';
-  inputCategory.value = '';
+  selectCategory.value = 'Select task category';
 }

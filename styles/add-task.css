@@ -21,7 +21,7 @@
   flex-direction: column;
   /* justify-content: space-between; */
   padding: 0 64px;
-  gap: 48px;
+  /* gap: 48px; */
   /* width: calc(100vw - 232px); */
   max-width: 1208px;
   top: calc(200px + 96px);
@@ -110,6 +110,7 @@
   justify-content: end;
   align-items: center;
   /* padding: 0 64px; */
+  margin-top: 48px;
   gap: 16px;
   width: 975px;
 }
