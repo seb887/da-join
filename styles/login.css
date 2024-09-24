@@ -109,8 +109,29 @@ input {
     background: url(/assets/icons/mail.png) no-repeat scroll 380px;
 }
 
-.password-input {
-    background: url(/assets/icons/lock.png) no-repeat scroll 380px;
+.password-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.password-icon {
+    position: absolute;
+    top: 50%;
+    right: 21px;
+    transform: translateY(-50%);
+    width: 21px;
+    height: 20px;
+    background: url(/assets/icons/lock.png) no-repeat center center;
+    background-size: contain;
+    cursor: default;
+}
+
+.password-icon:hover {
+    cursor: pointer;
+}
+
+.eye-password {
+    background: url(/assets/icons/visibility_off.svg) no-repeat center center;
 }
 
 .name-input {
