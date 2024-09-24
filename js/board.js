@@ -48,36 +48,80 @@ const tasks = [
 function render() {
   loadTasksFromFirebase();
   clearKanbanLists();
+}
+
+async function loadTasksFromFirebase() {
+  let response = await fetch(BASE_URL + 'tasks' + '.json');
+  let tasksDataFromFirebase = await response.json();
+
+  if (tasksDataFromFirebase == null) {
+    return;
+  } else {
+    tasks.length = 0;
+    pushTasksFromFirebaseToArr(tasksDataFromFirebase);
+  }
+}
+
+function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
+  let objectKeys = Object.keys(tasksDataFromFirebase);
+
+  for (let i = 0; i < objectKeys.length; i++) {
+    tasks.push({
+      id: objectKeys[i],
+      task: tasksDataFromFirebase[objectKeys[i]],
+    });
+  }
+
   renderKanbanLists();
 }
 
 function renderKanbanLists() {
-  for (let i = 0; i < tasks.length; i++) {
-    switch (tasks[i].board) {
-      case 'todo':
-        kanbanListTodo.innerHTML += createCardHTML(tasks[i]);
-        break;
-      case 'in progress':
-        kanbanListInProgress.innerHTML += createCardHTML(tasks[i]);
-        break;
-      case 'await feedback':
-        kanbanListAwaitFeedback.innerHTML += createCardHTML(tasks[i]);
-        break;
-      case 'done':
-        kanbanListDone.innerHTML += createCardHTML(tasks[i]);
-        break;
-    }
+  console.log('render tasks: ', tasks);
+  for (let element of tasks) {
+    let task = element.task;
+    let title = task.title;
+    let description = task.description;
+    // let date = task.date;
+    let category = task.category;
+    let board = task.board;
+
+    sortBoardColumns(board, title, description, category);
   }
 }
 
-function createCardHTML(task) {
+function sortBoardColumns(board, title, description, category) {
+  switch (board) {
+    case 'todo':
+      kanbanListTodo.innerHTML += createCardHTML(title, description, category);
+      break;
+    case 'in progress':
+      kanbanListInProgress.innerHTML += createCardHTML(
+        title,
+        description,
+        category
+      );
+      break;
+    case 'await feedback':
+      kanbanListAwaitFeedback.innerHTML += createCardHTML(
+        title,
+        description,
+        category
+      );
+      break;
+    case 'done':
+      kanbanListDone.innerHTML += createCardHTML(title, description, category);
+      break;
+  }
+}
+
+function createCardHTML(title, description, category) {
   return `
     <div class="kanban-card">
         <div class="card-label-container">
-            <div class="card-label">${task.category}</div>
+            <div class="card-label">${category}</div>
         </div>
-        <div class="card-title">${task.title}</div>
-        <div class="card-description">${task.description}</div>
+        <div class="card-title">${title}</div>
+        <div class="card-description">${description}</div>
         <div class="subtask-progress-bar-container">
             <div class="subtask-progress-bar">
                 <div class="subtask-progress-bar-done"></div>
@@ -116,36 +160,6 @@ function controlPrio(prioStatus) {
       return '../assets/icons/prio-medium.svg';
     case low:
       return '../assets/icons/prio-low.png';
-  }
-}
-
-// function controlLabel(label) {
-//   switch (label) {
-//     case 'User Story':
-//       console.log(parentNode);
-//   }
-// }
-
-async function loadTasksFromFirebase() {
-  let response = await fetch(BASE_URL + 'tasks' + '.json');
-  let tasksDataFromFirebase = await response.json();
-
-  if (tasksDataFromFirebase == null) {
-    return;
-  } else {
-    tasks.length = 0;
-    pushTasksFromFirebaseToArr(tasksDataFromFirebase);
-  }
-}
-
-function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
-  let objectKeys = Object.keys(tasksDataFromFirebase);
-
-  for (let i = 0; i < objectKeys.length; i++) {
-    tasks.push({
-      id: objectKeys[i],
-      task: tasksDataFromFirebase[objectKeys[i]],
-    });
   }
 }
 

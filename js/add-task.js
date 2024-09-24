@@ -8,6 +8,11 @@ const inputCategory = document.getElementById('input-category');
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 
+// DEFAULTS
+let currentDate = new Date();
+inputDate.valueAsDate = currentDate;
+
+// FUNCTIONS
 async function saveTaskToFirebase(newTask) {
   await fetch(BASE_URL + 'tasks' + '.json', {
     method: 'POST',
@@ -26,5 +31,12 @@ function createNewTask() {
 
   console.log('create new task: ', newTask);
   saveTaskToFirebase(newTask);
-  // checkInputs(newTask);
+  clearInputs();
+}
+
+function clearInputs() {
+  inputTitle.value = '';
+  inputDescription.value = '';
+  inputDate.value = '';
+  inputCategory.value = '';
 }
