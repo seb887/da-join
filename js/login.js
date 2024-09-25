@@ -1,6 +1,7 @@
 function init() {
     setTimeout(playLogoAnimation, 250);
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
+    document.getElementById("check-box").classList.remove('check-box-checked');
 }
 
 function playLogoAnimation() {
@@ -33,7 +34,9 @@ function renderLogIn() {
                         <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="check-box">
-                        <div onclick="rememberMe()" class="remember-true"></div>
+                        <div onclick="toggleCheckBoxRemember()" class="remember-true">
+                        <img id="check-box" src="/assets/icons/emptycheckbox.svg">
+                        </div>
                         <span>Remember me</span>
                     </div>
                     <div class="what-kind-of-login">
@@ -67,7 +70,9 @@ function renderSignUp() {
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
-                    <div onclick="rememberMe()" class="remember-true"></div>
+                    <div onclick="toggleCheckBoxAccept()" class="remember-true">
+                    <img id="check-box-accept" src="/assets/icons/emptycheckbox.svg">
+                    </div>
                     <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy</a></span>
                 </div>
                 <div class="what-kind-of-login">
@@ -76,6 +81,24 @@ function renderSignUp() {
             </form>
         </div>
     `;
+}
+
+function toggleLoginPasswordVisibility() {
+    let passwordField = document.getElementById("current-password");
+    if (passwordField.type === "password") {
+        showLoginPassword();
+    } else {
+        hideLoginPassword();
+    }
+}
+
+function toggleSignUpPasswordVisibility() {
+    let passwordField = document.getElementById("password-id-sign-up", "password-id-confirm");
+    if (passwordField.type === "password") {
+        showSignUpPassword();
+    } else {
+        hideSignUpPassword();
+    }
 }
 
 function showLoginPassword() {
@@ -105,26 +128,27 @@ function hideSignUpPassword() {
     document.getElementById("icon-password-confirm").classList.add("eye-password-non-visible");
 }
 
-function toggleLoginPasswordVisibility() {
-    let passwordField = document.getElementById("current-password");
-    if (passwordField.type === "password") {
-        showLoginPassword();
-    } else {
-        hideLoginPassword();
-    }
-}
-
-function toggleSignUpPasswordVisibility() {
-    let passwordField = document.getElementById("password-id-sign-up", "password-id-confirm");
-    if (passwordField.type === "password") {
-        showSignUpPassword();
-    } else {
-        hideSignUpPassword();
-    }
-}
-
 function disableSpacebar() {
     if (event.keyCode == 32) {
         return false;
     }
 }
+
+function toggleCheckBoxRemember() {
+    let checkBox = document.getElementById("check-box");
+    if (checkBox.src.includes('emptycheckbox.svg')) {
+        checkBox.src = '/assets/icons/checkedcheckbox.svg';
+    } else {
+        checkBox.src = '/assets/icons/emptycheckbox.svg';
+    }
+}
+
+function toggleCheckBoxAccept() {
+    let checkBox = document.getElementById("check-box-accept");
+    if (checkBox.src.includes('emptycheckbox.svg')) {
+        checkBox.src = '/assets/icons/checkedcheckbox.svg';
+    } else {
+        checkBox.src = '/assets/icons/emptycheckbox.svg';
+    }
+}
+    

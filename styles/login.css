@@ -73,10 +73,8 @@ body {
 }
 
 .login-signup-title {
-    font-family: Inter;
     font-size: 61px;
     font-weight: 700;
-    line-height: 73.2px;
     text-align: center;
 }
 
@@ -169,7 +167,7 @@ input {
 
 .sign-up-top-right button:hover {
     background: #29ABE2;
-    border: 0px;
+    border-color: #29ABE2;
     cursor: pointer;
     box-shadow: #8c8c8c 0px 5px 7px;
 }
@@ -182,10 +180,11 @@ input {
 }
 
 .remember-true {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    border: 2px solid #2A3647
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    width: 15px;
 }
 
 .remember-true:hover {
