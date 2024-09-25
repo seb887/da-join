@@ -35,7 +35,7 @@ function renderLogIn() {
                     </div>
                     <div class="check-box">
                         <div onclick="toggleCheckBoxRemember()" class="remember-true">
-                        <img id="check-box" src="/assets/icons/emptycheckbox.svg">
+                        <img id="check-box" src="../assets/icons/emptycheckbox.svg">
                         </div>
                         <span>Remember me</span>
                     </div>
@@ -53,7 +53,7 @@ function renderSignUp() {
     return `
        <div class="sign-up-mask">
        <div class="sign-up-title">
-            <img onclick="login()" src="/assets/icons/back.png">
+            <img onclick="login()" src="../assets/icons/back.png">
             <b class="login-signup-title">Sign Up</b>
        </div>
         <div class="login-seperator"></div>
@@ -71,7 +71,7 @@ function renderSignUp() {
                     </div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="toggleCheckBoxAccept()" class="remember-true">
-                    <img id="check-box-accept" src="/assets/icons/emptycheckbox.svg">
+                    <img id="check-box-accept" src="../assets/icons/emptycheckbox.svg">
                     </div>
                     <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy</a></span>
                 </div>
@@ -137,18 +137,18 @@ function disableSpacebar() {
 function toggleCheckBoxRemember() {
     let checkBox = document.getElementById("check-box");
     if (checkBox.src.includes('emptycheckbox.svg')) {
-        checkBox.src = '/assets/icons/checkedcheckbox.svg';
+        checkBox.src = '../assets/icons/checkedcheckbox.svg';
     } else {
-        checkBox.src = '/assets/icons/emptycheckbox.svg';
+        checkBox.src = '../assets/icons/emptycheckbox.svg';
     }
 }
 
 function toggleCheckBoxAccept() {
     let checkBox = document.getElementById("check-box-accept");
     if (checkBox.src.includes('emptycheckbox.svg')) {
-        checkBox.src = '/assets/icons/checkedcheckbox.svg';
+        checkBox.src = '../assets/icons/checkedcheckbox.svg';
     } else {
-        checkBox.src = '/assets/icons/emptycheckbox.svg';
+        checkBox.src = '../assets/icons/emptycheckbox.svg';
     }
 }
     

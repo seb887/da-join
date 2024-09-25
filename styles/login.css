@@ -104,7 +104,7 @@ input {
 }
 
 .email-input {
-    background: url(/assets/icons/mail.png) no-repeat scroll 380px;
+    background: url(../assets/icons/mail.png) no-repeat scroll 380px;
 }
 
 .password-input-wrapper {
@@ -119,7 +119,7 @@ input {
     transform: translateY(-50%);
     width: 21px;
     height: 20px;
-    background: url(/assets/icons/lock.png) no-repeat center center;
+    background: url(../assets/icons/lock.png) no-repeat center center;
     background-size: contain;
     cursor: default;
 }
@@ -129,15 +129,15 @@ input {
 }
 
 .eye-password {
-    background: url(/assets/icons/visibility_off.svg) no-repeat center center;
+    background: url(../assets/icons/visibility_off.svg) no-repeat center center;
 }
 
 .eye-password-non-visible {
-    background: url(/assets/icons/visibility.svg) no-repeat center center;
+    background: url(../assets/icons/visibility.svg) no-repeat center center;
 }
 
 .name-input {
-    background: url(/assets/icons/person.png) no-repeat scroll 380px;
+    background: url(../assets/icons/person.png) no-repeat scroll 380px;
 }
 
 ::placeholder {
