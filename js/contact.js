@@ -1,6 +1,7 @@
 CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
 
 let contacts = [];
+let animationActive = false;
 
 function init() {
     renderContacts();
@@ -90,6 +91,22 @@ function setSelectedContactBackground(index) {
 }
 
 
+function openCloseAddContact() {
+    let modal = document.getElementById('addContact');  
+    modal.style.display ='flex';  
+    if (animationActive) {
+        modal.classList.remove('animation-slide-in');
+        modal.classList.add('animation-slide-out');
+        setTimeout(() => {
+            modal.style.display ='none';
+        }, 250);
+      } else {
+        modal.classList.remove('animation-slide-out');
+        modal.classList.add('animation-slide-in');
+      }
+      animationActive = !animationActive;
+}
+
 function contactContent(index) {
     return `
         <div onclick ="openContact('${index}')" class="single-contact">
@@ -121,7 +138,7 @@ function nameHeaderContent(letter) {
 function addNewContactsContent () {
     return `
         <div class="add-new-contacts">
-            <button onclick="addNewContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
+            <button onclick="openCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
         </div>
     `
 }
