@@ -117,6 +117,30 @@ function checkIfAnimationActive() {
 }
 
 
+
+async function createContact() {
+    let name = document.getElementById('inputContactName');
+    let email = document.getElementById('inputMailAddress');
+    let phone = document.getElementById('inputPhoneNumber');
+    let response = await fetch(CONTACT_URL, {
+        method: "POST",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+            {
+            "name" : name.value,
+            "email" : email.value,
+            "phone" : phone.value
+        }) 
+    })
+}
+
+
+async function saveToFirebase(){
+
+}
+
 function contactContent(index) {
     return `
         <div onclick ="openContact('${index}')" class="single-contact">

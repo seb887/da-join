@@ -488,6 +488,8 @@ article {
   animation-fill-mode: forwards;
 }
 
+
+
 @keyframes slideInAddContact {
   0%{
     opacity: 1;
