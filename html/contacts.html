@@ -142,11 +142,11 @@
           </div>
           <div class="article-edit-and-delete">
             <div class="edit-contact flex-d-r">
-              <img onclick="editContact()" src="/assets/icons/edit.svg" alt="edit-icon">
+              <img onclick="editContact()" src="../assets/icons/edit.svg" alt="edit-icon">
               <span>Edit</span>
             </div>
             <div class="del-contact flex-d-r">
-              <img onclick="deleteContact()" src="/assets/icons/delete.svg" alt="delete-icon">
+              <img onclick="deleteContact()" src="../assets/icons/delete.svg" alt="delete-icon">
               <span>Delete</span>
             </div>
           </div>
@@ -161,13 +161,13 @@
       </div>
     </article>
 
-    <div id="addContact" class="modal-background">
-      <div class="add-contact-modal">
+    <div id="modalBackground" class="modal-background"></div>  
+    <div id="addContact" class="add-contact-modal">
 
         <div class="modal-header-logo-left">
 
           <div class="logo-modal">
-            <img src="/assets/img/logo-white.png" alt="logo-white">
+            <img src="../assets/img/logo-white.png" alt="logo-white">
           </div>
           <div class="header-modal">
             <h1>Add Contact</h1>
@@ -181,13 +181,13 @@
         <div class="add-contact-modal-right">
               
           <div class="add-contact-modal-person">
-            <img src="/assets/icons/add-contact-person.png" alt="profile-add-contact">
+            <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
           </div>
           
 
           <div class="input-field-right">
 
-              <button onclick="openCloseAddContact()" id="closeAddContact"><img src="/assets/icons/close.png" alt="close-button"></button>
+              <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
               <form class="input-fields" action="">
                 <input placeholder="Name" id="inputContactName" type="text">
                 <input placeholder="Email" id="inputMailAddress" type="email">
@@ -205,9 +205,7 @@
 
 
 
-      </div>
-    </div>  
-
+    </div>
     <script src="../js/contact.js"></script>
   </body>
 </html>

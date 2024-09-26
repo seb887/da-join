@@ -91,21 +91,31 @@ function setSelectedContactBackground(index) {
 }
 
 
-function openCloseAddContact() {
+function openAndCloseAddContact() {
     let modal = document.getElementById('addContact');  
-    modal.style.display ='flex';  
+    modal.style.display ='flex';
+    document.getElementById('modalBackground').style.display = 'flex';
+    checkIfAnimationActive()
+    animationActive = !animationActive;
+}
+
+
+function checkIfAnimationActive() {
+    let modal = document.getElementById('addContact'); 
     if (animationActive) {
         modal.classList.remove('animation-slide-in');
         modal.classList.add('animation-slide-out');
         setTimeout(() => {
             modal.style.display ='none';
+            document.getElementById('modalBackground').style.display = 'none';
         }, 250);
       } else {
         modal.classList.remove('animation-slide-out');
         modal.classList.add('animation-slide-in');
+        document.getElementById('modalBackground').classList.add('change-opacity');
       }
-      animationActive = !animationActive;
 }
+
 
 function contactContent(index) {
     return `
@@ -138,7 +148,7 @@ function nameHeaderContent(letter) {
 function addNewContactsContent () {
     return `
         <div class="add-new-contacts">
-            <button onclick="openCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
+            <button onclick="openAndCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
         </div>
     `
 }
