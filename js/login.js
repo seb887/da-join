@@ -66,11 +66,11 @@ function renderSignUp() {
                 <input id="name" id="name" class="name-input" type="text" placeholder="Name" required> 
                 <input id="email" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
-                        <input id="password" onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
                         <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="password-input-wrapper">
-                        <input id="password" onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
