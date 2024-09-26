@@ -119,9 +119,7 @@ function checkIfAnimationActive() {
 
 
 async function createContact() {
-    let name = document.getElementById('inputContactName');
-    let email = document.getElementById('inputMailAddress');
-    let phone = document.getElementById('inputPhoneNumber');
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     let response = await fetch(CONTACT_URL, {
         method: "POST",
         header: {
@@ -129,15 +127,21 @@ async function createContact() {
         },
         body: JSON.stringify(
             {
-            "name" : name.value,
-            "email" : email.value,
-            "phone" : phone.value
+            "name" :  document.getElementById('inputContactName').value,
+            "email" : document.getElementById('inputMailAddress').value,
+            "phone" : document.getElementById('inputPhoneNumber').value,
+            "color" : randomColor
         }) 
     })
+    closeAndClear()
 }
 
 
-async function saveToFirebase(){
+async function closeAndClear(){
+    openAndCloseAddContact();
+    document.getElementById('inputContactName').value = '';
+    document.getElementById('inputMailAddress').value = '';
+    document.getElementById('inputPhoneNumber').value = '';
 
 }
 

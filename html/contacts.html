@@ -188,13 +188,13 @@
           <div class="input-field-right">
 
               <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
-              <form class="input-fields" action="">
+              <form onsubmit="createContact()" class="input-fields" action="">
                   <input placeholder="Name" id="inputContactName" type="text" required>
                   <input placeholder="Email" id="inputMailAddress" type="email" required>
                   <input placeholder="Phone" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
                   <button onclick="openAndCloseAddContact()" >Cancel</button>
-                  <button type="submit" onclick="createContact()" >Create contact</button>
+                  <button type="submit" >Create contact</button>
                 </div>
               </form>
           </div>
