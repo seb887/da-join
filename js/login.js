@@ -10,13 +10,13 @@ function playLogoAnimation() {
     document.getElementById("loading-overlay-id").classList.add("loading-overlay-animation");
 }
 
-function login() {
+function goToLogin() {
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
     document.getElementById("sign-up-top-right-id").classList.remove("d-none");
     renderLogIn();
 }
 
-function signUp() {
+function goTosignUp() {
     document.getElementById("sign-up-top-right-id").classList.add("d-none");
     document.getElementById("whole-body-id").innerHTML = renderSignUp();
 }
@@ -27,7 +27,7 @@ function renderLogIn() {
             <b class="login-signup-title">Log in</b>
             <div class="login-seperator"></div>
             <div class="login-form">
-                <form>
+                <form onsubmit="logIn()">
                     <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
@@ -40,7 +40,7 @@ function renderLogIn() {
                         <span>Remember me</span>
                     </div>
                     <div class="what-kind-of-login">
-                        <a class="just-login" href="">Log in</a>
+                        <button class="just-login" href="">Log in</button>
                         <a class="guest-login" style="color: black;" href="board.html">Guest Log in</a>
                     </div>
                 </form>
@@ -53,12 +53,12 @@ function renderSignUp() {
     return `
        <div class="sign-up-mask">
        <div class="sign-up-title">
-            <img onclick="login()" src="../assets/icons/back.png">
+            <img onclick="goToLogin()" src="../assets/icons/back.png">
             <b class="login-signup-title">Sign Up</b>
        </div>
         <div class="login-seperator"></div>
         <div class="login-form">
-            <form>
+            <form onsubmit="signUp()">
                 <input class="name-input" type="text" placeholder="Name" required> 
                 <input onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
@@ -76,7 +76,7 @@ function renderSignUp() {
                     <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy</a></span>
                 </div>
                 <div class="what-kind-of-login">
-                    <a class="just-login" href="">Sign Up</a>
+                    <button class="just-login" href="">Sign Up</button>
                 </div>
             </form>
         </div>

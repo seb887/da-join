@@ -151,13 +151,13 @@ input {
     gap: 35px;
 }
 
-.sign-up-top-right button {
-    text-decoration: none;
+.sign-up-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #2A3647;
     width: 94px;
     height: 49px;
-    padding: 15px 16px 15px 16px;
-    gap: 10px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 700;
@@ -165,9 +165,9 @@ input {
     transition: ease-in-out 120ms;
 }
 
-.sign-up-top-right button:hover {
+.sign-up-button:hover {
     background: #29ABE2;
-    border-color: #29ABE2;
+    border: 0px;
     cursor: pointer;
     box-shadow: #8c8c8c 0px 5px 7px;
 }
