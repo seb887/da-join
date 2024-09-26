@@ -1,3 +1,7 @@
+let users = [
+    {'name': 'name', 'email': 'bartosz@test.de', 'password': 'test1'}
+]
+
 function init() {
     setTimeout(playLogoAnimation, 250);
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
@@ -58,15 +62,15 @@ function renderSignUp() {
        </div>
         <div class="login-seperator"></div>
         <div class="login-form">
-            <form onsubmit="signUp()">
-                <input class="name-input" type="text" placeholder="Name" required> 
-                <input onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
+            <form onsubmit="signUp(); return: false;">
+                <input id="name" id="name" class="name-input" type="text" placeholder="Name" required> 
+                <input id="email" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
+                        <input id="password" onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
                         <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
+                        <input id="password" onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
@@ -76,11 +80,19 @@ function renderSignUp() {
                     <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy</a></span>
                 </div>
                 <div class="what-kind-of-login">
-                    <button class="just-login" href="">Sign Up</button>
+                    <button class="just-login">Sign Up</button>
                 </div>
             </form>
         </div>
     `;
+}
+
+function signUp() {
+    let name = document.getElementById('name');
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    users.push({name: name.value, email: email.value, password: password.value})
+    window.location.href = 'login.html';
 }
 
 function toggleLoginPasswordVisibility() {
