@@ -79,6 +79,7 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
 function renderKanbanLists() {
   console.log('render tasks: ', tasks);
   for (let element of tasks) {
+    let id = element.id;
     let task = element.task;
     let title = task.title;
     let description = task.description;
@@ -86,17 +87,23 @@ function renderKanbanLists() {
     let category = task.category;
     let board = task.board;
 
-    sortBoardColumns(board, title, description, category);
+    sortBoardColumns(id, board, title, description, category);
   }
 }
 
-function sortBoardColumns(board, title, description, category) {
+function sortBoardColumns(id, board, title, description, category) {
   switch (board) {
     case 'todo':
-      kanbanListTodo.innerHTML += createCardHTML(title, description, category);
+      kanbanListTodo.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
       break;
     case 'in progress':
       kanbanListInProgress.innerHTML += createCardHTML(
+        id,
         title,
         description,
         category
@@ -104,20 +111,26 @@ function sortBoardColumns(board, title, description, category) {
       break;
     case 'await feedback':
       kanbanListAwaitFeedback.innerHTML += createCardHTML(
+        id,
         title,
         description,
         category
       );
       break;
     case 'done':
-      kanbanListDone.innerHTML += createCardHTML(title, description, category);
+      kanbanListDone.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
       break;
   }
 }
 
-function createCardHTML(title, description, category) {
+function createCardHTML(id, title, description, category) {
   return `
-    <div class="kanban-card" onclick="openModal()">
+    <div class="kanban-card" id="${id}" onclick="openModal(event)">
         <div class="card-label-container">
             <div class="card-label">${category}</div>
         </div>
@@ -164,9 +177,26 @@ function controlPrio(prioStatus) {
   }
 }
 
-function openModal() {
+function getDataForModal(event) {
+  const id = event.currentTarget.id;
+
+  for (let element of tasks) {
+    if (id == element.id) {
+      let task = element.task;
+      let title = task.title;
+      let description = task.description;
+      let date = task.date;
+      let category = task.category;
+
+      modal.innerHTML = createModalHTML(title, description, date, category);
+    }
+  }
+}
+
+function openModal(event) {
   modal.style.display = 'flex';
-  modal.innerHTML = createModalHTML();
+  getDataForModal(event);
+  console.log(event.currentTarget.id);
 }
 
 function closeModal() {
@@ -174,27 +204,27 @@ function closeModal() {
   modal.innerHTML = '';
 }
 
-function createModalHTML() {
+function createModalHTML(title, description, date, category) {
   return `
     <div
       class="modal-card"
       id="modal-card"
     >
       <div class="modal-card-header-container">
-        <div class="modal-card-category">User Story</div>
+        <div class="modal-card-category">${category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"
           onclick="closeModal()"
         />
       </div>
-      <div class="modal-card-title">Kochwelt Page & Recipe Recommender</div>
+      <div class="modal-card-title">${title}</div>
       <div class="modal-card-description">
-        Build start page with recipe recommendation...
+      ${description}
       </div>
       <div class="modal-card-date">
         <div class="modal-card-key">Due date:</div>
-        <span class="modal-card-date-content">24.09.2024</span>
+        <span class="modal-card-date-content">${date}</span>
       </div>
       <div class="modal-card-prio">
         <div class="modal-card-key">Priority:</div>
