@@ -73,69 +73,68 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
     });
   }
 
-  renderKanbanLists();
-}
-
-function renderKanbanLists() {
-  console.log('render tasks: ', tasks);
   for (let element of tasks) {
-    let id = element.id;
-    let task = element.task;
-    let title = task.title;
-    let description = task.description;
-    // let date = task.date;
-    let category = task.category;
-    let board = task.board;
-
-    sortBoardColumns(id, board, title, description, category);
+    renderKanbanLists(element);
   }
 }
 
-function sortBoardColumns(id, board, title, description, category) {
-  switch (board) {
-    case 'todo':
-      kanbanListTodo.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'in progress':
-      kanbanListInProgress.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'await feedback':
-      kanbanListAwaitFeedback.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'done':
-      kanbanListDone.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-  }
-}
+// function renderKanbanLists(element) {
+//   let id = element.id;
+//   let task = element.task;
+//   let title = task.title;
+//   let description = task.description;
+//   // let date = task.date;
+//   let category = task.category;
+//   let board = task.board;
 
-function createCardHTML(id, title, description, category) {
+//   sortBoardColumns(id, board, title, description, category);
+// }
+
+// function sortBoardColumns(id, board, title, description, category) {
+//   switch (board) {
+//     case 'todo':
+//       kanbanListTodo.innerHTML += createCardHTML(
+//         id,
+//         title,
+//         description,
+//         category
+//       );
+//       break;
+//     case 'in progress':
+//       kanbanListInProgress.innerHTML += createCardHTML(
+//         id,
+//         title,
+//         description,
+//         category
+//       );
+//       break;
+//     case 'await feedback':
+//       kanbanListAwaitFeedback.innerHTML += createCardHTML(
+//         id,
+//         title,
+//         description,
+//         category
+//       );
+//       break;
+//     case 'done':
+//       kanbanListDone.innerHTML += createCardHTML(
+//         id,
+//         title,
+//         description,
+//         category
+//       );
+//       break;
+//   }
+// }
+
+function createCardHTML(element) {
   return `
-    <div class="kanban-card" id="${id}" onclick="openModal(event)">
+    <div class="kanban-card" id="${element.id}" onclick="openModal(event)">
         <div class="card-label-container">
-            <div class="card-label">${category}</div>
+            <div class="card-label">${element.task.category}</div>
         </div>
-        <div class="card-title">${title}</div>
-        <div class="card-description">${description}</div>
+        <div class="card-title">${element.task.title}</div>
+        <div class="card-description">${element.task.description}</div>
         <div class="subtask-progress-bar-container">
             <div class="subtask-progress-bar">
                 <div class="subtask-progress-bar-done"></div>
@@ -294,7 +293,7 @@ function createModalHTML(title, description, date, category) {
 }
 
 // DRAG N DROP
-function updateHTML() {
+function renderKanbanLists() {
   let todo = tasks.filter((element) => element.task.board == 'todo');
   let inProgress = tasks.filter(
     (element) => element.task.board == 'in progress'
@@ -304,23 +303,30 @@ function updateHTML() {
   );
   let done = tasks.filter((element) => element.task.board == 'done');
 
-  kanbanListTodo.innerHTML = '';
-  kanbanListInProgress.innerHTML = '';
-  kanbanListAwaitFeedback.innerHTML = '';
-  kanbanListDone.innerHTML = '';
+  clearKanbanLists();
+  renderCardHTML(todo, inProgress, awaitFeedback, done);
+}
 
-  for (let i = 0; i < todo.length; index++) {
-    const element = todo[i];
-    document.getElementById('open').innerHTML += renderKanbanLists(element);
+function renderCardHTML(todo, inProgress, awaitFeedback, done) {
+  for (let i = 0; i < todo.length; i++) {
+    kanbanListTodo.innerHTML += createCardHTML(todo[i]);
+  }
+
+  for (let i = 0; i < inProgress.length; i++) {
+    kanbanListInProgress.innerHTML += createCardHTML(inProgress[i]);
+  }
+
+  for (let i = 0; i < awaitFeedback.length; i++) {
+    kanbanListAwaitFeedback.innerHTML += createCardHTML(awaitFeedback[i]);
+  }
+
+  for (let i = 0; i < done.length; i++) {
+    kanbanListDone.innerHTML += createCardHTML(done[i]);
   }
 }
 
 function startDragging(id) {
   currentDraggedElement = id;
-}
-
-function generateTodoHTML(element) {
-  return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
 }
 
 function allowDrop(ev) {
