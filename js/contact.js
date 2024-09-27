@@ -10,8 +10,8 @@ function init() {
 
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
-    let contacts = await response.json();
-    return contacts;
+    let contact = await response.json();    
+    return contact;
 }
 
 
@@ -32,6 +32,7 @@ function setDataOfContact(contact, index) {
     document.getElementById(`initials${index}`).innerText = generateInitials(contact.name);
     document.getElementById(`contactName${index}`).innerText = contact.name;
     document.getElementById(`contactMail${index}`).textContent = contact.email;
+    document.getElementById(`initialsContainer${index}`).style.backgroundColor = contacts[index].color;
 }
 
 
@@ -148,7 +149,7 @@ async function closeAndClear(){
 function contactContent(index) {
     return `
         <div onclick ="openContact('${index}')" class="single-contact">
-          <div class="initials-container">
+          <div id="initialsContainer${index}" class="initials-container">
             <span id="initials${index}"></span>
           </div>
           <div class="contact-data">
