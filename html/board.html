@@ -231,40 +231,75 @@
       </section>
     </main>
 
-    <section class="overlay">
-      <div class="overlay-card">
-        <div class="overlay-card-header-container">
-          <div class="overlay-card-category">User Story</div>
+    <!-- MODAL SECTION -->
+    <section
+      class="modal"
+      id="modal"
+    >
+      <!-- <div
+        class="modal-card"
+        id="modal-card"
+      >
+        <div class="modal-card-header-container">
+          <div class="modal-card-category">User Story</div>
           <img
             src="../assets/icons/cancel.png"
             alt="cancel icon"
+            onclick="closeModal()"
           />
         </div>
-        <div class="overlay-card-title">Kochwelt Page & Recipe Recommender</div>
-        <div class="overlay-card-description">
+        <div class="modal-card-title">Kochwelt Page & Recipe Recommender</div>
+        <div class="modal-card-description">
           Build start page with recipe recommendation...
         </div>
-        <div class="overlay-card-date">
-          <div class="overlay-card-key">Due date:</div>
-          <span class="overlay-card-date-content">24.09.2024</span>
+        <div class="modal-card-date">
+          <div class="modal-card-key">Due date:</div>
+          <span class="modal-card-date-content">24.09.2024</span>
         </div>
-        <div class="overlay-card-prio">
-          <div class="overlay-card-key">Priority:</div>
-          <span class="overlay-card-prio-content">Urgent</span>
+        <div class="modal-card-prio">
+          <div class="modal-card-key">Priority:</div>
+          <span class="modal-card-prio-content">Urgent</span>
           <img
             src="../assets/icons/prio-urgent.png"
             alt="prio icon"
           />
         </div>
-        <div class="overlay-card-assigned-to">
+        <div class="modal-card-assigned-to">
           Assigned To:
-          <div class="overlay-card-assigned-to-list"></div>
+          <div class="modal-card-assigned-to-list">
+            <div class="modal-contact-container">
+              <div class="modal-contact-profile-img">EM</div>
+              <div class="modal-contact-name">Emmanuel Mauer</div>
+            </div>
+
+            <div class="modal-contact-container">
+              <div class="modal-contact-profile-img">MB</div>
+              <div class="modal-contact-name">Marcel Bauer</div>
+            </div>
+
+
+          </div>
         </div>
-        <div class="overlay-card-subtasks">
+        <div class="modal-card-subtasks">
           Subtasks:
-          <div class="overlay-card-subtasks-list"></div>
+          <div class="modal-card-subtasks-list">
+            <div class="modal-subtask-container">
+              <img
+                src="../assets/icons/checkbox-empty.svg"
+                alt="checkbox icon"
+              />
+              Implement Recipe Recommendation
+            </div>
+            <div class="modal-subtask-container">
+              <img
+                src="../assets/icons/checkbox-empty.svg"
+                alt="checkbox icon"
+              />
+              Implement Recipe Recommendation
+            </div>
+          </div>
         </div>
-        <div class="overlay-card-buttons">
+        <div class="modal-card-buttons">
           <button>
             <img
               src="../assets/icons/delete.png"
@@ -272,7 +307,7 @@
             />
             Delete
           </button>
-          <div class="overlay-card-buttons-seperator"></div>
+          <div class="modal-card-buttons-seperator"></div>
           <button>
             <img
               src="../assets/icons/edit.png"
@@ -281,7 +316,7 @@
             Edit
           </button>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <script src="../js/board.js"></script>

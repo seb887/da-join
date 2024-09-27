@@ -5,6 +5,7 @@ const kanbanListAwaitFeedback = document.getElementById(
   'kanban-list-await-feedback'
 );
 const kanbanListDone = document.getElementById('kanban-list-done');
+const modal = document.getElementById('modal');
 
 // VARIABLES
 const BASE_URL =
@@ -116,7 +117,7 @@ function sortBoardColumns(board, title, description, category) {
 
 function createCardHTML(title, description, category) {
   return `
-    <div class="kanban-card">
+    <div class="kanban-card" onclick="openModal()">
         <div class="card-label-container">
             <div class="card-label">${category}</div>
         </div>
@@ -161,6 +162,105 @@ function controlPrio(prioStatus) {
     case low:
       return '../assets/icons/prio-low.png';
   }
+}
+
+function openModal() {
+  modal.style.display = 'flex';
+  modal.innerHTML = createModalHTML();
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+  modal.innerHTML = '';
+}
+
+function createModalHTML() {
+  return `
+    <div
+      class="modal-card"
+      id="modal-card"
+    >
+      <div class="modal-card-header-container">
+        <div class="modal-card-category">User Story</div>
+        <img
+          src="../assets/icons/cancel.png"
+          alt="cancel icon"
+          onclick="closeModal()"
+        />
+      </div>
+      <div class="modal-card-title">Kochwelt Page & Recipe Recommender</div>
+      <div class="modal-card-description">
+        Build start page with recipe recommendation...
+      </div>
+      <div class="modal-card-date">
+        <div class="modal-card-key">Due date:</div>
+        <span class="modal-card-date-content">24.09.2024</span>
+      </div>
+      <div class="modal-card-prio">
+        <div class="modal-card-key">Priority:</div>
+        <span class="modal-card-prio-content">Urgent</span>
+        <img
+          src="../assets/icons/prio-urgent.png"
+          alt="prio icon"
+        />
+      </div>
+      <div class="modal-card-assigned-to">
+        Assigned To:
+        <div class="modal-card-assigned-to-list">
+          <div class="modal-contact-container">
+            <div class="modal-contact-profile-img">EM</div>
+            <div class="modal-contact-name">Emmanuel Mauer</div>
+          </div>
+
+          <div class="modal-contact-container">
+            <div class="modal-contact-profile-img">MB</div>
+            <div class="modal-contact-name">Marcel Bauer</div>
+          </div>
+
+          <!-- <div class="modal-contact-container">
+            <div class="modal-contact-profile-img"></div>
+            <div class="modal-contact-name">Anton Mayer</div>
+          </div> -->
+        </div>
+      </div>
+      <div class="modal-card-subtasks">
+        Subtasks:
+        <div class="modal-card-subtasks-list">
+          <div class="modal-subtask-container">
+            <img
+              src="../assets/icons/checkbox-empty.svg"
+              alt="checkbox icon"
+            />
+            Implement Recipe Recommendation
+          </div>
+          <div class="modal-subtask-container">
+            <img
+              src="../assets/icons/checkbox-empty.svg"
+              alt="checkbox icon"
+            />
+            Implement Recipe Recommendation
+          </div>
+        </div>
+      </div>
+      <div class="modal-card-buttons">
+        <button>
+          <img
+            src="../assets/icons/delete.png"
+            alt="delete icon"
+          />
+          Delete
+        </button>
+        <div class="modal-card-buttons-seperator"></div>
+        <button>
+          <img
+            src="../assets/icons/edit.png"
+            alt="edit icon"
+          />
+          Edit
+        </button>
+      </div>
+    </div>
+  `;
 }
 
 render();

@@ -244,8 +244,8 @@
   color: #a8a8a8;
 }
 
-.overlay {
-  display: flex;
+.modal {
+  display: none;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -255,36 +255,36 @@
   z-index: 99;
 }
 
-.overlay-card {
+.modal-card {
   display: flex;
   flex-direction: column;
   padding: 48px 40px;
   gap: 24px;
   width: 526px;
-  height: 800px;
   border-radius: 30px;
   background-color: var(--bg-primary);
   font-size: 20px;
   font-weight: 400;
 }
 
-.overlay-card span {
+.modal-card span {
   color: black;
 }
 
-.overlay-card-header-container {
+.modal-card-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.overlay-card-header-container img {
+.modal-card-header-container img {
   width: 14px;
   height: 14px;
+  cursor: pointer;
 }
 
-.overlay-card-category {
+.modal-card-category {
   padding: 4px 24px;
   border-radius: 8px;
   background-color: #1fd7c1;
@@ -293,41 +293,83 @@
   font-weight: 400;
 }
 
-.overlay-card-title {
+.modal-card-title {
   font-size: 61px;
   font-weight: 700;
 }
 
-.overlay-card-date,
-.overlay-card-prio,
-.overlay-card-assigned-to,
-.overlay-card-subtasks {
+.modal-card-date,
+.modal-card-prio,
+.modal-card-assigned-to,
+.modal-card-subtasks {
   color: #42526e;
 }
 
-.overlay-card-date,
-.overlay-card-prio {
+.modal-card-date,
+.modal-card-prio {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.overlay-card-prio img {
+.modal-card-prio img {
   width: 17px;
   height: 12px;
 }
 
-.overlay-card-assigned-to,
-.overlay-card-subtasks {
+.modal-card-assigned-to,
+.modal-card-subtasks {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
-.overlay-card-key {
+.modal-card-key {
   width: 120px;
 }
 
-.overlay-card-buttons {
+.modal-card-assigned-to-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-contact-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 16px;
+  color: black;
+}
+
+.modal-contact-profile-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 100%;
+  background-color: #416bb3;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+}
+
+.modal-subtask-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 6px 16px;
+  gap: 16px;
+  color: black;
+}
+
+.modal-subtask-container img {
+  cursor: pointer;
+}
+
+.modal-card-buttons {
   display: flex;
   justify-content: end;
   align-items: center;
@@ -338,26 +380,23 @@
   font-weight: 400;
 }
 
-.overlay-card-buttons button {
+.modal-card-buttons button {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
-.overlay-card-buttons img {
+.modal-card-buttons img {
   width: 14px;
   height: 14px;
 }
 
-.overlay-card-buttons-seperator {
+.modal-card-buttons-seperator {
   width: 2px;
   height: 24px;
   background-color: #d1d1d1;
-}
-
-.test-class {
-  display: flex;
 }
