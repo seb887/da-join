@@ -357,3 +357,7 @@
   height: 24px;
   background-color: #d1d1d1;
 }
+
+.test-class {
+  display: flex;
+}
