@@ -10,7 +10,7 @@ const modal = document.getElementById('modal');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
-
+let currentDraggedElement;
 const tasks = [
   // {
   //   category: 'User Story',
@@ -291,6 +291,45 @@ function createModalHTML(title, description, date, category) {
       </div>
     </div>
   `;
+}
+
+// DRAG N DROP
+function updateHTML() {
+  let todo = tasks.filter((element) => element.task.board == 'todo');
+  let inProgress = tasks.filter(
+    (element) => element.task.board == 'in progress'
+  );
+  let awaitFeedback = tasks.filter(
+    (element) => element.task.board == 'await feedback'
+  );
+  let done = tasks.filter((element) => element.task.board == 'done');
+
+  kanbanListTodo.innerHTML = '';
+  kanbanListInProgress.innerHTML = '';
+  kanbanListAwaitFeedback.innerHTML = '';
+  kanbanListDone.innerHTML = '';
+
+  for (let i = 0; i < todo.length; index++) {
+    const element = todo[i];
+    document.getElementById('open').innerHTML += renderKanbanLists(element);
+  }
+}
+
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+function generateTodoHTML(element) {
+  return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function moveTo(category) {
+  todos[currentDraggedElement]['category'] = category;
+  updateHTML();
 }
 
 render();
