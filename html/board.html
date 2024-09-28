@@ -153,6 +153,8 @@
           <div
             class="kanban-list"
             id="kanban-list-todo"
+            ondrop="drop('todo')"
+            ondragover="allowDrop(event)"
           >
             <!-- <div class="no-tasks-card">No tasks</div> -->
           </div>
@@ -169,6 +171,8 @@
           <div
             class="kanban-list"
             id="kanban-list-in-progress"
+            ondrop="drop('in progress')"
+            ondragover="allowDrop(event)"
           >
             <div class="kanban-card">
               <div class="card-label-container">
@@ -212,6 +216,8 @@
           <div
             class="kanban-list"
             id="kanban-list-await-feedback"
+            ondrop="drop('await feedback')"
+            ondragover="allowDrop(event)"
           ></div>
         </div>
 
@@ -226,6 +232,8 @@
           <div
             class="kanban-list"
             id="kanban-list-done"
+            ondrop="drop('done')"
+            ondragover="allowDrop(event)"
           ></div>
         </div>
       </section>
