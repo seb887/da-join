@@ -10,7 +10,6 @@ const modal = document.getElementById('modal');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
-<<<<<<< HEAD
 let currentDraggedElement;
 const tasks = [
   // {
@@ -50,14 +49,6 @@ const tasks = [
 function render() {
   loadTasksFromFirebase();
   clearKanbanLists();
-=======
-const tasks = [];
-let currentDraggedElementId = '';
-
-function render() {
-  loadTasksFromFirebase();
-  // clearKanbanLists();
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
 }
 
 async function loadTasksFromFirebase() {
@@ -82,7 +73,6 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
     });
   }
 
-<<<<<<< HEAD
   for (let element of tasks) {
     renderKanbanLists(element);
   }
@@ -135,48 +125,10 @@ function sortBoardColumns(id, board, title, description, category) {
         category
       );
       break;
-=======
-  renderKanbanLists();
-}
-
-function renderKanbanLists() {
-  clearKanbanLists();
-
-  renderTasks(filterTasks('todo'), kanbanListTodo);
-  renderTasks(filterTasks('in progress'), kanbanListInProgress);
-  renderTasks(filterTasks('await feedback'), kanbanListAwaitFeedback);
-  renderTasks(filterTasks('done'), kanbanListDone);
-}
-
-function filterTasks(board) {
-  if (board == 'todo') {
-    return tasks.filter((t) => t.task.board == 'todo');
-  }
-  if (board == 'in progress') {
-    return tasks.filter((p) => p.task.board == 'in progress');
-  }
-  if (board == 'await feedback') {
-    return tasks.filter((f) => f.task.board == 'await feedback');
-  }
-  if (board == 'done') {
-    return tasks.filter((d) => d.task.board == 'done');
-  }
-}
-
-function renderTasks(tasks, kanbanList) {
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
-    kanbanList.innerHTML += createCardHTML(task);
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
   }
 }
 
 function createCardHTML(element) {
-<<<<<<< HEAD
-=======
-  // console.log('element id: ', element.id);
-
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
   return `
     <div class="kanban-card" id="${element.id}" onclick="openModal(event)">
         <div class="card-label-container">
