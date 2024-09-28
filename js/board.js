@@ -11,11 +11,12 @@ const modal = document.getElementById('modal');
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 const tasks = [];
+console.log('tasks begin', tasks);
 let currentDraggedElementId = '';
 
-function render() {
-  loadTasksFromFirebase();
-  // clearKanbanLists();
+async function render() {
+  await loadTasksFromFirebase();
+  clearKanbanLists();
 }
 
 async function loadTasksFromFirebase() {
@@ -40,6 +41,7 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
     });
   }
 
+  console.log('tasks: ', tasks);
   renderKanbanLists();
 }
 
@@ -54,7 +56,7 @@ function renderKanbanLists() {
 
 function filterTasks(board) {
   if (board == 'todo') {
-    return tasks.filter((t) => t.task.board == 'todo');
+    return tasks.filter((t) => t.task.task.board == 'todo');
   }
   if (board == 'in progress') {
     return tasks.filter((p) => p.task.board == 'in progress');
@@ -67,15 +69,17 @@ function filterTasks(board) {
   }
 }
 
-function renderTasks(tasks, kanbanList) {
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
+function renderTasks(tasksArr, kanbanList) {
+  for (let i = 0; i < tasksArr.length; i++) {
+    console.log('tasksArr', tasksArr);
+
+    const task = tasksArr[i];
     kanbanList.innerHTML += createCardHTML(task);
   }
 }
 
 function createCardHTML(element) {
-  // console.log('element id: ', element.id);
+  console.log('element: ', element);
 
   return `
     <div
