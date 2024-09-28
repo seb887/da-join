@@ -3,6 +3,8 @@ let users = [
 ]
 
 function init() {
+    document.getElementById("signed-up-overlay").classList.add("d-none");
+    document.getElementById("signed-up-overlay").style.zIndex = -5;
     setTimeout(playLogoAnimation, 250);
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
 }
@@ -96,14 +98,24 @@ function signUp() {
     if (password.value === passwordConfirm.value) {
         document.getElementById('password-non-match').innerHTML = '';
         if (checkBox.src.includes('checkbox-checked.svg')) {
+            playSignedUpAnimation();
             users.push({name: name.value, email: email.value, password: password.value});
-            window.location.href = 'login.html';
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1500); // 1500 milliseconds = 1.5 seconds
         } else {
             document.getElementById('password-non-match').innerHTML = 'Please accept the Privacy Policy';
         }
     } else {
         document.getElementById('password-non-match').innerHTML = 'Passwords do not match';
     }
+}
+
+function playSignedUpAnimation() {
+    document.getElementById("signed-up-overlay").classList.remove("d-none");
+    document.getElementById("signed-up-overlay").style.zIndex = 5;
+    document.getElementById("signed-up-overlay").classList.add("signed-up-animation-overlay");
+    document.getElementById("signed-up-container").classList.add("signed-up-animation-container");
 }
 
 function toggleLoginPasswordVisibility() {

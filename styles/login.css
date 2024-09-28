@@ -313,10 +313,10 @@ footer a:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -999999; /* NEED TO FIX TMRW */
-    background-color: #656667;
-    opacity: 30%;
-    transition: ease-in-out 750ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 2000ms;
 }
 
 .you-signed-up {
@@ -331,6 +331,33 @@ footer a:hover {
     color: #FFFFFF;
 }
 
+.signed-up-animation-overlay {
+    animation: sign-up-key-frames 500ms forwards;
+}
+
+.signed-up-animation-container {
+    animation: sign-up-container-key-frames 400ms forwards;
+}
+
+@keyframes sign-up-key-frames {
+    0% {
+        background-color: #65666700;
+    }
+    100% {
+        background-color: #656667a1;
+    }
+}
+
+@keyframes sign-up-container-key-frames {
+    0% {
+        margin-top: 70%;
+    }
+    100% {
+        margin-top: 0%;
+    }
+}
+
 .d-none {
+    z-index: -999;
     display: none;
 }
