@@ -87,12 +87,17 @@ async function setContactInformation(index) {
 function setSelectedContactBackground(index) {
     let allContactDivs = document.querySelectorAll('.single-contact');
     let selectedContactDiv = document.querySelectorAll('.single-contact')[index];
+    if(selectedContactDiv.style.backgroundColor == 'rgb(42, 54, 71)'){
+        selectedContactDiv.style.backgroundColor ='white';
+        selectedContactDiv.style.color ='black'
+        return
+    }
     allContactDivs.forEach(div => {
         div.style.backgroundColor ='white'
         div.style.color ='black'
     });
-    selectedContactDiv.style.backgroundColor ='#2A3647';
-    selectedContactDiv.style.color ='white'
+        selectedContactDiv.style.backgroundColor = 'rgb(42, 54, 71)';
+        selectedContactDiv.style.color ='white'
 }
 
 
@@ -122,7 +127,6 @@ function checkIfAnimationActive() {
 }
 
 
-
 async function createContact() {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     let response = await fetch(CONTACT_URL, {
@@ -148,7 +152,6 @@ async function closeAndClear(){
     document.getElementById('inputContactName').value = '';
     document.getElementById('inputMailAddress').value = '';
     document.getElementById('inputPhoneNumber').value = '';
-
 }
 
 
