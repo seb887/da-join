@@ -78,54 +78,55 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
   }
 }
 
-// function renderKanbanLists(element) {
-//   let id = element.id;
-//   let task = element.task;
-//   let title = task.title;
-//   let description = task.description;
-//   // let date = task.date;
-//   let category = task.category;
-//   let board = task.board;
+function renderKanbanLists(element) {
+  console.log(element);
+  let id = element.id;
+  let task = element.task;
+  let title = task.title;
+  let description = task.description;
+  // let date = task.date;
+  let category = task.category;
+  let board = task.board;
 
-//   sortBoardColumns(id, board, title, description, category);
-// }
+  sortBoardColumns(id, board, title, description, category);
+}
 
-// function sortBoardColumns(id, board, title, description, category) {
-//   switch (board) {
-//     case 'todo':
-//       kanbanListTodo.innerHTML += createCardHTML(
-//         id,
-//         title,
-//         description,
-//         category
-//       );
-//       break;
-//     case 'in progress':
-//       kanbanListInProgress.innerHTML += createCardHTML(
-//         id,
-//         title,
-//         description,
-//         category
-//       );
-//       break;
-//     case 'await feedback':
-//       kanbanListAwaitFeedback.innerHTML += createCardHTML(
-//         id,
-//         title,
-//         description,
-//         category
-//       );
-//       break;
-//     case 'done':
-//       kanbanListDone.innerHTML += createCardHTML(
-//         id,
-//         title,
-//         description,
-//         category
-//       );
-//       break;
-//   }
-// }
+function sortBoardColumns(id, board, title, description, category) {
+  switch (board) {
+    case 'todo':
+      kanbanListTodo.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
+      break;
+    case 'in progress':
+      kanbanListInProgress.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
+      break;
+    case 'await feedback':
+      kanbanListAwaitFeedback.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
+      break;
+    case 'done':
+      kanbanListDone.innerHTML += createCardHTML(
+        id,
+        title,
+        description,
+        category
+      );
+      break;
+  }
+}
 
 function createCardHTML(element) {
   return `
