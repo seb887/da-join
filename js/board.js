@@ -10,54 +10,12 @@ const modal = document.getElementById('modal');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
-<<<<<<< HEAD
-let currentDraggedElement;
-const tasks = [
-  // {
-  //   category: 'User Story',
-  //   title: 'Kochwelt Page & Recipe Recommender',
-  //   description: 'Build start page with recipe recommendation...',
-  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-  //   prio: 'medium',
-  //   board: 'in progress',
-  // },
-  // {
-  //   category: 'Technical Task',
-  //   title: 'HTML Base Template Creation',
-  //   description: 'Create reusable HTML base templates..',
-  //   collaborators: ['Anne Theke', 'Kara Mell'],
-  //   prio: 'low',
-  //   board: 'await feedback',
-  // },
-  // {
-  //   category: 'User Story',
-  //   title: 'Daily Kochwelt Recipe',
-  //   description: 'Implement daily recipe and portion calculator....',
-  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-  //   prio: 'medium',
-  //   board: 'in progress',
-  // },
-  // {
-  //   category: 'Technical Task',
-  //   title: 'CSS Architecture Planning',
-  //   description: 'Define CSS naming conventions and structure...',
-  //   collaborators: ['Jim Panse', 'Anne Theke', 'Kara Mell'],
-  //   prio: 'urgent',
-  //   board: 'done',
-  // },
-];
-
-function render() {
-  loadTasksFromFirebase();
-  clearKanbanLists();
-=======
 const tasks = [];
 let currentDraggedElementId = '';
 
 function render() {
   loadTasksFromFirebase();
   // clearKanbanLists();
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
 }
 
 async function loadTasksFromFirebase() {
@@ -82,60 +40,6 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
     });
   }
 
-<<<<<<< HEAD
-  for (let element of tasks) {
-    renderKanbanLists(element);
-  }
-}
-
-function renderKanbanLists(element) {
-  console.log(element);
-  let id = element.id;
-  let task = element.task;
-  let title = task.title;
-  let description = task.description;
-  // let date = task.date;
-  let category = task.category;
-  let board = task.board;
-
-  sortBoardColumns(id, board, title, description, category);
-}
-
-function sortBoardColumns(id, board, title, description, category) {
-  switch (board) {
-    case 'todo':
-      kanbanListTodo.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'in progress':
-      kanbanListInProgress.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'await feedback':
-      kanbanListAwaitFeedback.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-    case 'done':
-      kanbanListDone.innerHTML += createCardHTML(
-        id,
-        title,
-        description,
-        category
-      );
-      break;
-=======
   renderKanbanLists();
 }
 
@@ -167,16 +71,12 @@ function renderTasks(tasks, kanbanList) {
   for (let i = 0; i < tasks.length; i++) {
     const task = tasks[i];
     kanbanList.innerHTML += createCardHTML(task);
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
   }
 }
 
 function createCardHTML(element) {
-<<<<<<< HEAD
-=======
   // console.log('element id: ', element.id);
 
->>>>>>> parent of 8798dd3 (board page: drag and drop - buggy 2)
   return `
     <div class="kanban-card" id="${element.id}" onclick="openModal(event)">
         <div class="card-label-container">
