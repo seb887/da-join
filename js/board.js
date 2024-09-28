@@ -153,6 +153,7 @@ function createModalHTML(element) {
     <div
       class="modal-card"
       id="modal-card"
+      onclick="event.stopPropagation()"
     >
       <div class="modal-card-header-container">
         <div class="modal-card-category">${element.task.category}</div>
@@ -237,7 +238,7 @@ function createModalHTML(element) {
   `;
 }
 
-// DRAG N DROP
+// DRAG AND DROP
 function allowDrop(event) {
   event.preventDefault();
 }
