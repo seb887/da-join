@@ -38,18 +38,20 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 32px;
 }
 
 .sign-up-mask {
     width: 652px;
-    height: 650px;
-    padding: 48px 88px 48px 88px;
+    height: 630px;
+    padding: 48px;
     border-radius: 30px;
     background: #FFFFFF;
     box-shadow: 0px 0px 14px 3px #0000000A;
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 32px;
 }
 
 .sign-up-title {
@@ -79,11 +81,10 @@ body {
 }
 
 .login-seperator {
-    width: 0px;
-    height: 150px;
-    border: 3px;
-    rotate: 90deg;
-    border: 3px solid #29ABE2
+    width: 150px;
+    height: 0px;
+    rotate: 180deg;
+    border: 3px solid #29ABE2;
 }
 
 form {
@@ -300,6 +301,34 @@ footer a:hover {
 
 .sign-up-check-box {
     color: #A8A8A8;
+}
+
+#password-non-match {
+    color: red;
+}
+
+.signed-up-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -999999; /* NEED TO FIX TMRW */
+    background-color: #656667;
+    opacity: 30%;
+    transition: ease-in-out 750ms;
+}
+
+.you-signed-up {
+    width: 312px;
+    height: 74px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    background: #2A3647;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
 }
 
 .d-none {
