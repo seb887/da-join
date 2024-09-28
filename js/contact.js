@@ -17,6 +17,9 @@ async function getContacts() {
 
 async function renderContacts() {
     let allContacts = Object.values(await getContacts());
+    let id = Object.keys(await getContacts());
+    contacts = [];
+    allContacts.forEach((element, index) => {element.id = id[index]});
     allContacts.sort((a, b) => a.name.localeCompare(b.name));
     document.getElementById('contacts').innerHTML = addNewContactsContent();
     allContacts.forEach((contact, index) =>{
@@ -70,12 +73,13 @@ function openContact(index) {
 }
 
 
-function setContactInformation(index) {
+async function setContactInformation(index) {
     document.getElementById('bgInitials').style.backgroundColor = contacts[index].color;
     document.getElementById('contactName').innerText = contacts[index].name
     document.getElementById('mailAddress').innerText = contacts[index].email
     document.getElementById('phoneNumber').innerText = contacts[index].phone
     document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name) 
+    document.getElementById('delContact').onclick = () => {deleteContact(contacts[index].id)}
     setSelectedContactBackground(index);   
 }
 
@@ -134,7 +138,7 @@ async function createContact() {
             "color" : randomColor
         }) 
     })
-    closeAndClear()
+    closeAndClear();
 }
 
 
@@ -145,6 +149,17 @@ async function closeAndClear(){
     document.getElementById('inputPhoneNumber').value = '';
 
 }
+
+
+async function deleteContact(id) {
+    let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
+        method: "DELETE"
+    })
+    console.log(`${id} wurde gelöscht!`);
+    renderContacts();
+    document.getElementById('contactInformation').classList.toggle('contactFadeAndSlideIn');
+}
+
 
 function contactContent(index) {
     return `
