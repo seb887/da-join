@@ -88,6 +88,7 @@
   font-size: 21px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .add-task-button img {
@@ -128,6 +129,7 @@
   flex-direction: column;
   padding-bottom: 26px;
   gap: 26px;
+  min-width: 244px;
   height: calc(100vh - 96px - 209px - 25px - 16px);
   overflow-y: auto;
 }

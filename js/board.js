@@ -13,8 +13,8 @@ const BASE_URL =
 const tasks = [];
 let currentDraggedElementId = '';
 
-function render() {
-  loadTasksFromFirebase();
+async function render() {
+  await loadTasksFromFirebase();
   // clearKanbanLists();
 }
 
@@ -67,18 +67,21 @@ function filterTasks(board) {
   }
 }
 
-function renderTasks(tasks, kanbanList) {
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
+function renderTasks(tasksArr, kanbanList) {
+  for (let i = 0; i < tasksArr.length; i++) {
+    const task = tasksArr[i];
     kanbanList.innerHTML += createCardHTML(task);
   }
 }
 
 function createCardHTML(element) {
-  // console.log('element id: ', element.id);
-
   return `
-    <div class="kanban-card" id="${element.id}" onclick="openModal(event)">
+    <div
+      class="kanban-card" id="${element.id}"
+      onclick="openModal(event)"
+      draggable="true"
+      ondragstart="drag(event)"
+    >
         <div class="card-label-container">
             <div class="card-label">${element.task.category}</div>
         </div>
@@ -114,29 +117,23 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function controlPrio(prioStatus) {
-  switch (prioStatus) {
-    case urgent:
-      return '../assets/icons/prio-urgent.png';
-    case medium:
-      return '../assets/icons/prio-medium.svg';
-    case low:
-      return '../assets/icons/prio-low.png';
-  }
-}
+// function controlPrio(prioStatus) {
+//   switch (prioStatus) {
+//     case urgent:
+//       return '../assets/icons/prio-urgent.png';
+//     case medium:
+//       return '../assets/icons/prio-medium.svg';
+//     case low:
+//       return '../assets/icons/prio-low.png';
+//   }
+// }
 
 function getDataForModal(event) {
   const id = event.currentTarget.id;
 
   for (let element of tasks) {
     if (id == element.id) {
-      let task = element.task;
-      let title = task.title;
-      let description = task.description;
-      let date = task.date;
-      let category = task.category;
-
-      modal.innerHTML = createModalHTML(title, description, date, category);
+      modal.innerHTML = createModalHTML(element);
     }
   }
 }
@@ -144,7 +141,6 @@ function getDataForModal(event) {
 function openModal(event) {
   modal.style.display = 'flex';
   getDataForModal(event);
-  console.log(event.currentTarget.id);
 }
 
 function closeModal() {
@@ -152,27 +148,27 @@ function closeModal() {
   modal.innerHTML = '';
 }
 
-function createModalHTML(title, description, date, category) {
+function createModalHTML(element) {
   return `
     <div
       class="modal-card"
       id="modal-card"
     >
       <div class="modal-card-header-container">
-        <div class="modal-card-category">${category}</div>
+        <div class="modal-card-category">${element.task.category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"
           onclick="closeModal()"
         />
       </div>
-      <div class="modal-card-title">${title}</div>
+      <div class="modal-card-title">${element.task.title}</div>
       <div class="modal-card-description">
-      ${description}
+        ${element.task.description}
       </div>
       <div class="modal-card-date">
         <div class="modal-card-key">Due date:</div>
-        <span class="modal-card-date-content">${date}</span>
+        <span class="modal-card-date-content">${element.task.date}</span>
       </div>
       <div class="modal-card-prio">
         <div class="modal-card-key">Priority:</div>
@@ -242,49 +238,30 @@ function createModalHTML(title, description, date, category) {
 }
 
 // DRAG N DROP
-function renderKanbanLists() {
-  let todo = tasks.filter((element) => element.task.board == 'todo');
-  let inProgress = tasks.filter(
-    (element) => element.task.board == 'in progress'
-  );
-  let awaitFeedback = tasks.filter(
-    (element) => element.task.board == 'await feedback'
-  );
-  let done = tasks.filter((element) => element.task.board == 'done');
-
-  clearKanbanLists();
-  renderCardHTML(todo, inProgress, awaitFeedback, done);
+function allowDrop(event) {
+  event.preventDefault();
 }
 
-function renderCardHTML(todo, inProgress, awaitFeedback, done) {
-  for (let i = 0; i < todo.length; i++) {
-    kanbanListTodo.innerHTML += createCardHTML(todo[i]);
-  }
-
-  for (let i = 0; i < inProgress.length; i++) {
-    kanbanListInProgress.innerHTML += createCardHTML(inProgress[i]);
-  }
-
-  for (let i = 0; i < awaitFeedback.length; i++) {
-    kanbanListAwaitFeedback.innerHTML += createCardHTML(awaitFeedback[i]);
-  }
-
-  for (let i = 0; i < done.length; i++) {
-    kanbanListDone.innerHTML += createCardHTML(done[i]);
-  }
+function drag(event) {
+  currentDraggedElementId = event.target.id;
 }
 
-function startDragging(id) {
-  currentDraggedElement = id;
+function drop(board) {
+  for (let element of tasks) {
+    if (currentDraggedElementId == element.id) {
+      element.task.board = board;
+      updateTaskInFirebase(element.id, element.task);
+    }
+  }
+
+  render();
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function moveTo(category) {
-  todos[currentDraggedElement]['category'] = category;
-  updateHTML();
+async function updateTaskInFirebase(taskId, updatedTask) {
+  await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
+    method: 'PUT',
+    body: JSON.stringify(updatedTask),
+  });
 }
 
 render();
