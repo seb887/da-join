@@ -38,10 +38,11 @@
   width: 312px;
   border: 1px solid #a8a8a8;
   border-radius: 10px;
+  background-color: white;
 }
 
 .input-container input {
-  width: 240px;
+  width: 200px;
   border: none;
   font-size: 20px;
   font-weight: 400;
@@ -55,10 +56,19 @@
   width: 48px;
 }
 
-.input-container img {
+.input-search-img {
   width: 18px;
   height: 18px;
   margin-left: 16px;
+}
+
+.input-cancel-img {
+  width: 12px;
+  height: 12px;
+  margin-left: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  visibility: hidden;
 }
 
 .input-seperator {
@@ -150,7 +160,6 @@
   background-color: white;
   font-size: 16px;
   cursor: pointer;
-  z-index: 1;
 }
 
 .card-label-container {
@@ -268,6 +277,7 @@
   padding: 48px 40px;
   gap: 24px;
   width: 526px;
+  max-height: 875px;
   border-radius: 30px;
   background-color: var(--bg-primary);
   font-size: 20px;

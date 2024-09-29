@@ -6,6 +6,8 @@ const kanbanListAwaitFeedback = document.getElementById(
 );
 const kanbanListDone = document.getElementById('kanban-list-done');
 const modal = document.getElementById('modal');
+const searchInput = document.getElementById('search-input');
+const clearInputBtn = document.getElementById('search-clear-btn');
 
 // VARIABLES
 const BASE_URL =
@@ -40,30 +42,30 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
     });
   }
 
-  renderKanbanLists();
+  renderKanbanLists(tasks);
 }
 
-function renderKanbanLists() {
+function renderKanbanLists(tasksArr) {
   clearKanbanLists();
 
-  renderTasks(filterTasks('todo'), kanbanListTodo);
-  renderTasks(filterTasks('in progress'), kanbanListInProgress);
-  renderTasks(filterTasks('await feedback'), kanbanListAwaitFeedback);
-  renderTasks(filterTasks('done'), kanbanListDone);
+  renderTasks(filterTasks('todo', tasksArr), kanbanListTodo);
+  renderTasks(filterTasks('in progress', tasksArr), kanbanListInProgress);
+  renderTasks(filterTasks('await feedback', tasksArr), kanbanListAwaitFeedback);
+  renderTasks(filterTasks('done', tasksArr), kanbanListDone);
 }
 
-function filterTasks(board) {
+function filterTasks(board, tasksArr) {
   if (board == 'todo') {
-    return tasks.filter((t) => t.task.board == 'todo');
+    return tasksArr.filter((t) => t.task.board == 'todo');
   }
   if (board == 'in progress') {
-    return tasks.filter((p) => p.task.board == 'in progress');
+    return tasksArr.filter((p) => p.task.board == 'in progress');
   }
   if (board == 'await feedback') {
-    return tasks.filter((f) => f.task.board == 'await feedback');
+    return tasksArr.filter((f) => f.task.board == 'await feedback');
   }
   if (board == 'done') {
-    return tasks.filter((d) => d.task.board == 'done');
+    return tasksArr.filter((d) => d.task.board == 'done');
   }
 }
 
@@ -274,6 +276,37 @@ function highlight(id) {
 
 function removeHighlight(id) {
   document.getElementById(id).classList.remove('highlight-kanban-list');
+}
+
+// SEARCH TASKS
+function searchTask() {
+  clearKanbanLists(); // Leert den Content Bereich
+  controlVisibilityInputClearBtn();
+
+  let inputText = searchInput.value.toLowerCase();
+
+  const filteredTasks = tasks.filter(
+    (element) =>
+      element.task.title.toLowerCase().includes(inputText) ||
+      element.task.description.toLowerCase().includes(inputText)
+  ); // Filtert das Arr nach der Eingabe im Input
+
+  renderKanbanLists(filteredTasks);
+}
+
+function controlVisibilityInputClearBtn() {
+  if (searchInput.value.length > 0) {
+    clearInputBtn.style.visibility = 'visible';
+  } else {
+    clearInputBtn.style.visibility = 'hidden';
+  }
+}
+
+function cancelSearchTask() {
+  searchInput.value = '';
+
+  renderKanbanLists(tasks);
+  controlVisibilityInputClearBtn();
 }
 
 render();

@@ -120,13 +120,22 @@
             <div class="input-container">
               <input
                 type="search"
-                id="find-task"
+                id="search-input"
                 placeholder="Find task"
+                oninput="searchTask()"
+              />
+              <img
+                src="../assets/icons/cancel.png"
+                alt="cancel icon"
+                class="input-cancel-img"
+                id="search-clear-btn"
+                onclick="cancelSearchTask()"
               />
               <div class="input-seperator"></div>
               <img
                 src="../assets/icons/search.png"
                 alt="search icon"
+                class="input-search-img"
               />
             </div>
 
