@@ -15,7 +15,7 @@ async function getContacts() {
 }
 
 
-async function renderContacts() {
+async function renderContacts(newContact) {
     let allContacts = Object.values(await getContacts());
     let id = Object.keys(await getContacts());
     contacts = [];
@@ -27,7 +27,8 @@ async function renderContacts() {
         checkForExistingLetter(contact, index);
         document.getElementById('contacts').innerHTML += contactContent(index); 
         setDataOfContact(contact, index);
-    })   
+    })
+    console.log(newContact); 
 }
 
 
@@ -102,7 +103,7 @@ function setSelectedContactBackground(index) {
 }
 
 
-function openAndCloseAddContact() {
+function openAndCloseAddContact(){ 
     let modal = document.getElementById('addContact');
     modal.innerHTML = '';
     modal.innerHTML = addContactCardContent();  
@@ -145,8 +146,20 @@ async function createContact() {
             "color" : randomColor
         }) 
     })
-    closeAndClear();
-    renderContacts();
+    selectCreatedContact(document.getElementById('inputContactName').value);
+}
+
+
+async function selectCreatedContact(contactName){
+    try {
+       await renderContacts();
+        closeAndClear();
+        const index = contacts.findIndex(contact => contact.name == contactName)
+        updateAndRenderContacts(index);
+        openAndCloseAddContact();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
@@ -191,8 +204,18 @@ async function saveChangesOnContact(id, index) {
             "color" : document.getElementById('bgInitials').style.backgroundColor
         })
     })
-    renderContacts();
-    openAndCloseAddContact();
+    updateAndRenderContacts(index);
+}
+
+
+async function updateAndRenderContacts (index) {
+    try {
+        await renderContacts(contacts[index].name);
+        openContact(index)
+        openAndCloseAddContact();
+       } catch (error) {
+        console.log(error);
+       } 
 }
 
 
@@ -282,13 +305,13 @@ function editContactCardContent(contact, initials, index){
         </div>
           <div class="input-field-right">
               <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
-              <form onsubmit="updateContact('${contact}')" class="input-fields" action="">
+              <form onsubmit="saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
                   <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" required>
                   <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
                   <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
-                  <button style="content:none" onclick="deleteContact('${contact.id}')">Delete</button>
-                  <button onclick= "saveChangesOnContact('${contact.id}','${index}')" type="submit">Save</button>
+                  <button style="background-image: none; text-align: center;" onclick="deleteContact('${contact.id}')">Delete</button>
+                  <button style="width: 111px;" type="submit">Save</button>
                 </div>
               </form>
           </div>
