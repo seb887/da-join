@@ -13,11 +13,26 @@ const clearInputBtn = document.getElementById('search-clear-btn');
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 const tasks = [];
+const contacts = [];
 let currentDraggedElementId = '';
 
 async function render() {
   await loadTasksFromFirebase();
-  // clearKanbanLists();
+  await loadContactsFromFirebase();
+  searchInput.value = '';
+}
+
+async function loadContactsFromFirebase() {
+  let response = await fetch(BASE_URL + 'contacts' + '.json');
+  let contactsFromFirebase = await response.json();
+
+  if (contactsFromFirebase == null) {
+    return;
+  } else {
+    contacts.length = 0;
+    pushDataFromFirebaseToArr(contactsFromFirebase, contacts);
+    console.log('contacts:', contacts);
+  }
 }
 
 async function loadTasksFromFirebase() {
@@ -28,17 +43,18 @@ async function loadTasksFromFirebase() {
     return;
   } else {
     tasks.length = 0;
-    pushTasksFromFirebaseToArr(tasksDataFromFirebase);
+    pushDataFromFirebaseToArr(tasksDataFromFirebase, tasks);
+    console.log('tasks:', tasks);
   }
 }
 
-function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
-  let objectKeys = Object.keys(tasksDataFromFirebase);
+function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
+  let objectKeys = Object.keys(dataFromFirebase);
 
   for (let i = 0; i < objectKeys.length; i++) {
-    tasks.push({
+    arrToPush.push({
       id: objectKeys[i],
-      task: tasksDataFromFirebase[objectKeys[i]],
+      data: dataFromFirebase[objectKeys[i]],
     });
   }
 
@@ -48,28 +64,28 @@ function pushTasksFromFirebaseToArr(tasksDataFromFirebase) {
 function renderKanbanLists(tasksArr) {
   clearKanbanLists();
 
-  renderTasks(filterTasks('todo', tasksArr), kanbanListTodo);
-  renderTasks(filterTasks('in progress', tasksArr), kanbanListInProgress);
-  renderTasks(filterTasks('await feedback', tasksArr), kanbanListAwaitFeedback);
-  renderTasks(filterTasks('done', tasksArr), kanbanListDone);
+  renderData(filterData('todo', tasksArr), kanbanListTodo);
+  renderData(filterData('in progress', tasksArr), kanbanListInProgress);
+  renderData(filterData('await feedback', tasksArr), kanbanListAwaitFeedback);
+  renderData(filterData('done', tasksArr), kanbanListDone);
 }
 
-function filterTasks(board, tasksArr) {
+function filterData(board, tasksArr) {
   if (board == 'todo') {
-    return tasksArr.filter((t) => t.task.board == 'todo');
+    return tasksArr.filter((t) => t.data.board == 'todo');
   }
   if (board == 'in progress') {
-    return tasksArr.filter((p) => p.task.board == 'in progress');
+    return tasksArr.filter((p) => p.data.board == 'in progress');
   }
   if (board == 'await feedback') {
-    return tasksArr.filter((f) => f.task.board == 'await feedback');
+    return tasksArr.filter((f) => f.data.board == 'await feedback');
   }
   if (board == 'done') {
-    return tasksArr.filter((d) => d.task.board == 'done');
+    return tasksArr.filter((d) => d.data.board == 'done');
   }
 }
 
-function renderTasks(tasksArr, kanbanList) {
+function renderData(tasksArr, kanbanList) {
   if (tasksArr.length == 0) {
     kanbanList.innerHTML = `<div class="no-tasks-card">No tasks</div>`;
   } else {
@@ -88,10 +104,10 @@ function createCardHTML(element) {
       ondragstart="drag(event)"
     >
         <div class="card-label-container">
-            <div class="card-label">${element.task.category}</div>
+            <div class="card-label">${element.data.category}</div>
         </div>
-        <div class="card-title">${element.task.title}</div>
-        <div class="card-description">${element.task.description}</div>
+        <div class="card-title">${element.data.title}</div>
+        <div class="card-description">${element.data.description}</div>
         <div class="subtask-progress-bar-container">
             <div class="subtask-progress-bar">
                 <div class="subtask-progress-bar-done"></div>
@@ -161,20 +177,20 @@ function createModalHTML(element) {
       onclick="event.stopPropagation()"
     >
       <div class="modal-card-header-container">
-        <div class="modal-card-category">${element.task.category}</div>
+        <div class="modal-card-category">${element.data.category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"
           onclick="closeModal()"
         />
       </div>
-      <div class="modal-card-title">${element.task.title}</div>
+      <div class="modal-card-title">${element.data.title}</div>
       <div class="modal-card-description">
-        ${element.task.description}
+        ${element.data.description}
       </div>
       <div class="modal-card-date">
         <div class="modal-card-key">Due date:</div>
-        <span class="modal-card-date-content">${element.task.date}</span>
+        <span class="modal-card-date-content">${element.data.date}</span>
       </div>
       <div class="modal-card-prio">
         <div class="modal-card-key">Priority:</div>
@@ -223,7 +239,7 @@ function createModalHTML(element) {
         </div>
       </div>
       <div class="modal-card-buttons">
-        <button>
+        <button id="${element.id}" onclick="deleteTask(event)">
           <img
             src="../assets/icons/delete.png"
             alt="delete icon"
@@ -231,7 +247,7 @@ function createModalHTML(element) {
           Delete
         </button>
         <div class="modal-card-buttons-seperator"></div>
-        <button>
+        <button id="${element.id}">
           <img
             src="../assets/icons/edit.png"
             alt="edit icon"
@@ -255,8 +271,8 @@ function drag(event) {
 function drop(board) {
   for (let element of tasks) {
     if (currentDraggedElementId == element.id) {
-      element.task.board = board;
-      updateTaskInFirebase(element.id, element.task);
+      element.data.board = board;
+      updateTaskInFirebase(element.id, element.data);
     }
   }
 
@@ -285,13 +301,13 @@ function searchTask() {
 
   let inputText = searchInput.value.toLowerCase();
 
-  const filteredTasks = tasks.filter(
+  const filteredData = tasks.filter(
     (element) =>
-      element.task.title.toLowerCase().includes(inputText) ||
-      element.task.description.toLowerCase().includes(inputText)
+      element.data.title.toLowerCase().includes(inputText) ||
+      element.data.description.toLowerCase().includes(inputText)
   ); // Filtert das Arr nach der Eingabe im Input
 
-  renderKanbanLists(filteredTasks);
+  renderKanbanLists(filteredData);
 }
 
 function controlVisibilityInputClearBtn() {
@@ -307,6 +323,17 @@ function cancelSearchTask() {
 
   renderKanbanLists(tasks);
   controlVisibilityInputClearBtn();
+}
+
+async function deleteTask(event) {
+  const taskId = event.target.id;
+
+  await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
+    method: 'DELETE',
+  });
+
+  closeModal();
+  render();
 }
 
 render();
