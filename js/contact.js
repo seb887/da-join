@@ -80,7 +80,7 @@ async function setContactInformation(index) {
     document.getElementById('phoneNumber').innerText = contacts[index].phone
     document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name) 
     document.getElementById('delContact').onclick = () => {deleteContact(contacts[index].id)}
-    document.getElementById('editContact').onclick = () => {editContact(contacts[index].id)}
+    document.getElementById('editContact').onclick = () => {editContact(index)}
     setSelectedContactBackground(index);   
 }
 
@@ -170,9 +170,10 @@ async function deleteContact(id) {
 
 async function editContact(index) {
     let content = document.getElementById('addContact');
+    let initials = generateInitials(contacts[index].name);
     openAndCloseAddContact();
     content.innerHTML = '';
-    content.innerHTML = editContactCardContent(index);
+    content.innerHTML = editContactCardContent(contacts[index],initials);
 }
 
 
@@ -244,7 +245,7 @@ function addContactCardContent(){
     `
 }
 
-function editContactCardContent(index){
+function editContactCardContent(contact, initials){
     return `
         <div class="modal-header-logo-left">
           <div class="logo-modal">
@@ -257,18 +258,18 @@ function editContactCardContent(index){
           </div>
         </div>
         <div class="add-contact-modal-right">   
-          <div class="add-contact-modal-person">
-            <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
-          </div>
+          <div id="bgInitials" class="initials-container" style="background-color: ${contact.color}; width:120px; height:120px; margin:0 80px;">
+          <span style="font-size:47px;" id="initialsArticle">${initials}</span>
+        </div>
           <div class="input-field-right">
               <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
-              <form onsubmit="createContact()" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" required>
-                  <input placeholder="Email" id="inputMailAddress" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="text" required>
+              <form onsubmit="updateContact('${contact}')" class="input-fields" action="">
+                  <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" required>
+                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
+                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
-                  <button onclick="openAndCloseAddContact()" >Cancel</button>
-                  <button type="submit" >Create contact</button>
+                  <button style="content:none" onclick="openAndCloseAddContact()">Delete</button>
+                  <button type="submit">Save</button>
                 </div>
               </form>
           </div>
