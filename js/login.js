@@ -1,11 +1,12 @@
 let users = [
-    {'name': 'name', 'email': 'bartosz@test.de', 'password': 'test1'}
+    {}
 ]
 
 function init() {
+    document.getElementById("signed-up-overlay").classList.add("d-none");
+    document.getElementById("signed-up-overlay").style.zIndex = -5;
     setTimeout(playLogoAnimation, 250);
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
-    document.getElementById("check-box").classList.remove('check-box-checked');
 }
 
 function playLogoAnimation() {
@@ -39,7 +40,7 @@ function renderLogIn() {
                     </div>
                     <div class="check-box">
                         <div onclick="toggleCheckBoxRemember()" class="remember-true">
-                        <img id="check-box" src="../assets/icons/emptycheckbox.svg">
+                        <img id="check-box" src="../assets/icons/checkbox-empty.svg">
                         </div>
                         <span>Remember me</span>
                     </div>
@@ -62,9 +63,9 @@ function renderSignUp() {
        </div>
         <div class="login-seperator"></div>
         <div class="login-form">
-            <form onsubmit="signUp(); return: false;">
-                <input id="name" id="name" class="name-input" type="text" placeholder="Name" required> 
-                <input id="email" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
+             <form id="form-inputs" onsubmit="signUp(); return false;">
+                <input id="name" class="name-input" type="text" placeholder="Name" required> 
+                <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
                         <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
@@ -73,9 +74,10 @@ function renderSignUp() {
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
+                    <div id='password-non-match'></div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="toggleCheckBoxAccept()" class="remember-true">
-                    <img id="check-box-accept" src="../assets/icons/emptycheckbox.svg">
+                    <img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
                     </div>
                     <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy</a></span>
                 </div>
@@ -89,10 +91,31 @@ function renderSignUp() {
 
 function signUp() {
     let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    users.push({name: name.value, email: email.value, password: password.value})
-    window.location.href = 'login.html';
+    let email = document.getElementById('email-address');
+    let password = document.getElementById('password-id-sign-up');
+    let passwordConfirm = document.getElementById('password-id-confirm');
+    let checkBox = document.getElementById("check-box-accept");
+    if (password.value === passwordConfirm.value) {
+        document.getElementById('password-non-match').innerHTML = '';
+        if (checkBox.src.includes('checkbox-checked.svg')) {
+            playSignedUpAnimation();
+            users.push({name: name.value, email: email.value, password: password.value});
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1500);
+        } else {
+            document.getElementById('password-non-match').innerHTML = 'Please accept the Privacy Policy';
+        }
+    } else {
+        document.getElementById('password-non-match').innerHTML = 'Passwords do not match';
+    }
+}
+
+function playSignedUpAnimation() {
+    document.getElementById("signed-up-overlay").classList.remove("d-none");
+    document.getElementById("signed-up-overlay").style.zIndex = 5;
+    document.getElementById("signed-up-overlay").classList.add("signed-up-animation-overlay");
+    document.getElementById("signed-up-container").classList.add("signed-up-animation-container");
 }
 
 function toggleLoginPasswordVisibility() {
@@ -148,19 +171,19 @@ function disableSpacebar() {
 
 function toggleCheckBoxRemember() {
     let checkBox = document.getElementById("check-box");
-    if (checkBox.src.includes('emptycheckbox.svg')) {
-        checkBox.src = '../assets/icons/checkedcheckbox.svg';
+    if (checkBox.src.includes('checkbox-empty.svg')) {
+        checkBox.src = '../assets/icons/checkbox-checked.svg';
     } else {
-        checkBox.src = '../assets/icons/emptycheckbox.svg';
+        checkBox.src = '../assets/icons/checkbox-empty.svg';
     }
 }
 
 function toggleCheckBoxAccept() {
     let checkBox = document.getElementById("check-box-accept");
-    if (checkBox.src.includes('emptycheckbox.svg')) {
-        checkBox.src = '../assets/icons/checkedcheckbox.svg';
+    if (checkBox.src.includes('checkbox-empty.svg')) {
+        checkBox.src = '../assets/icons/checkbox-checked.svg';
     } else {
-        checkBox.src = '../assets/icons/emptycheckbox.svg';
+        checkBox.src = '../assets/icons/checkbox-empty.svg';
     }
 }
     

@@ -38,18 +38,20 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 32px;
 }
 
 .sign-up-mask {
     width: 652px;
-    height: 650px;
-    padding: 48px 88px 48px 88px;
+    height: 630px;
+    padding: 48px;
     border-radius: 30px;
     background: #FFFFFF;
     box-shadow: 0px 0px 14px 3px #0000000A;
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 32px;
 }
 
 .sign-up-title {
@@ -79,11 +81,10 @@ body {
 }
 
 .login-seperator {
-    width: 0px;
-    height: 150px;
-    border: 3px;
-    rotate: 90deg;
-    border: 3px solid #29ABE2
+    width: 150px;
+    height: 0px;
+    rotate: 180deg;
+    border: 3px solid #29ABE2;
 }
 
 form {
@@ -302,6 +303,56 @@ footer a:hover {
     color: #A8A8A8;
 }
 
+#password-non-match {
+    color: red;
+}
+.signed-up-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 2000ms;
+}
+.you-signed-up {
+    width: 312px;
+    height: 74px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    background: #2A3647;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.signed-up-animation-overlay {
+    animation: sign-up-key-frames 500ms forwards;
+}
+.signed-up-animation-container {
+    animation: sign-up-container-key-frames 400ms forwards;
+}
+@keyframes sign-up-key-frames {
+    0% {
+        background-color: #65666700;
+    }
+    100% {
+        background-color: #656667a1;
+    }
+}
+@keyframes sign-up-container-key-frames {
+    0% {
+        margin-top: 70%;
+    }
+    100% {
+        margin-top: 0%;
+    }
+}
+
 .d-none {
+    z-index: -999;
     display: none;
 }
