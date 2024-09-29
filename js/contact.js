@@ -179,6 +179,7 @@ async function deleteContact(id) {
     console.log(`${id} wurde gelöscht!`);
     renderContacts();
     document.getElementById('contactInformation').classList.toggle('contactFadeAndSlideIn');
+    openAndCloseAddContact();
     showInfoToast('Contact deleted');
 }
 
@@ -323,7 +324,7 @@ function editContactCardContent(contact, initials, index){
                   <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
                   <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
-                  <button style="background-image: none; text-align: center;" onclick="deleteContact('${contact.id}')">Delete</button>
+                  <button style="background-image: none; text-align: center;" type ="button" onclick="deleteContact('${contact.id}')">Delete</button>
                   <button style="width: 111px;" type="submit">Save</button>
                 </div>
               </form>
