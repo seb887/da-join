@@ -147,6 +147,7 @@ async function createContact() {
         }) 
     })
     selectCreatedContact(document.getElementById('inputContactName').value);
+    showInfoToast('Contact succesfully created')
 }
 
 
@@ -178,6 +179,7 @@ async function deleteContact(id) {
     console.log(`${id} wurde gelöscht!`);
     renderContacts();
     document.getElementById('contactInformation').classList.toggle('contactFadeAndSlideIn');
+    showInfoToast('Contact deleted');
 }
 
 
@@ -205,6 +207,7 @@ async function saveChangesOnContact(id, index) {
         })
     })
     updateAndRenderContacts(index);
+    showInfoToast('Contact changes saved');
 }
 
 
@@ -216,6 +219,16 @@ async function updateAndRenderContacts (index) {
        } catch (error) {
         console.log(error);
        } 
+}
+
+
+function showInfoToast(text) {
+    const toast = document.getElementById("info-toast");
+    toast.innerText = text;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
 }
 
 
