@@ -157,10 +157,9 @@
             class="kanban-list"
             id="kanban-list-todo"
             ondrop="drop('todo')"
-            ondragover="allowDrop(event)"
-          >
-            <div class="no-tasks-card">No tasks</div>
-          </div>
+            ondragover="allowDrop(event); highlight('kanban-list-todo')"
+            ondragleave="removeHighlight('kanban-list-todo')"
+          ></div>
         </div>
 
         <div class="kanban-container">
@@ -175,7 +174,8 @@
             class="kanban-list"
             id="kanban-list-in-progress"
             ondrop="drop('in progress')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('kanban-list-in-progress')"
+            ondragleave="removeHighlight('kanban-list-in-progress')"
           ></div>
         </div>
 
@@ -191,7 +191,8 @@
             class="kanban-list"
             id="kanban-list-await-feedback"
             ondrop="drop('await feedback')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('kanban-list-await-feedback')"
+            ondragleave="removeHighlight('kanban-list-await-feedback')"
           ></div>
         </div>
 
@@ -207,7 +208,8 @@
             class="kanban-list"
             id="kanban-list-done"
             ondrop="drop('done')"
-            ondragover="allowDrop(event)"
+            ondragover="allowDrop(event); highlight('kanban-list-done')"
+            ondragleave="removeHighlight('kanban-list-done')"
           ></div>
         </div>
       </section>

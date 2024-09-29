@@ -68,9 +68,12 @@ function filterTasks(board) {
 }
 
 function renderTasks(tasksArr, kanbanList) {
-  for (let i = 0; i < tasksArr.length; i++) {
-    const task = tasksArr[i];
-    kanbanList.innerHTML += createCardHTML(task);
+  if (tasksArr.length == 0) {
+    kanbanList.innerHTML = `<div class="no-tasks-card">No tasks</div>`;
+  } else {
+    for (let i = 0; i < tasksArr.length; i++) {
+      kanbanList.innerHTML += createCardHTML(tasksArr[i]);
+    }
   }
 }
 
@@ -263,6 +266,14 @@ async function updateTaskInFirebase(taskId, updatedTask) {
     method: 'PUT',
     body: JSON.stringify(updatedTask),
   });
+}
+
+function highlight(id) {
+  document.getElementById(id).classList.add('highlight-kanban-list');
+}
+
+function removeHighlight(id) {
+  document.getElementById(id).classList.remove('highlight-kanban-list');
 }
 
 render();

@@ -132,6 +132,11 @@
   min-width: 244px;
   height: calc(100vh - 96px - 209px - 25px - 16px);
   overflow-y: auto;
+  border-radius: 10px;
+}
+
+.highlight-kanban-list {
+  border: 1px dashed black;
 }
 
 .kanban-card {
@@ -253,7 +258,7 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background-color: #000000bd;
+  background-color: #0000005c;
   z-index: 99;
 }
 
