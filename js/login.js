@@ -32,7 +32,7 @@ function renderLogIn() {
             <b class="login-signup-title">Log in</b>
             <div class="login-seperator"></div>
             <div class="login-form">
-                <form onsubmit="logIn()">
+                <form onsubmit="logIn(); return false;">
                     <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
@@ -45,7 +45,7 @@ function renderLogIn() {
                         <span>Remember me</span>
                     </div>
                     <div class="what-kind-of-login">
-                        <button class="just-login" href="">Log in</button>
+                        <button class="just-login">Log in</button>
                         <a class="guest-login" style="color: black;" href="board.html">Guest Log in</a>
                     </div>
                 </form>
@@ -87,6 +87,13 @@ function renderSignUp() {
             </form>
         </div>
     `;
+}
+
+function logIn() {
+    let email = document.getElementById('email-address');
+    let password = document.getElementById('password-id-sign-up');
+    let user = users.find( u=> u.email == email.value && u.password == password.value);
+    console.log(user);
 }
 
 function signUp() {
