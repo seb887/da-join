@@ -173,7 +173,26 @@ async function editContact(index) {
     let initials = generateInitials(contacts[index].name);
     openAndCloseAddContact();
     content.innerHTML = '';
-    content.innerHTML = editContactCardContent(contacts[index],initials);
+    content.innerHTML = editContactCardContent(contacts[index],initials, index);
+}
+
+
+async function saveChangesOnContact(id, index) {
+    let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
+        method: "PUT",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+            {
+            "name" :  document.getElementById('inputContactName').value,
+            "email" : document.getElementById('inputMailAddress').value,
+            "phone" : document.getElementById('inputPhoneNumber').value,
+            "color" : document.getElementById('bgInitials').style.backgroundColor
+        })
+    })
+    renderContacts();
+    openAndCloseAddContact();
 }
 
 
@@ -236,8 +255,8 @@ function addContactCardContent(){
                   <input placeholder="Email" id="inputMailAddress" type="email" required>
                   <input placeholder="Phone" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
-                  <button onclick="openAndCloseAddContact()" >Cancel</button>
-                  <button type="submit" >Create contact</button>
+                  <button onclick="openAndCloseAddContact()">Cancel</button>
+                  <button type="submit">Create contact</button>
                 </div>
               </form>
           </div>
@@ -245,7 +264,7 @@ function addContactCardContent(){
     `
 }
 
-function editContactCardContent(contact, initials){
+function editContactCardContent(contact, initials, index){
     return `
         <div class="modal-header-logo-left">
           <div class="logo-modal">
@@ -268,8 +287,8 @@ function editContactCardContent(contact, initials){
                   <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
                   <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="text" required>
                 <div class="add-contact-button-bottom">
-                  <button style="content:none" onclick="openAndCloseAddContact()">Delete</button>
-                  <button type="submit">Save</button>
+                  <button style="content:none" onclick="deleteContact('${contact.id}')">Delete</button>
+                  <button onclick= "saveChangesOnContact('${contact.id}','${index}')" type="submit">Save</button>
                 </div>
               </form>
           </div>
