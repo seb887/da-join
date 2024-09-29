@@ -141,8 +141,8 @@
             <h2 id="contactName">Test Test</h2>
           </div>
           <div class="article-edit-and-delete">
-            <div class="edit-contact flex-d-r">
-              <img onclick="editContact()" src="../assets/icons/edit.svg" alt="edit-icon">
+            <div onclick="editContact()"  class="edit-contact flex-d-r">
+              <img src="../assets/icons/edit.svg" alt="edit-icon">
               <span>Edit</span>
             </div>
             <div id="delContact" class="del-contact flex-d-r">
@@ -163,46 +163,8 @@
 
     <div id="modalBackground" class="modal-background"></div>  
     <div id="addContact" class="add-contact-modal">
-
-        <div class="modal-header-logo-left">
-
-          <div class="logo-modal">
-            <img src="../assets/img/logo-white.png" alt="logo-white">
-          </div>
-          <div class="header-modal">
-            <h1>Add Contact</h1>
-            <h2>Tasks are better with a team!</h2>
-            <div class="header-seperator"></div>
-          </div>
-          
-        </div>
-
-
-        <div class="add-contact-modal-right">
-              
-          <div class="add-contact-modal-person">
-            <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
-          </div>
-          
-
-          <div class="input-field-right">
-
-              <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
-              <form onsubmit="createContact()" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" required>
-                  <input placeholder="Email" id="inputMailAddress" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="text" required>
-                <div class="add-contact-button-bottom">
-                  <button onclick="openAndCloseAddContact()" >Cancel</button>
-                  <button type="submit" >Create contact</button>
-                </div>
-              </form>
-          </div>
-        </div>
-
-
-
-
+        
+    </div>
 
     </div>
     <script src="../js/contact.js"></script>
