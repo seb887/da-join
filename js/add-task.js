@@ -34,10 +34,22 @@ function createNewTask() {
   console.log('create new task: ', newTask);
   saveTaskToFirebase(newTask);
   clearInputs();
+  showInfoToast('Task added to board');
 }
 
 function clearInputs() {
   inputTitle.value = '';
   inputDescription.value = '';
   selectCategory.value = 'Select task category';
+}
+
+
+function showInfoToast(text) {
+  const toast = document.getElementById("info-toast");
+  const infoText = document.getElementById('infoText');
+  infoText.innerText = text;
+  toast.classList.add("show");
+  setTimeout(() => {
+      toast.classList.remove("show");
+  }, 1500);
 }

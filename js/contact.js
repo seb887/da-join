@@ -286,7 +286,7 @@ function addContactCardContent(){
             <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
           </div>
           <div class="input-field-right">
-              <button onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
+              <button  id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></button>
               <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
                   <input placeholder="Name" id="inputContactName" type="text" required>
                   <input placeholder="Email" id="inputMailAddress" type="email" required>
@@ -318,7 +318,7 @@ function editContactCardContent(contact, initials, index){
           <span style="font-size:47px;" id="initialsArticle">${initials}</span>
         </div>
           <div class="input-field-right">
-              <button type ="button" onclick="openAndCloseAddContact()" id="closeAddContact"><img src="../assets/icons/close.png" alt="close-button"></button>
+              <button type ="button" id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></button>
               <form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
                   <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" required>
                   <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
