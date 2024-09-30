@@ -5,7 +5,8 @@ const kanbanListAwaitFeedback = document.getElementById(
   'kanban-list-await-feedback'
 );
 const kanbanListDone = document.getElementById('kanban-list-done');
-const modal = document.getElementById('modal');
+const taskModal = document.getElementById('task-modal');
+const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
 const clearInputBtn = document.getElementById('search-clear-btn');
 
@@ -99,7 +100,7 @@ function createCardHTML(element) {
   return `
     <div
       class="kanban-card" id="${element.id}"
-      onclick="openModal(event)"
+      onclick="openTaskModal(event)"
       draggable="true"
       ondragstart="drag(event)"
     >
@@ -154,82 +155,91 @@ function getDataForModal(event) {
 
   for (let element of tasks) {
     if (id == element.id) {
-      modal.innerHTML = createModalHTML(element);
+      taskModal.innerHTML = createTaskModalHTML(element);
     }
   }
 }
 
-function openModal(event) {
-  modal.style.display = 'flex';
+function openTaskModal(event) {
+  taskModal.style.display = 'flex';
   getDataForModal(event);
 }
 
-function closeModal() {
-  modal.style.display = 'none';
-  modal.innerHTML = '';
+function closeTaskModal() {
+  taskModal.style.display = 'none';
+  innerHTML = '';
 }
 
-function createModalHTML(element) {
+function openAddTaskModal() {
+  addTaskModal.style.display = 'flex';
+  addTaskModal.innerHTML = createAddTaskModalHTML();
+}
+
+function closeAddTaskModal() {
+  addTaskModal.style.display = 'none';
+}
+
+function createTaskModalHTML(element) {
   return `
     <div
-      class="modal-card"
-      id="modal-card"
+      class="task-modal-card"
+      id="task-modal-card"
       onclick="event.stopPropagation()"
     >
-      <div class="modal-card-header-container">
-        <div class="modal-card-category">${element.data.category}</div>
+      <div class="task-modal-card-header-container">
+        <div class="task-modal-card-category">${element.data.category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"
-          onclick="closeModal()"
+          onclick="closeTaskModal()"
         />
       </div>
-      <div class="modal-card-title">${element.data.title}</div>
-      <div class="modal-card-description">
+      <div class="task-modal-card-title">${element.data.title}</div>
+      <div class="task-modal-card-description">
         ${element.data.description}
       </div>
-      <div class="modal-card-date">
-        <div class="modal-card-key">Due date:</div>
-        <span class="modal-card-date-content">${element.data.date}</span>
+      <div class="task-modal-card-date">
+        <div class="task-modal-card-key">Due date:</div>
+        <span class="task-modal-card-date-content">${element.data.date}</span>
       </div>
-      <div class="modal-card-prio">
-        <div class="modal-card-key">Priority:</div>
-        <span class="modal-card-prio-content">Urgent</span>
+      <div class="task-modal-card-prio">
+        <div class="task-modal-card-key">Priority:</div>
+        <span class="task-modal-card-prio-content">Urgent</span>
         <img
           src="../assets/icons/prio-urgent.png"
           alt="prio icon"
         />
       </div>
-      <div class="modal-card-assigned-to">
+      <div class="task-modal-card-assigned-to">
         Assigned To:
-        <div class="modal-card-assigned-to-list">
-          <div class="modal-contact-container">
-            <div class="modal-contact-profile-img">EM</div>
-            <div class="modal-contact-name">Emmanuel Mauer</div>
+        <div class="task-modal-card-assigned-to-list">
+          <div class="task-modal-contact-container">
+            <div class="task-modal-contact-profile-img">EM</div>
+            <div class="task-modal-contact-name">Emmanuel Mauer</div>
           </div>
 
-          <div class="modal-contact-container">
-            <div class="modal-contact-profile-img">MB</div>
-            <div class="modal-contact-name">Marcel Bauer</div>
+          <div class="task-modal-contact-container">
+            <div class="task-modal-contact-profile-img">MB</div>
+            <div class="task-modal-contact-name">Marcel Bauer</div>
           </div>
 
-          <!-- <div class="modal-contact-container">
-            <div class="modal-contact-profile-img"></div>
-            <div class="modal-contact-name">Anton Mayer</div>
+          <!-- <div class="task-modal-contact-container">
+            <div class="task-modal-contact-profile-img"></div>
+            <div class="task-modal-contact-name">Anton Mayer</div>
           </div> -->
         </div>
       </div>
-      <div class="modal-card-subtasks">
+      <div class="task-modal-card-subtasks">
         Subtasks:
-        <div class="modal-card-subtasks-list">
-          <div class="modal-subtask-container">
+        <div class="task-modal-card-subtasks-list">
+          <div class="task-modal-subtask-container">
             <img
               src="../assets/icons/checkbox-empty.svg"
               alt="checkbox icon"
             />
             Implement Recipe Recommendation
           </div>
-          <div class="modal-subtask-container">
+          <div class="task-modal-subtask-container">
             <img
               src="../assets/icons/checkbox-empty.svg"
               alt="checkbox icon"
@@ -238,7 +248,7 @@ function createModalHTML(element) {
           </div>
         </div>
       </div>
-      <div class="modal-card-buttons">
+      <div class="task-modal-card-buttons">
         <button id="${element.id}" onclick="deleteTask(event)">
           <img
             src="../assets/icons/delete.png"
@@ -246,7 +256,7 @@ function createModalHTML(element) {
           />
           Delete
         </button>
-        <div class="modal-card-buttons-seperator"></div>
+        <div class="task-modal-card-buttons-seperator"></div>
         <button id="${element.id}">
           <img
             src="../assets/icons/edit.png"
@@ -332,8 +342,157 @@ async function deleteTask(event) {
     method: 'DELETE',
   });
 
-  closeModal();
+  closeTaskModal();
   render();
+}
+
+function createAddTaskModalHTML() {
+  return `
+    <section class="add-task-content-section">
+      <form class="add-task-form">
+        <div class="left-container">
+          <div class="form-container title-container">
+            <label for="title"
+              >Title<span class="required-marker">*</span></label
+            >
+            <input
+              type="text"
+              id="input-title"
+              name="title"
+              placeholder="Enter a title"
+            />
+          </div>
+          <div class="form-container description-container">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="input-description"
+              name="description"
+              rows="4"
+              placeholder="Enter a description"
+            ></textarea>
+          </div>
+          <div class="form-container assigned-to-container">
+            <label for="assigned to">Assigned to</label>
+            <select
+              type="text"
+              id="input-assigned-to"
+              name="assigned to"
+            >
+              <option
+                value="No selection"
+                disabled
+                selected
+                hidden
+              >
+                Select contacts to assign
+              </option>
+              <option value="Jim Panse">Jim Panse</option>
+              <option value="Anne Theke">Anne Theke</option>
+              <option value="Kara Mell">Kara Mell</option>
+            </select>
+          </div>
+        </div>
+        <div class="seperator"></div>
+        <div class="right-container">
+          <div class="form-container date-container">
+            <label for="date"
+              >Due date<span class="required-marker">*</span></label
+            >
+            <input
+              type="date"
+              id="input-date"
+              name="date"
+            />
+          </div>
+
+          <div class="form-container date-container">
+            <label for="prio">Prio</label>
+            <div class="prio-buttons-container">
+              <button class="prio-buttons">
+                Low
+                <img
+                  src="../assets/icons/prio-low.png"
+                  alt="prio low icon"
+                />
+              </button>
+              <button class="prio-buttons">
+                Medium
+                <img
+                  src="../assets/icons/prio-medium.png"
+                  alt="prio medium icon"
+                />
+              </button>
+              <button class="prio-buttons">
+                Urgent
+                <img
+                  src="../assets/icons/prio-urgent.png"
+                  alt="prio urgent icon"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="form-container category-container">
+            <label for="category"
+              >Category<span class="required-marker">*</span></label
+            >
+            <select
+              type="text"
+              id="select-category"
+              name="category"
+            >
+              <option
+                value="Select task category"
+                disabled
+                selected
+                hidden
+              >
+                Select task category
+              </option>
+              <option value="User Story">User Story</option>
+              <option value="Technical Task">Technical Task</option>
+            </select>
+          </div>
+
+          <div class="form-container subtasks-container">
+            <label for="subtasks">Subtasks</label>
+            <div class="add-task-input">
+              <input
+                type="subtasks"
+                name="subtasks"
+                placeholder="Add new subtask"
+                id="input-subtasks"
+              />
+              <img
+                src="../assets/icons/add-subtasks.png"
+                alt=""
+              />
+            </div>
+            <div
+              class="subtasks-list"
+              id="subtasks-list"
+            ></div>
+          </div>
+        </div>
+      </form>
+      <div class="add-task-buttons-container">
+        <button
+          class="add-task-cancel-button"
+          onclick="clearInputs()"
+        >
+          Cancel
+        </button>
+        <button
+          class="add-task-submit-button"
+          onclick="createNewTask()"
+        >
+          Create Task
+        </button>
+      </div>
+      <div><span class="required-marker">*</span>This field is required</div>
+    </section>
+  `;
 }
 
 render();

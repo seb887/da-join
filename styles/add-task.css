@@ -51,6 +51,7 @@
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   background-color: white;
+  outline: none;
 }
 
 .add-task-content-section input::placeholder,
@@ -103,6 +104,27 @@
   box-shadow: 0 0 4px 0 #0000001a;
   font-size: 20px;
   font-weight: 400;
+}
+
+.add-task-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 21px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.add-task-input input {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  outline: none;
+}
+
+.add-task-input img {
+  cursor: pointer;
 }
 
 .add-task-buttons-container {

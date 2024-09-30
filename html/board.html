@@ -15,6 +15,10 @@
       href="../styles/board.css"
     />
     <link
+      rel="stylesheet"
+      href="../styles/add-task.css"
+    />
+    <link
       rel="icon"
       type="image/png"
       href="../assets/img/logo-white.png"
@@ -139,16 +143,16 @@
               />
             </div>
 
-            <a
-              href="../html/add-task.html"
+            <button
               class="add-task-button"
+              onclick="openAddTaskModal()"
             >
               Add task
               <img
                 src="../assets/icons/add.png"
                 alt="add task icon"
               />
-            </a>
+            </button>
           </div>
         </div>
       </header>
@@ -224,11 +228,18 @@
       </section>
     </main>
 
-    <!-- MODAL SECTION -->
+    <!-- TASK MODAL SECTION -->
     <section
-      class="modal"
-      id="modal"
-      onclick="closeModal()"
+      class="task-modal"
+      id="task-modal"
+      onclick="closeTaskModal()"
+    ></section>
+
+    <!-- ADD TASK MODAL SECTION -->
+    <section
+      class="add-task-modal"
+      id="add-task-modal"
+      onclick="closeAddTaskModal()"
     ></section>
 
     <script src="../js/board.js"></script>

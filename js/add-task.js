@@ -3,6 +3,8 @@ const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
 const inputDate = document.getElementById('input-date');
 const selectCategory = document.getElementById('select-category');
+const subtasksList = document.getElementById('subtasks-list');
+const inputSubtasks = document.getElementById('input-subtasks');
 
 // VARIABLES
 const BASE_URL =
