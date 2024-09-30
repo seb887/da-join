@@ -8,6 +8,7 @@ function init() {
 }
 
 function playLogoAnimation() {
+    getUser();
     document.getElementById("logo").classList.remove("loading-logo-animation");
     document.getElementById("logo").classList.add("loading-logo-animation");
     document.getElementById("loading-overlay-id").classList.add("loading-overlay-animation");
@@ -25,10 +26,7 @@ function goTosignUp() {
 }
 
 function logIn() {
-    let email = document.getElementById('email-address');
-    let password = document.getElementById('password-id-sign-up');
-    let user = users.find( u=> u.email == email.value && u.password == password.value);
-    console.log(user);
+    getUser();
 }
 
 function signUp() {
@@ -62,6 +60,12 @@ async function postUser() {
         })
     });
     return responseToJson = await response.json();
+}
+
+async function getUser() {
+    let response = await fetch(BASE_URL + ".json");
+    let responseToJson = await response.json();
+    console.log(responseToJson);
 }
 
 function playSignedUpAnimation() {
@@ -178,7 +182,7 @@ function renderSignUp() {
         <div class="login-seperator"></div>
         <div class="login-form">
              <form id="form-inputs" onsubmit="signUp(); return false;">
-                <input onkeypress="return disableSpacebar()" id="name" class="name-input" type="text" placeholder="Name" required> 
+                <input minlength="5" id="name" class="name-input" type="text" placeholder="Name" required> 
                 <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
