@@ -348,7 +348,7 @@ async function deleteTask(event) {
 
 function createAddTaskModalHTML() {
   return `
-    <section class="add-task-content-section">
+    <section class="add-task-modal-card" onclick="event.stopPropagation()">
       <form class="add-task-form">
         <div class="left-container">
           <div class="form-container title-container">

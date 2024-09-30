@@ -260,7 +260,8 @@
   color: #a8a8a8;
 }
 
-.task-modal {
+.task-modal,
+.add-task-modal {
   display: none;
   justify-content: center;
   align-items: center;
@@ -416,4 +417,12 @@
   width: 2px;
   height: 24px;
   background-color: #d1d1d1;
+}
+
+.add-task-modal-card {
+  padding: 64px 74px;
+  width: 1116px;
+  height: 870px;
+  border-radius: 30px;
+  background-color: white;
 }
