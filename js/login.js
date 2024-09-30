@@ -1,6 +1,4 @@
-let users = [
-    {}
-]
+const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 function init() {
     document.getElementById("signed-up-overlay").classList.add("d-none");
