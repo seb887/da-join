@@ -1,3 +1,4 @@
+
 const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 function init() {
@@ -25,8 +26,24 @@ function goTosignUp() {
     document.getElementById("whole-body-id").innerHTML = renderSignUp();
 }
 
-function logIn() {
-    getUser();
+async function logIn() {
+    let email = document.querySelector('input[type="email"]').value;
+    let password = document.getElementById('current-password').value;
+    let response = await fetch(BASE_URL + ".json");
+    let users = await response.json();
+    let userExists = false;
+    for (let key in users) {
+        if (users[key].email === email && users[key].password === password) {
+            userExists = true;
+            break;
+        }
+    }
+    if (userExists) {
+        console.log("Login erfolgreich");
+        window.location.href = 'summary.html';
+    } else {
+        console.log('E-Mail oder Passwort ist falsch.');
+    }
 }
 
 function signUp() {
