@@ -11,7 +11,7 @@ body {
 
 .flex-d-r {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -195,8 +195,7 @@ article {
   position: absolute;
   flex-direction: column;
   top: 311px;
-  right: 750px;
-  width: 461px;
+  left: 690px;
   height: 364px;
   a{
     text-decoration: none;
@@ -275,6 +274,7 @@ article {
   display: flex !important;
   animation-name: fadeAndSlideIn;
   animation-duration: 150ms;
+  animation-fill-mode: forwards;
 }
 
 #contactInformation{
@@ -560,11 +560,11 @@ article {
 
 @keyframes fadeAndSlideIn {
     0% {
-      right: -500px;
-      opacity: 0;
+      left: 100%;
+      opacity: 0.5;
     }
     100% {
-      right: 750px;
+      left: 690px;
       opacity: 1;
     }
 }
