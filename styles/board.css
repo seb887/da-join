@@ -435,15 +435,15 @@
   z-index: 10000;
   width: 326px;
   height: 74px;
-  bottom: 0%;
+  bottom: 0;
   font-size: 24px;
-  right: 40%;
+  right: 70%;
   background-color: #2A3647;
   border-radius: 20px;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transform: translateY(100%);
+  transform: translateY(700px);
   transition: opacity 0.2s ease, transform 0.2s ease;
   img{
     margin-left: 24px;
@@ -452,5 +452,5 @@
 
 #info-toast.show {
   opacity: 1;
-  transform: translateY(-10%);
+  transform: translateY(0px);
 }
