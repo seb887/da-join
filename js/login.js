@@ -51,15 +51,31 @@ function signUp() {
     if (password.value === passwordConfirm.value) {
         document.getElementById('sign-up-error').innerHTML = '';
         if (checkBox.src.includes('checkbox-checked.svg')) {
-            playSignedUpAnimation();
-            postUser();
-            setTimeout(function() {window.location.href = 'login.html';}, 1500);
+            checkUser();
         } else {
             document.getElementById('sign-up-error').innerHTML = 'Please accept the Privacy Policy';
         }
     } else {
         document.getElementById('sign-up-error').innerHTML = 'Passwords do not match';
     }
+}
+
+async function checkUser() {
+    let email = document.querySelector('input[type="email"]').value;
+    let response = await fetch(BASE_URL + ".json");
+    let users = await response.json();
+    let emailExists = false;
+    for (let key in users) {
+        if (users[key].email === email) {
+            emailExists = true;
+            document.getElementById('sign-up-error').innerHTML='E-Mail already in use';
+            break;
+        }}
+        if (!emailExists) {
+            document.getElementById('sign-up-error').innerHTML = '';
+            await postUser(); // Benutzer posten
+            playSignedUpAnimation();
+        }
 }
 
 async function postUser() {
@@ -82,6 +98,7 @@ function playSignedUpAnimation() {
     document.getElementById("signed-up-overlay").style.zIndex = 5;
     document.getElementById("signed-up-overlay").classList.add("signed-up-animation-overlay");
     document.getElementById("signed-up-container").classList.add("signed-up-animation-container");
+    setTimeout(function() {window.location.href = 'login.html';}, 1500);
 }
 
 function toggleLoginPasswordVisibility() {
