@@ -1,4 +1,3 @@
-
 const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 function init() {
@@ -9,7 +8,6 @@ function init() {
 }
 
 function playLogoAnimation() {
-    getUser();
     document.getElementById("logo").classList.remove("loading-logo-animation");
     document.getElementById("logo").classList.add("loading-logo-animation");
     document.getElementById("loading-overlay-id").classList.add("loading-overlay-animation");
@@ -34,15 +32,15 @@ async function logIn() {
     let userExists = false;
     for (let key in users) {
         if (users[key].email === email && users[key].password === password) {
+            document.getElementById('login-error').innerHTML='';
             userExists = true;
             break;
         }
     }
     if (userExists) {
-        console.log("Login erfolgreich");
         window.location.href = 'summary.html';
     } else {
-        console.log('E-Mail oder Passwort ist falsch.');
+        document.getElementById('login-error').innerHTML='Wrong E-Mail or Password';
     }
 }
 
@@ -51,16 +49,16 @@ function signUp() {
     let passwordConfirm = document.getElementById('password-id-confirm');
     let checkBox = document.getElementById("check-box-accept");
     if (password.value === passwordConfirm.value) {
-        document.getElementById('password-non-match').innerHTML = '';
+        document.getElementById('sign-up-error').innerHTML = '';
         if (checkBox.src.includes('checkbox-checked.svg')) {
             playSignedUpAnimation();
             postUser();
             setTimeout(function() {window.location.href = 'login.html';}, 1500);
         } else {
-            document.getElementById('password-non-match').innerHTML = 'Please accept the Privacy Policy';
+            document.getElementById('sign-up-error').innerHTML = 'Please accept the Privacy Policy';
         }
     } else {
-        document.getElementById('password-non-match').innerHTML = 'Passwords do not match';
+        document.getElementById('sign-up-error').innerHTML = 'Passwords do not match';
     }
 }
 
@@ -77,12 +75,6 @@ async function postUser() {
         })
     });
     return responseToJson = await response.json();
-}
-
-async function getUser() {
-    let response = await fetch(BASE_URL + ".json");
-    let responseToJson = await response.json();
-    console.log(responseToJson);
 }
 
 function playSignedUpAnimation() {
@@ -173,6 +165,7 @@ function renderLogIn() {
                         <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
                         <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
                     </div>
+                    <div id='login-error'></div>
                     <div class="check-box">
                         <div onclick="toggleCheckBoxRemember()" class="remember-true">
                         <img id="check-box" src="../assets/icons/checkbox-empty.svg">
@@ -209,7 +202,7 @@ function renderSignUp() {
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
-                    <div id='password-non-match'></div>
+                    <div id='sign-up-error'></div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="toggleCheckBoxAccept()" class="remember-true">
                     <img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
