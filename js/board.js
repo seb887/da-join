@@ -346,6 +346,19 @@ async function deleteTask(event) {
   render();
 }
 
+
+function showInfoToast(text) {
+  event.preventDefault();
+  const toast = document.getElementById("info-toast");
+  const infoText = document.getElementById('infoText');
+  infoText.innerText = text;
+  toast.classList.add("show");
+  setTimeout(() => {
+      toast.classList.remove("show");
+  }, 1500);
+}
+
+
 function createAddTaskModalHTML() {
   return `
     <section class="add-task-modal-card" onclick="event.stopPropagation()">
@@ -485,7 +498,7 @@ function createAddTaskModalHTML() {
         </button>
         <button
           class="add-task-submit-button"
-          onclick="createNewTask()"
+          onclick="showInfoToast('Task added to board');"
         >
           Create Task
         </button>
@@ -494,5 +507,6 @@ function createAddTaskModalHTML() {
     </section>
   `;
 }
+//showInfoToast('Tast added to board') should be moved to the addTask function after creation
 
 render();
