@@ -303,9 +303,10 @@ footer a:hover {
     color: #A8A8A8;
 }
 
-#password-non-match {
+#sign-up-error, #login-error {
     color: red;
 }
+
 .signed-up-overlay {
     position: fixed;
     top: 0;
