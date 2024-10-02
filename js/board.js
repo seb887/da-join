@@ -9,6 +9,10 @@ const taskModal = document.getElementById('task-modal');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
 const clearInputBtn = document.getElementById('search-clear-btn');
+const inputTitle = document.getElementById('input-title');
+const inputDescription = document.getElementById('input-description');
+const inputDate = document.getElementById('input-date');
+const selectCategory = document.getElementById('select-category');
 
 // VARIABLES
 const BASE_URL =
@@ -167,7 +171,7 @@ function openTaskModal(event) {
 
 function closeTaskModal() {
   taskModal.style.display = 'none';
-  innerHTML = '';
+  taskModal.innerHTML = '';
 }
 
 function openAddTaskModal() {
@@ -176,6 +180,7 @@ function openAddTaskModal() {
 }
 
 function closeAddTaskModal() {
+  // clearInputs();
   addTaskModal.style.display = 'none';
 }
 
@@ -479,7 +484,7 @@ function createAddTaskModalHTML() {
       <div class="add-task-buttons-container">
         <button
           class="add-task-cancel-button"
-          onclick="clearInputs()"
+          onclick="closeAddTaskModal()"
         >
           Cancel
         </button>
@@ -493,6 +498,12 @@ function createAddTaskModalHTML() {
       <div><span class="required-marker">*</span>This field is required</div>
     </section>
   `;
+}
+
+function clearInputs() {
+  inputTitle.value = '';
+  inputDescription.value = '';
+  selectCategory.value = 'Select task category';
 }
 
 render();

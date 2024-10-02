@@ -43,13 +43,12 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
 }
 
-
 function showInfoToast(text) {
-  const toast = document.getElementById("info-toast");
+  const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');
   infoText.innerText = text;
-  toast.classList.add("show");
+  toast.classList.add('show');
   setTimeout(() => {
-      toast.classList.remove("show");
+    toast.classList.remove('show');
   }, 1500);
 }
