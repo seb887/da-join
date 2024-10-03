@@ -61,6 +61,23 @@ function signUp() {
 }
 
 async function checkUser() {
+    let name = document.querySelector('input[type="text"]').value;
+    let response = await fetch(BASE_URL + ".json");
+    let users = await response.json();
+    let nameExists = false;
+    for (let key in users) {
+        if (users[key].name === name) {
+            nameExists = true;
+            document.getElementById('sign-up-error').innerHTML='Username already in use';
+            break;
+        }}
+        if (!nameExists) {
+            document.getElementById('sign-up-error').innerHTML = '';
+            checkEmail();
+        }
+}
+
+async function checkEmail() {
     let email = document.querySelector('input[type="email"]').value;
     let response = await fetch(BASE_URL + ".json");
     let users = await response.json();
