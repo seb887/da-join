@@ -33,7 +33,7 @@
 .add-task-form {
   display: flex;
   gap: 48px;
-  width: 975px;
+  width: 968px;
 }
 
 .form-container {
@@ -42,9 +42,11 @@
   gap: 8px;
 }
 
-.add-task-content-section input,
-.add-task-content-section textarea,
-.add-task-content-section select {
+.add-task-input-title,
+.add-task-input-date,
+.add-task-input-description,
+.add-task-input-subtasks,
+.add-task-select {
   font-size: 20px;
   font-weight: 400;
   padding: 12px 21px;
@@ -57,6 +59,12 @@
 .add-task-content-section input::placeholder,
 .add-task-content-section textarea::placeholder {
   color: #d1d1d1;
+}
+
+.add-task-labels {
+  display: flex;
+  align-items: center;
+  height: 24px;
 }
 
 .left-container {
@@ -127,14 +135,19 @@
   cursor: pointer;
 }
 
+.add-task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 48px;
+  width: 968px;
+}
+
 .add-task-buttons-container {
   display: flex;
   justify-content: end;
   align-items: center;
-  /* padding: 0 64px; */
-  margin-top: 48px;
   gap: 16px;
-  width: 975px;
 }
 
 .add-task-cancel-button {
@@ -166,6 +179,8 @@
   cursor: pointer;
 }
 
+/* INFO TOAST */
+
 #info-toast {
   display: flex;
   justify-content: center;
@@ -176,14 +191,14 @@
   bottom: 0%;
   font-size: 24px;
   right: 40%;
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 20px;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   opacity: 1;
   transform: translateY(100%);
   transition: opacity 0.2s ease, transform 0.2s ease;
-  img{
+  img {
     margin-left: 24px;
   }
 }

@@ -121,20 +121,28 @@
         <form class="add-task-form">
           <div class="left-container">
             <div class="form-container title-container">
-              <label for="title"
+              <label
+                for="title"
+                class="add-task-labels"
                 >Title<span class="required-marker">*</span></label
               >
               <input
                 type="text"
+                class="add-task-input-title"
                 id="input-title"
                 name="title"
                 placeholder="Enter a title"
               />
             </div>
             <div class="form-container description-container">
-              <label for="description">Description</label>
+              <label
+                for="description"
+                class="add-task-labels"
+                >Description</label
+              >
               <textarea
                 type="text"
+                class="add-task-input-description"
                 id="input-description"
                 name="description"
                 rows="4"
@@ -142,10 +150,15 @@
               ></textarea>
             </div>
             <div class="form-container assigned-to-container">
-              <label for="assigned to">Assigned to</label>
+              <label
+                for="assigned to"
+                class="add-task-labels"
+                >Assigned to</label
+              >
               <select
                 type="text"
                 id="input-assigned-to"
+                class="add-task-select"
                 name="assigned to"
               >
                 <option
@@ -165,18 +178,25 @@
           <div class="seperator"></div>
           <div class="right-container">
             <div class="form-container date-container">
-              <label for="date"
+              <label
+                for="date"
+                class="add-task-labels"
                 >Due date<span class="required-marker">*</span></label
               >
               <input
                 type="date"
+                class="add-task-input-date"
                 id="input-date"
                 name="date"
               />
             </div>
 
             <div class="form-container date-container">
-              <label for="prio">Prio</label>
+              <label
+                for="prio"
+                class="add-task-labels"
+                >Prio</label
+              >
               <div class="prio-buttons-container">
                 <button class="prio-buttons">
                   Low
@@ -203,11 +223,14 @@
             </div>
 
             <div class="form-container category-container">
-              <label for="category"
+              <label
+                for="category"
+                class="add-task-labels"
                 >Category<span class="required-marker">*</span></label
               >
               <select
                 type="text"
+                class="add-task-select"
                 id="select-category"
                 name="category"
               >
@@ -225,12 +248,17 @@
             </div>
 
             <div class="form-container subtasks-container">
-              <label for="subtasks">Subtasks</label>
+              <label
+                for="subtasks"
+                class="add-task-labels"
+                >Subtasks</label
+              >
               <div class="add-task-input">
                 <input
                   type="subtasks"
                   name="subtasks"
                   placeholder="Add new subtask"
+                  class="add-task-input-subtasks"
                   id="input-subtasks"
                 />
                 <img
@@ -245,24 +273,37 @@
             </div>
           </div>
         </form>
-        <div class="add-task-buttons-container">
-          <button
-            class="add-task-cancel-button"
-            onclick="clearInputs()"
-          >
-            Cancel
-          </button>
-          <button
-            class="add-task-submit-button"
-            onclick="createNewTask()"
-          >
-            Create Task
-          </button>
+        <div class="add-task-footer">
+          <div>
+            <span class="required-marker">*</span>This field is required
+          </div>
+          <div class="add-task-buttons-container">
+            <button
+              class="add-task-cancel-button"
+              onclick="clearInputs()"
+            >
+              Cancel
+            </button>
+            <button
+              class="add-task-submit-button"
+              onclick="createNewTask()"
+            >
+              Create Task
+            </button>
+          </div>
         </div>
-        <div><span class="required-marker">*</span>This field is required</div>
-        <div id="info-toast" class="hidden">
+
+        <div
+          id="info-toast"
+          class="hidden"
+        >
           <p id="infoText"></p>
-          <img src="../assets/icons/board.png" width="30px" height="30px" alt="task icon">
+          <img
+            src="../assets/icons/board.png"
+            width="30px"
+            height="30px"
+            alt="task icon"
+          />
         </div>
       </section>
     </main>

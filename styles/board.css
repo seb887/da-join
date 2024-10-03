@@ -260,8 +260,7 @@
   color: #a8a8a8;
 }
 
-.task-modal,
-.add-task-modal {
+.task-modal {
   display: none;
   justify-content: center;
   align-items: center;
@@ -427,6 +426,26 @@
   background-color: white;
 }
 
+.add-task-modal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  /* padding: 80px 64px 55px 64px; */
+  /* width: calc(100vw - 232px); */
+  /* max-width: 1208px; */
+}
+
+.add-task-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 968px;
+  position: absolute;
+  top: 780px;
+}
+
+/* INFO TOAST */
+
 #info-toast {
   display: flex;
   justify-content: center;
@@ -438,14 +457,14 @@
   bottom: 0;
   font-size: 24px;
   right: 70%;
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 20px;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   opacity: 1;
   transform: translateY(700px);
   transition: opacity 0.2s ease, transform 0.2s ease;
-  img{
+  img {
     margin-left: 24px;
   }
 }
