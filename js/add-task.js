@@ -31,10 +31,22 @@ function createNewTask() {
     board: 'todo',
   };
 
-  console.log('create new task: ', newTask);
-  saveTaskToFirebase(newTask);
-  clearInputs();
-  showInfoToast('Task added to board');
+  checkInputs(newTask);
+}
+
+function checkInputs(taskObj) {
+  if (taskObj.title == '' || taskObj.category == 'Select task category') {
+    if (taskObj.title == '') {
+      alert('Please insert a title');
+    } else if (taskObj.category == 'Select task category') {
+      alert('Please select the category');
+    }
+  } else {
+    console.log('create new task: ', taskObj);
+    saveTaskToFirebase(taskObj);
+    clearInputs();
+    showInfoToast('Task added to board');
+  }
 }
 
 function clearInputs() {
@@ -43,6 +55,7 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
 }
 
+// TOAST INFO
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');

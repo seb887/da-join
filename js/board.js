@@ -8,22 +8,22 @@ const kanbanListDone = document.getElementById('kanban-list-done');
 const taskModal = document.getElementById('task-modal');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
-const clearInputBtn = document.getElementById('search-clear-btn');
-const inputTitle = document.getElementById('input-title');
-const inputDescription = document.getElementById('input-description');
-const inputDate = document.getElementById('input-date');
-const selectCategory = document.getElementById('select-category');
+// const clearInputBtn = document.getElementById('search-clear-btn');
+// const inputTitle = document.getElementById('input-title');
+// const inputDescription = document.getElementById('input-description');
+// const inputDate = document.getElementById('input-date');
+// const selectCategory = document.getElementById('select-category');
 
 // VARIABLES
-const BASE_URL =
-  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
+// const BASE_URL =
+//   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 const tasks = [];
 const contacts = [];
 let currentDraggedElementId = '';
 
 // DEFAULTS
-let currentDate = new Date();
-inputDate.valueAsDate = currentDate;
+// let currentDate = new Date();
+// inputDate.valueAsDate = currentDate;
 
 // FUNCTIONS
 
@@ -532,12 +532,6 @@ async function deleteTask(event) {
 //   `;
 // }
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
-
-function clearInputs() {
-  inputTitle.value = '';
-  inputDescription.value = '';
-  selectCategory.value = 'Select task category';
-}
 
 function showInfoToast(text) {
   event.preventDefault();
