@@ -20,6 +20,8 @@ async function saveTaskToFirebase(newTask) {
     method: 'POST',
     body: JSON.stringify(newTask),
   });
+
+  render();
 }
 
 function createNewTask() {
@@ -28,10 +30,19 @@ function createNewTask() {
     description: inputDescription.value,
     date: inputDate.value,
     category: selectCategory.value,
+    bgCategory: setCategoryBackgroundColor(selectCategory.value),
     board: 'todo',
   };
 
   checkInputs(newTask);
+}
+
+function setCategoryBackgroundColor(category) {
+  if (category == 'User Story') {
+    return '#0038FF';
+  } else if (category == 'Technical Task') {
+    return '#1FD7C1';
+  }
 }
 
 function checkInputs(taskObj) {
@@ -44,7 +55,7 @@ function checkInputs(taskObj) {
   } else {
     console.log('create new task: ', taskObj);
     saveTaskToFirebase(taskObj);
-    clearInputs();
+    closeAddTaskModal();
     showInfoToast('Task added to board');
   }
 }

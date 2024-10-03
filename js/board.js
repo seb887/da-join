@@ -115,7 +115,7 @@ function createCardHTML(element) {
       ondragstart="drag(event)"
     >
         <div class="card-label-container">
-            <div class="card-label">${element.data.category}</div>
+            <div class="card-label" style="background-color: ${element.data.bgCategory}">${element.data.category}</div>
         </div>
         <div class="card-title">${element.data.title}</div>
         <div class="card-description">${element.data.description}</div>
@@ -198,7 +198,7 @@ function createTaskModalHTML(element) {
       onclick="event.stopPropagation()"
     >
       <div class="task-modal-card-header-container">
-        <div class="task-modal-card-category">${element.data.category}</div>
+        <div class="task-modal-card-category" style="background-color: ${element.data.bgCategory}">${element.data.category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"

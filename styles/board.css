@@ -173,7 +173,8 @@
   padding: 4px 16px;
   width: auto;
   border-radius: 8px;
-  background-color: aquamarine;
+  color: white;
+  background-color: red;
 }
 
 .card-title {
