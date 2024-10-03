@@ -5,6 +5,7 @@ let animationActive = false;
 
 function init() {
     renderContacts();
+    setActiveUserInitials();
 }
 
 
@@ -230,6 +231,15 @@ function showInfoToast(text) {
     setTimeout(() => {
         toast.classList.remove("show");
     }, 1500);
+}
+
+
+async function setActiveUserInitials() {
+    let response =  await fetch('https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users/activeUser.json')
+    let user = await response.json();
+    let activeUserName = user.activeName
+    let initials = await generateInitials(activeUserName);
+    document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
 }
 
 
