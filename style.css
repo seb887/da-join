@@ -95,6 +95,11 @@ h1 {
   border-radius: 100%;
 }
 
+.user-initials:hover {
+  cursor: pointer;
+  background-color: #f6f7f8;
+}
+
 /*======================
        Sidebar
 =======================*/
