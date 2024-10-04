@@ -8,6 +8,10 @@ const kanbanListDone = document.getElementById('kanban-list-done');
 const taskModal = document.getElementById('task-modal');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
+const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
+const taskModalSubtasksList = document.getElementById(
+  'task-modal-card-subtasks-list'
+);
 
 // VARIABLES
 const tasks = [];
@@ -234,23 +238,10 @@ function createTaskModalHTML(element) {
           </div> -->
         </div>
       </div>
-      <div class="task-modal-card-subtasks">
+      <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
         Subtasks:
-        <div class="task-modal-card-subtasks-list">
-          <div class="task-modal-subtask-container">
-            <img
-              src="../assets/icons/checkbox-empty.svg"
-              alt="checkbox icon"
-            />
-            Implement Recipe Recommendation
-          </div>
-          <div class="task-modal-subtask-container">
-            <img
-              src="../assets/icons/checkbox-empty.svg"
-              alt="checkbox icon"
-            />
-            Implement Recipe Recommendation
-          </div>
+        <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
+        ${renderSubtasksOnTaskModal(element)}
         </div>
       </div>
       <div class="task-modal-card-buttons">
@@ -353,6 +344,25 @@ async function deleteTask(event) {
 
   closeTaskModal();
   renderBoard();
+}
+
+function renderSubtasksOnTaskModal(task) {
+  const subtasksArr = task.data.subtasks;
+  let subtasksHTML = '';
+
+  for (let i = 0; i < subtasksArr.length; i++) {
+    subtasksHTML += `
+    <div class="task-modal-subtask-container">
+      <img
+        src="../assets/icons/checkbox-empty.svg"
+        alt="checkbox icon"
+      />
+      ${subtasksArr[i]}
+    </div>
+  `;
+  }
+
+  return subtasksHTML;
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation

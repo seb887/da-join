@@ -122,24 +122,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 244px;
+  min-width: 270px;
 }
 
 .kanban-headline {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 20px;
   font-weight: 700;
-  width: 244px;
+  width: 270px;
 }
 
 .kanban-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
   padding-bottom: 26px;
   gap: 26px;
-  min-width: 244px;
+  min-width: 270px;
   height: calc(100vh - 96px - 209px - 25px - 16px);
   overflow-y: auto;
   border-radius: 10px;

@@ -48,6 +48,7 @@ function createNewTask() {
     bgCategory: setCategoryBackgroundColor(selectCategory.value),
     board: 'todo',
     prio: currentPrio,
+    subtasks: subtasks,
   };
 
   checkInputs(newTask);
@@ -71,6 +72,7 @@ function checkInputs(taskObj) {
   } else {
     console.log('create new task: ', taskObj);
     saveTaskToFirebase(taskObj);
+    subtasksList.innerHTML = '';
     closeAddTaskModal();
     showInfoToast('Task added to board');
   }
@@ -145,7 +147,22 @@ function cancelInputSubtask() {
   controlSubtaskIcons();
 }
 
-function submitInputSubtask() {}
+function submitInputSubtask() {
+  subtasks.push(inputSubtask.value);
+  inputSubtask.value = '';
+  controlSubtaskIcons();
+  renderSubtasks();
+
+  console.log(subtasks);
+}
+
+function renderSubtasks() {
+  subtasksList.innerHTML = '';
+
+  for (let element of subtasks) {
+    subtasksList.innerHTML += `<li class="subtask">${element}</li>`;
+  }
+}
 
 // TOAST INFO
 function showInfoToast(text) {
