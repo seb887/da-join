@@ -287,11 +287,11 @@ function drag(event) {
   currentDraggedElementId = event.target.id;
 }
 
-function drop(board) {
+async function drop(board) {
   for (let element of tasks) {
     if (currentDraggedElementId == element.id) {
       element.data.board = board;
-      updateTaskInFirebase(element.id, element.data);
+      await updateTaskInFirebase(element.id, element.data);
     }
   }
 
