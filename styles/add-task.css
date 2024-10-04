@@ -112,6 +112,23 @@
   box-shadow: 0 0 4px 0 #0000001a;
   font-size: 20px;
   font-weight: 400;
+  cursor: pointer;
+}
+
+#button-medium {
+  background-color: #ffa800;
+  color: white;
+}
+
+#button-medium-img {
+  width: 20px;
+  height: 7.5px;
+}
+
+#button-low-img,
+#button-urgent-img {
+  width: 20px;
+  height: 14.5px;
 }
 
 .add-task-input {

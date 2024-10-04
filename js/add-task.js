@@ -5,6 +5,12 @@ const inputDate = document.getElementById('input-date');
 const selectCategory = document.getElementById('select-category');
 const subtasksList = document.getElementById('subtasks-list');
 const inputSubtasks = document.getElementById('input-subtasks');
+const buttonLow = document.getElementById('button-low');
+const buttonMedium = document.getElementById('button-medium');
+const buttonUrgent = document.getElementById('button-urgent');
+const buttonLowImg = document.getElementById('button-low-img');
+const buttonMediumImg = document.getElementById('button-medium-img');
+const buttonUrgentImg = document.getElementById('button-urgent-img');
 
 // VARIABLES
 const BASE_URL =
@@ -13,6 +19,7 @@ const BASE_URL =
 // DEFAULTS
 let currentDate = new Date();
 inputDate.valueAsDate = currentDate;
+let currentPrio = 'medium';
 
 // FUNCTIONS
 async function saveTaskToFirebase(newTask) {
@@ -32,6 +39,7 @@ function createNewTask() {
     category: selectCategory.value,
     bgCategory: setCategoryBackgroundColor(selectCategory.value),
     board: 'todo',
+    prio: currentPrio,
   };
 
   checkInputs(newTask);
@@ -64,6 +72,51 @@ function clearInputs() {
   inputTitle.value = '';
   inputDescription.value = '';
   selectCategory.value = 'Select task category';
+}
+
+function setPrio(prio) {
+  if (prio == 'urgent') {
+    currentPrio = 'urgent';
+    controlPrioButtonStyle();
+  } else if (prio == 'medium') {
+    currentPrio = 'medium';
+    controlPrioButtonStyle();
+  } else if (prio == 'low') {
+    currentPrio = 'low';
+    controlPrioButtonStyle();
+  }
+}
+
+function controlPrioButtonStyle() {
+  if (currentPrio == 'urgent') {
+    buttonUrgent.style.background = '#ff3d00';
+    buttonUrgent.style.color = 'white';
+    buttonUrgentImg.src = '../assets/icons/prio-urgent-white.png';
+  } else {
+    buttonUrgent.style.background = 'white';
+    buttonUrgent.style.color = 'black';
+    buttonUrgentImg.src = '../assets/icons/prio-urgent.png';
+  }
+
+  if (currentPrio == 'medium') {
+    buttonMedium.style.background = '#FFA800';
+    buttonMedium.style.color = 'white';
+    buttonMediumImg.src = '../assets/icons/prio-medium-white.png';
+  } else {
+    buttonMedium.style.background = 'white';
+    buttonMedium.style.color = 'black';
+    buttonMediumImg.src = '../assets/icons/prio-medium.png';
+  }
+
+  if (currentPrio == 'low') {
+    buttonLow.style.background = '#7ae229';
+    buttonLow.style.color = 'white';
+    buttonLowImg.src = '../assets/icons/prio-low-white.png';
+  } else {
+    buttonLow.style.background = 'white';
+    buttonLow.style.color = 'black';
+    buttonLowImg.src = '../assets/icons/prio-low.png';
+  }
 }
 
 // TOAST INFO

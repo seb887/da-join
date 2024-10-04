@@ -118,14 +118,15 @@
       </header>
 
       <section class="add-task-content-section">
-        <form class="add-task-form">
+        <div class="add-task-form">
           <div class="left-container">
             <div class="form-container title-container">
-              <label
+              <div
                 for="title"
                 class="add-task-labels"
-                >Title<span class="required-marker">*</span></label
               >
+                Title<span class="required-marker">*</span>
+              </div>
               <input
                 type="text"
                 class="add-task-input-title"
@@ -135,11 +136,12 @@
               />
             </div>
             <div class="form-container description-container">
-              <label
+              <div
                 for="description"
                 class="add-task-labels"
-                >Description</label
               >
+                Description
+              </div>
               <textarea
                 type="text"
                 class="add-task-input-description"
@@ -150,11 +152,12 @@
               ></textarea>
             </div>
             <div class="form-container assigned-to-container">
-              <label
+              <div
                 for="assigned to"
                 class="add-task-labels"
-                >Assigned to</label
               >
+                Assigned to
+              </div>
               <select
                 type="text"
                 id="input-assigned-to"
@@ -178,11 +181,12 @@
           <div class="seperator"></div>
           <div class="right-container">
             <div class="form-container date-container">
-              <label
+              <div
                 for="date"
                 class="add-task-labels"
-                >Due date<span class="required-marker">*</span></label
               >
+                Due date<span class="required-marker">*</span>
+              </div>
               <input
                 type="date"
                 class="add-task-input-date"
@@ -192,42 +196,61 @@
             </div>
 
             <div class="form-container date-container">
-              <label
+              <div
                 for="prio"
                 class="add-task-labels"
-                >Prio</label
               >
+                Prio
+              </div>
               <div class="prio-buttons-container">
-                <button class="prio-buttons">
-                  Low
-                  <img
-                    src="../assets/icons/prio-low.png"
-                    alt="prio low icon"
-                  />
-                </button>
-                <button class="prio-buttons">
-                  Medium
-                  <img
-                    src="../assets/icons/prio-medium.png"
-                    alt="prio medium icon"
-                  />
-                </button>
-                <button class="prio-buttons">
+                <button
+                  class="prio-buttons"
+                  id="button-urgent"
+                  onclick="setPrio('urgent')"
+                >
                   Urgent
                   <img
                     src="../assets/icons/prio-urgent.png"
                     alt="prio urgent icon"
+                    id="button-urgent-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons"
+                  id="button-medium"
+                  onclick="setPrio('medium')"
+                >
+                  Medium
+                  <img
+                    src="../assets/icons/prio-medium-white.png"
+                    alt="prio medium icon"
+                    id="button-medium-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons"
+                  id="button-low"
+                  onclick="setPrio('low')"
+                >
+                  Low
+                  <img
+                    src="../assets/icons/prio-low.png"
+                    alt="prio low icon"
+                    id="button-low-img"
                   />
                 </button>
               </div>
             </div>
 
             <div class="form-container category-container">
-              <label
+              <div
                 for="category"
                 class="add-task-labels"
-                >Category<span class="required-marker">*</span></label
               >
+                Category<span class="required-marker">*</span>
+              </div>
               <select
                 type="text"
                 class="add-task-select"
@@ -248,11 +271,12 @@
             </div>
 
             <div class="form-container subtasks-container">
-              <label
+              <div
                 for="subtasks"
                 class="add-task-labels"
-                >Subtasks</label
               >
+                Subtasks
+              </div>
               <div class="add-task-input">
                 <input
                   type="subtasks"
@@ -272,7 +296,7 @@
               ></div>
             </div>
           </div>
-        </form>
+        </div>
         <div class="add-task-footer">
           <div>
             <span class="required-marker">*</span>This field is required

@@ -42,7 +42,7 @@ async function loadContactsFromFirebase() {
   } else {
     contacts.length = 0;
     pushDataFromFirebaseToArr(contactsFromFirebase, contacts);
-    console.log('contacts:', contacts);
+    // console.log('contacts:', contacts);
   }
 }
 
@@ -55,7 +55,7 @@ async function loadTasksFromFirebase() {
   } else {
     tasks.length = 0;
     pushDataFromFirebaseToArr(tasksDataFromFirebase, tasks);
-    console.log('tasks:', tasks);
+    // console.log('tasks:', tasks);
   }
 }
 
@@ -357,182 +357,7 @@ async function deleteTask(event) {
   render();
 }
 
-// function createAddTaskModalHTML() {
-//   return `
-//       <div class="add-task-modal-card" onclick="event.stopPropagation()">
-//         <header class="add-task-modal-header">
-//           <h1>Add Task</h1>
-//         </header>
-//         <form class="add-task-form">
-//           <div class="left-container">
-//             <div class="form-container title-container">
-//               <label for="title" class="add-task-labels"
-//                 >Title<span class="required-marker">*</span></label
-//               >
-//               <input
-//                 type="text"
-//                 class="add-task-input-title"
-//                 id="input-title"
-//                 name="title"
-//                 placeholder="Enter a title"
-//               />
-//             </div>
-//             <div class="form-container description-container">
-//               <label for="description" class="add-task-labels">Description</label>
-//               <textarea
-//                 type="text"
-//                 class="add-task-input-description"
-//                 id="input-description"
-//                 name="description"
-//                 rows="4"
-//                 placeholder="Enter a description"
-//               ></textarea>
-//             </div>
-//             <div class="form-container assigned-to-container">
-//               <label for="assigned to" class="add-task-labels">Assigned to</label>
-//               <select
-//                 type="text"
-//                 id="input-assigned-to"
-//                 class="add-task-select"
-//                 name="assigned to"
-//               >
-//                 <option
-//                   value="No selection"
-//                   disabled
-//                   selected
-//                   hidden
-//                 >
-//                   Select contacts to assign
-//                 </option>
-//                 <option value="Jim Panse">Jim Panse</option>
-//                 <option value="Anne Theke">Anne Theke</option>
-//                 <option value="Kara Mell">Kara Mell</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div class="seperator"></div>
-//           <div class="right-container">
-//             <div class="form-container date-container">
-//               <label for="date" class="add-task-labels"
-//                 >Due date<span class="required-marker">*</span></label
-//               >
-//               <input
-//                 type="date"
-//                 class="add-task-input-date"
-//                 id="input-date"
-//                 name="date"
-//               />
-//             </div>
-
-//             <div class="form-container date-container">
-//               <label for="prio" class="add-task-labels">Prio</label>
-//               <div class="prio-buttons-container">
-//                 <button class="prio-buttons">
-//                   Low
-//                   <img
-//                     src="../assets/icons/prio-low.png"
-//                     alt="prio low icon"
-//                   />
-//                 </button>
-//                 <button class="prio-buttons">
-//                   Medium
-//                   <img
-//                     src="../assets/icons/prio-medium.png"
-//                     alt="prio medium icon"
-//                   />
-//                 </button>
-//                 <button class="prio-buttons">
-//                   Urgent
-//                   <img
-//                     src="../assets/icons/prio-urgent.png"
-//                     alt="prio urgent icon"
-//                   />
-//                 </button>
-//               </div>
-//             </div>
-
-//             <div class="form-container category-container">
-//               <label for="category" class="add-task-labels"
-//                 >Category<span class="required-marker">*</span></label
-//               >
-//               <select
-//                 type="text"
-//                 class="add-task-select"
-//                 id="select-category"
-//                 name="category"
-//               >
-//                 <option
-//                   value="Select task category"
-//                   disabled
-//                   selected
-//                   hidden
-//                 >
-//                   Select task category
-//                 </option>
-//                 <option value="User Story">User Story</option>
-//                 <option value="Technical Task">Technical Task</option>
-//               </select>
-//             </div>
-
-//             <div class="form-container subtasks-container">
-//               <label for="subtasks" class="add-task-labels">Subtasks</label>
-//               <div class="add-task-input">
-//                 <input
-//                   type="subtasks"
-//                   name="subtasks"
-//                   placeholder="Add new subtask"
-//                   class="add-task-input-subtasks"
-//                   id="input-subtasks"
-//                 />
-//                 <img
-//                   src="../assets/icons/add-subtasks.png"
-//                   alt=""
-//                 />
-//               </div>
-//               <div
-//                 class="subtasks-list"
-//                 id="subtasks-list"
-//               ></div>
-//             </div>
-//           </div>
-//         </form>
-//         <div class="add-task-modal-footer">
-//           <div>
-//             <span class="required-marker">*</span>This field is required
-//           </div>
-//           <div class="add-task-buttons-container">
-//             <button
-//               class="add-task-cancel-button"
-//               onclick="closeAddTaskModal()"
-//             >
-//               Cancel
-//             </button>
-//             <button
-//               class="add-task-submit-button"
-//               onclick="createNewTask()"
-//             >
-//               Create Task
-//             </button>
-//           </div>
-//         </div>
-
-//         <div
-//           id="info-toast"
-//           class="hidden"
-//         >
-//           <p id="infoText"></p>
-//           <img
-//             src="../assets/icons/board.png"
-//             width="30px"
-//             height="30px"
-//             alt="task icon"
-//           />
-//         </div>
-//       </div>
-//   `;
-// }
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
-
 function showInfoToast(text) {
   event.preventDefault();
   const toast = document.getElementById('info-toast');
