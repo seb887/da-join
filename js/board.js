@@ -133,8 +133,9 @@ function createCardHTML(element) {
             </div>
             <div class="task-prio">
             <img
-                src="../assets/icons/prio-medium.png"
+                src="../assets/icons/prio-${element.data.prio}.png"
                 alt="prio icon"
+                id="button-${element.data.prio}-img"
             />
             </div>
         </div>
@@ -198,7 +199,9 @@ function createTaskModalHTML(element) {
       onclick="event.stopPropagation()"
     >
       <div class="task-modal-card-header-container">
-        <div class="task-modal-card-category" style="background-color: ${element.data.bgCategory}">${element.data.category}</div>
+        <div class="task-modal-card-category" style="background-color: ${
+          element.data.bgCategory
+        }">${element.data.category}</div>
         <img
           src="../assets/icons/cancel.png"
           alt="cancel icon"
@@ -215,9 +218,11 @@ function createTaskModalHTML(element) {
       </div>
       <div class="task-modal-card-prio">
         <div class="task-modal-card-key">Priority:</div>
-        <span class="task-modal-card-prio-content">Urgent</span>
+        <span class="task-modal-card-prio-content">${capitalizeFirstLetter(
+          element.data.prio
+        )}</span>
         <img
-          src="../assets/icons/prio-urgent.png"
+          src="../assets/icons/prio-${element.data.prio}.png"
           alt="prio icon"
         />
       </div>
@@ -278,6 +283,10 @@ function createTaskModalHTML(element) {
       </div>
     </div>
   `;
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // DRAG AND DROP
