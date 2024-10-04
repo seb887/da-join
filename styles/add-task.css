@@ -72,7 +72,6 @@
   flex-direction: column;
   gap: 24px;
   width: 440px;
-  height: 376px;
 }
 
 .seperator {
@@ -86,7 +85,6 @@
   flex-direction: column;
   gap: 24px;
   width: 440px;
-  height: 416px;
 }
 
 .required-marker {
@@ -150,6 +148,30 @@
 
 .add-task-input img {
   cursor: pointer;
+}
+
+#add-subtask-img {
+  display: flex;
+  width: 14px;
+  height: 14px;
+}
+
+#submit-subtask-img {
+  display: none;
+  width: 14px;
+  height: 14px;
+}
+
+#cancel-subtask-img {
+  display: none;
+  width: 14px;
+  height: 14px;
+}
+
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .add-task-footer {

@@ -4,7 +4,10 @@ const inputDescription = document.getElementById('input-description');
 const inputDate = document.getElementById('input-date');
 const selectCategory = document.getElementById('select-category');
 const subtasksList = document.getElementById('subtasks-list');
-const inputSubtasks = document.getElementById('input-subtasks');
+const addSubtasksImg = document.getElementById('add-subtask-img');
+const submitSubtasksImg = document.getElementById('submit-subtask-img');
+const cancelSubtasksImg = document.getElementById('cancel-subtask-img');
+const inputSubtask = document.getElementById('input-subtask');
 const buttonLow = document.getElementById('button-low');
 const buttonMedium = document.getElementById('button-medium');
 const buttonUrgent = document.getElementById('button-urgent');
@@ -22,13 +25,17 @@ inputDate.valueAsDate = currentDate;
 let currentPrio = 'medium';
 
 // FUNCTIONS
+async function renderAddTask() {
+  clearInputs();
+}
+
 async function saveTaskToFirebase(newTask) {
   await fetch(BASE_URL + 'tasks' + '.json', {
     method: 'POST',
     body: JSON.stringify(newTask),
   });
 
-  render();
+  renderBoard();
 }
 
 function createNewTask() {
@@ -72,6 +79,7 @@ function clearInputs() {
   inputTitle.value = '';
   inputDescription.value = '';
   selectCategory.value = 'Select task category';
+  inputSubtask.value = '';
 }
 
 function setPrio(prio) {
@@ -119,6 +127,23 @@ function controlPrioButtonStyle() {
   }
 }
 
+function controlSubtaskIcons() {
+  if (inputSubtask.value.length > 0) {
+    addSubtasksImg.style.display = 'none';
+    submitSubtasksImg.style.display = 'flex';
+    cancelSubtasksImg.style.display = 'flex';
+  } else {
+    addSubtasksImg.style.display = 'flex';
+    submitSubtasksImg.style.display = 'none';
+    cancelSubtasksImg.style.display = 'none';
+  }
+}
+
+function cancelInputSubtask() {
+  inputSubtask.value = '';
+  controlSubtaskIcons();
+}
+
 // TOAST INFO
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
@@ -129,3 +154,5 @@ function showInfoToast(text) {
     toast.classList.remove('show');
   }, 1500);
 }
+
+renderAddTask();

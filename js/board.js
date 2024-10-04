@@ -8,28 +8,17 @@ const kanbanListDone = document.getElementById('kanban-list-done');
 const taskModal = document.getElementById('task-modal');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
-// const clearInputBtn = document.getElementById('search-clear-btn');
-// const inputTitle = document.getElementById('input-title');
-// const inputDescription = document.getElementById('input-description');
-// const inputDate = document.getElementById('input-date');
-// const selectCategory = document.getElementById('select-category');
 
 // VARIABLES
-// const BASE_URL =
-//   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 const tasks = [];
 const contacts = [];
 let currentDraggedElementId = '';
 
-// DEFAULTS
-// let currentDate = new Date();
-// inputDate.valueAsDate = currentDate;
-
 // FUNCTIONS
-
-async function render() {
+async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
+  clearInputs();
   searchInput.value = '';
 }
 
@@ -306,7 +295,7 @@ function drop(board) {
     }
   }
 
-  render();
+  renderBoard();
 }
 
 async function updateTaskInFirebase(taskId, updatedTask) {
@@ -363,7 +352,7 @@ async function deleteTask(event) {
   });
 
   closeTaskModal();
-  render();
+  renderBoard();
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
@@ -378,4 +367,4 @@ function showInfoToast(text) {
   }, 1500);
 }
 
-render();
+renderBoard();

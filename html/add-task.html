@@ -283,17 +283,33 @@
                   name="subtasks"
                   placeholder="Add new subtask"
                   class="add-task-input-subtasks"
-                  id="input-subtasks"
+                  id="input-subtask"
+                  oninput="controlSubtaskIcons()"
                 />
                 <img
-                  src="../assets/icons/add-subtasks.png"
-                  alt=""
+                  src="../assets/icons/add-subtask.png"
+                  alt="add subtask icon"
+                  id="add-subtask-img"
+                />
+                <img
+                  src="../assets/icons/submit-subtask.png"
+                  alt="submit subtask icon"
+                  id="submit-subtask-img"
+                />
+                <img
+                  src="../assets/icons/cancel-subtask.png"
+                  alt="plus icon"
+                  id="cancel-subtask-img"
+                  onclick="cancelInputSubtask()"
                 />
               </div>
-              <div
+              <ul
                 class="subtasks-list"
                 id="subtasks-list"
-              ></div>
+              >
+                <li class="subtask">This is a subtask</li>
+                <li class="subtask">This is a subtask</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -333,5 +349,6 @@
     </main>
 
     <script src="../js/add-task.js"></script>
+    <script src="../js/board.js"></script>
   </body>
 </html>
