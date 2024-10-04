@@ -18,6 +18,7 @@ const buttonUrgentImg = document.getElementById('button-urgent-img');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
+const subtasks = [];
 
 // DEFAULTS
 let currentDate = new Date();
@@ -143,6 +144,8 @@ function cancelInputSubtask() {
   inputSubtask.value = '';
   controlSubtaskIcons();
 }
+
+function submitInputSubtask() {}
 
 // TOAST INFO
 function showInfoToast(text) {

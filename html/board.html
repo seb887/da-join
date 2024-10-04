@@ -169,7 +169,7 @@
           <div
             class="kanban-list"
             id="kanban-list-todo"
-            ondrop="drop('todo')"
+            ondrop="drop('todo'); removeHighlight('kanban-list-todo')"
             ondragover="allowDrop(event); highlight('kanban-list-todo')"
             ondragleave="removeHighlight('kanban-list-todo')"
           ></div>
@@ -186,7 +186,7 @@
           <div
             class="kanban-list"
             id="kanban-list-in-progress"
-            ondrop="drop('in progress')"
+            ondrop="drop('in progress'); removeHighlight('kanban-list-in-progress')"
             ondragover="allowDrop(event); highlight('kanban-list-in-progress')"
             ondragleave="removeHighlight('kanban-list-in-progress')"
           ></div>
@@ -203,7 +203,7 @@
           <div
             class="kanban-list"
             id="kanban-list-await-feedback"
-            ondrop="drop('await feedback')"
+            ondrop="drop('await feedback'); removeHighlight('kanban-list-await-feedback')"
             ondragover="allowDrop(event); highlight('kanban-list-await-feedback')"
             ondragleave="removeHighlight('kanban-list-await-feedback')"
           ></div>
@@ -220,7 +220,7 @@
           <div
             class="kanban-list"
             id="kanban-list-done"
-            ondrop="drop('done')"
+            ondrop="drop('done'); removeHighlight('kanban-list-done')"
             ondragover="allowDrop(event); highlight('kanban-list-done')"
             ondragleave="removeHighlight('kanban-list-done')"
           ></div>
