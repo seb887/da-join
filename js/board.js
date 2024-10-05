@@ -99,43 +99,6 @@ function renderData(tasksArr, kanbanList) {
   }
 }
 
-function createCardHTML(element) {
-  return `
-    <div
-      class="kanban-card" id="${element.id}"
-      onclick="openTaskModal(event)"
-      draggable="true"
-      ondragstart="drag(event)"
-    >
-        <div class="card-label-container">
-            <div class="card-label" style="background-color: ${element.data.bgCategory}">${element.data.category}</div>
-        </div>
-        <div class="card-title">${element.data.title}</div>
-        <div class="card-description">${element.data.description}</div>
-        <div class="subtask-progress-bar-container">
-            <div class="subtask-progress-bar">
-                <div class="subtask-progress-bar-done"></div>
-            </div>
-            <div class="subtask-counter">1/2 Subtasks</div>
-        </div>
-        <div class="card-footer">
-            <div class="task-collaborators">
-            <div class="card-profile-badge-1">AB</div>
-            <div class="card-profile-badge-2">BC</div>
-            <div class="card-profile-badge-3">CD</div>
-            </div>
-            <div class="task-prio">
-            <img
-                src="../assets/icons/prio-${element.data.prio}.png"
-                alt="prio icon"
-                id="button-${element.data.prio}-img"
-            />
-            </div>
-        </div>
-    </div>
-    `;
-}
-
 function clearKanbanLists() {
   kanbanListTodo.innerHTML = '';
   kanbanListInProgress.innerHTML = '';
@@ -182,6 +145,40 @@ function openAddTaskModal() {
 function closeAddTaskModal() {
   addTaskModal.style.display = 'none';
   clearInputs();
+}
+
+function createCardHTML(element) {
+  return `
+    <div
+      class="kanban-card" id="${element.id}"
+      onclick="openTaskModal(event)"
+      draggable="true"
+      ondragstart="drag(event)"
+    >
+        <div class="card-label-container">
+            <div class="card-label" style="background-color: ${
+              element.data.bgCategory
+            }">${element.data.category}</div>
+        </div>
+        <div class="card-title">${element.data.title}</div>
+        <div class="card-description">${element.data.description}</div>
+        ${checkTaskSubtasks(element)}
+        <div class="card-footer">
+            <div class="task-collaborators">
+            <div class="card-profile-badge-1">AB</div>
+            <div class="card-profile-badge-2">BC</div>
+            <div class="card-profile-badge-3">CD</div>
+            </div>
+            <div class="task-prio">
+            <img
+                src="../assets/icons/prio-${element.data.prio}.png"
+                alt="prio icon"
+                id="button-${element.data.prio}-img"
+            />
+            </div>
+        </div>
+    </div>
+    `;
 }
 
 function createTaskModalHTML(element) {
@@ -238,12 +235,7 @@ function createTaskModalHTML(element) {
           </div> -->
         </div>
       </div>
-      <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
-        Subtasks:
-        <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
-        ${renderSubtasksOnTaskModal(element)}
-        </div>
-      </div>
+      ${checkTaskModalSubtasks(element)}
       <div class="task-modal-card-buttons">
         <button id="${element.id}" onclick="deleteTask(event)">
           <img
@@ -263,6 +255,34 @@ function createTaskModalHTML(element) {
       </div>
     </div>
   `;
+}
+
+function checkTaskModalSubtasks(task) {
+  if (task.data.subtasks && task.data.subtasks.length > 0) {
+    return `
+    <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
+      Subtasks:
+      <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
+        ${renderSubtasksOnTaskModal(task)}
+      </div>
+  </div>`;
+  } else {
+    return '';
+  }
+}
+
+function checkTaskSubtasks(task) {
+  if (task.data.subtasks && task.data.subtasks.length > 0) {
+    return `
+    <div class="subtask-progress-bar-container">
+      <div class="subtask-progress-bar">
+          <div class="subtask-progress-bar-done"></div>
+      </div>
+      <div class="subtask-counter">1/2 Subtasks</div>
+    </div>`;
+  } else {
+    return '';
+  }
 }
 
 function capitalizeFirstLetter(string) {
@@ -352,16 +372,15 @@ function renderSubtasksOnTaskModal(task) {
 
   for (let i = 0; i < subtasksArr.length; i++) {
     subtasksHTML += `
-    <div class="task-modal-subtask-container">
-      <img
-        src="../assets/icons/checkbox-empty.svg"
-        alt="checkbox icon"
-      />
-      ${subtasksArr[i]}
-    </div>
-  `;
+      <div class="task-modal-subtask-container">
+        <img
+          src="../assets/icons/checkbox-empty.svg"
+          alt="checkbox icon"
+        />
+        ${subtasksArr[i]}
+      </div>
+    `;
   }
-
   return subtasksHTML;
 }
 
