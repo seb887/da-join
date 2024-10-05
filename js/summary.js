@@ -1,25 +1,9 @@
 const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 function initSummary() {
-    getActiveUser();
     greeting();
     setActiveUserInitials();
-}
-
-async function getActiveUser() {
-    let response = await fetch(BASE_URL + '/activeUser.json');
-    let activeUser = await response.json();
-    if (activeUser) {
-        document.getElementById('name').innerHTML = activeUser.activeName;
-        return activeUser;
-    }
-}
-
-async function deleteActiveUser() {
-    response =  await fetch(BASE_URL + '/activeUser.json', {
-        method: "DELETE",
-    });
-    window.location.href= "login.html";
+    document.getElementById('name').innerHTML = activeUser.name;
 }
   
 function greeting() {
@@ -34,8 +18,4 @@ function greeting() {
         greet = 'Good Evening,';
     }
     document.getElementById('time-of-the-day').innerHTML = greet;
-}
-
-function createLogOutDiv() {
-
 }

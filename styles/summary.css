@@ -204,3 +204,6 @@ body {
     }
 }
 
+.show {
+    visibility: visible;
+}
