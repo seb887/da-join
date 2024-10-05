@@ -23,6 +23,13 @@ async function setActiveUserInitials() {
     document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
 }
 
+async function deleteActiveUser() {
+    response =  await fetch(BASE_URL + '/activeUser.json', {
+        method: "DELETE",
+    });
+    window.location.href= "login.html";
+}
+
 function generateInitials (name){
     let words = name.split(' ');
     let firstInitial = words[0].charAt(0).toUpperCase();
@@ -48,5 +55,5 @@ function greeting() {
 }
 
 function createLogOutDiv() {
-    
+
 }
