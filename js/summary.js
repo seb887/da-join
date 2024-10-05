@@ -1,12 +1,12 @@
 const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/tasks';
 
+const monthString = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
 
 function initSummary() {
     greeting();
     setActiveUserInitials();
-<<<<<<< HEAD
-    setSummaries()
+    setSummaries();
 }
 
 async function getActiveUser() {
@@ -23,9 +23,6 @@ async function deleteActiveUser() {
         method: "DELETE",
     });
     window.location.href= "login.html";
-=======
-    document.getElementById('name').innerHTML = activeUser.name;
->>>>>>> f3aab704a5175e02fae692abe38d5ab6dec24b3b
 }
   
 function greeting() {
@@ -41,7 +38,6 @@ function greeting() {
     }
     document.getElementById('time-of-the-day').innerHTML = greet;
 }
-<<<<<<< HEAD
 
 function createLogOutDiv() {
 
@@ -131,6 +127,23 @@ async function setAwaitingFeedbackNumber() {
 }
 
 
+async function setDeadlineDate() {
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let deadlines = [];
+    allTasksAsObject.forEach((task) =>{
+        let date = new Date(task[1]['date']).getTime()
+        deadlines.push(date);
+    })
+    let upcomingDeadline = Math.min(...deadlines);
+    let day = new Date(upcomingDeadline).getDate();
+    let month = new Date(upcomingDeadline).getMonth();
+    let year = new Date (upcomingDeadline).getFullYear();
+    let date = day + ' ' + monthString[month] + ', ' + year
+    document.getElementById('deadline').innerText = date;
+}
+
+
 function setSummaries(){
     setToDoANumber();
     setDoneNumber();
@@ -138,6 +151,5 @@ function setSummaries(){
     setTasksinBoardNumber();
     setTasksInProgressNumber();
     setAwaitingFeedbackNumber();
+    setDeadlineDate();
 }
-=======
->>>>>>> f3aab704a5175e02fae692abe38d5ab6dec24b3b
