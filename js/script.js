@@ -21,3 +21,7 @@ function generateInitials (name){
     }
     return firstInitial + lastInitial;      
 }
+
+function showProfileDropDownMenu() {
+    const container = document.getElementById('dropdown-profile').classList.toggle('show')
+}
