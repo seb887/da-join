@@ -1,9 +1,12 @@
 const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
+const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/tasks';
+
 
 function initSummary() {
     getActiveUser();
     greeting();
     setActiveUserInitials();
+    setSummaries()
 }
 
 async function getActiveUser() {
@@ -38,4 +41,97 @@ function greeting() {
 
 function createLogOutDiv() {
 
+}
+
+
+async function getTasks() {
+    let response = await fetch(TASKS_URL + '.json');
+    let allTasks = await response.json();
+    return allTasks;
+}
+
+
+async function setToDoANumber() { 
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let toDoAmount = [0];
+    allTasksAsObject.forEach((entry) =>{
+        if (entry[1]['board'] == 'todo'){
+            toDoAmount++;
+        }
+    })
+    document.getElementById('to-do-tasks').innerText = toDoAmount;
+}
+
+
+async function setDoneNumber() { 
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let doneAmount = [0];
+    allTasksAsObject.forEach((entry) =>{
+        if (entry[1]['board'] == 'done'){
+            doneAmount++;
+        }
+    })
+    document.getElementById('done-tasks').innerText = doneAmount;
+}
+
+
+async function setUrgentNumber() { 
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let urgentAmount = [0];
+    allTasksAsObject.forEach((entry) =>{
+        if (entry[1]['prio'] == 'urgent'){
+            urgentAmount++;
+        }
+    })
+    document.getElementById('urgent-tasks').innerText = urgentAmount;
+}
+
+
+async function setTasksinBoardNumber() {
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let tasksInBoard = [0];
+    allTasksAsObject.forEach((entry) =>{
+        tasksInBoard++;
+    })
+    document.getElementById('tasks-in-board').innerText = tasksInBoard;
+}
+
+
+async function setTasksInProgressNumber() {
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let tasksInProgress = [0];
+    allTasksAsObject.forEach((task) => {
+        if (task[1]['board'] == 'in progress'){
+            tasksInProgress++;
+        }
+    })
+    document.getElementById('tasks-in-progress').innerText = tasksInProgress;
+}
+
+
+async function setAwaitingFeedbackNumber() {
+    let tasks = await getTasks();
+    const allTasksAsObject = Object.entries(await tasks);
+    let awaitingFeedback = [0];
+    allTasksAsObject.forEach((task) => {
+        if (task[1]['board'] == 'await feedback'){
+            awaitingFeedback++;
+        }
+    })
+    document.getElementById('awaiting-feedback').innerText = awaitingFeedback;
+}
+
+
+function setSummaries(){
+    setToDoANumber();
+    setDoneNumber();
+    setUrgentNumber();
+    setTasksinBoardNumber();
+    setTasksInProgressNumber();
+    setAwaitingFeedbackNumber();
 }
