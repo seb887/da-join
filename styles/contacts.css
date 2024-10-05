@@ -45,7 +45,7 @@ body {
     border: none;
     background-color: #2a3647;
     padding: 12px 0px 12px 0px;
-    transition: 150ms;
+    transition: 125ms;
     img {
       height: 32px;
       width: 32px;
@@ -434,7 +434,7 @@ article {
     height: 56px;
     padding: 16px;
     font-size: 20px;
-    transition: 150ms ease-in-out;
+    transition: 125ms ease-in-out;
   }
   button:nth-child(1){
     width: 126px;
@@ -533,6 +533,36 @@ article {
   opacity: 1;
   transform: translateX(-200%);
 }
+
+
+.profile-dropdown{
+  display: flex;
+  visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  a{
+    display: flex;
+    padding: 16px 8px;
+    color: #CDCDCD;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  a:hover{
+    background-color: #3b4b63;
+  }
+  top: 96px;
+  right: 16px;
+  background-color: #2a3647;
+  width: 150px;
+  height: 158px;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.show{
+  visibility: visible;
+}
+
 
 
 @keyframes slideInAddContact {
