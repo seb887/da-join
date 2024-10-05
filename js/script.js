@@ -2,15 +2,20 @@ function init() {
     setActiveUserInitials();
 }
 
-
-async function setActiveUserInitials() {
-    let response =  await fetch('https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users/activeUser.json')
-    let user = await response.json();
-    let activeUserName = user.activeName
-    let initials = await generateInitials(activeUserName);
-    document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
+function saveActiveUserToLocalStorage(user) {
+    localStorage.setItem('activeUser', JSON.stringify(user));
 }
 
+let activeUser = JSON.parse(localStorage.getItem('activeUser'));
+
+function setActiveUserInitials() {
+    if (activeUser) {
+        let initials = generateInitials(activeUser.name);
+        document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
+    } else {
+        document.getElementById('user-initials').innerHTML = `<p>G</p>`
+    }
+}
 
 function generateInitials (name){
     let words = name.split(' ');

@@ -29,21 +29,13 @@ async function logIn() {
     let password = document.getElementById('current-password').value;
     let response = await fetch(BASE_URL + ".json");
     let users = await response.json();
-    let activeUser = null;
     for (let key in users) {
         if (users[key].email === email && users[key].password === password) {
-            activeUser = {
-                activeName: users[key].name,
-                activeEmail: users[key].email,
-            };
             document.getElementById('login-error').innerHTML = '';
+            saveActiveUserToLocalStorage(users[key]);
+            window.location.href = 'summary.html';
             break;
-        }
-    }
-    if (activeUser) {
-        await setActiveUser(activeUser);
-        window.location.href = 'summary.html';
-    } else {
+    } else
         document.getElementById('login-error').innerHTML = 'Wrong E-Mail or Password';
     }
 }
@@ -112,27 +104,6 @@ async function postUser() {
         })
     });
     return responseToJson = await response.json();
-}
-
-async function setActiveUser(user) {
-    await fetch(BASE_URL + '/activeUser.json', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user)
-    });
-}
-
-async function getActiveUser() {
-    let response = await fetch(BASE_URL + '/activeUser.json');
-    let activeUser = await response.json();
-    if (activeUser) {
-        return activeUser;
-    } else {
-        console.log("Kein Benutzer eingeloggt");
-        return null;
-    }
 }
 
 function playSignedUpAnimation() {
