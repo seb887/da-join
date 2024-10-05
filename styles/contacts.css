@@ -534,36 +534,9 @@ article {
   transform: translateX(-200%);
 }
 
-
-.profile-dropdown{
-  display: flex;
-  visibility: hidden;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  a{
-    display: flex;
-    padding: 16px 8px;
-    color: #CDCDCD;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  a:hover{
-    background-color: #3b4b63;
-  }
-  top: 96px;
-  right: 16px;
-  background-color: #2a3647;
-  width: 150px;
-  height: 158px;
-  border-radius: 20px 0px 20px 20px;
-}
-
-.show{
+.show {
   visibility: visible;
 }
-
-
 
 @keyframes slideInAddContact {
   0%{
