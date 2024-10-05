@@ -87,6 +87,7 @@ h1 {
   font-size: 22px;
   font-weight: 700;
   display: flex;
+  user-select: none;
   justify-content: center;
   align-items: center;
   width: 56px;

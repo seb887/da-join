@@ -243,6 +243,11 @@ async function setActiveUserInitials() {
 }
 
 
+function showProfileDropDownMenu(){
+    const container = document.getElementById('dropdownProfile').classList.toggle('show')
+}
+
+
 function contactContent(index) {
     return `
         <div onclick ="openContact('${index}')" class="single-contact">
