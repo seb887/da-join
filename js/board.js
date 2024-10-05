@@ -160,8 +160,10 @@ function createCardHTML(element) {
               element.data.bgCategory
             }">${element.data.category}</div>
         </div>
-        <div class="card-title">${element.data.title}</div>
-        <div class="card-description">${element.data.description}</div>
+        <div class="task-modal-card-title-container">
+          <div class="card-title">${element.data.title}</div>
+          <div class="card-description">${element.data.description}</div>
+        </div>
         ${checkTaskSubtasks(element)}
         <div class="card-footer">
             <div class="task-collaborators">
@@ -274,12 +276,13 @@ function checkTaskModalSubtasks(task) {
 function checkTaskSubtasks(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
-    <div class="subtask-progress-bar-container">
-      <div class="subtask-progress-bar">
-          <div class="subtask-progress-bar-done"></div>
+      <div class="subtask-progress-bar-container">
+        <div class="subtask-progress-bar">
+            <div class="subtask-progress-bar-done"></div>
+        </div>
+        <div class="subtask-counter">1/2 Subtasks</div>
       </div>
-      <div class="subtask-counter">1/2 Subtasks</div>
-    </div>`;
+    `;
   } else {
     return '';
   }

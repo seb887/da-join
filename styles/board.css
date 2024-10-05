@@ -154,7 +154,7 @@
 .kanban-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
   padding: 16px;
   width: 252px;
   border-radius: 10px;
@@ -179,6 +179,12 @@
   background-color: red;
 }
 
+.task-modal-card-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .card-title {
   font-weight: 700;
 }
@@ -191,11 +197,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 16px 0;
-  height: 16px;
 }
 
 .subtask-progress-bar {
+  /* padding: 16px 0; */
   border-radius: 8px;
   width: 128px;
   height: 8px;
