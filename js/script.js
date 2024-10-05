@@ -23,5 +23,5 @@ function generateInitials (name){
 }
 
 function showProfileDropDownMenu() {
-    const container = document.getElementById('dropdown-profile').classList.toggle('show')
+    document.getElementById('dropdown-profile').classList.toggle('show');
 }
