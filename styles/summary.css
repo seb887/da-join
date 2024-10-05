@@ -204,4 +204,35 @@ body {
     }
 }
 
+.user-interface {
+    margin-top: 150px;
+    background-color: #2A3647;
+
+    font-size: 16px;
+    width: 150px;
+    height: 158px;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.ui-buttons {
+    text-decoration: none;
+    color: #CDCDCD;
+    border-radius: 8px;
+    width: 130px;
+    height: 46px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: ease-in-out 115ms;
+}
+
+.ui-buttons:hover {
+    cursor: pointer;
+    background-color: #2A3D59;
+}
 
