@@ -3,9 +3,9 @@ const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatab
 
 
 function initSummary() {
-    getActiveUser();
     greeting();
     setActiveUserInitials();
+<<<<<<< HEAD
     setSummaries()
 }
 
@@ -23,6 +23,9 @@ async function deleteActiveUser() {
         method: "DELETE",
     });
     window.location.href= "login.html";
+=======
+    document.getElementById('name').innerHTML = activeUser.name;
+>>>>>>> f3aab704a5175e02fae692abe38d5ab6dec24b3b
 }
   
 function greeting() {
@@ -38,6 +41,7 @@ function greeting() {
     }
     document.getElementById('time-of-the-day').innerHTML = greet;
 }
+<<<<<<< HEAD
 
 function createLogOutDiv() {
 
@@ -135,3 +139,5 @@ function setSummaries(){
     setTasksInProgressNumber();
     setAwaitingFeedbackNumber();
 }
+=======
+>>>>>>> f3aab704a5175e02fae692abe38d5ab6dec24b3b

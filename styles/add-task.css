@@ -246,3 +246,8 @@
   opacity: 1;
   transform: translateY(-550%);
 }
+
+.show {
+  visibility: visible;
+}
+
