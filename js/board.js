@@ -23,6 +23,7 @@ async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   clearInputs();
+  
   searchInput.value = '';
 }
 
