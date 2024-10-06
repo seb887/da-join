@@ -1,4 +1,3 @@
-
 // DOM ELEMENTS
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
@@ -20,7 +19,8 @@ const inputAssignedTo = document.getElementById('input-assigned-to');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
-CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
+CONTACT_URL =
+  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 const subtasks = [];
 
 // DEFAULTS
@@ -152,12 +152,7 @@ function cancelInputSubtask() {
 }
 
 function submitInputSubtask() {
-  let subtaskObj = {
-    name: inputSubtask.value,
-    checked: false,
-  };
-
-  subtasks.push(subtaskObj);
+  subtasks.push(inputSubtask.value);
   inputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasks();
@@ -169,7 +164,7 @@ function renderSubtasks() {
   subtasksList.innerHTML = '';
 
   for (let element of subtasks) {
-    subtasksList.innerHTML += `<li class="subtask">${element.name}</li>`;
+    subtasksList.innerHTML += `<li class="subtask">${element}</li>`;
   }
 }
 
@@ -191,15 +186,14 @@ async function getContacts() {
   return contacts;
 }
 
-
-async function listContactsToAssignedTo(){
+async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += `
       <option value = ${id[index]}>${contact['name']}</option>
-    `
-  })
+    `;
+  });
 }
 
 renderAddTask();
