@@ -148,7 +148,12 @@ function cancelInputSubtask() {
 }
 
 function submitInputSubtask() {
-  subtasks.push(inputSubtask.value);
+  let subtaskObj = {
+    name: inputSubtask.value,
+    checked: false,
+  };
+
+  subtasks.push(subtaskObj);
   inputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasks();
@@ -160,7 +165,7 @@ function renderSubtasks() {
   subtasksList.innerHTML = '';
 
   for (let element of subtasks) {
-    subtasksList.innerHTML += `<li class="subtask">${element}</li>`;
+    subtasksList.innerHTML += `<li class="subtask">${element.name}</li>`;
   }
 }
 

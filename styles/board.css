@@ -209,7 +209,7 @@
 
 .subtask-progress-bar-done {
   border-radius: 8px;
-  width: 64px;
+  /* width: 64px; */
   height: 8px;
   background-color: #4589ff;
 }

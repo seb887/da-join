@@ -225,16 +225,10 @@ function createTaskModalHTML(element) {
             <div class="task-modal-contact-profile-img">EM</div>
             <div class="task-modal-contact-name">Emmanuel Mauer</div>
           </div>
-
           <div class="task-modal-contact-container">
             <div class="task-modal-contact-profile-img">MB</div>
             <div class="task-modal-contact-name">Marcel Bauer</div>
           </div>
-
-          <!-- <div class="task-modal-contact-container">
-            <div class="task-modal-contact-profile-img"></div>
-            <div class="task-modal-contact-name">Anton Mayer</div>
-          </div> -->
         </div>
       </div>
       ${checkTaskModalSubtasks(element)}
@@ -259,6 +253,23 @@ function createTaskModalHTML(element) {
   `;
 }
 
+function checkTaskSubtasks(task) {
+  if (task.data.subtasks && task.data.subtasks.length > 0) {
+    return `
+      <div class="subtask-progress-bar-container">
+        <div class="subtask-progress-bar">
+            <div class="subtask-progress-bar-done" style="width: ${renderProgressBar(
+              task
+            )}px"></div>
+        </div>
+        <div class="subtask-counter">1/2 Subtasks</div>
+      </div>
+    `;
+  } else {
+    return '';
+  }
+}
+
 function checkTaskModalSubtasks(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
@@ -273,19 +284,38 @@ function checkTaskModalSubtasks(task) {
   }
 }
 
-function checkTaskSubtasks(task) {
-  if (task.data.subtasks && task.data.subtasks.length > 0) {
-    return `
-      <div class="subtask-progress-bar-container">
-        <div class="subtask-progress-bar">
-            <div class="subtask-progress-bar-done"></div>
-        </div>
-        <div class="subtask-counter">1/2 Subtasks</div>
+// TODO: replace "1" with checked subtasks length
+function renderProgressBar(task) {
+  const subtasks = task.data.subtasks;
+  let progressDone = (128 / subtasks.length) * 1;
+
+  return progressDone;
+}
+
+function renderSubtasksOnTaskModal(task) {
+  const subtasksArr = task.data.subtasks;
+  let subtasksHTML = '';
+
+  for (let i = 0; i < subtasksArr.length; i++) {
+    subtasksHTML += `
+      <div class="task-modal-subtask-container" id="subtask-${i}">
+        <img
+          src="../assets/icons/checkbox-empty.svg"
+          alt="checkbox icon"
+          onclick="setSubtaskChecked(${i})"
+        />
+        ${subtasksArr[i].name}
       </div>
     `;
-  } else {
-    return '';
   }
+  return subtasksHTML;
+}
+
+function setSubtaskChecked(id) {
+  // chance icon
+  // save subtask checked to tasks arr
+  // pushToFirebase
+  // renderBoard
 }
 
 function capitalizeFirstLetter(string) {
@@ -367,24 +397,6 @@ async function deleteTask(event) {
 
   closeTaskModal();
   renderBoard();
-}
-
-function renderSubtasksOnTaskModal(task) {
-  const subtasksArr = task.data.subtasks;
-  let subtasksHTML = '';
-
-  for (let i = 0; i < subtasksArr.length; i++) {
-    subtasksHTML += `
-      <div class="task-modal-subtask-container">
-        <img
-          src="../assets/icons/checkbox-empty.svg"
-          alt="checkbox icon"
-        />
-        ${subtasksArr[i]}
-      </div>
-    `;
-  }
-  return subtasksHTML;
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
