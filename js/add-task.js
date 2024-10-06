@@ -216,13 +216,14 @@ function inspectCheckboxes () {
 
 function dropDownContacts(){
   const contactList = document.getElementById('input-assigned-to');
-  console.log('fire');
-  
   if(contactList.style.display == 'flex'){
     contactList.style.display = 'none'
-  }
-  else{
+    document.getElementById('searchContact').placeholder = 'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-down.png"
+  }else{
     contactList.style.display = 'flex'
+    document.getElementById('searchContact').placeholder = '';
+    document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
   }
 }
 
