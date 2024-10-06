@@ -190,20 +190,14 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
-  inputAssignedTo.innerHTML += `
-      <option value = ""></option>
-    `
+ 
   allContacts.forEach((contact, index) => {
-    inputAssignedTo.innerHTML += `
-<<<<<<< HEAD
-      <option value = ${id[index]}><div>${contact['name']}</option>
+    inputAssignedTo.innerHTML += 
     `
+      <div></div>
+    `
+    // <option value = ${id[index]}><div>${contact['name']}</option>
   })
-=======
-      <option value = ${id[index]}>${contact['name']}</option>
-    `;
-  });
->>>>>>> 3a6cffff3c93c4c61fae4a2c1aa65efba01dd3e6
 }
 
 renderAddTask();

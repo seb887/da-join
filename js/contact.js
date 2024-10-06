@@ -1,6 +1,6 @@
 CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
 
-let contacts = [];
+let contactsArray = [];
 let animationActive = false;
 
 function initContacts() {
@@ -19,12 +19,12 @@ async function getContacts() {
 async function renderContacts(newContact) {
     let allContacts = Object.values(await getContacts());
     let id = Object.keys(await getContacts());
-    contacts = [];
+    contactsArray = [];
     allContacts.forEach((element, index) => {element.id = id[index]});
     allContacts.sort((a, b) => a.name.localeCompare(b.name));
     document.getElementById('contacts').innerHTML = addNewContactsContent();
     allContacts.forEach((contact, index) =>{
-        contacts.push(contact);
+        contactsArray.push(contact);
         checkForExistingLetter(contact, index);
         document.getElementById('contacts').innerHTML += contactContent(index); 
         setDataOfContact(contact, index);
@@ -37,7 +37,7 @@ function setDataOfContact(contact, index) {
     document.getElementById(`initials${index}`).innerText = generateInitials(contact.name);
     document.getElementById(`contactName${index}`).innerText = contact.name;
     document.getElementById(`contactMail${index}`).textContent = contact.email;
-    document.getElementById(`initialsContainer${index}`).style.backgroundColor = contacts[index].color;
+    document.getElementById(`initialsContainer${index}`).style.backgroundColor = contactsArray[index].color;
 }
 
 
@@ -63,7 +63,7 @@ function checkForExistingLetter(contact, index) {
 
 function openContact(index) {
     let container = document.getElementById('contactInformation');
-    if(document.getElementById('contactName').innerText == contacts[index].name){
+    if(document.getElementById('contactName').innerText == contactsArray[index].name){
         container.classList.toggle('contactFadeAndSlideIn');
     }else{
         container.classList.remove('contactFadeAndSlideIn');
@@ -76,12 +76,12 @@ function openContact(index) {
 
 
 async function setContactInformation(index) {
-    document.getElementById('bgInitials').style.backgroundColor = contacts[index].color;
-    document.getElementById('contactName').innerText = contacts[index].name
-    document.getElementById('mailAddress').innerText = contacts[index].email
-    document.getElementById('phoneNumber').innerText = contacts[index].phone
-    document.getElementById('initialsArticle').innerText = generateInitials(contacts[index].name) 
-    document.getElementById('delContact').onclick = () => {deleteContact(contacts[index].id)}
+    document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
+    document.getElementById('contactName').innerText = contactsArray[index].name
+    document.getElementById('mailAddress').innerText = contactsArray[index].email
+    document.getElementById('phoneNumber').innerText = contactsArray[index].phone
+    document.getElementById('initialsArticle').innerText = generateInitials(contactsArray[index].name) 
+    document.getElementById('delContact').onclick = () => {deleteContact(contactsArray[index].id)}
     document.getElementById('editContact').onclick = () => {editContact(index)}
     setSelectedContactBackground(index);   
 }
@@ -134,6 +134,7 @@ function checkIfAnimationActive() {
 
 async function createContact() {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(CONTACT_URL, {
         method: "POST",
         header: {
@@ -144,7 +145,8 @@ async function createContact() {
             "name" :  document.getElementById('inputContactName').value,
             "email" : document.getElementById('inputMailAddress').value,
             "phone" : document.getElementById('inputPhoneNumber').value,
-            "color" : randomColor
+            "color" : randomColor,
+            "initials": initials
         }) 
     })
     selectCreatedContact(document.getElementById('inputContactName').value);
@@ -156,7 +158,7 @@ async function selectCreatedContact(contactName){
     try {
        await renderContacts();
         closeAndClear();
-        const index = contacts.findIndex(contact => contact.name == contactName)
+        const index = contactsArray.findIndex(contact => contact.name == contactName)
         updateAndRenderContacts(index);
         openAndCloseAddContact();
     } catch (error) {
@@ -187,10 +189,10 @@ async function deleteContact(id) {
 
 async function editContact(index) {
     let content = document.getElementById('addContact');
-    let initials = generateInitials(contacts[index].name);
+    let initials = generateInitials(contactsArray[index].name);
     openAndCloseAddContact();
     content.innerHTML = '';
-    content.innerHTML = editContactCardContent(contacts[index],initials, index);
+    content.innerHTML = editContactCardContent(contactsArray[index],initials, index);
 }
 
 
@@ -215,7 +217,7 @@ async function saveChangesOnContact(id, index) {
 
 async function updateAndRenderContacts (index) {
     try {
-        await renderContacts(contacts[index].name);
+        await renderContacts(contactsArray[index].name);
         openContact(index)
         openAndCloseAddContact();
        } catch (error) {

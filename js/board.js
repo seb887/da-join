@@ -191,7 +191,7 @@ function renderSubtasks(task) {
         <img
           src="../assets/icons/checkbox-empty.svg"
           alt="checkbox icon"
-          onclick="setSubtaskChecked(${taskId})"
+          onclick="setSubtaskChecked('${taskId}')"
         />
         ${subtasksArr[i].name}
       </div>

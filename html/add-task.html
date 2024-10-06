@@ -180,7 +180,7 @@
               >
                 Assigned to
               </div>
-              <select
+              <!-- <select
                 type="text"
                 id="input-assigned-to"
                 class="add-task-select"
@@ -193,10 +193,14 @@
                   hidden
                 >
                   Select contacts to assign
-                </option>
+                </option> -->
                 <!-- <option value="Jim Panse">Jim Panse</option>
                 <option value="Anne Theke">Anne Theke</option>
                 <option value="Kara Mell">Kara Mell</option> -->
+                <div class="add-task-select">
+                    <div><input placeholder="Select contacts to assign" type="text"></div>
+                    <div id="input-assigned-to"></div>
+                </div>
               </select>
             </div>
           </div>
@@ -369,6 +373,7 @@
     </main>
 
     <script src="../js/add-task.js"></script>
+    <script src="../js/contact.js"></script>
     <script src="../js/board.js"></script>
     <script src="../js/create-HTML.js"></script>
     <script
