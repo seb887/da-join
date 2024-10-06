@@ -214,13 +214,30 @@ function inspectCheckboxes () {
 }
 
 
+function dropDownContacts(){
+  const contactList = document.getElementById('input-assigned-to');
+  console.log('fire');
+  
+  if(contactList.style.display == 'flex'){
+    contactList.style.display = 'none'
+  }
+  else{
+    contactList.style.display = 'flex'
+  }
+}
+
+
 function assignedToContactsContent(contact, id, index){
   return `
+  <label for ="${id[index]}cb">
       <div class ="add-task-contact-list">
         <div id= "${id[index]}-container" class= "initial-div">${contact['initials']}</div>
-        <div>${contact['name']}</div>
-        <input onchange ="inspectCheckboxes()" value="${id[index]}" type ="checkbox">
+        <div>
+          ${contact['name']}
+        </div>
+        <input onchange ="inspectCheckboxes()" value="${id[index]}" id="${id[index]}cb" type ="checkbox">
       </div>
+  </label>
     `
 }
 

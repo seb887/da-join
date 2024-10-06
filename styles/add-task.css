@@ -248,12 +248,15 @@
 }
 
 .show {
-  visibility: visible;
+  display: flex !important;
+  visibility: visible !important;
 }
 
 .add-task-contact-list{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  user-select: none;
   input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
@@ -262,8 +265,13 @@
     align-content: center;
     justify-content: center;
     font-size: 2rem;
-    padding: 0.1rem;
+    padding: 16px;
     border-radius: 0.5rem;
+  }
+  div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
    input[type="checkbox"]::before {
   content: "";
@@ -271,19 +279,33 @@
   width: 24px;
   height: 24px;
   }
-  input[type="checkbox"]:hover::before {
-    cursor: pointer;
-    background-image: url(../assets/icons/check-box-unchecked-hover.png)
-  }
+ 
   input[type="checkbox"]:checked::before {
     cursor: pointer;
     background-image: url(../assets/icons/check-box-checked.png);
   }
-  input[type="checkbox"]:checked:hover::before {
-    cursor: pointer;
-    background-image: url(../assets/icons/check-box-checked-hover.png);
-    background-repeat: no-repeat;
-  }
+ 
+}
+#input-assigned-to{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  overflow-y: scroll;
+  height: 250px;
+  width: 435px;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: white;
+}
+
+#add-task-contact-container{
+  position: relative;
+}
+
+.add-task-contact-list:hover{
+  background-color: #F6F7F8;
+  cursor: pointer;
 }
 
 .initial-div{
