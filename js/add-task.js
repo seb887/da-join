@@ -24,6 +24,7 @@ CONTACT_URL =
 const subtasks = [];
 let assignedContacts = [];
 let renderedContacts = [];
+let dropedDown = false;
 
 // DEFAULTS
 let currentDate = new Date();
@@ -194,9 +195,10 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
-  renderContacts = [];
+  renderedContacts = [];
   allContacts.forEach((contact, index )=>{contact.id = id[index]});
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
+  inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact, id, index);
     document.getElementById(id[index] +'-container').style.backgroundColor = contact['color'];
@@ -231,15 +233,30 @@ function dropDownContacts(){
     document.getElementById('searchContact').placeholder = '';
     document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
   }
+  dropedDown = !dropedDown;
 }
 
 
 function filterContacts(event) {
-  if(document.getElementById('searchContact').value.length >= 3 && 
-      document.getElementById('input-assigned-to').style.display == 'none')
+  console.log(dropedDown);
+  
+  if(document.getElementById('searchContact').value.length >= 3 && !dropedDown)
     {
       dropDownContacts();
+      displayMatchingContacts();
     }
+    else{
+      document.getElementById('input-assigned-to').style.display = 'none'
+      dropedDown = false;
+      return
+    }
+    displayMatchingContacts();    
+}
+
+
+function displayMatchingContacts(){
+  console.log('hallo');
+  
 }
 
 
