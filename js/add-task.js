@@ -53,6 +53,7 @@ function createNewTask() {
     board: 'todo',
     prio: currentPrio,
     subtasks: subtasks,
+    assignedTo: inputAssignedTo.value,
   };
 
   checkInputs(newTask);
@@ -190,9 +191,12 @@ async function getContacts() {
 async function listContactsToAssignedTo(){
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
+  inputAssignedTo.innerHTML += `
+      <option value = ""></option>
+    `
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += `
-      <option value = ${id[index]}>${contact['name']}</option>
+      <option value = ${id[index]}><div>${contact['name']}</option>
     `
   })
 }
