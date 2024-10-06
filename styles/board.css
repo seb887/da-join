@@ -14,7 +14,7 @@
   align-items: center;
   padding: 80px 64px 55px 64px;
   width: calc(100vw - 232px);
-  max-width: 1208px;
+  max-width: 1300px;
 }
 
 .headline-container {
@@ -112,7 +112,7 @@
   padding: 0 64px;
   gap: 26px;
   width: calc(100vw - 232px);
-  max-width: 1208px;
+  max-width: 1300px;
   top: calc(200px + 96px);
   left: 232px;
   overflow-y: scroll;

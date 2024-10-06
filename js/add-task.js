@@ -1,4 +1,3 @@
-
 // DOM ELEMENTS
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
@@ -20,7 +19,8 @@ const inputAssignedTo = document.getElementById('input-assigned-to');
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
-CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
+CONTACT_URL =
+  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 const subtasks = [];
 
 // DEFAULTS
@@ -187,8 +187,7 @@ async function getContacts() {
   return contacts;
 }
 
-
-async function listContactsToAssignedTo(){
+async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   inputAssignedTo.innerHTML += `
@@ -196,9 +195,15 @@ async function listContactsToAssignedTo(){
     `
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += `
+<<<<<<< HEAD
       <option value = ${id[index]}><div>${contact['name']}</option>
     `
   })
+=======
+      <option value = ${id[index]}>${contact['name']}</option>
+    `;
+  });
+>>>>>>> 3a6cffff3c93c4c61fae4a2c1aa65efba01dd3e6
 }
 
 renderAddTask();

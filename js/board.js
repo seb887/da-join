@@ -23,7 +23,7 @@ async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   clearInputs();
-  
+
   searchInput.value = '';
 }
 
@@ -148,118 +148,6 @@ function closeAddTaskModal() {
   clearInputs();
 }
 
-function createCardHTML(element) {
-  return `
-    <div
-      class="kanban-card" id="${element.id}"
-      onclick="openTaskModal(event)"
-      draggable="true"
-      ondragstart="drag(event)"
-    >
-        <div class="card-label-container">
-            <div class="card-label" style="background-color: ${
-              element.data.bgCategory
-            }">${element.data.category}</div>
-        </div>
-        <div class="task-modal-card-title-container">
-          <div class="card-title">${element.data.title}</div>
-          <div class="card-description">${element.data.description}</div>
-        </div>
-        ${checkTaskSubtasks(element)}
-        <div class="card-footer">
-            <div class="task-collaborators">
-            <div class="card-profile-badge-1">AB</div>
-            <div class="card-profile-badge-2">BC</div>
-            <div class="card-profile-badge-3">CD</div>
-            </div>
-            <div class="task-prio">
-            <img
-                src="../assets/icons/prio-${element.data.prio}.png"
-                alt="prio icon"
-                id="button-${element.data.prio}-img"
-            />
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-function createTaskModalHTML(element) {
-  return `
-    <div
-      class="task-modal-card"
-      id="task-modal-card"
-      onclick="event.stopPropagation()"
-    >
-      <div class="task-modal-card-header-container">
-        <div class="task-modal-card-category" style="background-color: ${
-          element.data.bgCategory
-        }">${element.data.category}</div>
-        <img
-          src="../assets/icons/cancel.png"
-          alt="cancel icon"
-          onclick="closeTaskModal()"
-        />
-      </div>
-      <div class="task-modal-card-title">${element.data.title}</div>
-      <div class="task-modal-card-description">
-        ${element.data.description}
-      </div>
-      <div class="task-modal-card-date">
-        <div class="task-modal-card-key">Due date:</div>
-        <span class="task-modal-card-date-content">${element.data.date}</span>
-      </div>
-      <div class="task-modal-card-prio">
-        <div class="task-modal-card-key">Priority:</div>
-        <span class="task-modal-card-prio-content">${capitalizeFirstLetter(
-          element.data.prio
-        )}</span>
-        <img
-          src="../assets/icons/prio-${element.data.prio}.png"
-          alt="prio icon"
-        />
-      </div>
-      <div class="task-modal-card-assigned-to">
-        Assigned To:
-        <div class="task-modal-card-assigned-to-list">
-          <div class="task-modal-contact-container">
-            <div class="task-modal-contact-profile-img">EM</div>
-            <div class="task-modal-contact-name">Emmanuel Mauer</div>
-          </div>
-
-          <div class="task-modal-contact-container">
-            <div class="task-modal-contact-profile-img">MB</div>
-            <div class="task-modal-contact-name">Marcel Bauer</div>
-          </div>
-
-          <!-- <div class="task-modal-contact-container">
-            <div class="task-modal-contact-profile-img"></div>
-            <div class="task-modal-contact-name">Anton Mayer</div>
-          </div> -->
-        </div>
-      </div>
-      ${checkTaskModalSubtasks(element)}
-      <div class="task-modal-card-buttons">
-        <button id="${element.id}" onclick="deleteTask(event)">
-          <img
-            src="../assets/icons/delete.png"
-            alt="delete icon"
-          />
-          Delete
-        </button>
-        <div class="task-modal-card-buttons-seperator"></div>
-        <button id="${element.id}">
-          <img
-            src="../assets/icons/edit.png"
-            alt="edit icon"
-          />
-          Edit
-        </button>
-      </div>
-    </div>
-  `;
-}
-
 function checkTaskModalSubtasks(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
@@ -381,7 +269,7 @@ function renderSubtasksOnTaskModal(task) {
           src="../assets/icons/checkbox-empty.svg"
           alt="checkbox icon"
         />
-        ${subtasksArr[i]}
+        ${subtasksArr[i].name}
       </div>
     `;
   }
