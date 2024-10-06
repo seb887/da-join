@@ -36,7 +36,6 @@ body {
     box-shadow: 0px 0px 14px 3px #0000000A;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     gap: 32px;
 }
@@ -356,4 +355,130 @@ footer a:hover {
 .d-none {
     z-index: -999;
     display: none;
+}
+
+@media (max-width: 680px) {
+    .login-mask {
+        width: 480px;
+    }
+    .sign-up-mask {
+        width: 480px;
+    }
+    .sign-up-title img {
+        right: 75px;
+    }
+}
+
+@media (max-width: 505px) {
+    .email-input {
+        background: url(../assets/icons/mail.png) no-repeat scroll 308px;
+    }
+    .login-signup-title {
+        font-size: 47px;
+    }
+    .login-mask {
+        width: 396px;
+    }
+    .sign-up-mask {
+        width: 396px;
+        height: 590px;
+    }
+    .sign-up-title img {
+        right: 40px;
+    }
+    form {
+        width: 350px;
+    }
+    .name-input {
+        background: url(../assets/icons/person.png) no-repeat scroll 309px;
+    }
+}
+
+@media (max-width: 428px) {
+    .name-input {
+        background: url(../assets/icons/person.png) no-repeat scroll 322px;
+    }
+    .login-signup-title {
+        padding-top: 15px;
+    }
+    .email-input {
+        background: url(../assets/icons/mail.png) no-repeat scroll 321px;
+    }
+    .login-mask {
+        width: 396px;
+        height: 515px;
+        padding: 32px 0px 32px 0px;
+        justify-content: flex-start;
+    }
+    form {
+        width: 364px;
+        gap: 16px;
+    }
+    input {
+        height: 48px;
+    }
+    .check-box {
+        padding-left: 20px;
+    }
+    .what-kind-of-login {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        height: 123px;
+        gap: 21px;
+    }
+    .just-login {
+        width: 177px;
+    }
+}
+
+@media (max-width: 410px) {
+    .name-input {
+        background: url(../assets/icons/person.png) no-repeat scroll 214px;
+    }
+    .login-signup-title {
+        padding-top: 0px;
+        font-size: 44px;
+    }
+    .email-input {
+        background: url(../assets/icons/mail.png) no-repeat scroll 212px;
+    }
+    .login-mask {
+        width: 340px;
+        height: 475px;
+    }
+    .sign-up-mask {
+        width: 340px;
+        height: 550px;
+    }
+    form {
+        width: 255px;
+        gap: 16px;
+    }
+    input {
+        height: 44px;
+    }
+    .check-box {
+        padding-left: 20px;
+    }
+    .what-kind-of-login {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        height: 123px;
+        gap: 21px;
+    }
+}
+
+@media (max-width: 355px) {
+    .login-mask {
+        width: 280px;
+        height: 475px;
+    }
+    .sign-up-mask {
+        width: 280px;
+    }
+    .sign-up-title img {
+        right: 25px;
+    }
 }
