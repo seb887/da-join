@@ -22,6 +22,7 @@ const BASE_URL =
 CONTACT_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 const subtasks = [];
+let assignedContacts = [];
 
 // DEFAULTS
 let currentDate = new Date();
@@ -192,18 +193,36 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
- ;
+  allContacts.forEach((contact, index )=>{contact.id = id[index]});
+  allContacts.sort((a, b) => a.name.localeCompare(b.name));
   allContacts.forEach((contact, index) => {
-    inputAssignedTo.innerHTML += 
-    `
-      <div></div>
-    `
-    // <option value = ${id[index]}><div>${contact['name']}</option>
+    inputAssignedTo.innerHTML += assignedToContactsContent(contact, id, index);
+    document.getElementById(id[index] +'-container').style.backgroundColor = contact['color'];
+    
   })
-    inputAssignedTo.innerHTML += `
-      <option value = ${id[index]}>${contact['name']}</option>
-    `;
-  });
 }
+
+
+function inspectCheckboxes () {
+  let allDivs = document.getElementById('input-assigned-to');
+  assignedContacts = [];
+  allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+    if (cb.checked) {
+        assignedContacts.push(cb.value);
+    }
+  })
+}
+
+
+function assignedToContactsContent(contact, id, index){
+  return `
+      <div class ="add-task-contact-list">
+        <div id= "${id[index]}-container" class= "initial-div">${contact['initials']}</div>
+        <div>${contact['name']}</div>
+        <input onchange ="inspectCheckboxes()" value="${id[index]}" type ="checkbox">
+      </div>
+    `
+}
+
 
 renderAddTask();

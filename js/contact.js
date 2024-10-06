@@ -29,7 +29,6 @@ async function renderContacts(newContact) {
         document.getElementById('contacts').innerHTML += contactContent(index); 
         setDataOfContact(contact, index);
     })
-    console.log(newContact); 
 }
 
 

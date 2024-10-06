@@ -250,3 +250,26 @@
 .show {
   visibility: visible;
 }
+
+.add-task-contact-list{
+  display: flex;
+  justify-content: space-between;
+  input[type ="checkbox"]{
+    width: 24px;
+    height: 24px;
+    accent-color: #29ABE2;
+  }
+}
+
+.initial-div{
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a3647;
+  color: white;
+  text-align: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 20px;
+}
