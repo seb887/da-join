@@ -24,3 +24,7 @@
 .headline {
   margin-bottom: 35px;
 }
+
+.show {
+  visibility: visible;
+}

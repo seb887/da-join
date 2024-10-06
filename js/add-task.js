@@ -1,3 +1,4 @@
+
 // DOM ELEMENTS
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
@@ -14,10 +15,12 @@ const buttonUrgent = document.getElementById('button-urgent');
 const buttonLowImg = document.getElementById('button-low-img');
 const buttonMediumImg = document.getElementById('button-medium-img');
 const buttonUrgentImg = document.getElementById('button-urgent-img');
+const inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
+CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 const subtasks = [];
 
 // DEFAULTS
@@ -28,6 +31,7 @@ let currentPrio = 'medium';
 // FUNCTIONS
 async function renderAddTask() {
   clearInputs();
+  listContactsToAssignedTo();
 }
 
 async function saveTaskToFirebase(newTask) {
@@ -178,6 +182,24 @@ function showInfoToast(text) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 1500);
+}
+
+// eventually import function from contact.js
+async function getContacts() {
+  let response = await fetch(CONTACT_URL);
+  let contacts = await response.json();
+  return contacts;
+}
+
+
+async function listContactsToAssignedTo(){
+  let allContacts = Object.values(await getContacts());
+  let id = Object.keys(await getContacts());
+  allContacts.forEach((contact, index) => {
+    inputAssignedTo.innerHTML += `
+      <option value = ${id[index]}>${contact['name']}</option>
+    `
+  })
 }
 
 renderAddTask();

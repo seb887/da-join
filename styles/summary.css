@@ -204,4 +204,6 @@ body {
     }
 }
 
-
+.show {
+    visibility: visible;
+}

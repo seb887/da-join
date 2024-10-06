@@ -22,10 +22,16 @@
       rel="stylesheet"
       href="../styles/privacy-policy.css"
     />
+    <script src="../js/script.js"></script>
   </head>
 
-  <body>
+  <body onload="init()">
     <header class="header">
+      <div id="dropdown-profile" class="dropdown-profile">
+        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
+        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
+        <div onclick="deleteActiveUser()" class="dropdown-profile-buttons">Log out</div>
+      </div>
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
@@ -37,11 +43,13 @@
         </div>
 
         <div
+          onclick="showProfileDropDownMenu()"
           id="user-initials"
           class="user-initials"
         ></div>
       </div>
     </header>
+
 
     <aside class="sidebar">
       <a href="../index.html"
@@ -128,7 +136,7 @@
 
       <!--Hier beginnt der Content-->
       <div class="content">
-        <h1 class="headline">Privacy Police</h1>
+        <h1 class="headline">Privacy Policy</h1>
         <div class="privacy-policy-content">
           <div>
             <h2>Subtitle</h2>

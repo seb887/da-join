@@ -20,8 +20,9 @@
       rel="stylesheet"
       href="../styles/legal-notice.css"
     />
+    <script src="../js/script.js"></script>
   </head>
-  <body>
+  <body onload="init()">
     <header class="header">
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
@@ -34,9 +35,15 @@
         </div>
 
         <div
+          onclick="showProfileDropDownMenu()"
           id="user-initials"
           class="user-initials"
         ></div>
+      </div>
+      <div id="dropdown-profile" class="dropdown-profile">
+        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
+        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
+        <div onclick="deleteActiveUser()" class="dropdown-profile-buttons">Log out</div>
       </div>
     </header>
 

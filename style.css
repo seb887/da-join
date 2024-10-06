@@ -87,6 +87,7 @@ h1 {
   font-size: 22px;
   font-weight: 700;
   display: flex;
+  user-select: none;
   justify-content: center;
   align-items: center;
   width: 56px;
@@ -98,6 +99,44 @@ h1 {
 .user-initials:hover {
   cursor: pointer;
   background-color: #f6f7f8;
+}
+
+.show {
+  visibility: visible;
+}
+
+.dropdown-profile {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  visibility: hidden;
+  position: fixed;
+  top: 96px;
+  right: 16px;
+  background-color: #2A3647;
+  font-size: 16px;
+  width: 150px;
+  height: 158px;
+  padding: 10px;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.dropdown-profile-buttons {
+  text-decoration: none;
+  color: #CDCDCD;
+  border-radius: 8px;
+  width: 130px;
+  height: 46px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: ease-in-out 115ms;
+}
+
+.dropdown-profile-buttons:hover {
+  cursor: pointer;
+  background-color: #2A3D59;
 }
 
 /*======================

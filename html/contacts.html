@@ -17,7 +17,7 @@
     href="../styles/contacts.css"
   />
   </head>
-  <body onload="init()">
+  <body onload="initContacts()">
     <header class="header">
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
@@ -29,12 +29,18 @@
           /></a>
         </div>
 
-        <div
+        <div 
+          onclick="showProfileDropDownMenu()"
           id="user-initials"
           class="user-initials"
         ></div>
       </div>
     </header>
+    <div id="dropdown-profile" class="dropdown-profile">
+        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
+        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
+        <div onclick="deleteActiveUser()" class="dropdown-profile-buttons">Log out</div>
+    </div>
 
     <aside class="sidebar">
       <a href="../index.html"
@@ -170,5 +176,6 @@
 
     </div>
     <script src="../js/contact.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

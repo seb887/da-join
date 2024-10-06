@@ -3,7 +3,7 @@ CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.
 let contacts = [];
 let animationActive = false;
 
-function init() {
+function initContacts() {
     renderContacts();
     setActiveUserInitials();
 }
@@ -223,7 +223,6 @@ async function updateAndRenderContacts (index) {
        } 
 }
 
-
 function showInfoToast(text) {
     const toast = document.getElementById("info-toast");
     toast.innerText = text;
@@ -233,7 +232,6 @@ function showInfoToast(text) {
     }, 1500);
 }
 
-
 async function setActiveUserInitials() {
     let response =  await fetch('https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users/activeUser.json')
     let user = await response.json();
@@ -241,7 +239,6 @@ async function setActiveUserInitials() {
     let initials = await generateInitials(activeUserName);
     document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
 }
-
 
 function contactContent(index) {
     return `
@@ -257,7 +254,6 @@ function contactContent(index) {
     `;
 }
 
-
 function nameHeaderContent(letter) {
     return`
         <div class="nameHeader" id ="${letter}">
@@ -269,7 +265,6 @@ function nameHeaderContent(letter) {
         </div>
     `
 }
-
 
 function addNewContactsContent () {
     return `

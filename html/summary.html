@@ -21,8 +21,13 @@
     />
     <title>Summary - Join</title>
   </head>
-  <body onload="init()">
+  <body onload="initSummary()">
     <header class="header">
+      <div id="dropdown-profile" class="dropdown-profile">
+        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
+        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
+        <div onclick="deleteActiveUser()" class="dropdown-profile-buttons">Log out</div>
+      </div>
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
@@ -33,7 +38,7 @@
           /></a>
         </div>
 
-        <div
+        <div onclick="showProfileDropDownMenu()"
           id="user-initials"
           class="user-initials"
         ></div>
@@ -111,7 +116,6 @@
         </div>
       </nav>
     </aside>
-
     <div class="summary-content">
       <div class="summary-title">
         <b>Join 360</b>
@@ -133,7 +137,7 @@
                 <span
                   class="task-counter"
                   id="to-do-tasks"
-                  >1</span
+                  ></span
                 >
                 <span
                   style="font-size: 20px"
@@ -154,7 +158,7 @@
                 <span
                   class="task-counter"
                   id="done-tasks"
-                  >3</span
+                  ></span
                 >
                 <span
                   style="font-size: 20px"
@@ -177,13 +181,13 @@
                 <span
                   class="task-counter"
                   id="urgent-tasks"
-                  >5</span
+                  ></span
                 >
                 <span class="task-description">Urgent</span>
               </div>
               <div class="second-seperator"></div>
               <div class="deadline">
-                <b id="deadline">3 January, 2025</b>
+                <b id="deadline"></b>
                 <span>Upcoming Deadline</span>
               </div>
             </div>
@@ -197,7 +201,7 @@
                 <span
                   class="task-counter"
                   id="tasks-in-board"
-                  >2</span
+                  ></span
                 >
                 <span
                   style="font-size: 20px"
@@ -214,7 +218,7 @@
                 <span
                   class="task-counter"
                   id="tasks-in-progress"
-                  >4</span
+                  ></span
                 >
                 <span
                   style="font-size: 20px"
@@ -231,7 +235,7 @@
                 <span
                   class="task-counter"
                   id="awaiting-feedback"
-                  >1</span
+                  ></span
                 >
                 <span
                   style="font-size: 20px"
@@ -248,7 +252,7 @@
         </div>
       </div>
     </div>
-
     <script src="../js/summary.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

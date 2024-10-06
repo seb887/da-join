@@ -21,8 +21,13 @@
     />
     <title>Add Task - Join</title>
   </head>
-  <body>
+  <body onload="init()">
     <header class="header">
+      <div id="dropdown-profile" class="dropdown-profile">
+        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
+        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
+        <div onclick="deleteActiveUser()" class="dropdown-profile-buttons">Log out</div>
+      </div>
       <p>Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
@@ -34,6 +39,7 @@
         </div>
 
         <div
+          onclick="showProfileDropDownMenu()"
           id="user-initials"
           class="user-initials"
         ></div>
@@ -172,9 +178,9 @@
                 >
                   Select contacts to assign
                 </option>
-                <option value="Jim Panse">Jim Panse</option>
+                <!-- <option value="Jim Panse">Jim Panse</option>
                 <option value="Anne Theke">Anne Theke</option>
-                <option value="Kara Mell">Kara Mell</option>
+                <option value="Kara Mell">Kara Mell</option> -->
               </select>
             </div>
           </div>
@@ -348,5 +354,6 @@
 
     <script src="../js/add-task.js"></script>
     <script src="../js/board.js"></script>
+    <script src="../js/script.js" defer></script>
   </body>
 </html>

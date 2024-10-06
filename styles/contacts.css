@@ -45,7 +45,7 @@ body {
     border: none;
     background-color: #2a3647;
     padding: 12px 0px 12px 0px;
-    transition: 150ms;
+    transition: 125ms;
     img {
       height: 32px;
       width: 32px;
@@ -434,7 +434,7 @@ article {
     height: 56px;
     padding: 16px;
     font-size: 20px;
-    transition: 150ms ease-in-out;
+    transition: 125ms ease-in-out;
   }
   button:nth-child(1){
     width: 126px;
@@ -534,6 +534,9 @@ article {
   transform: translateX(-200%);
 }
 
+.show {
+  visibility: visible;
+}
 
 @keyframes slideInAddContact {
   0%{
