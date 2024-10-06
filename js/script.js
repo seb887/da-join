@@ -8,10 +8,16 @@ function saveActiveUserToLocalStorage(user) {
 
 let activeUser = JSON.parse(localStorage.getItem('activeUser'));
 
+function guestLogInOrLogOut() {
+    localStorage.removeItem('activeUser');
+    window.location.href='login.html';
+}
+
 function setActiveUserInitials() {
     if (activeUser) {
         let initials = generateInitials(activeUser.name);
         document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
+        document.getElementById('name').innerHTML = activeUser.name;
     } else {
         document.getElementById('user-initials').innerHTML = `<p>G</p>`
     }
