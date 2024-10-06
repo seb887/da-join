@@ -254,10 +254,35 @@
 .add-task-contact-list{
   display: flex;
   justify-content: space-between;
-  input[type ="checkbox"]{
-    width: 24px;
-    height: 24px;
-    accent-color: #29ABE2;
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 0.1rem;
+    border-radius: 0.5rem;
+  }
+   input[type="checkbox"]::before {
+  content: "";
+  background-image: url(../assets/icons/check-box-unchecked.png);
+  width: 24px;
+  height: 24px;
+  }
+  input[type="checkbox"]:hover::before {
+    cursor: pointer;
+    background-image: url(../assets/icons/check-box-unchecked-hover.png)
+  }
+  input[type="checkbox"]:checked::before {
+    cursor: pointer;
+    background-image: url(../assets/icons/check-box-checked.png);
+  }
+  input[type="checkbox"]:checked:hover::before {
+    cursor: pointer;
+    background-image: url(../assets/icons/check-box-checked-hover.png);
+    background-repeat: no-repeat;
   }
 }
 
