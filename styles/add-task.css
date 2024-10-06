@@ -257,24 +257,29 @@
   justify-content: space-between;
   align-items: center;
   user-select: none;
-  input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    font-size: 2rem;
-    padding: 16px;
-    border-radius: 0.5rem;
-  }
-  div:nth-child(2){
+  padding: 12px 21px;
+  border-radius: 10px;
+  border: 2px solid white;
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-radius: 0.5rem;
+    }
+
+  div:nth-child(1){
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 16px;
   }
    input[type="checkbox"]::before {
   content: "";
+  cursor: pointer;
   background-image: url(../assets/icons/check-box-unchecked.png);
   width: 24px;
   height: 24px;
@@ -282,7 +287,10 @@
  
   input[type="checkbox"]:checked::before {
     cursor: pointer;
-    background-image: url(../assets/icons/check-box-checked.png);
+    background-image: url(../assets/icons/check-box-checked-white.png);
+  }
+  input[type="checkbox"]:checked::before:hover {
+   background-color: white;
   }
  
 }
@@ -290,6 +298,7 @@
   display: none;
   position: absolute;
   left: 0;
+  padding: 0;
   top: 50px;
   overflow-y: scroll;
   height: 250px;
@@ -297,6 +306,15 @@
   justify-content: space-evenly;
   flex-direction: column;
   background-color: white;
+}
+
+.selected{
+  background-color: #2A3647;
+  border-radius: 10px;
+  color: white;
+  :hover{
+    background-color: #091931 !important;
+  }
 }
 
 #add-task-contact-container{
@@ -324,6 +342,7 @@
   align-items: center;
   background-color: #2a3647;
   color: white;
+  border: 3px solid white;
   text-align: center;
   width: 42px;
   height: 42px;

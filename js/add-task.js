@@ -23,6 +23,7 @@ CONTACT_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 const subtasks = [];
 let assignedContacts = [];
+let renderedContacts = [];
 
 // DEFAULTS
 let currentDate = new Date();
@@ -193,12 +194,13 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
+  renderContacts = [];
   allContacts.forEach((contact, index )=>{contact.id = id[index]});
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact, id, index);
     document.getElementById(id[index] +'-container').style.backgroundColor = contact['color'];
-    
+    renderedContacts.push(contact);
   })
 }
 
@@ -209,7 +211,11 @@ function inspectCheckboxes () {
   allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
     if (cb.checked) {
         assignedContacts.push(cb.value);
+        cb.parentElement.parentElement.classList.add('selected');
     }
+    if (!cb.checked) {
+      cb.parentElement.parentElement.classList.remove('selected');
+  }
   })
 }
 
@@ -228,13 +234,22 @@ function dropDownContacts(){
 }
 
 
+function filterContacts(event) {
+  if(document.getElementById('searchContact').value.length >= 3 && 
+      document.getElementById('input-assigned-to').style.display == 'none')
+    {
+      dropDownContacts();
+    }
+}
+
+
 function assignedToContactsContent(contact, id, index){
   return `
   <label for ="${id[index]}cb">
       <div class ="add-task-contact-list">
-        <div id= "${id[index]}-container" class= "initial-div">${contact['initials']}</div>
         <div>
-          ${contact['name']}
+          <div id= "${id[index]}-container" class= "initial-div">${contact['initials']}</div>
+          <div>${contact['name']}</div>
         </div>
         <input onchange ="inspectCheckboxes()" value="${id[index]}" id="${id[index]}cb" type ="checkbox">
       </div>
