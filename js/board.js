@@ -123,6 +123,7 @@ function getDataForModal(event) {
 
   for (let element of tasks) {
     if (id == element.id) {
+      // console.log('task modal element id:', element.id);
       taskModal.innerHTML = createTaskModalHTML(element);
     }
   }
@@ -154,7 +155,7 @@ function checkTaskModalSubtasks(task) {
     <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
       Subtasks:
       <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
-        ${renderSubtasksOnTaskModal(task)}
+        ${renderSubtasks(task)}
       </div>
   </div>`;
   } else {
@@ -175,6 +176,37 @@ function checkTaskSubtasks(task) {
   } else {
     return '';
   }
+}
+
+function renderSubtasks(task) {
+  const subtasksArr = task.data.subtasks;
+  let taskId = task.id;
+  let subtasksHTML = '';
+
+  for (let i = 0; i < subtasksArr.length; i++) {
+    console.log('renderSubtasks', typeof taskId, i);
+
+    subtasksHTML += `
+      <div class="task-modal-subtask-container">
+        <img
+          src="../assets/icons/checkbox-empty.svg"
+          alt="checkbox icon"
+          onclick="setSubtaskChecked(${taskId})"
+        />
+        ${subtasksArr[i].name}
+      </div>
+    `;
+  }
+  return subtasksHTML;
+}
+
+function setSubtaskChecked(taskId) {
+  console.log(typeof taskId);
+
+  // set subtask checked in tasks arr
+  // pushToFirebase
+  // change icon to checked in task modal
+  // renderBoard
 }
 
 function capitalizeFirstLetter(string) {
@@ -256,24 +288,6 @@ async function deleteTask(event) {
 
   closeTaskModal();
   renderBoard();
-}
-
-function renderSubtasksOnTaskModal(task) {
-  const subtasksArr = task.data.subtasks;
-  let subtasksHTML = '';
-
-  for (let i = 0; i < subtasksArr.length; i++) {
-    subtasksHTML += `
-      <div class="task-modal-subtask-container">
-        <img
-          src="../assets/icons/checkbox-empty.svg"
-          alt="checkbox icon"
-        />
-        ${subtasksArr[i].name}
-      </div>
-    `;
-  }
-  return subtasksHTML;
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
