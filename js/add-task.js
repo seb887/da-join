@@ -70,9 +70,11 @@ function setCategoryBackgroundColor(category) {
 function checkInputs(taskObj) {
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
-      alert('Please insert a title');
+      return;
+      // alert('Please insert a title');
     } else if (taskObj.category == 'Select task category') {
-      alert('Please select the category');
+      return;
+      // alert('Please select the category');
     }
   } else {
     console.log('create new task: ', taskObj);
