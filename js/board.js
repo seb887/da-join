@@ -184,14 +184,14 @@ function renderSubtasks(task) {
   let subtasksHTML = '';
 
   for (let i = 0; i < subtasksArr.length; i++) {
-    console.log('renderSubtasks', typeof taskId, i);
+    console.log('renderSubtasks', taskId, i);
 
     subtasksHTML += `
       <div class="task-modal-subtask-container">
         <img
           src="../assets/icons/checkbox-empty.svg"
           alt="checkbox icon"
-          onclick="setSubtaskChecked('${taskId}')"
+          onclick="setSubtaskChecked(''${taskId}', '${i}'')"
         />
         ${subtasksArr[i].name}
       </div>
@@ -200,11 +200,17 @@ function renderSubtasks(task) {
   return subtasksHTML;
 }
 
-function setSubtaskChecked(taskId) {
-  console.log(typeof taskId);
+function setSubtaskChecked(taskId, subtaskId) {
+  // set subtask checked in tasks arr (only for test)
+  for (let element of tasks) {
+    if (element.id == taskId) {
+      element.data.subtasks[subtaskId].checked =
+        !element.data.subtasks[subtaskId].checked;
+      console.log(tasks);
+    }
+  }
 
-  // set subtask checked in tasks arr
-  // pushToFirebase
+  // checked subtask directly pushToFirebase
   // change icon to checked in task modal
   // renderBoard
 }

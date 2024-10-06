@@ -70,9 +70,11 @@ function setCategoryBackgroundColor(category) {
 function checkInputs(taskObj) {
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
-      alert('Please insert a title');
+      return;
+      // alert('Please insert a title');
     } else if (taskObj.category == 'Select task category') {
-      alert('Please select the category');
+      return;
+      // alert('Please select the category');
     }
   } else {
     console.log('create new task: ', taskObj);
@@ -190,7 +192,7 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
- 
+ ;
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += 
     `
@@ -198,6 +200,10 @@ async function listContactsToAssignedTo() {
     `
     // <option value = ${id[index]}><div>${contact['name']}</option>
   })
+    inputAssignedTo.innerHTML += `
+      <option value = ${id[index]}>${contact['name']}</option>
+    `;
+  });
 }
 
 renderAddTask();
