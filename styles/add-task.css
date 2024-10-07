@@ -301,7 +301,7 @@
   padding: 0;
   top: 50px;
   overflow-y: scroll;
-  height: 250px;
+  max-height: 250px;
   width: 435px;
   justify-content: space-evenly;
   flex-direction: column;
