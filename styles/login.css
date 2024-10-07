@@ -388,8 +388,20 @@ footer a:hover {
 }
 
 @media (max-width: 505px) {
+    input {
+        font-size: 16px;
+    }
+    .just-login {
+        font-size: 16px;
+    }
+    .guest-login {
+        font-size: 16px;
+    }
+    footer {
+        margin-top: 20%;
+    }
     .whole-body {
-        margin-top: 0px;
+        margin-top: 10px;
     }
     .email-input {
         background: url(../assets/icons/mail.png) no-repeat scroll 308px;
@@ -405,7 +417,7 @@ footer a:hover {
         height: 590px;
     }
     .sign-up-title img {
-        right: 40px;
+        right: 60px;
     }
     form {
         width: 350px;
@@ -430,6 +442,13 @@ footer a:hover {
     }
     #logo-white {
         display: unset;
+    }
+    .sign-up-top-right {
+        position: relative;
+        top: 650px;
+        padding: 0px;
+        right: 50%;
+        transform: translate(50%);
     }
 }
 
@@ -472,6 +491,9 @@ footer a:hover {
 }
 
 @media (max-width: 410px) {
+    .sign-up-title img {
+        right: 40px;
+    }
     .name-input {
         background: url(../assets/icons/person.png) no-repeat scroll 214px;
     }
@@ -507,6 +529,12 @@ footer a:hover {
         height: 123px;
         gap: 21px;
     }
+    footer {
+        margin-top: 30%;
+    }
+    .sign-up-top-right {
+        top: 620px;
+    }
 }
 
 @media (max-width: 355px) {
@@ -519,5 +547,8 @@ footer a:hover {
     }
     .sign-up-title img {
         right: 25px;
+    }
+    .sign-up-top-right {
+        font-size: 16px;
     }
 }
