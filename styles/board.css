@@ -477,6 +477,16 @@
   }
 }
 
+.edit-task-buttons-container {
+  display: flex;
+  justify-content: end;
+}
+
+.edit-task-buttons-container button {
+  display: flex;
+  gap: 8px;
+}
+
 #info-toast.show {
   opacity: 1;
   transform: translateY(0px);

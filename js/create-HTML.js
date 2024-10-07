@@ -92,7 +92,7 @@ function createTaskModalHTML(element) {
             Delete
           </button>
           <div class="task-modal-card-buttons-seperator"></div>
-          <button id="${element.id}" onclick="editTask(event)">
+          <button id="${element.id}" onclick="openEditTaskModal(event)">
             <img
               src="../assets/icons/edit.png"
               alt="edit icon"
@@ -104,240 +104,187 @@ function createTaskModalHTML(element) {
     `;
 }
 
-// function createAddTaskHTML() {
-//   dateToday();
+function createEditTaskModalHTML(element) {
+  return `
+    <div
+        class="task-modal-card"
+        id="task-modal-card"
+        onclick="event.stopPropagation()"
+      >
+            <div class="form-container title-container">
+              <div
+                for="title"
+                class="add-task-labels"
+              >
+                Title
+              </div>
+              <input
+                type="text"
+                class="add-task-input-title"
+                id="input-title"
+                name="title"
+                value="${element.data.title}"
+              />
+            </div>
+            <div class="form-container description-container">
+              <div
+                for="description"
+                class="add-task-labels"
+              >
+                Description
+              </div>
+              <textarea
+                type="text"
+                class="add-task-input-description"
+                id="input-description"
+                name="description"
+                rows="4"
+              >${element.data.description}</textarea>
+            </div>
 
-//   return `
-//     <div
-//         class="add-task-card"
-//         onclick="event.stopPropagation()"
-//       >
-//         <header class="add-task-header">
-//           <h1>Add Task</h1>
-//         </header>
-//         <div class="add-task-form">
-//           <div class="left-container">
-//             <div class="form-container title-container">
-//               <div
-//                 for="title"
-//                 class="add-task-labels"
-//               >
-//                 Title<span class="required-marker">*</span>
-//               </div>
-//               <input
-//                 type="text"
-//                 class="add-task-input-title"
-//                 id="input-title"
-//                 name="title"
-//                 placeholder="Enter a title"
-//               />
-//             </div>
-//             <div class="form-container description-container">
-//               <div
-//                 for="description"
-//                 class="add-task-labels"
-//               >
-//                 Description
-//               </div>
-//               <textarea
-//                 type="text"
-//                 class="add-task-input-description"
-//                 id="input-description"
-//                 name="description"
-//                 rows="4"
-//                 placeholder="Enter a description"
-//               ></textarea>
-//             </div>
-//             <div class="form-container assigned-to-container">
-//               <div
-//                 for="assigned to"
-//                 class="add-task-labels"
-//               >
-//                 Assigned to
-//               </div>
-//               <select
-//                 type="text"
-//                 id="input-assigned-to"
-//                 class="add-task-select"
-//                 name="assigned to"
-//               >
-//                 <option
-//                   value="No selection"
-//                   disabled
-//                   selected
-//                   hidden
-//                 >
-//                   Select contacts to assign
-//                 </option>
-//                 <option value="Jim Panse">Jim Panse</option>
-//                 <option value="Anne Theke">Anne Theke</option>
-//                 <option value="Kara Mell">Kara Mell</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div class="seperator"></div>
-//           <div class="right-container">
-//             <div class="form-container date-container">
-//               <div
-//                 for="date"
-//                 class="add-task-labels"
-//               >
-//                 Due date<span class="required-marker">*</span>
-//               </div>
-//               <input
-//                 type="date"
-//                 class="add-task-input-date"
-//                 id="input-date"
-//                 name="date"
-//               />
-//             </div>
+            <div class="form-container date-container">
+              <div
+                for="date"
+                class="add-task-labels"
+              >
+                Due date<span class="required-marker">*</span>
+              </div>
+              <input
+                type="date"
+                class="add-task-input-date"
+                id="input-date"
+                name="date"
+                value="${element.data.date}"
+              />
+            </div>
 
-//             <div class="form-container date-container">
-//               <div
-//                 for="prio"
-//                 class="add-task-labels"
-//               >
-//                 Prio
-//               </div>
-//               <div class="prio-buttons-container">
-//                 <button
-//                   class="prio-buttons"
-//                   id="button-urgent"
-//                   onclick="setPrio('urgent')"
-//                 >
-//                   Urgent
-//                   <img
-//                     src="../assets/icons/prio-urgent.png"
-//                     alt="prio urgent icon"
-//                     id="button-urgent-img"
-//                   />
-//                 </button>
-//                 <button
-//                   class="prio-buttons"
-//                   id="button-medium"
-//                   onclick="setPrio('medium')"
-//                 >
-//                   Medium
-//                   <img
-//                     src="../assets/icons/prio-medium.png"
-//                     alt="prio medium icon"
-//                     id="button-medium-img"
-//                   />
-//                 </button>
-//                 <button
-//                   class="prio-buttons"
-//                   id="button-low"
-//                   onclick="setPrio('low')"
-//                 >
-//                   Low
-//                   <img
-//                     src="../assets/icons/prio-low.png"
-//                     alt="prio low icon"
-//                     id="button-low-img"
-//                   />
-//                 </button>
-//               </div>
-//             </div>
+            <div class="form-container prio-container">
+              <div
+                for="prio"
+                class="add-task-labels"
+              >
+                Prio
+              </div>
+              <div class="prio-buttons-container">
+                <button
+                  class="prio-buttons"
+                  id="button-urgent"
+                  onclick="setPrio('urgent')"
+                >
+                  Urgent
+                  <img
+                    src="../assets/icons/prio-urgent.png"
+                    alt="prio urgent icon"
+                    id="button-urgent-img"
+                  />
+                </button>
+                <button
+                  class="prio-buttons"
+                  id="button-medium"
+                  onclick="setPrio('medium')"
+                >
+                  Medium
+                  <img
+                    src="../assets/icons/prio-medium.png"
+                    alt="prio medium icon"
+                    id="button-medium-img"
+                  />
+                </button>
+                <button
+                  class="prio-buttons"
+                  id="button-low"
+                  onclick="setPrio('low')"
+                >
+                  Low
+                  <img
+                    src="../assets/icons/prio-low.png"
+                    alt="prio low icon"
+                    id="button-low-img"
+                  />
+                </button>
+              </div>
+            </div>
 
-//             <div class="form-container category-container">
-//               <div
-//                 for="category"
-//                 class="add-task-labels"
-//               >
-//                 Category<span class="required-marker">*</span>
-//               </div>
-//               <select
-//                 type="text"
-//                 class="add-task-select"
-//                 id="select-category"
-//                 name="category"
-//               >
-//                 <option
-//                   value="Select task category"
-//                   disabled
-//                   selected
-//                   hidden
-//                 >
-//                   Select task category
-//                 </option>
-//                 <option value="User Story">User Story</option>
-//                 <option value="Technical Task">Technical Task</option>
-//               </select>
-//             </div>
+            <div class="form-container assigned-to-container">
+              <div
+                for="assigned to"
+                class="add-task-labels"
+              >
+                Assigned to
+              </div>
+              <select
+                type="text"
+                id="input-assigned-to"
+                class="add-task-select"
+                name="assigned to"
+              >
+                <option
+                  value="No selection"
+                  disabled
+                  selected
+                  hidden
+                >
+                  Select contacts to assign
+                </option>
+                <option value="Jim Panse">Jim Panse</option>
+                <option value="Anne Theke">Anne Theke</option>
+                <option value="Kara Mell">Kara Mell</option>
+              </select>
+            </div>
 
-//             <div class="form-container subtasks-container">
-//               <div
-//                 for="subtasks"
-//                 class="add-task-labels"
-//               >
-//                 Subtasks
-//               </div>
-//               <div class="add-task-input">
-//                 <input
-//                   type="subtasks"
-//                   name="subtasks"
-//                   placeholder="Add new subtask"
-//                   class="add-task-input-subtasks"
-//                   id="input-subtask"
-//                   oninput="controlSubtaskIcons()"
-//                 />
-//                 <img
-//                   src="../assets/icons/add-subtask.png"
-//                   alt="add subtask icon"
-//                   id="add-subtask-img"
-//                 />
-//                 <img
-//                   src="../assets/icons/submit-subtask.png"
-//                   alt="submit subtask icon"
-//                   id="submit-subtask-img"
-//                   onclick="submitInputSubtask()"
-//                 />
-//                 <img
-//                   src="../assets/icons/cancel-subtask.png"
-//                   alt="plus icon"
-//                   id="cancel-subtask-img"
-//                   onclick="cancelInputSubtask()"
-//                 />
-//               </div>
-//               <ul
-//                 class="subtasks-list"
-//                 id="subtasks-list"
-//               ></ul>
-//             </div>
-//           </div>
-//         </div>
-//         <div class="add-task-footer">
-//           <div>
-//             <span class="required-marker">*</span>This field is required
-//           </div>
-//           <div class="add-task-buttons-container">
-//             <button
-//               class="add-task-cancel-button"
-//               onclick="closeAddTaskModal()"
-//             >
-//               Cancel
-//             </button>
-//             <button
-//               class="add-task-submit-button"
-//               onclick="createNewTask()"
-//             >
-//               Create Task
-//             </button>
-//           </div>
-//         </div>
+            <div class="form-container subtasks-container">
+              <div
+                for="subtasks"
+                class="add-task-labels"
+              >
+                Subtasks
+              </div>
+              <div class="add-task-input">
+                <input
+                  type="subtasks"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                  class="add-task-input-subtasks"
+                  id="input-subtask"
+                  oninput="controlSubtaskIcons()"
+                />
+                <img
+                  src="../assets/icons/add-subtask.png"
+                  alt="add subtask icon"
+                  id="add-subtask-img"
+                />
+                <img
+                  src="../assets/icons/submit-subtask.png"
+                  alt="submit subtask icon"
+                  id="submit-subtask-img"
+                  onclick="submitInputSubtask()"
+                />
+                <img
+                  src="../assets/icons/cancel-subtask.png"
+                  alt="plus icon"
+                  id="cancel-subtask-img"
+                  onclick="cancelInputSubtask()"
+                />
+              </div>
+              <ul
+                class="subtasks-list"
+                id="subtasks-list"
+              ></ul>
+            </div>
 
-//         <div
-//           id="info-toast"
-//           class="hidden"
-//         >
-//           <p id="infoText"></p>
-//           <img
-//             src="../assets/icons/board.png"
-//             width="30px"
-//             height="30px"
-//             alt="task icon"
-//           />
-//         </div>
-//       </div>
-//     `;
-// }
+            <div class="edit-task-buttons-container">
+              <button
+                class="add-task-submit-button"
+                id="${element.id}"
+                onclick="editTask(event)"
+              >
+                OK
+                <img
+                  src="../assets/icons/check.png"
+                  alt="check icon"
+                />
+              </button>
+            </div>
+      </div>
+  `;
+}

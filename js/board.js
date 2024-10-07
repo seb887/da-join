@@ -302,22 +302,34 @@ async function deleteTask(event) {
   renderBoard();
 }
 
-function editTask(event) {
+function openEditTaskModal(event) {
   const taskId = event.target.id;
 
-  console.log(taskId);
+  for (let element of tasks) {
+    if (taskId == element.id) {
+      // console.log('task modal element id:', element.id);
+      taskModal.innerHTML = createEditTaskModalHTML(element);
+    }
+  }
+}
+
+function editTask(event) {
+  const taskId = event.target.id;
 
   let editedTask = {
     title: inputTitle.value,
     description: inputDescription.value,
     date: inputDate.value,
-    category: selectCategory.value,
-    bgCategory: setCategoryBackgroundColor(selectCategory.value),
-    board: 'todo',
-    prio: currentPrio,
-    subtasks: subtasks,
-    assignedTo: inputAssignedTo.value,
+    // prio: currentPrio,
+    // subtasks: subtasks,
+    // assignedTo: inputAssignedTo.value,
   };
+
+  console.log(inputTitle.value);
+
+  // updateTaskInFirebase(taskId, editedTask);
+  // openTaskModal(event);
+  // renderBoard();
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
@@ -331,5 +343,3 @@ function showInfoToast(text) {
     toast.classList.remove('show');
   }, 1500);
 }
-
-
