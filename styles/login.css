@@ -21,8 +21,8 @@ body {
 }
 
 .logo {
-    z-index: 5;
-    width: 250px;
+    z-index: 100;
+    width: 274px;
     transition: ease-in-out 750ms;
     position: absolute;
     left: 50%;
@@ -273,7 +273,7 @@ footer a:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 99;
     background-color: #F6F7F8;
     opacity: 100%;
     transition: ease-in-out 750ms;
@@ -335,9 +335,15 @@ footer a:hover {
 .signed-up-animation-overlay {
     animation: sign-up-key-frames 500ms forwards;
 }
+
 .signed-up-animation-container {
     animation: sign-up-container-key-frames 400ms forwards;
 }
+
+#logo-white {
+    display: none;
+}
+
 @keyframes sign-up-key-frames {
     0% {
         background-color: #65666700;
@@ -352,6 +358,15 @@ footer a:hover {
     }
     100% {
         margin-top: 0%;
+    }
+}
+
+@keyframes change-color-of-logo {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
     }
 }
 
@@ -373,6 +388,9 @@ footer a:hover {
 }
 
 @media (max-width: 505px) {
+    .whole-body {
+        margin-top: 0px;
+    }
     .email-input {
         background: url(../assets/icons/mail.png) no-repeat scroll 308px;
     }
@@ -395,16 +413,23 @@ footer a:hover {
     .name-input {
         background: url(../assets/icons/person.png) no-repeat scroll 309px;
     }
+    #logo-white {
+        animation: change-color-of-logo 750ms forwards;
+    }
     .logo {
         width: 100px;
-        content: url(../assets/img/logo-white.png);
     }
     .loading-logo-animation {
         width: 64px;
     }
     .loading-overlay {
         background-color: #2A3647;
-        z-index: 1;
+    }
+    .loading-overlay-animation {
+        z-index: -1;
+    }
+    #logo-white {
+        display: unset;
     }
 }
 
@@ -481,10 +506,6 @@ footer a:hover {
         align-items: center;
         height: 123px;
         gap: 21px;
-    }
-    .loading-overlay-animation {
-        opacity: 0%;
-        z-index: -1;
     }
 }
 
