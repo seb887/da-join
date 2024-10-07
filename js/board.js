@@ -332,4 +332,4 @@ function showInfoToast(text) {
   }, 1500);
 }
 
-renderBoard();
+

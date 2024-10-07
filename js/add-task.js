@@ -257,8 +257,15 @@ function filterContacts(event) {
   displayMatchingContacts();
 }
 
+<<<<<<< HEAD
 function displayMatchingContacts() {
   console.log('hallo');
+=======
+
+function displayMatchingContacts(){
+  console.log('displayMatchingContacts fired!');
+  
+>>>>>>> c7a4ed984a69b39a3463755d6f5db6b72326bad9
 }
 
 function assignedToContactsContent(contact, id, index) {
@@ -275,4 +282,9 @@ function assignedToContactsContent(contact, id, index) {
     `;
 }
 
+<<<<<<< HEAD
 renderAddTask();
+=======
+
+
+>>>>>>> c7a4ed984a69b39a3463755d6f5db6b72326bad9
