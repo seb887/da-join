@@ -25,7 +25,10 @@
     />
     <title>Board - Join</title>
   </head>
-  <body onload="renderBoard()">
+  <body
+    onload="renderBoard()"
+    onkeydown="closeTaskModalESC(event)"
+  >
     <header class="header">
       <div
         id="dropdown-profile"
