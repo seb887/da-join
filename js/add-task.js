@@ -255,7 +255,7 @@ function filterContacts(event) {
 
 
 function displayMatchingContacts(){
-  console.log('hallo');
+  console.log('displayMatchingContacts fired!');
   
 }
 
@@ -275,4 +275,4 @@ function assignedToContactsContent(contact, id, index){
 }
 
 
-renderAddTask();
+
