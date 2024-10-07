@@ -219,11 +219,20 @@ function inspectCheckboxes () {
       cb.parentElement.parentElement.classList.remove('selected');
   }
   })
+  renderAssignedContacts()
+}
+
+function renderAssignedContacts(){
+  assignedContacts.forEach((id) => {
+    console.log(id);
+    
+  })  
 }
 
 
 function dropDownContacts(){
   const contactList = document.getElementById('input-assigned-to');
+
   if(contactList.style.display == 'flex'){
     contactList.style.display = 'none'
     document.getElementById('searchContact').placeholder = 'Select contacts to assign';
@@ -233,30 +242,52 @@ function dropDownContacts(){
     document.getElementById('searchContact').placeholder = '';
     document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
   }
-  dropedDown = !dropedDown;
 }
 
 
 function filterContacts(event) {
-  console.log(dropedDown);
-  
-  if(document.getElementById('searchContact').value.length >= 3 && !dropedDown)
+  if(showOrHideContactsOnInput()){
+    displayMatchingContacts();
+  }
+}
+
+
+function showOrHideContactsOnInput(){
+  const contactList = document.getElementById('input-assigned-to');
+  if(document.getElementById('searchContact').value.length > 0)
     {
-      dropDownContacts();
-      displayMatchingContacts();
+      contactList.style.display = 'flex'
+      document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
+      return true
     }
     else{
       document.getElementById('input-assigned-to').style.display = 'none'
-      dropedDown = false;
-      return
-    }
-    displayMatchingContacts();    
+      document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-down.png"
+  }
 }
 
 
 function displayMatchingContacts(){
-  console.log('displayMatchingContacts fired!');
-  
+  let input = document.getElementById('searchContact')
+  inputAssignedTo.innerHTML = '';
+  renderedContacts.forEach((contact, index) => {
+    if(input.value.toLowerCase().match(contact['name'].toLowerCase().slice(0, 2))){
+        inputAssignedTo.innerHTML += assignedToContactsContentFilter(contact, contact['id']);
+        document.getElementById(contact['id'] +'-container').style.backgroundColor = contact['color'];
+    }
+    else{
+      return
+    }
+  });
+}
+
+
+function renderContactArray(){
+  inputAssignedTo.innerHTML = '';
+      renderedContacts.forEach((contact, index) => {
+        inputAssignedTo.innerHTML += assignedToContactsContentFilter(contact, contact['id']);
+        document.getElementById(contact['id'] +'-container').style.backgroundColor = contact['color'];
+    })
 }
 
 
@@ -269,6 +300,20 @@ function assignedToContactsContent(contact, id, index){
           <div>${contact['name']}</div>
         </div>
         <input onchange ="inspectCheckboxes()" value="${id[index]}" id="${id[index]}cb" type ="checkbox">
+      </div>
+  </label>
+    `
+}
+
+function assignedToContactsContentFilter(contact, id){
+  return `
+  <label for ="${id}cb">
+      <div class ="add-task-contact-list">
+        <div>
+          <div id= "${id}-container" class= "initial-div">${contact['initials']}</div>
+          <div>${contact['name']}</div>
+        </div>
+        <input onchange ="inspectCheckboxes()" value="${id}" id="${id}cb" type ="checkbox">
       </div>
   </label>
     `
