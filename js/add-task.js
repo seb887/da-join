@@ -73,11 +73,11 @@ function setCategoryBackgroundColor(category) {
 function checkInputs(taskObj) {
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
-      return;
-      // alert('Please insert a title');
+      // return;
+      alert('Please insert a title');
     } else if (taskObj.category == 'Select task category') {
-      return;
-      // alert('Please select the category');
+      // return;
+      alert('Please select a category');
     }
   } else {
     console.log('create new task: ', taskObj);
@@ -196,71 +196,72 @@ async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   renderedContacts = [];
-  allContacts.forEach((contact, index )=>{contact.id = id[index]});
+  allContacts.forEach((contact, index) => {
+    contact.id = id[index];
+  });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact, id, index);
-    document.getElementById(id[index] +'-container').style.backgroundColor = contact['color'];
+    document.getElementById(id[index] + '-container').style.backgroundColor =
+      contact['color'];
     renderedContacts.push(contact);
-  })
+  });
 }
 
-
-function inspectCheckboxes () {
+function inspectCheckboxes() {
   let allDivs = document.getElementById('input-assigned-to');
   assignedContacts = [];
   allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
     if (cb.checked) {
-        assignedContacts.push(cb.value);
-        cb.parentElement.parentElement.classList.add('selected');
+      assignedContacts.push(cb.value);
+      cb.parentElement.parentElement.classList.add('selected');
     }
     if (!cb.checked) {
       cb.parentElement.parentElement.classList.remove('selected');
-  }
-  })
+    }
+  });
 }
 
-
-function dropDownContacts(){
+function dropDownContacts() {
   const contactList = document.getElementById('input-assigned-to');
-  if(contactList.style.display == 'flex'){
-    contactList.style.display = 'none'
-    document.getElementById('searchContact').placeholder = 'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-down.png"
-  }else{
-    contactList.style.display = 'flex'
+  if (contactList.style.display == 'flex') {
+    contactList.style.display = 'none';
+    document.getElementById('searchContact').placeholder =
+      'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+  } else {
+    contactList.style.display = 'flex';
     document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
   }
   dropedDown = !dropedDown;
 }
 
-
 function filterContacts(event) {
   console.log(dropedDown);
-  
-  if(document.getElementById('searchContact').value.length >= 3 && !dropedDown)
-    {
-      dropDownContacts();
-      displayMatchingContacts();
-    }
-    else{
-      document.getElementById('input-assigned-to').style.display = 'none'
-      dropedDown = false;
-      return
-    }
-    displayMatchingContacts();    
+
+  if (
+    document.getElementById('searchContact').value.length >= 3 &&
+    !dropedDown
+  ) {
+    dropDownContacts();
+    displayMatchingContacts();
+  } else {
+    document.getElementById('input-assigned-to').style.display = 'none';
+    dropedDown = false;
+    return;
+  }
+  displayMatchingContacts();
 }
 
-
-function displayMatchingContacts(){
+function displayMatchingContacts() {
   console.log('hallo');
-  
 }
 
-
-function assignedToContactsContent(contact, id, index){
+function assignedToContactsContent(contact, id, index) {
   return `
   <label for ="${id[index]}cb">
       <div class ="add-task-contact-list">
@@ -271,8 +272,7 @@ function assignedToContactsContent(contact, id, index){
         <input onchange ="inspectCheckboxes()" value="${id[index]}" id="${id[index]}cb" type ="checkbox">
       </div>
   </label>
-    `
+    `;
 }
-
 
 renderAddTask();

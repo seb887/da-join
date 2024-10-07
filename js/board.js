@@ -139,6 +139,12 @@ function closeTaskModal() {
   // taskModal.innerHTML = '';
 }
 
+function closeTaskModalESC(event) {
+  if (event.key === 'Escape') {
+    closeTaskModal();
+  }
+}
+
 function openAddTaskModal() {
   addTaskModal.style.display = 'flex';
   // addTaskModal.innerHTML = createAddTaskModalHTML();
@@ -294,6 +300,24 @@ async function deleteTask(event) {
 
   closeTaskModal();
   renderBoard();
+}
+
+function editTask(event) {
+  const taskId = event.target.id;
+
+  console.log(taskId);
+
+  let editedTask = {
+    title: inputTitle.value,
+    description: inputDescription.value,
+    date: inputDate.value,
+    category: selectCategory.value,
+    bgCategory: setCategoryBackgroundColor(selectCategory.value),
+    board: 'todo',
+    prio: currentPrio,
+    subtasks: subtasks,
+    assignedTo: inputAssignedTo.value,
+  };
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation

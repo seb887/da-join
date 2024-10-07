@@ -92,7 +92,7 @@ function createTaskModalHTML(element) {
             Delete
           </button>
           <div class="task-modal-card-buttons-seperator"></div>
-          <button id="${element.id}">
+          <button id="${element.id}" onclick="editTask(event)">
             <img
               src="../assets/icons/edit.png"
               alt="edit icon"
