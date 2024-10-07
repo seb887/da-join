@@ -4,18 +4,9 @@ const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatab
 const monthString = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
 
 function initSummary() {
-    greeting();
-    setActiveUserInitials();
     setSummaries();
-}
-
-async function getActiveUser() {
-    let response = await fetch(BASE_URL + '/activeUser.json');
-    let activeUser = await response.json();
-    if (activeUser) {
-        document.getElementById('name').innerHTML = activeUser.activeName;
-        return activeUser;
-    }
+    setActiveUserInitials();
+    greeting();
 }
 
 async function deleteActiveUser() {
@@ -38,11 +29,6 @@ function greeting() {
     }
     document.getElementById('time-of-the-day').innerHTML = greet;
 }
-
-function createLogOutDiv() {
-
-}
-
 
 async function getTasks() {
     let response = await fetch(TASKS_URL + '.json');

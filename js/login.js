@@ -10,6 +10,8 @@ function init() {
 function playLogoAnimation() {
     document.getElementById("logo").classList.remove("loading-logo-animation");
     document.getElementById("logo").classList.add("loading-logo-animation");
+    document.getElementById("logo-white").classList.remove("loading-logo-animation");
+    document.getElementById("logo-white").classList.add("loading-logo-animation");
     document.getElementById("loading-overlay-id").classList.add("loading-overlay-animation");
 }
 
@@ -204,7 +206,7 @@ function renderLogIn() {
                     </div>
                     <div class="what-kind-of-login">
                         <button class="just-login">Log in</button>
-                        <a class="guest-login" style="color: black;" href="board.html">Guest Log in</a>
+                        <a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in</a>
                     </div>
                 </form>
             </div>
