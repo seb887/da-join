@@ -24,11 +24,12 @@
   <body onload="initSummary()">
     <header class="header">
       <div id="dropdown-profile" class="dropdown-profile">
+        <div onclick="location.href='help.html'" class="dropdown-profile-buttons help-button">Help</div>
         <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
         <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
         <div onclick="guestLogInOrLogOut()" class="dropdown-profile-buttons">Log out</div>
       </div>
-      <p>Kanban Project Management Tool</p>
+      <p class="project-tool-info">Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
           <a href="../help.html"
@@ -56,11 +57,11 @@
 
       <nav class="navbar">
         <div class="nav-links-container">
-          <a
+          <a style="color: white;"
             href="../html/summary.html"
             class="nav-links"
           >
-            <img
+            <img style="filter: brightness(150%);"
               src="../assets/icons/summary.png"
               alt="summary icon"
             />Summary</a
@@ -121,6 +122,7 @@
         <b>Join 360</b>
         <div class="seperator"></div>
         <p>Key Metrics at a Glance</p>
+        <div class="hidden-seperator"></div>
       </div>
       <div class="summary-overview">
         <div class="summary-overview-tasks">
@@ -140,7 +142,6 @@
                   ></span
                 >
                 <span
-                  style="font-size: 20px"
                   class="task-description"
                   >To-Do</span
                 >
@@ -161,7 +162,6 @@
                   ></span
                 >
                 <span
-                  style="font-size: 20px"
                   class="task-description"
                   >Done</span
                 >
@@ -204,7 +204,6 @@
                   ></span
                 >
                 <span
-                  style="font-size: 20px"
                   class="task-description"
                   >Tasks in Board</span
                 >
@@ -221,7 +220,6 @@
                   ></span
                 >
                 <span
-                  style="font-size: 20px"
                   class="task-description"
                   >Tasks in Progress</span
                 >
@@ -238,7 +236,6 @@
                   ></span
                 >
                 <span
-                  style="font-size: 20px"
                   class="task-description"
                   >Awaiting Feedback</span
                 >
@@ -252,6 +249,46 @@
         </div>
       </div>
     </div>
+    <footer>
+      <div class="nav-links-summary"><a style="color: white;"
+        href="../html/summary.html"
+        class="nav-links"
+      >
+        <img style="filter: brightness(150%);"
+          src="../assets/icons/summary.png"
+          alt="summary icon"
+        />Summary</a
+      ></div>
+      <div class="nav-links-responsive"><a
+        href="../html/add-task.html"
+        class="nav-links"
+      >
+        <img
+          src="../assets/icons/add-task.png"
+          alt="add task icon"
+        />
+        Add Task</a
+      ></div>
+      <div class="nav-links-responsive"><a
+        href="../html/board.html"
+        class="nav-links"
+      >
+        <img
+          src="../assets/icons/board.png"
+          alt="board icon"
+        />
+        Board</a
+      ></div>
+      <div class="nav-links-responsive"><a
+        href="../html/contacts.html"
+        class="nav-links"
+      >
+        <img
+          src="../assets/icons/contacts.png"
+          alt="contacts icon"
+        />Contacts</a
+      ></div>
+    </footer>
     <script src="../js/summary.js"></script>
     <script src="../js/script.js"></script>
   </body>
