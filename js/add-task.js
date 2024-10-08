@@ -1,19 +1,19 @@
 // DOM ELEMENTS
-let inputTitle = document.getElementById('input-title');
-let inputDescription = document.getElementById('input-description');
-let inputDate = document.getElementById('input-date');
+const inputTitle = document.getElementById('input-title');
+const inputDescription = document.getElementById('input-description');
+const inputDate = document.getElementById('input-date');
 const selectCategory = document.getElementById('select-category');
 const subtasksList = document.getElementById('subtasks-list');
 const addSubtasksImg = document.getElementById('add-subtask-img');
 const submitSubtasksImg = document.getElementById('submit-subtask-img');
 const cancelSubtasksImg = document.getElementById('cancel-subtask-img');
 const inputSubtask = document.getElementById('input-subtask');
-let buttonLow = document.getElementById('button-low');
-let buttonMedium = document.getElementById('button-medium');
-let buttonUrgent = document.getElementById('button-urgent');
-let buttonLowImg = document.getElementById('button-low-img');
-let buttonMediumImg = document.getElementById('button-medium-img');
-let buttonUrgentImg = document.getElementById('button-urgent-img');
+const buttonLow = document.getElementById('button-low');
+const buttonMedium = document.getElementById('button-medium');
+const buttonUrgent = document.getElementById('button-urgent');
+const buttonLowImg = document.getElementById('button-low-img');
+const buttonMediumImg = document.getElementById('button-medium-img');
+const buttonUrgentImg = document.getElementById('button-urgent-img');
 const inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
@@ -196,16 +196,18 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
+
   renderedContacts = [];
   allContacts.forEach((contact, index) => {
-    contact.id = id[index];
+    console.log(contact.name + id[index]), (contact.id = id[index]);
   });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
-    inputAssignedTo.innerHTML += assignedToContactsContent(contact, id, index);
-    document.getElementById(id[index] + '-container').style.backgroundColor =
-      contact['color'];
+    inputAssignedTo.innerHTML += assignedToContactsContent(contact);
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
     renderedContacts.push(contact);
   });
 }
@@ -222,12 +224,11 @@ function inspectCheckboxes() {
       cb.parentElement.parentElement.classList.remove('selected');
     }
   });
-  renderAssignedContacts();
 }
 
-function renderAssignedContacts() {
-  assignedContacts.forEach((id) => {
-    console.log(id);
+function setAssignedContacts() {
+  renderedContacts.forEach((contact) => {
+    if (1) console.log('!');
   });
 }
 
@@ -255,37 +256,34 @@ function filterContacts(event) {
 }
 
 function showOrHideContactsOnInput() {
+  let allDivs = document.getElementById('input-assigned-to');
   const contactList = document.getElementById('input-assigned-to');
   if (document.getElementById('searchContact').value.length > 0) {
     contactList.style.display = 'flex';
     document.getElementById('arrowAssignTo').src =
       '../assets/icons/arrow-up.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      cb.parentElement.parentElement.style.display = 'none';
+    });
     return true;
   } else {
     document.getElementById('input-assigned-to').style.display = 'none';
     document.getElementById('arrowAssignTo').src =
       '../assets/icons/arrow-down.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      cb.parentElement.parentElement.style.display = '';
+    });
+    return false;
   }
 }
 
+//Hier soll allen Elementen die nicht matchen display none oder visibility = hidden gegeben werden (Nicht alles neu rendern, da die gecheckten boxen wieder verschwinden)
 function displayMatchingContacts() {
-  let input = document.getElementById('searchContact');
-  inputAssignedTo.innerHTML = '';
-  renderedContacts.forEach((contact, index) => {
-    if (
-      input.value.toLowerCase().match(contact['name'].toLowerCase().slice(0, 2))
-    ) {
-      inputAssignedTo.innerHTML += assignedToContactsContentFilter(
-        contact,
-        contact['id']
-      );
-      document.getElementById(
-        contact['id'] + '-container'
-      ).style.backgroundColor = contact['color'];
-    } else {
-      return;
-    }
-  });
+  console.log(
+    renderedContacts.find((renderedContact) =>
+      assignedContacts.includes(renderedContact['id'])
+    )
+  );
 }
 
 function renderContactArray() {
@@ -303,13 +301,13 @@ function renderContactArray() {
 
 function assignedToContactsContent(contact, id, index) {
   return `
-  <label for ="${id[index]}cb">
+  <label for ="${contact['id']}cb">
       <div class ="add-task-contact-list">
         <div>
-          <div id= "${id[index]}-container" class= "initial-div">${contact['initials']}</div>
+          <div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}</div>
           <div>${contact['name']}</div>
         </div>
-        <input onchange ="inspectCheckboxes()" value="${id[index]}" id="${id[index]}cb" type ="checkbox">
+        <input onchange ="inspectCheckboxes()" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
       </div>
   </label>
     `;
