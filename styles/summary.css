@@ -32,19 +32,13 @@ body {
 }
 
 .summary-title p {
-    font-family: Inter;
     font-size: 27px;
     font-weight: 400;
-    line-height: 32.4px;
-    text-align: left;
 }
 
 .summary-title b {
-    font-family: Inter;
     font-size: 61px;
     font-weight: 700;
-    line-height: 73.2px;
-    text-align: left;
 }
 
 .seperator {
@@ -94,10 +88,8 @@ body {
 }
 
 .task-counter {
-    font-family: Inter;
     font-size: 64px;
     font-weight: 600;
-    line-height: 76.8px;
     text-align: center;
 }
 
@@ -118,16 +110,12 @@ body {
 }
 
 #deadline {
-    font-family: Inter;
     font-size: 21px;
     font-weight: 700;
-    line-height: 25.2px;
-    text-align: left;
 }
 
 .summary-overview-top {
     width: 560px;
-    height: 168px;
     gap: 32px;
     display: flex;
 }
@@ -139,9 +127,7 @@ body {
     background: #FFFFFF;
     width: 264px;
     height: 168px;
-    padding: 38px 19px 38px 19px;
     gap: 18px;
-    line-height: 24px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #0000001A;
 }
@@ -161,15 +147,12 @@ body {
     top: 1px;
     padding: 25px;
     display: flex;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 13px;
     border-radius: 30px;
     left: 196px;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000001A;
-    line-height: 24px;
 }
 
 .greeting {
@@ -269,5 +252,86 @@ body {
     }
     .task-description {
         font-size: 18px;
+    }
+}
+
+@media (max-width: 625px) {
+    .to-do {
+        height: 130px;
+        gap: 10px;
+    }
+    .icons-top {
+        width: 40px;
+    }
+    .summary-overview-top {
+        width: unset;
+        align-items: center;
+    }
+    .summary-overview-tasks {
+        gap: 20px;
+    }
+    body {
+        justify-content: center;
+    }
+    .summary-content {
+        display: flex;
+        flex-direction: column;
+        position: unset;
+        height: unset;
+        width: unset;
+    }
+    .summary-title {
+        padding: 0px;
+    }
+    .summary-overview {
+        width: 360px;
+        padding: 0px;
+        display: unset;
+    }
+    .summary-overview-bottom {
+        gap: 0px;
+        width: unset;
+        display: flex;
+        justify-content: space-between;
+    }
+    .task:hover {
+    transform: scale(1.03);
+    }
+    .deadline {
+        font-size: 14px;
+    }
+    #deadline {
+        font-size: 16px;
+    }
+    .urgent {
+        gap: 20px;
+    }
+    .urgent-tasks-board {
+        gap: unset;
+        height: 130px;
+        width: 360px;
+        padding: 28px;
+    }
+    .urgent-tasks-board img {
+        width: 40px;
+        height: 40px;
+        margin-right: 18px;
+    }
+    .summary-title b {
+        font-size: 47px;
+    }
+    .summary-title p {
+        font-size: 20px;
+    }
+    .summary-overview-bottom a {
+        height: 116px;
+        width: 110px;
+    }
+    .task-description {
+        font-size: 14px;
+    }
+
+    .second-seperator {
+        height: 68px;
     }
 }

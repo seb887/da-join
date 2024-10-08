@@ -234,4 +234,7 @@ h1 {
   .project-tool-info {
     display: none;
   }
+  .help-logo {
+    display: none;
+  }
 }
