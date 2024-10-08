@@ -65,6 +65,7 @@ body {
     display: flex;
     gap: 61px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -195,6 +196,10 @@ body {
     color: black;
 }
 
+.task-description {
+    font-size: 20px;
+}
+
 .task:hover {
     background-color: #2A3647;
     color: #F6F7F8;
@@ -206,4 +211,63 @@ body {
 
 .show {
     visibility: visible;
+}
+
+.hidden-seperator {
+    visibility: hidden;
+    border: 3px solid #29ABE2;
+    rotate: 180deg;
+    width: 120px;
+}
+
+@media (max-width: 1630px) {
+    .greeting {
+        padding-left: 75px;
+    }
+}
+
+@media (max-width: 1510px) {
+    .greeting {
+        padding-left: 25px;
+    }
+    #time-of-the-day {
+        font-size: 45px;
+    }
+    #name {
+        font-size: 45px;
+    }
+}
+
+@media (max-width: 1280px) {
+.greeting {
+    display: none;
+    }
+}
+
+@media (max-width: 890px) {
+    .summary-title {
+        flex-direction: column;
+        align-items: unset;
+    }
+    .seperator {
+        display: none;
+    }
+    .hidden-seperator {
+        visibility: visible;
+    }
+    .summary-overview-top a {
+        width: 210px;
+    }
+    .urgent-tasks-board {
+        width: 455px;
+    }
+    .summary-overview-bottom a {
+        width: 130px;
+    }
+    .task-counter {
+        font-size: 47px;
+    }
+    .task-description {
+        font-size: 18px;
+    }
 }

@@ -222,3 +222,16 @@ h1 {
   position: relative;
   top: 96px;
 }
+
+/*======================
+       Responsive
+=======================*/
+
+@media (max-width: 890px) {
+  .sidebar {
+      display: none;
+  }
+  .project-tool-info {
+    display: none;
+  }
+}
