@@ -233,7 +233,7 @@ h1 {
 
 footer {
     display: none;
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     left: 0px;
     width: 100vw;
@@ -277,6 +277,7 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow: auto;
   }
   .nav-links {
     flex-direction: column;
