@@ -20,6 +20,16 @@ body {
   gap: 12px;
 }
 
+.nav-links-contacts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+  background-color: var(--bg-hover);
+}
+
 .contact-list-container {
   display: flex;
   justify-content: flex-start;
@@ -282,9 +292,6 @@ article {
     color: var(--accent-primary);
   }
 }
-
-
-
 
 .add-contact-modal{
   display: none;

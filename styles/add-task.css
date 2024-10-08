@@ -74,6 +74,16 @@
   width: 440px;
 }
 
+.nav-links-add-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+  background-color: var(--bg-hover);
+}
+
 .seperator {
   width: 2px;
   height: 424px;

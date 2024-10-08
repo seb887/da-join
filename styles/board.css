@@ -118,6 +118,16 @@
   overflow-y: scroll;
 }
 
+.nav-links-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+  background-color: var(--bg-hover);
+}
+
 .kanban-container {
   display: flex;
   flex-direction: column;
