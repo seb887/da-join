@@ -139,6 +139,10 @@ h1 {
   background-color: #2A3D59;
 }
 
+.help-button {
+  display: none;
+}
+
 /*======================
        Sidebar
 =======================*/
@@ -236,5 +240,18 @@ h1 {
   }
   .help-logo {
     display: none;
+  }
+  .header {
+    justify-content: flex-end;
+  }
+  .header-user-box {
+    margin-right: 20px;
+    width: unset;
+  }
+  .help-button {
+    display: flex;
+  }
+  .dropdown-profile {
+    height: unset;
   }
 }

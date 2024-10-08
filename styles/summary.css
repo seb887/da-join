@@ -330,8 +330,11 @@ body {
     .task-description {
         font-size: 14px;
     }
-
     .second-seperator {
         height: 68px;
     }
+}
+
+@media (max-width: 360px) {
+
 }
