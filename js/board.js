@@ -49,7 +49,6 @@ async function loadTasksFromFirebase() {
   } else {
     tasks.length = 0;
     pushDataFromFirebaseToArr(tasksDataFromFirebase, tasks);
-    // console.log('tasks:', tasks);
   }
 }
 
@@ -106,17 +105,6 @@ function clearKanbanLists() {
   kanbanListAwaitFeedback.innerHTML = '';
   kanbanListDone.innerHTML = '';
 }
-
-// function controlPrio(prioStatus) {
-//   switch (prioStatus) {
-//     case urgent:
-//       return '../assets/icons/prio-urgent.png';
-//     case medium:
-//       return '../assets/icons/prio-medium.svg';
-//     case low:
-//       return '../assets/icons/prio-low.png';
-//   }
-// }
 
 function getDataForModal(event) {
   const id = event.currentTarget.id;
