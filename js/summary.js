@@ -5,17 +5,10 @@ const monthString = ['Januar','Februar','März','April','Mai','Juni','Juli','Aug
 
 function initSummary() {
     setSummaries();
-    setActiveUserInitials();
     greeting();
+    setActiveUserInitials();
 }
 
-async function deleteActiveUser() {
-    response =  await fetch(BASE_URL + '/activeUser.json', {
-        method: "DELETE",
-    });
-    window.location.href= "login.html";
-}
-  
 function greeting() {
     let myDate = new Date();
     let hrs = myDate.getHours();
