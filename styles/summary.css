@@ -96,9 +96,6 @@ body {
 .second-seperator {
     width: 0px;
     height: 102.02px;
-    gap: 0px;
-    border: 2px 0px 0px 0px;
-    opacity: 0px;
     border: 2px solid #D1D1D1;
 }
 
@@ -159,6 +156,19 @@ body {
     display: flex;
     flex-direction: column;
     padding-left: 200px;
+    animation: addOpacity 1s forwards;
+    animation-delay: 750ms;
+}
+
+.greeting-overlay-responsive {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F6F7F8;
+    animation: addOpacity 1s forwards;
+    animation-delay: 750ms;
 }
 
 #time-of-the-day {
@@ -199,7 +209,6 @@ body {
 .hidden-seperator {
     visibility: hidden;
     border: 3px solid #29ABE2;
-    rotate: 180deg;
     width: 120px;
 }
 
@@ -222,12 +231,48 @@ body {
 }
 
 @media (max-width: 1280px) {
-.greeting {
-    display: none;
+    #time-of-the-day {
+        font-size: 30px;
+    }
+    #name {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1112px) {
+    .greeting {
+        display: none;
     }
 }
 
 @media (max-width: 890px) {
+    @keyframes addOpacity {
+        0% {
+            opacity: 100%;
+        }
+        99.999% {
+            opacity: 0%;
+        }
+        100% {
+            display: none;
+        }
+    }
+    .greeting {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        padding: unset;
+    }
+    #time-of-the-day {
+        font-size: 30px;
+    }
+    #name {
+        font-size: 44px;
+    }
     .nav-links-summary {
         display: flex;
         align-items: center;
@@ -262,35 +307,17 @@ body {
     .task-description {
         font-size: 18px;
     }
-}
-
-@media (max-width: 625px) {
-    .to-do {
-        height: 130px;
-        gap: 10px;
-    }
-    .icons-top {
-        width: 40px;
-    }
-    .summary-overview-top {
-        width: unset;
-        align-items: center;
-    }
-    .summary-overview-tasks {
-        gap: 20px;
-    }
-    body {
-        justify-content: center;
-    }
     .summary-content {
         display: flex;
         flex-direction: column;
         position: unset;
         height: unset;
         width: unset;
+        gap: 25px;
     }
     .summary-title {
         padding: 0px;
+        margin-top: 110px;
     }
     .summary-overview {
         width: 360px;
@@ -303,17 +330,13 @@ body {
         display: flex;
         justify-content: space-between;
     }
-    .task:hover {
-    transform: scale(1.03);
+    .summary-overview-top {
+        width: unset;
+        align-items: center;
     }
-    .deadline {
-        font-size: 14px;
-    }
-    #deadline {
-        font-size: 16px;
-    }
-    .urgent {
-        gap: 20px;
+    body {
+        justify-content: center;
+        margin-bottom: 25px;
     }
     .urgent-tasks-board {
         gap: unset;
@@ -326,15 +349,11 @@ body {
         height: 40px;
         margin-right: 18px;
     }
-    .summary-title b {
-        font-size: 47px;
+    .deadline {
+        font-size: 14px;
     }
-    .summary-title p {
-        font-size: 20px;
-    }
-    .summary-overview-bottom a {
-        height: 116px;
-        width: 110px;
+    #deadline {
+        font-size: 16px;
     }
     .task-description {
         font-size: 14px;
@@ -342,11 +361,85 @@ body {
     .second-seperator {
         height: 68px;
     }
-    body {
-        margin-bottom: 75px;
+    .icons-top {
+        width: 40px;
+    }
+    .urgent {
+        gap: 20px;
+    }
+    .summary-overview-bottom a {
+        height: 116px;
+        width: 110px;
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 634px) {
+    .to-do {
+        height: 130px;
+        gap: 10px;
+    }
+    .summary-overview-tasks {
+        gap: 20px;
+    }
 
+    .task:hover {
+        transform: scale(1.03);
+    }
+    .summary-title b {
+        font-size: 47px;
+    }
+    .summary-title p {
+        font-size: 20px;
+    }
+    body {
+        margin-bottom: 75px;
+    }
+    .hidden-seperator {
+        width: 90px;
+    }
+}
+
+@media (max-width: 395px) {
+    #name {
+        font-size: 34px;
+    }
+    .summary-overview {
+        width: 290px;
+    }
+    .urgent-tasks-board {
+        width: 290px;
+    }
+    .summary-overview-bottom a {
+        width: 85px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .task-description {
+        font-size: 12px;
+    }
+    .deadline {
+        font-size: 12px;
+    }
+    #deadline {
+        font-size: 14px;
+    }
+    .task-counter {
+        font-size: 38px;
+    }
+    .summary-title b {
+        font-size: 38px;
+    }
+    .summary-title p {
+        font-size: 15px;
+    }
+    body {
+        margin-bottom: 160px;
+    }
+}
+
+@media (max-width: 355px) {
+    body {
+        margin-bottom: 250px;
+    }
 }
