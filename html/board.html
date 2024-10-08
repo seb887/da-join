@@ -35,9 +35,10 @@
         class="dropdown-profile"
       >
         <div
-          onclick="location.href='help.html'" 
-          class="dropdown-profile-buttons help-button" 
-          >Help
+          onclick="location.href='help.html'"
+          class="dropdown-profile-buttons help-button"
+        >
+          Help
         </div>
         <a
           class="dropdown-profile-buttons"
@@ -106,11 +107,13 @@
             Add Task</a
           >
 
-          <a style="color: white;"
+          <a
+            style="color: white"
             href="../html/board.html"
             class="nav-links"
           >
-            <img style="filter: brightness(150%);"
+            <img
+              style="filter: brightness(150%)"
               src="../assets/icons/board.png"
               alt="board icon"
             />
@@ -175,7 +178,7 @@
 
             <button
               class="add-task-button"
-              onclick="openAddTaskModal()"
+              onclick="openAddTaskModal(); setPrio('medium')"
             >
               Add task
               <img

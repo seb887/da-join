@@ -1,19 +1,19 @@
 // DOM ELEMENTS
-const inputTitle = document.getElementById('input-title');
-const inputDescription = document.getElementById('input-description');
-const inputDate = document.getElementById('input-date');
+let inputTitle = document.getElementById('input-title');
+let inputDescription = document.getElementById('input-description');
+let inputDate = document.getElementById('input-date');
 const selectCategory = document.getElementById('select-category');
 const subtasksList = document.getElementById('subtasks-list');
 const addSubtasksImg = document.getElementById('add-subtask-img');
 const submitSubtasksImg = document.getElementById('submit-subtask-img');
 const cancelSubtasksImg = document.getElementById('cancel-subtask-img');
 const inputSubtask = document.getElementById('input-subtask');
-const buttonLow = document.getElementById('button-low');
-const buttonMedium = document.getElementById('button-medium');
-const buttonUrgent = document.getElementById('button-urgent');
-const buttonLowImg = document.getElementById('button-low-img');
-const buttonMediumImg = document.getElementById('button-medium-img');
-const buttonUrgentImg = document.getElementById('button-urgent-img');
+let buttonLow = document.getElementById('button-low');
+let buttonMedium = document.getElementById('button-medium');
+let buttonUrgent = document.getElementById('button-urgent');
+let buttonLowImg = document.getElementById('button-low-img');
+let buttonMediumImg = document.getElementById('button-medium-img');
+let buttonUrgentImg = document.getElementById('button-urgent-img');
 const inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
@@ -220,75 +220,85 @@ function inspectCheckboxes() {
     }
     if (!cb.checked) {
       cb.parentElement.parentElement.classList.remove('selected');
-  }
-  })
-  renderAssignedContacts()
+    }
+  });
+  renderAssignedContacts();
 }
 
-function renderAssignedContacts(){
+function renderAssignedContacts() {
   assignedContacts.forEach((id) => {
     console.log(id);
-    
-  })  
+  });
 }
 
 function dropDownContacts() {
   const contactList = document.getElementById('input-assigned-to');
 
-  if(contactList.style.display == 'flex'){
-    contactList.style.display = 'none'
-    document.getElementById('searchContact').placeholder = 'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-down.png"
-  }else{
-    contactList.style.display = 'flex'
+  if (contactList.style.display == 'flex') {
+    contactList.style.display = 'none';
+    document.getElementById('searchContact').placeholder =
+      'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+  } else {
+    contactList.style.display = 'flex';
     document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src ='../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
   }
 }
 
 function filterContacts(event) {
-  if(showOrHideContactsOnInput()){
+  if (showOrHideContactsOnInput()) {
     displayMatchingContacts();
   }
 }
 
-
-function showOrHideContactsOnInput(){
+function showOrHideContactsOnInput() {
   const contactList = document.getElementById('input-assigned-to');
-  if(document.getElementById('searchContact').value.length > 0)
-    {
-      contactList.style.display = 'flex'
-      document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-up.png"
-      return true
-    }
-    else{
-      document.getElementById('input-assigned-to').style.display = 'none'
-      document.getElementById('arrowAssignTo').src = "../assets/icons/arrow-down.png"
+  if (document.getElementById('searchContact').value.length > 0) {
+    contactList.style.display = 'flex';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
+    return true;
+  } else {
+    document.getElementById('input-assigned-to').style.display = 'none';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
   }
 }
 
-
-function displayMatchingContacts(){
-  let input = document.getElementById('searchContact')
+function displayMatchingContacts() {
+  let input = document.getElementById('searchContact');
   inputAssignedTo.innerHTML = '';
   renderedContacts.forEach((contact, index) => {
-    if(input.value.toLowerCase().match(contact['name'].toLowerCase().slice(0, 2))){
-        inputAssignedTo.innerHTML += assignedToContactsContentFilter(contact, contact['id']);
-        document.getElementById(contact['id'] +'-container').style.backgroundColor = contact['color'];
-    }
-    else{
-      return
+    if (
+      input.value.toLowerCase().match(contact['name'].toLowerCase().slice(0, 2))
+    ) {
+      inputAssignedTo.innerHTML += assignedToContactsContentFilter(
+        contact,
+        contact['id']
+      );
+      document.getElementById(
+        contact['id'] + '-container'
+      ).style.backgroundColor = contact['color'];
+    } else {
+      return;
     }
   });
 }
 
-
-function renderContactArray(){
+function renderContactArray() {
   inputAssignedTo.innerHTML = '';
-      renderedContacts.forEach((contact, index) => {
-        inputAssignedTo.innerHTML += assignedToContactsContentFilter(contact, contact['id']);
-        document.getElementById(contact['id'] +'-container').style.backgroundColor = contact['color'];
-    })
+  renderedContacts.forEach((contact, index) => {
+    inputAssignedTo.innerHTML += assignedToContactsContentFilter(
+      contact,
+      contact['id']
+    );
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
+  });
 }
 
 function assignedToContactsContent(contact, id, index) {
@@ -305,7 +315,7 @@ function assignedToContactsContent(contact, id, index) {
     `;
 }
 
-function assignedToContactsContentFilter(contact, id){
+function assignedToContactsContentFilter(contact, id) {
   return `
   <label for ="${id}cb">
       <div class ="add-task-contact-list">
@@ -316,8 +326,5 @@ function assignedToContactsContentFilter(contact, id){
         <input onchange ="inspectCheckboxes()" value="${id}" id="${id}cb" type ="checkbox">
       </div>
   </label>
-    `
+    `;
 }
-
-
-
