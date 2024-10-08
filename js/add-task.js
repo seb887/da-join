@@ -35,6 +35,7 @@ let currentPrio = 'medium';
 async function renderAddTask() {
   clearInputs();
   listContactsToAssignedTo();
+  setActiveUserInitials();
 }
 
 async function saveTaskToFirebase(newTask) {

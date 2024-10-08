@@ -139,6 +139,10 @@ h1 {
   background-color: #2A3D59;
 }
 
+.help-button {
+  display: none;
+}
+
 /*======================
        Sidebar
 =======================*/
@@ -221,4 +225,70 @@ h1 {
   height: calc(100vh - 96px);
   position: relative;
   top: 96px;
+}
+
+/*======================
+       Responsive
+=======================*/
+
+footer {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 80px;
+    background-color: #2A3647;
+}
+
+.nav-links-responsive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+}
+
+@media (max-width: 890px) {
+  .sidebar {
+      display: none;
+  }
+  .project-tool-info {
+    display: none;
+  }
+  .help-logo {
+    display: none;
+  }
+  .header {
+    justify-content: flex-end;
+  }
+  .header-user-box {
+    margin-right: 20px;
+    width: unset;
+  }
+  .help-button {
+    display: flex;
+  }
+  .dropdown-profile {
+    height: unset;
+  }
+  footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: auto;
+  }
+  .nav-links {
+    flex-direction: column;
+    font-size: 14px;
+    padding: 0px;
+  }
+  .nav-links img {
+    width: 24px;
+    height: 24px;
+  }
+  .nav-links-responsive:hover {
+    background-color: var(--bg-hover);
+  }
 }

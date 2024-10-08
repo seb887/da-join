@@ -19,7 +19,7 @@
   </head>
   <body onload="initContacts()">
     <header class="header">
-      <p>Kanban Project Management Tool</p>
+      <p class="project-tool-info">Kanban Project Management Tool</p>
       <div class="header-user-box">
         <div class="help-logo">
           <a href="./help.html"
@@ -37,6 +37,7 @@
       </div>
     </header>
     <div id="dropdown-profile" class="dropdown-profile">
+      <div onclick="location.href='help.html'" class="dropdown-profile-buttons help-button">Help</div>
         <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
         <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
         <div onclick="guestLogInOrLogOut()" class="dropdown-profile-buttons">Log out</div>
@@ -85,11 +86,11 @@
             Board</a
           >
 
-          <a
+          <a style="color: white;"
             href="../html/contacts.html"
             class="nav-links"
           >
-            <img
+            <img style="filter: brightness(150%);"
               src="../assets/icons/contacts.png"
               alt="contacts icon"
             />Contacts</a

@@ -224,7 +224,7 @@ function renderSignUp() {
         <div class="login-seperator"></div>
         <div class="login-form">
              <form id="form-inputs" onsubmit="signUp(); return false;">
-                <input minlength="5" id="name" class="name-input" type="text" placeholder="Name" required> 
+                <input minlength="5" maxlength="16" id="name" class="name-input" type="text" placeholder="Name" required> 
                 <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
