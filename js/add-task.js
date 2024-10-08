@@ -242,8 +242,7 @@ function dropDownContacts() {
   }else{
     contactList.style.display = 'flex'
     document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src ='../assets/icons/arrow-up.png';
   }
 }
 
