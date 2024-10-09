@@ -202,7 +202,6 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
-
   renderedContacts = [];
   allContacts.forEach((contact, index) => {
     console.log(contact.name + id[index]), (contact.id = id[index]);
@@ -225,16 +224,12 @@ function inspectCheckboxes() {
     if (cb.checked) {
       assignedContacts.push(cb.value);
       cb.parentElement.parentElement.classList.add('selected');
+      renderAssignedContacts()
     }
     if (!cb.checked) {
       cb.parentElement.parentElement.classList.remove('selected');
+      renderAssignedContacts()
     }
-  });
-}
-
-function setAssignedContacts() {
-  renderedContacts.forEach((contact) => {
-    if (1) console.log('!');
   });
 }
 
@@ -291,6 +286,25 @@ function displayMatchingContacts(){
     document.getElementById(`${contact.id}cb`).parentElement.parentElement.style.display = ''
   })
 }
+
+function renderAssignedContacts() {
+  let container = document.getElementById('assigned-contacts-list');
+  container.innerHTML = '';
+  let matches = renderedContacts.filter(contact => 
+    assignedContacts.some(id => id.slice(0, -2) === contact.id)
+  );
+  matches.forEach((match,index)=> {
+    container.innerHTML += 
+    `
+      <div id="addContactList${index}" class ="assigned-contacts-initial-container">
+          <div>
+            <div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}</div>
+          </div>
+      </div>
+    `
+  })
+}
+
 
 function renderContactArray() {
   inputAssignedTo.innerHTML = '';
