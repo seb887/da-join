@@ -442,6 +442,9 @@ body {
     gap: 8px;
     width: unset;
   }
+  #input-assigned-to {
+    width: 280px;
+  }
   .add-task-input-title,
   .add-task-input-date,
   .add-task-input-description,
@@ -556,6 +559,9 @@ body {
 }
 
 @media (max-width: 427px) {
+  #input-assigned-to{
+    width: 320px;
+  }
   .add-task-input-title,
   .add-task-input-date,
   .add-task-input-description,
@@ -595,6 +601,9 @@ body {
   .add-task-input,
   .prio-buttons-container {
     font-size: 14px;
+    width: 280px;
+  }
+  #input-assigned-to{
     width: 280px;
   }
 .add-task-labels {

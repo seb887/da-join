@@ -206,7 +206,7 @@ article {
   position: absolute;
   flex-direction: column;
   top: 311px;
-  left: 690px;
+  margin-left: 30px;
   height: 364px;
   a{
     text-decoration: none;
@@ -450,10 +450,13 @@ article {
     border: 1px solid black;
     margin-right: 16px;
     border-radius: 10px;
+    color: black;
     background-image: url(/assets/icons/close.png);
     background-repeat: no-repeat;
     background-position: 90px 16px;
     text-align: left;
+    display: flex;
+    justify-content: unset;
     &:hover{
       cursor: pointer;
       color: #29ABE2;
@@ -469,9 +472,11 @@ article {
     border-radius: 10px;
     background-image: url(/assets/icons/check.png);
     background-repeat: no-repeat;
-    background-position: 170px 22px;
+    background-position: 180px 22px;
     border: none;
     text-align: left;
+    display: flex;
+    justify-content: unset;
     &:hover{
       cursor: pointer;
       background-color: #29ABE2;
