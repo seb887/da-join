@@ -520,13 +520,58 @@ body {
   }
   .add-task-header {
     width: unset;
-    padding-left: 20px;
+    padding-left: 12px;
   }
   body {
     margin-bottom: 250px;
   }
 }
 
-@media (max-width: 428px) {
-  
+@media (max-width: 427px) {
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 14px;
+    width: 320px;
+  }
+  .add-task-submit-button {
+    width: 150px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  .add-task-header {
+    padding-left: 25px;
+  }
+  body {
+    margin-bottom: 320px;
+  }
+}
+
+@media (max-width: 359px) {
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 14px;
+    width: 280px;
+  }
+.add-task-labels {
+  font-size: 14px;
+  }
+.add-task-header {
+  padding-left: 18px;
+  }
+  body {
+    margin-bottom: 520px;
+  }
 }
