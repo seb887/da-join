@@ -25,6 +25,7 @@ const subtasks = [];
 let assignedContacts = [];
 let renderedContacts = [];
 let dropedDown = false;
+let matches = [];
 
 // DEFAULTS
 let currentDate = new Date();
@@ -57,7 +58,7 @@ function createNewTask() {
     board: 'todo',
     prio: currentPrio,
     subtasks: subtasks,
-    assignedTo: inputAssignedTo.value,
+    assignedTo: matches,
   };
 
   checkInputs(newTask);
@@ -181,7 +182,7 @@ function renderSubtasks() {
   }
 }
 
-// TOAST INFO
+
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');
@@ -192,12 +193,13 @@ function showInfoToast(text) {
   }, 1500);
 }
 
-// eventually import function from contact.js
+
 async function getContacts() {
   let response = await fetch(CONTACT_URL);
   let contacts = await response.json();
   return contacts;
 }
+
 
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
@@ -217,6 +219,7 @@ async function listContactsToAssignedTo() {
   });
 }
 
+
 function inspectCheckboxes() {
   let allDivs = document.getElementById('input-assigned-to');
   assignedContacts = [];
@@ -233,22 +236,21 @@ function inspectCheckboxes() {
   });
 }
 
+
 function dropDownContacts() {
   const contactList = document.getElementById('input-assigned-to');
-
   if (contactList.style.display == 'flex') {
     contactList.style.display = 'none';
     document.getElementById('searchContact').placeholder =
       'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
   } else {
     contactList.style.display = 'flex';
     document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
   }
 }
+
 
 function filterContacts(event) {
   if (showOrHideContactsOnInput()) {
@@ -256,29 +258,24 @@ function filterContacts(event) {
   }
 }
 
+
 function showOrHideContactsOnInput() {
   let allDivs = document.getElementById('input-assigned-to');
   const contactList = document.getElementById('input-assigned-to');
   if (document.getElementById('searchContact').value.length > 0) {
     contactList.style.display = 'flex';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
-    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-      cb.parentElement.parentElement.style.display = 'none';
-    });
+    document.getElementById('arrowAssignTo').src ='../assets/icons/arrow-up.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {cb.parentElement.parentElement.style.display = 'none';});
     return true;
   } else {
     document.getElementById('input-assigned-to').style.display = 'none';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
-    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-      cb.parentElement.parentElement.style.display = '';
-    });
+    document.getElementById('arrowAssignTo').src ='../assets/icons/arrow-down.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {cb.parentElement.parentElement.style.display = '';});
     return false;
   }
 }
 
-//Lässt alle assigned Contacts wieder in der Liste erscheinen
+
 function displayMatchingContacts(){
   let input = document.getElementById('searchContact');
   renderedContacts.forEach((contact) => {
@@ -287,21 +284,16 @@ function displayMatchingContacts(){
   })
 }
 
+
 function renderAssignedContacts() {
   let container = document.getElementById('assigned-contacts-list');
   container.innerHTML = '';
-  let matches = renderedContacts.filter(contact => 
+  matches = [];
+  matches = renderedContacts.filter(contact => 
     assignedContacts.some(id => id.slice(0, -2) === contact.id)
   );
   matches.forEach((match,index)=> {
-    container.innerHTML += 
-    `
-      <div id="addContactList${index}" class ="assigned-contacts-initial-container">
-          <div>
-            <div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}</div>
-          </div>
-      </div>
-    `
+    container.innerHTML += assignedInitialContent(match, index);
   })
 }
 
@@ -319,6 +311,7 @@ function renderContactArray() {
   });
 }
 
+
 function assignedToContactsContent(contact, id, index) {
   return `
   <label for ="${contact['id']}cb">
@@ -333,6 +326,7 @@ function assignedToContactsContent(contact, id, index) {
     `;
 }
 
+
 function assignedToContactsContentFilter(contact, id) {
   return `
   <label for ="${id}cb">
@@ -345,4 +339,14 @@ function assignedToContactsContentFilter(contact, id) {
       </div>
   </label>
     `;
+}
+
+function assignedInitialContent(match, index){
+  return  `
+  <div id="addContactList${index}" class ="assigned-contacts-initial-container">
+      <div>
+        <div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}</div>
+      </div>
+  </div>
+`
 }

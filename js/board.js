@@ -95,6 +95,7 @@ function renderData(tasksArr, kanbanList) {
   } else {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
+      renderAssignedToInCard();
     }
   }
 }
@@ -348,4 +349,43 @@ function showInfoToast(text) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 1500);
+}
+
+
+async function returnTasksFromFirebase() {
+  let response = await fetch(BASE_URL + 'tasks' + '.json');
+  let tasks = await response.json();
+  let taskAsObject = Object.values(tasks);
+  let taskKeys = Object.keys(tasks)
+  taskAsObject.forEach((task,index)=> {
+    task.id = taskKeys[index]
+  })
+  return taskAsObject;
+}
+
+async function renderAssignedToInCard() {
+  let tasks = await returnTasksFromFirebase();
+  let assignedTo = await getAllAssignedTo();
+  
+  let card = document.getElementById('card-footer')
+  tasks.forEach((taks)=>{ 
+    assignedTo.forEach((assignedContact)=>{
+      card.innerHTML = '';
+      card.innerHTML += 
+    `
+    <div class="card-profile-badge-3">ALALAL</div>
+    `
+    });
+})
+}
+
+async function getAllAssignedTo() {
+  let tasks = await returnTasksFromFirebase();
+  let assignTo = [];
+  tasks.forEach((task) => {
+    if(task['assignedTo']){
+      assignTo.push(task['assignedTo'])
+    }
+  })
+  return assignTo;
 }
