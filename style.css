@@ -250,7 +250,7 @@ footer {
   border-radius: 8px;
 }
 
-header img {
+.logo-responsive {
   display: none;
   width: 32px;
   margin-left: 20px;
@@ -299,7 +299,7 @@ header img {
   .nav-links-responsive:hover {
     background-color: var(--bg-hover);
   }
-  header img {
+  .logo-responsive {
     display: flex;
   }
 }
