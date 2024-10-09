@@ -250,6 +250,12 @@ footer {
   border-radius: 8px;
 }
 
+.logo-responsive {
+  display: none;
+  width: 32px;
+  margin-left: 20px;
+}
+
 @media (max-width: 890px) {
   .sidebar {
       display: none;
@@ -261,7 +267,9 @@ footer {
     display: none;
   }
   .header {
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0px;
+    position: fixed;
   }
   .header-user-box {
     margin-right: 20px;
@@ -290,5 +298,8 @@ footer {
   }
   .nav-links-responsive:hover {
     background-color: var(--bg-hover);
+  }
+  .logo-responsive {
+    display: flex;
   }
 }

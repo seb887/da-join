@@ -49,7 +49,6 @@ async function loadTasksFromFirebase() {
   } else {
     tasks.length = 0;
     pushDataFromFirebaseToArr(tasksDataFromFirebase, tasks);
-    // console.log('tasks:', tasks);
   }
 }
 
@@ -106,17 +105,6 @@ function clearKanbanLists() {
   kanbanListAwaitFeedback.innerHTML = '';
   kanbanListDone.innerHTML = '';
 }
-
-// function controlPrio(prioStatus) {
-//   switch (prioStatus) {
-//     case urgent:
-//       return '../assets/icons/prio-urgent.png';
-//     case medium:
-//       return '../assets/icons/prio-medium.svg';
-//     case low:
-//       return '../assets/icons/prio-low.png';
-//   }
-// }
 
 function getDataForModal(event) {
   const id = event.currentTarget.id;
@@ -313,23 +301,41 @@ function openEditTaskModal(event) {
   }
 }
 
-function editTask(event) {
+async function editTask(event) {
   const taskId = event.target.id;
+  inputTitle = document.getElementById('input-title');
+  inputDescription = document.getElementById('input-description');
+  inputDate = document.getElementById('input-date');
+  buttonLow = document.getElementById('button-low');
+  buttonMedium = document.getElementById('button-medium');
+  buttonUrgent = document.getElementById('button-urgent');
+  buttonLowImg = document.getElementById('button-low-img');
+  buttonMediumImg = document.getElementById('button-medium-img');
+  buttonUrgentImg = document.getElementById('button-urgent-img');
 
-  let editedTask = {
-    title: inputTitle.value,
-    description: inputDescription.value,
-    date: inputDate.value,
-    // prio: currentPrio,
-    // subtasks: subtasks,
-    // assignedTo: inputAssignedTo.value,
-  };
+  for (let element of tasks) {
+    if (taskId == element.id) {
+      element.data.title = inputTitle.value;
+      element.data.description = inputDescription.value;
+      element.data.date = inputDate.value;
+      element.data.prio = currentPrio;
 
-  console.log(inputTitle.value);
+      await updateTaskInFirebase(element.id, element.data);
+      closeTaskModal();
+      renderBoard();
+    }
+  }
 
-  // updateTaskInFirebase(taskId, editedTask);
-  // openTaskModal(event);
-  // renderBoard();
+  // let editedTask = {
+  //   title: inputTitle.value,
+  //   description: inputDescription.value,
+  //   date: inputDate.value,
+  //   // prio: currentPrio,
+  //   // subtasks: subtasks,
+  //   // assignedTo: inputAssignedTo.value,
+  // };
+
+  // console.log(inputTitle.value);
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation

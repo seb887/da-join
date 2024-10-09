@@ -1,3 +1,7 @@
+body {
+  background-color: var(--bg-primary);
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -72,6 +76,16 @@
   flex-direction: column;
   gap: 24px;
   width: 440px;
+}
+
+.nav-links-add-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+  background-color: var(--bg-hover);
 }
 
 .seperator {
@@ -180,6 +194,7 @@
   align-items: end;
   margin-top: 48px;
   width: 968px;
+  background-color: var(--bg-primary);
 }
 
 .add-task-buttons-container {
@@ -370,4 +385,108 @@
 #searchContact:hover{
   cursor: pointer;
   border: 1px solid #000000;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1280px) {
+  .add-task-submit-button {
+    font-size: 18px;
+  }
+  .add-task-cancel-button {
+    font-size: 18px;
+  }
+  .left-container {
+    width: unset;
+  }
+  .prio-buttons {
+    width: 80px;
+    font-size: 12px;
+  }
+  .prio-buttons-container {
+    gap: 0px;
+  }
+  .add-task-header {
+    padding: 20px;
+  }
+  .add-task-content-section {
+    padding: 20px;
+  }
+  .add-task-footer {
+    width: unset;
+  }
+  .add-task-form {
+    gap: 8px;
+    width: unset;
+  }
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 15px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 890px) {
+  body {
+    justify-content: center;
+  }
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    width: 650px;
+  }
+  h1 {
+    font-size: 47px;
+  }
+}
+
+@media (max-width: 650px) {
+  .add-task-form {
+    flex-direction: column;
+  }
+  .seperator {
+    display: none;
+  }
+  .content {
+    width: unset;
+  }
+  .left-container {
+    align-items: center;
+  }
+  .right-container {
+    align-items: center;
+  }
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 16px;
+    width: 396px;
+  }
+  .prio-buttons {
+    width: 121.33px;
+    height: 41px;
+    font-size: 16px;
+  }
+  #input-assigned-to {
+    width: 396px;
+  }
+  .add-task-header {
+    width: unset;
+    padding-left: 40px;
+  }
+}
+
+@media (max-width: 428px) {
+  
 }
