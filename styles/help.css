@@ -38,6 +38,7 @@ body {
 @media (max-width: 890px) {
   body {
     justify-content: center;
+    margin-bottom: 350px;
   }
   .content {
     padding: unset;
