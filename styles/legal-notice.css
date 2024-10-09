@@ -56,6 +56,7 @@ body {
     width: 650px;
   }
 }
+
 @media (max-width: 675px) {
   body {
     margin-bottom: 1150px;

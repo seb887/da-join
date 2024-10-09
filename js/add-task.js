@@ -113,30 +113,36 @@ function controlPrioButtonStyle() {
   if (currentPrio == 'urgent') {
     buttonUrgent.style.background = '#ff3d00';
     buttonUrgent.style.color = 'white';
+    buttonUrgent.style.fontWeight = 'bold';
     buttonUrgentImg.src = '../assets/icons/prio-urgent-white.png';
   } else {
     buttonUrgent.style.background = 'white';
     buttonUrgent.style.color = 'black';
+    buttonUrgent.style.fontWeight = 'normal';
     buttonUrgentImg.src = '../assets/icons/prio-urgent.png';
   }
 
   if (currentPrio == 'medium') {
     buttonMedium.style.background = '#FFA800';
     buttonMedium.style.color = 'white';
+    buttonMedium.style.fontWeight = 'bold';
     buttonMediumImg.src = '../assets/icons/prio-medium-white.png';
   } else {
     buttonMedium.style.background = 'white';
     buttonMedium.style.color = 'black';
+    buttonMedium.style.fontWeight = 'normal';
     buttonMediumImg.src = '../assets/icons/prio-medium.png';
   }
 
   if (currentPrio == 'low') {
     buttonLow.style.background = '#7ae229';
     buttonLow.style.color = 'white';
+    buttonLow.style.fontWeight = 'bold';
     buttonLowImg.src = '../assets/icons/prio-low-white.png';
   } else {
     buttonLow.style.background = 'white';
     buttonLow.style.color = 'black';
+    buttonLow.style.fontWeight = 'normal';
     buttonLowImg.src = '../assets/icons/prio-low.png';
   }
 }
