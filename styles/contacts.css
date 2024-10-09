@@ -40,34 +40,35 @@ body {
   height: calc(100vh - 96px);
   width: 456px;
   overflow-x: auto;
+  margin-left: 222px;
+}
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    height: 56px;
-    width: 352px;
-    border-radius: 10px;
-    font-size: 21px;
-    font-weight: 700;
-    color: white;
-    border: none;
-    background-color: #2a3647;
-    padding: 12px 0px 12px 0px;
-    transition: 125ms;
-    img {
-      height: 32px;
-      width: 32px;
-      object-fit: contain;
-    }
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  width: 352px;
+  border-radius: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  background-color: #2a3647;
+  padding: 12px 0px 12px 0px;
+  transition: 125ms;
+  img {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
   }
+}
 
-  button:hover {
-    cursor: pointer;
-    background-color: var(--accent-primary);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
-  }
+button:hover {
+  cursor: pointer;
+  background-color: var(--accent-primary);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
 }
 
 .add-new-contacts {

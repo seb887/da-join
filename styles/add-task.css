@@ -10,6 +10,7 @@ body {
   height: calc(100vh - 96px);
   position: relative;
   top: 96px;
+  margin-left: 222px;
 }
 
 .required-div {
@@ -197,6 +198,7 @@ body {
   justify-content: space-between;
   align-items: end;
   margin-top: 48px;
+  margin-bottom: 48px;
   width: 968px;
   background-color: var(--bg-primary);
 }
@@ -433,12 +435,6 @@ body {
   .prio-buttons-container {
     gap: 0px;
   }
-  .add-task-header {
-    padding: 20px;
-  }
-  .add-task-content-section {
-    padding: 20px;
-  }
   .add-task-footer {
     width: unset;
   }
@@ -455,7 +451,7 @@ body {
   .add-task-input,
   .prio-buttons-container {
     font-size: 15px;
-    width: 300px;
+    width: 280px;
   }
 }
 
@@ -467,13 +463,30 @@ body {
     display: flex;
     justify-content: flex-start;
     width: 650px;
+    margin-left: 30px;
+  }
+  .right-container {
+    width: unset;
   }
   h1 {
     font-size: 47px;
   }
+  .add-task-content-section {
+    padding: unset;
+    margin-left: unset;
+  }
+  .add-task-header {
+    padding: 80px 64px 55px 0px;
+  }
+  .add-task-footer {
+    width: 580px;
+  }
 }
 
 @media (max-width: 650px) {
+  .content {
+    margin-left: unset;
+  }
   .required-div {
     font-size: 18px;
   }
@@ -538,7 +551,7 @@ body {
     padding-left: 12px;
   }
   body {
-    margin-bottom: 250px;
+    margin-bottom: 360px;
   }
 }
 
@@ -564,7 +577,7 @@ body {
     padding-left: 25px;
   }
   body {
-    margin-bottom: 320px;
+    margin-bottom: 450px;
   }
   .prio-buttons {
     width: 90px;
@@ -591,6 +604,6 @@ body {
   padding-left: 18px;
   }
   body {
-    margin-bottom: 520px;
+    margin-bottom: 650px;
   }
 }

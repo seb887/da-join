@@ -19,6 +19,8 @@
   position: relative;
   top: 96px;
   overflow-y: auto;
+  margin-left: 222px;
+  padding: 80px 64px 55px 64px;
 }
 
 .headline {
@@ -44,6 +46,7 @@ body {
     top: 120px;
     height: unset;
     width: 650px;
+    margin-left: unset;
   }
 }
 @media (max-width: 675px) {

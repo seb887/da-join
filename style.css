@@ -151,18 +151,26 @@ h1 {
        Sidebar
 =======================*/
 
+.sidebar-container {
+  display: flex; /* Sidebar bleibt nebeneinander mit anderen Layout-Elementen */
+  height: 100vh; /* Volle Höhe des Ansichtsfensters */
+  position: relative;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   top: 0;
   padding: 64px 0;
   width: 232px;
   height: 100vh;
   background-color: var(--bg-secondary);
   color: var(--font-secondary);
-  position: relative;
+  position: fixed;
   z-index: 99;
+  overflow-y: auto;
 }
 
 .sidebar-logo {
