@@ -196,9 +196,8 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
-   
   renderedContacts = [];
-  allContacts.forEach((contact, index) => { console.log(contact.name +  id[index]),  contact.id = id[index] });
+  allContacts.forEach((contact, index) => {contact.id = id[index] });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
@@ -220,7 +219,6 @@ function inspectCheckboxes() {
       cb.parentElement.parentElement.classList.remove('selected');
   }
   })
-  
 }
 
 function setAssignedContacts(){
@@ -247,6 +245,7 @@ function dropDownContacts() {
 
 function filterContacts(event) {
   if(showOrHideContactsOnInput()){
+    
     displayMatchingContacts();
   }
 }
@@ -269,12 +268,13 @@ function showOrHideContactsOnInput(){
   }
 }
 
-//Hier soll allen Elementen die nicht matchen display none oder visibility = hidden gegeben werden (Nicht alles neu rendern, da die gecheckten boxen wieder verschwinden)
+//Lässt alle assigned Contacts wieder in der Liste erscheinen
 function displayMatchingContacts(){
-  
-  console.log(renderedContacts.find(renderedContact => assignedContacts.includes(renderedContact['id'])));
-  
-
+  let input = document.getElementById('searchContact');
+  renderedContacts.forEach((contact) => {
+    if(contact.name.toLowerCase().slice(0,2) == input.value.toLowerCase().slice(0,2))
+    document.getElementById(`${contact.id}cb`).parentElement.parentElement.style.display = ''
+  })
 }
 
 
