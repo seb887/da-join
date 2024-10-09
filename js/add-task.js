@@ -202,16 +202,11 @@ async function getContacts() {
 async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
-<<<<<<< HEAD
-  renderedContacts = [];
-  allContacts.forEach((contact, index) => {contact.id = id[index] });
-=======
 
   renderedContacts = [];
   allContacts.forEach((contact, index) => {
     console.log(contact.name + id[index]), (contact.id = id[index]);
   });
->>>>>>> 5a6f18559f788e12199769e81e00ec108ef6ac4e
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
@@ -233,13 +228,8 @@ function inspectCheckboxes() {
     }
     if (!cb.checked) {
       cb.parentElement.parentElement.classList.remove('selected');
-<<<<<<< HEAD
-  }
-  })
-=======
     }
   });
->>>>>>> 5a6f18559f788e12199769e81e00ec108ef6ac4e
 }
 
 function setAssignedContacts() {
@@ -293,7 +283,6 @@ function showOrHideContactsOnInput() {
   }
 }
 
-<<<<<<< HEAD
 //Lässt alle assigned Contacts wieder in der Liste erscheinen
 function displayMatchingContacts(){
   let input = document.getElementById('searchContact');
@@ -301,15 +290,6 @@ function displayMatchingContacts(){
     if(contact.name.toLowerCase().slice(0,2) == input.value.toLowerCase().slice(0,2))
     document.getElementById(`${contact.id}cb`).parentElement.parentElement.style.display = ''
   })
-=======
-//Hier soll allen Elementen die nicht matchen display none oder visibility = hidden gegeben werden (Nicht alles neu rendern, da die gecheckten boxen wieder verschwinden)
-function displayMatchingContacts() {
-  console.log(
-    renderedContacts.find((renderedContact) =>
-      assignedContacts.includes(renderedContact['id'])
-    )
-  );
->>>>>>> 5a6f18559f788e12199769e81e00ec108ef6ac4e
 }
 
 function renderContactArray() {
