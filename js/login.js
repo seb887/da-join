@@ -35,6 +35,7 @@ async function logIn() {
         if (users[key].email === email && users[key].password === password) {
             document.getElementById('login-error').innerHTML = '';
             saveActiveUserToLocalStorage(users[key]);
+            localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
             window.location.href = 'summary.html';
             break;
     } else

@@ -29,7 +29,7 @@
     <header class="header">
       <img class="logo-responsive" src="../assets/img/logo-black.png">
       <div id="dropdown-profile" class="dropdown-profile">
-        <div onclick="location.href='help.html'" class="dropdown-profile-buttons help-button">Help</div>
+        <div onclick="location.href='help.html'; removeFirstLogin()" class="dropdown-profile-buttons help-button">Help</div>
         <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
         <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
         <div onclick="guestLogInOrLogOut()" class="dropdown-profile-buttons">Log out</div>
@@ -173,7 +173,7 @@
       </div>
     </main>
     <footer>
-      <div class="nav-links-summary"><a
+      <div class="nav-links-responsive"><a
         href="../html/summary.html"
         class="nav-links"
       >
@@ -182,7 +182,7 @@
           alt="summary icon"
         />Summary</a
       ></div>
-      <div class="nav-links-responsive"><a
+      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
         href="../html/add-task.html"
         class="nav-links"
       >
@@ -192,7 +192,7 @@
         />
         Add Task</a
       ></div>
-      <div class="nav-links-responsive"><a
+      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
         href="../html/board.html"
         class="nav-links"
       >
@@ -202,7 +202,7 @@
         />
         Board</a
       ></div>
-      <div class="nav-links-responsive"><a
+      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
         href="../html/contacts.html"
         class="nav-links"
       >

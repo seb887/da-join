@@ -1,12 +1,27 @@
+let activeUser = JSON.parse(localStorage.getItem('activeUser'));
+let firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
+
 function init() {
     setActiveUserInitials();
+}
+
+function removeFirstLogin() {
+    localStorage.removeItem('firstLogin');
+    firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
+    setTimeout(checkFirstLogin, 10); 
+}
+
+function checkFirstLogin() {
+    if (!firstLogin) {
+        document.getElementById('greeting-overlay-responsive').classList.add('d-none');
+        document.getElementById('time-of-the-day').classList.add('d-none');
+        document.getElementById('name').classList.add('d-none');
+    }
 }
 
 function saveActiveUserToLocalStorage(user) {
     localStorage.setItem('activeUser', JSON.stringify(user));
 }
-
-let activeUser = JSON.parse(localStorage.getItem('activeUser'));
 
 function guestLogInOrLogOut() {
     localStorage.removeItem('activeUser');

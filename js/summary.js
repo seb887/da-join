@@ -7,6 +7,7 @@ function initSummary() {
     setSummaries();
     greeting();
     setActiveUserInitials();
+    checkFirstLogin();
 }
 
 function greeting() {
