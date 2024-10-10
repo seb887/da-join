@@ -320,7 +320,7 @@ function editContactCardContent(contact, initials, index){
           </div>
         </div>
         <div class="add-contact-modal-right">   
-          <div id="bgInitials" class="initials-container" style="background-color: ${contact.color}; width:120px; height:120px; margin:0 80px;">
+          <div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
           <span style="font-size:47px;" id="initialsArticle">${initials}</span>
         </div>
           <div class="input-field-right">

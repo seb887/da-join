@@ -122,6 +122,24 @@ button:hover {
   }
 }
 
+.initials-container-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 120px;
+  height: 120px;
+  margin-left: 80px;
+  margin-right: 80px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  gap: 10px;
+
+  span {
+    font-size: 12px;
+  }
+}
+
 .single-contact {
   display: flex;
   justify-content: flex-start;
@@ -409,17 +427,17 @@ article {
   flex-direction: column;
 }
 
-#inputContactName{
+#inputContactName {
   background-image: url(/assets/icons/person.png);
-  background-position: 380px 15px; 
+  background-position: 382px 18px; 
   background-repeat: no-repeat;
 }
-#inputMailAddress{
+#inputMailAddress {
   background-image: url(/assets/icons/mail.png);
-  background-position: 380px 15px; 
+  background-position: 380px 18px; 
   background-repeat: no-repeat;
 }
-#inputPhoneNumber{
+#inputPhoneNumber {
   background-image: url(/assets/icons/phone.png);
   background-position: 380px 15px; 
   background-repeat: no-repeat;
@@ -428,7 +446,7 @@ article {
   padding: 0 80px;
 }
 
-.add-contact-button-bottom{
+.add-contact-button-bottom {
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -613,7 +631,75 @@ article {
   .add-contact-modal-person {
     padding: 20px;
   }
+  .initials-container-edit {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+  }
   .input-field-right input {
     width: 360px;
+  }
+  #inputContactName {
+    background-position: 326px 18.2px;
+  }
+  #inputMailAddress {
+    background-position: 326px 18.2px;
+  }
+  #inputPhoneNumber {
+    background-position: 326px 16px;
+  }
+}
+
+@media (max-width: 430px) {
+  .add-contact-modal-person img {
+    width: 120px;
+    height: 120px;
+  }
+  .add-contact-modal {
+    flex-direction: column;
+    width: 396px;
+    height: 700px;
+  }
+  .logo-modal img {
+    display: none;
+  }
+  .modal-header-logo-left {
+    width: unset;
+    height: 352px;
+    border-radius: 30px 30px 0px 0px;
+  }
+  .header-modal h1 {
+    font-size: 47px;
+  }
+  .header-modal h2 {
+    font-size: 20px;
+  }
+  .add-contact-modal-right {
+    flex-direction: column;
+    position: fixed;
+    left: 18px;
+    top: 250px;
+  }
+  .add-contact-button-bottom button:nth-child(1) {
+     display: none;
+  }
+  .add-contact-button-bottom {
+    justify-content: center;
+  }
+  #closeAddContact {
+    filter: invert();
+    position: fixed;
+    width: unset;
+    left: 345px;
+    bottom: 610px;
+  }
+  .input-field-right {
+    margin-top: 35px;
+  }
+  .initials-container-edit {
+    width: 120px;
+    height: 120px;
+    margin: 20px;
   }
 }
