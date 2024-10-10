@@ -193,6 +193,36 @@ body {
   gap: 16px;
 }
 
+.subtasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtasks:hover {
+  background: var(--font-secondary);
+}
+
+.subtask-title {
+  display: list-item;
+  list-style-type: disc;
+}
+
+.subtask-buttons {
+  display: flex;
+  gap: 12px;
+  padding-right: 24px;
+}
+
+.subtask-buttons img {
+  width: 16px;
+  height: 16px;
+}
+
+.subtask-buttons img:hover {
+  scale: 1.2;
+}
+
 .add-task-footer {
   display: flex;
   justify-content: space-between;
@@ -242,7 +272,7 @@ body {
 }
 
 .add-task-submit-button:hover {
-  background: #29ABE2;
+  background: #29abe2;
   border: 0px;
   box-shadow: #8c8c8c 0px 5px 7px;
 }
@@ -281,7 +311,7 @@ body {
   visibility: visible !important;
 }
 
-.add-task-contact-list{
+.add-task-contact-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -289,42 +319,41 @@ body {
   padding: 12px 21px;
   border-radius: 10px;
   border: 2px solid white;
-    input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      justify-content: center;
-      font-size: 2rem;
-      border-radius: 0.5rem;
-    }
+  input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+  }
 
-  div:nth-child(1){
+  div:nth-child(1) {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 16px;
   }
-   input[type="checkbox"]::before {
-  content: "";
-  cursor: pointer;
-  background-image: url(../assets/icons/check-box-unchecked.png);
-  width: 24px;
-  height: 24px;
+  input[type='checkbox']::before {
+    content: '';
+    cursor: pointer;
+    background-image: url(../assets/icons/check-box-unchecked.png);
+    width: 24px;
+    height: 24px;
   }
- 
-  input[type="checkbox"]:checked::before {
+
+  input[type='checkbox']:checked::before {
     cursor: pointer;
     background-image: url(../assets/icons/check-box-checked-white.png);
   }
-  input[type="checkbox"]:checked::before:hover {
-   background-color: white;
+  input[type='checkbox']:checked::before:hover {
+    background-color: white;
   }
- 
 }
 
-#input-assigned-to{
+#input-assigned-to {
   display: none;
   position: absolute;
   left: 0;
@@ -338,19 +367,19 @@ body {
   background-color: white;
 }
 
-.selected{
-  background-color: #2A3647;
+.selected {
+  background-color: #2a3647;
   border-radius: 10px;
   color: white;
-  :hover{
+  :hover {
     background-color: #091931 !important;
   }
 }
 
-#add-task-contact-container{
+#add-task-contact-container {
   position: relative;
   padding: 0;
-  img{
+  img {
     position: absolute;
     top: 12px;
     right: 21px;
@@ -359,8 +388,8 @@ body {
   }
 }
 
-.add-task-contact-list:hover{
-  background-color: #F6F7F8;
+.add-task-contact-list:hover {
+  background-color: #f6f7f8;
   cursor: pointer;
 }
 
@@ -378,7 +407,7 @@ body {
   border-radius: 20px;
 }
 
-#searchContact{
+#searchContact {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -392,22 +421,21 @@ body {
   border-radius: 10px;
   padding: 12px 21px;
 }
-#searchContact::placeholder{
+#searchContact::placeholder {
   color: black;
   background-color: white;
 }
-#searchContact:hover{
+#searchContact:hover {
   cursor: pointer;
   border: 1px solid #000000;
 }
 
-
-#assigned-contacts-list{
+#assigned-contacts-list {
   display: flex;
   padding: 0;
 }
 
-.assigned-contacts-initial-container{
+.assigned-contacts-initial-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -503,7 +531,7 @@ body {
   }
   .add-task-cancel-button {
     display: none;
-}
+  }
   .add-task-form {
     width: unset;
     flex-direction: column;
@@ -559,7 +587,7 @@ body {
 }
 
 @media (max-width: 427px) {
-  #input-assigned-to{
+  #input-assigned-to {
     width: 320px;
   }
   .add-task-input-title,
@@ -603,14 +631,14 @@ body {
     font-size: 14px;
     width: 280px;
   }
-  #input-assigned-to{
+  #input-assigned-to {
     width: 280px;
   }
-.add-task-labels {
-  font-size: 14px;
+  .add-task-labels {
+    font-size: 14px;
   }
-.add-task-header {
-  padding-left: 18px;
+  .add-task-header {
+    padding-left: 18px;
   }
   body {
     margin-bottom: 650px;

@@ -85,7 +85,8 @@ function checkInputs(taskObj) {
     console.log('create new task: ', taskObj);
     saveTaskToFirebase(taskObj);
     subtasksList.innerHTML = '';
-    closeAddTaskModal();
+    // closeAddTaskModal();
+    clearInputs();
     showInfoToast('Task added to board');
   }
 }
@@ -166,7 +167,11 @@ function cancelInputSubtask() {
 }
 
 function submitInputSubtask() {
-  subtasks.push(inputSubtask.value);
+  const subtaskObj = {
+    title: inputSubtask.value,
+    checked: false,
+  };
+  subtasks.push(subtaskObj);
   inputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasks();
@@ -178,7 +183,24 @@ function renderSubtasks() {
   subtasksList.innerHTML = '';
 
   for (let element of subtasks) {
-    subtasksList.innerHTML += `<li class="subtask">${element}</li>`;
+    subtasksList.innerHTML += `
+      <li class="subtasks">
+        <div class="subtask-title">${element.title}</div>
+        <div class="subtask-buttons">
+          <img
+            src="../assets/icons/edit.png"
+            alt="edit icon"
+            id="edit-subtask"
+          />
+          <img
+            src="../assets/icons/delete.png"
+            alt="trash icon"
+            id="delete-subtask"
+          />
+        </div>
+
+      </li>
+    `;
   }
 }
 

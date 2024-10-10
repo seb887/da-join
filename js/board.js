@@ -141,7 +141,6 @@ function openAddTaskModal() {
 
 function closeAddTaskModal() {
   addTaskModal.style.display = 'none';
-  clearInputs();
 }
 
 function checkTaskModalSubtasks(task) {
@@ -150,7 +149,7 @@ function checkTaskModalSubtasks(task) {
     <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
       Subtasks:
       <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
-        ${renderSubtasks(task)}
+        ${renderSubtasksModal(task)}
       </div>
   </div>`;
   } else {
@@ -173,10 +172,12 @@ function checkTaskSubtasks(task) {
   }
 }
 
-function renderSubtasks(task) {
+function renderSubtasksModal(task) {
   const subtasksArr = task.data.subtasks;
   let taskId = task.id;
   let subtasksHTML = '';
+
+  console.log('subtasksArr', subtasksArr);
 
   for (let i = 0; i < subtasksArr.length; i++) {
     console.log('renderSubtasks', taskId, i);
@@ -186,9 +187,9 @@ function renderSubtasks(task) {
         <img
           src="../assets/icons/checkbox-empty.svg"
           alt="checkbox icon"
-          onclick="setSubtaskChecked(''${taskId}', '${i}'')"
+          onclick="setSubtaskChecked('${taskId}', '${i}')"
         />
-        ${subtasksArr[i].name}
+        ${subtasksArr[i].title}
       </div>
     `;
   }
