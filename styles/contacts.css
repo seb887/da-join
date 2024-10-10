@@ -111,10 +111,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 .initials-container {
   display: flex;
   justify-content: center;
@@ -172,11 +168,12 @@ input[type=number] {
     font-size: 16px;
     text-decoration: none;
     color: #007cee;
+    overflow-wrap: anywhere;
   }
   h4 {
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -242,6 +239,7 @@ article {
   h2 {
     font-size: 47px;
     font-weight: 500;
+    overflow-wrap: anywhere;
   }
   .initials-container {
     min-height: 120px;
@@ -318,6 +316,7 @@ article {
 
 #contactInformation a {
     color: var(--accent-primary);
+    overflow-wrap: anywhere;
 }
 
 .add-contact-modal{
@@ -567,6 +566,7 @@ article {
   bottom: 15%;
   font-size: 20px;
   right: 0%;
+  top: 50%;
   background-color: #2A3647;
   border-radius: 20px;
   color: white;
@@ -578,7 +578,7 @@ article {
 
 #info-toast.show {
   opacity: 1;
-  transform: translateX(-200%);
+  transform: translateX(-100%);
 }
 
 .show {
@@ -658,6 +658,57 @@ article {
   }
   #inputPhoneNumber {
     background-position: 326px 16px;
+  }
+  .contact-list-container {
+    width: unset;
+    margin-left: 230px;
+  }
+  .contact-data h4 {
+    font-size: 14px;
+  }
+  #contacts {
+    width: 270px;
+  }
+  .single-contact {
+    width: 240px;
+  }
+  .initials-container {
+    margin-right: 15px;
+  }
+  .contact-data a {
+    font-size: 14px;
+  }
+  button {
+    width: 240px;
+  }
+  .contacts-title b {
+    font-size: 47px;
+  }
+  .contacts-title {
+    margin: 30px;
+    flex-direction: column;
+    gap: 0px;
+    align-items: unset;
+  }
+  .contacts-title p {
+    font-size: 20px;
+  }
+  article {
+    margin-left: -140px;
+    top: 230px;
+  }
+  article .initials-container {
+    min-width: 80px;
+    min-height: 80px;
+  }
+  article .initials-container span {
+    font-size: 24px;
+  }
+  article h2 {
+    font-size: 28px;
+  }
+  .contact-information-header {
+    padding: 20px 0px 20px 0px;
   }
 }
 
