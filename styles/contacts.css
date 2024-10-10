@@ -319,7 +319,7 @@ article {
   height: 592px;
   top: 50%;
   left: 50%;
-  border-radius: 30px;
+  border-radius: 35px;
 }
 
 .modal-header-logo-left {
@@ -651,7 +651,7 @@ article {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 890px) {
   .add-contact-modal-person img {
     width: 120px;
     height: 120px;
@@ -700,6 +700,71 @@ article {
   .initials-container-edit {
     width: 120px;
     height: 120px;
-    margin: 20px;
+    margin: 23px;
   }
+}
+
+@media (max-width: 427px) {
+  #inputPhoneNumber {
+    background-position: 225px 9px;
+}
+  #inputMailAddress {
+    background-position: 223px 11px;
+}
+  #inputContactName {
+    background-position: 225px 11.5px;
+}
+  .add-contact-modal-person {
+    padding: 0px;
+  }
+  .input-field-right :nth-child(2) {
+    margin: 16px 0px;
+  }
+  .input-field-right {
+    margin-top: 15px;
+    gap: 0px;
+  }
+  .input-field-right input {
+    width: 255px;
+    height: 38px;
+    font-size: 16px;
+  }
+  .add-contact-modal-person img {
+    width: 80px;
+    height: 80px;
+  }
+  .add-contact-modal {
+    width: 285px;
+    height: 440px;
+  }
+  .modal-header-logo-left {
+    height: 170px;
+  }
+  .header-modal h1 {
+    font-size: 30px;
+  }
+  .header-modal h2 {
+    font-size: 16px;
+  }
+  .add-contact-modal-right {
+    left: 13.5px;
+    top: 130px;
+  }
+  #closeAddContact {
+    width: unset;
+    left: 238px;
+    bottom: 350px;
+  }
+  .initials-container-edit {
+    width: 80px;
+    height: 80px;
+    margin: 1.5px;
+  }
+  .add-contact-button-bottom button:nth-child(2)  {
+        width: 175px;
+        height: 50px;
+        font-size: 16px;
+        padding: unset;
+        justify-content: center;
+  } 
 }
