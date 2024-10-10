@@ -710,6 +710,14 @@ article {
   .contact-information-header {
     padding: 20px 0px 20px 0px;
   }
+  .seperator-contacts-title {
+    position: fixed;
+    rotate: 180deg;
+    top: 217px;
+    padding-left: 90px;
+    height: 3px;
+    width: 50px;
+  }
 }
 
 @media (max-width: 890px) {
@@ -778,6 +786,34 @@ article {
     width: 120px;
     height: 120px;
     margin: 23px;
+  }
+  .contact-information {
+    display: none;
+  }
+  #contactInformation {
+    display: none;
+  }
+  .contactFadeAndSlideIn {
+    display: none !important;
+  }
+  .contact-list-container {
+    width: 100%;
+    margin-left: unset;
+  }
+  button {
+    display: none;
+  }
+  #contacts {
+    width: 100%;
+  }
+  .single-contact {
+    width: 352px;
+  }
+  .nameHeader {
+    width: 352px;
+  }
+  .contact-list-container {
+    margin-top: 0px;
   }
 }
 
