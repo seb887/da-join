@@ -105,13 +105,23 @@ button:hover {
   width: 352px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .initials-container {
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  width: 42px;
-  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
   margin-right: 35px;
   background-color: var(--accent-primary);
   border-radius: 50%;
@@ -234,8 +244,8 @@ article {
     font-weight: 500;
   }
   .initials-container {
-    height: 120px;
-    width: 120px;
+    min-height: 120px;
+    min-width: 120px;
     border: 3px solid white;
     span {
       font-size: 47px;
@@ -652,6 +662,22 @@ article {
 }
 
 @media (max-width: 890px) {
+  @keyframes slideInAddContact {
+    0%{
+      transform: translate(-50%, -50%) translateY(150vw);
+    }
+    100%{
+      transform: translate(-50%, -50%) translateX(0)
+    }
+  }
+  @keyframes slideOutAddContact {
+    0%{
+      transform: translate(-50%, -50%) translateX(0);
+    }
+    100%{
+      transform: translate(-50%, -50%) translateY(150vw);
+    }
+  }
   .add-contact-modal-person img {
     width: 120px;
     height: 120px;
