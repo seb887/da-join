@@ -326,17 +326,6 @@ async function editTask(event) {
       renderBoard();
     }
   }
-
-  // let editedTask = {
-  //   title: inputTitle.value,
-  //   description: inputDescription.value,
-  //   date: inputDate.value,
-  //   // prio: currentPrio,
-  //   // subtasks: subtasks,
-  //   // assignedTo: inputAssignedTo.value,
-  // };
-
-  // console.log(inputTitle.value);
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
@@ -351,41 +340,39 @@ function showInfoToast(text) {
   }, 1500);
 }
 
-
 async function returnTasksFromFirebase() {
   let response = await fetch(BASE_URL + 'tasks' + '.json');
   let tasks = await response.json();
   let taskAsObject = Object.values(tasks);
-  let taskKeys = Object.keys(tasks)
-  taskAsObject.forEach((task,index)=> {
-    task.id = taskKeys[index]
-  })
+  let taskKeys = Object.keys(tasks);
+  taskAsObject.forEach((task, index) => {
+    task.id = taskKeys[index];
+  });
   return taskAsObject;
 }
 
 async function renderAssignedToInCard() {
   let tasks = await returnTasksFromFirebase();
   let assignedTo = await getAllAssignedTo();
-  
-  let card = document.getElementById('card-footer')
-  tasks.forEach((taks)=>{ 
-    assignedTo.forEach((assignedContact)=>{
+
+  let card = document.getElementById('card-footer');
+  tasks.forEach((taks) => {
+    assignedTo.forEach((assignedContact) => {
       card.innerHTML = '';
-      card.innerHTML += 
-    `
+      card.innerHTML += `
     <div class="card-profile-badge-3">ALALAL</div>
-    `
+    `;
     });
-})
+  });
 }
 
 async function getAllAssignedTo() {
   let tasks = await returnTasksFromFirebase();
   let assignTo = [];
   tasks.forEach((task) => {
-    if(task['assignedTo']){
-      assignTo.push(task['assignedTo'])
+    if (task['assignedTo']) {
+      assignTo.push(task['assignedTo']);
     }
-  })
+  });
   return assignTo;
 }
