@@ -8,7 +8,6 @@ function initContacts() {
     setActiveUserInitials();
 }
 
-
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();
@@ -196,6 +195,7 @@ async function editContact(index) {
 
 
 async function saveChangesOnContact(id, index) {
+    let initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
         method: "PUT",
         header: {
@@ -206,7 +206,8 @@ async function saveChangesOnContact(id, index) {
             "name" :  document.getElementById('inputContactName').value,
             "email" : document.getElementById('inputMailAddress').value,
             "phone" : document.getElementById('inputPhoneNumber').value,
-            "color" : document.getElementById('bgInitials').style.backgroundColor
+            "color" : document.getElementById('bgInitials').style.backgroundColor,
+            "initials": initials
         })
     })
     updateAndRenderContacts(index);

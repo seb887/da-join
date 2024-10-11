@@ -800,7 +800,7 @@ article {
     width: 100%;
     margin-left: unset;
   }
-  button {
+  .add-new-contacts {
     display: none;
   }
   #contacts {
@@ -811,9 +811,6 @@ article {
   }
   .nameHeader {
     width: 352px;
-  }
-  .contact-list-container {
-    margin-top: 0px;
   }
 }
 
