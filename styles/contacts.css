@@ -585,6 +585,37 @@ article {
   visibility: visible;
 }
 
+.add-contact-responsive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  margin: 14px;
+  background-color: #2A3647;
+  transition: ease-in-out 120ms;
+  img {
+    width: 32px;
+  }
+}
+
+.add-contact-responsive:hover {
+  background: #29ABE2;
+  cursor: pointer;
+  box-shadow: #8c8c8c 0px 5px 7px;
+}
+
+.hidden-overlay {
+  position: fixed;
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  bottom: 14%;
+  height: 100px;
+  width: 100%;
+}
+
 @keyframes slideInAddContact {
   0%{
     opacity: 0;
@@ -737,6 +768,9 @@ article {
       transform: translate(-50%, -50%) translateY(150vw);
     }
   }
+  .hidden-overlay {
+    display: flex;
+  }
   .add-contact-modal-person img {
     width: 120px;
     height: 120px;
@@ -877,4 +911,10 @@ article {
         padding: unset;
         justify-content: center;
   } 
+  .single-contact {
+    width: 282px;
+  }
+  .nameHeader {
+    width: 282px;
+  }
 }
