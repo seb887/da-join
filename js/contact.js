@@ -8,7 +8,6 @@ function initContacts() {
     setActiveUserInitials();
 }
 
-
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();
@@ -196,6 +195,7 @@ async function editContact(index) {
 
 
 async function saveChangesOnContact(id, index) {
+    let initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
         method: "PUT",
         header: {
@@ -206,7 +206,8 @@ async function saveChangesOnContact(id, index) {
             "name" :  document.getElementById('inputContactName').value,
             "email" : document.getElementById('inputMailAddress').value,
             "phone" : document.getElementById('inputPhoneNumber').value,
-            "color" : document.getElementById('bgInitials').style.backgroundColor
+            "color" : document.getElementById('bgInitials').style.backgroundColor,
+            "initials": initials
         })
     })
     updateAndRenderContacts(index);
@@ -295,7 +296,7 @@ function addContactCardContent(){
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
                   <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" id="inputMailAddress" type="email" required>
+                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="24" type="email" required>
                   <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" maxlength="14" required>
                 <div class="add-contact-button-bottom">
                   <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
@@ -327,7 +328,7 @@ function editContactCardContent(contact, initials, index){
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
                   <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" required>
+                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="24"  required>
                   <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" maxlength="14" required>
                 <div class="add-contact-button-bottom">
                   <button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete</button>

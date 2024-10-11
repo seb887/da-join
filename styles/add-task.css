@@ -360,6 +360,7 @@ body {
   padding: 0;
   top: 50px;
   overflow-y: scroll;
+  overflow-wrap: anywhere;
   max-height: 250px;
   width: 435px;
   justify-content: space-evenly;
@@ -402,9 +403,12 @@ body {
   color: white;
   border: 3px solid white;
   text-align: center;
-  width: 42px;
-  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 42px;
+  max-height: 42px;
   border-radius: 20px;
+  overflow-wrap: anywhere;
 }
 
 #searchContact {
@@ -432,7 +436,7 @@ body {
 
 #assigned-contacts-list {
   display: flex;
-  padding: 0;
+  flex-wrap: wrap;
 }
 
 .assigned-contacts-initial-container {
@@ -482,6 +486,9 @@ body {
   .add-task-input,
   .prio-buttons-container {
     font-size: 15px;
+    width: 280px;
+  }
+  #assigned-contacts-list {
     width: 280px;
   }
 }
@@ -569,6 +576,9 @@ body {
     font-size: 16px;
     width: 396px;
   }
+  #assigned-contacts-list {
+    width: 396px;
+  }
   .prio-buttons {
     width: 121.33px;
     height: 41px;
@@ -582,7 +592,7 @@ body {
     padding-left: 12px;
   }
   body {
-    margin-bottom: 360px;
+    margin-bottom: 500px;
   }
 }
 
@@ -601,6 +611,9 @@ body {
     font-size: 14px;
     width: 320px;
   }
+  #assigned-contacts-list {
+    width: 320px;
+  }
   .add-task-submit-button {
     width: 150px;
   }
@@ -611,7 +624,7 @@ body {
     padding-left: 25px;
   }
   body {
-    margin-bottom: 450px;
+    margin-bottom: 580px;
   }
   .prio-buttons {
     width: 90px;
@@ -631,6 +644,9 @@ body {
     font-size: 14px;
     width: 280px;
   }
+  #assigned-contacts-list {
+    width: 280px;
+  }
   #input-assigned-to {
     width: 280px;
   }
@@ -641,6 +657,6 @@ body {
     padding-left: 18px;
   }
   body {
-    margin-bottom: 650px;
+    margin-bottom: 820px;
   }
 }
