@@ -630,6 +630,11 @@ article {
   bottom: 14%;
   height: 100px;
   width: 100%;
+  pointer-events: none;
+}
+
+.hidden-overlay * {
+  pointer-events: auto;
 }
 
 .return-to-list-responsive {
