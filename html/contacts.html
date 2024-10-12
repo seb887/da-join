@@ -178,8 +178,18 @@
     <div id="info-toast" class="hidden">
     </div>
     <div class="hidden-overlay">
-      <div onclick="openAndCloseAddContact()" class="add-contact-responsive">
-      <img id="responsive-button-bottom" src="../assets/icons/add-contact.png">
+      <div onclick="openContactOrOpenMore()" class="add-contact-responsive">
+        <img id="responsive-button-bottom" src="../assets/icons/add-contact.png">
+      </div>
+      <div id="edit-del-contact-responsive" class="edit-del-contact-responsive">
+        <div id="edit-contact-responsive" onclick="editContact()" >
+          <img src="../assets/icons/edit.png">
+          <span>Edit</span>
+        </div>
+        <div id="del-contact-responsive" onclick="editContact()">
+          <img src="../assets/icons/delete.png">
+          <span>Delete</span>
+        </div>
       </div>
     </div>
 

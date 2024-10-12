@@ -945,6 +945,35 @@ article {
   .nameHeader {
     width: 352px;
   }
+  .edit-del-contact-responsive {
+    width: 116px;
+    height: 110px;
+    display: none;
+    border-radius: 20px 20px 0px 20px;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+  .edit-del-contact-responsive div {
+    width: 96px;
+    height: 40px;
+    padding: 8px;
+    transition: ease-in-out 200ms;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .edit-del-contact-responsive div:hover {
+    background-color: #d1d1d14d;
+  }
+  .edit-del-contact-responsive img {
+    width: 18px;
+  }
 }
 
 @media (max-width: 427px) {
@@ -1065,5 +1094,8 @@ article {
   }
   .return-to-list-responsive {
     position: absolute;
+  }
+  .edit-del-contact-responsive {
+    margin-bottom: 15%;
   }
 }

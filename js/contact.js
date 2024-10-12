@@ -72,17 +72,15 @@ function openContact(index) {
     } else { 
         container.classList.remove('contactFadeAndSlideIn');
         document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
-        responsiveButtonBottom.src = '../assets/icons/add-contact.png';
+        responsiveButtonBottom.src = '../assets/icons/more.png';
         setTimeout(() => {
             container.classList.add('contactFadeAndSlideIn');
             document.getElementById('contact-information-responsive').classList.add('fadeAndSlideInResponsive');
-            responsiveButtonBottom.src = '../assets/icons/more.png';
             document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
         }, 50);
     }
     setContactInformation(index)
 }
-
 
 async function setContactInformation(index) {
     document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
@@ -92,6 +90,8 @@ async function setContactInformation(index) {
     document.getElementById('initialsArticle').innerText = generateInitials(contactsArray[index].name);
     document.getElementById('delContact').onclick = () => {deleteContact(contactsArray[index].id)};
     document.getElementById('editContact').onclick = () => {editContact(index)};
+    document.getElementById('edit-contact-responsive').onclick = () => {editContact(index)};
+    document.getElementById('del-contact-responsive').onclick = () => {deleteContact(contactsArray[index].id)};
     setSelectedContactBackground(index);   
 }
 
@@ -112,7 +112,6 @@ function setSelectedContactBackground(index) {
         selectedContactDiv.style.color ='white'
 }
 
-
 function openAndCloseAddContact(){ 
     let modal = document.getElementById('addContact');
     modal.innerHTML = '';
@@ -123,6 +122,20 @@ function openAndCloseAddContact(){
     animationActive = !animationActive;
 }
 
+function openContactOrOpenMore() {
+    let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
+    let srcFilename = responsiveButtonBottom.src.split('/').pop();
+    let editDelContact = document.getElementById('edit-del-contact-responsive');
+    if (srcFilename === 'more.png') {
+        if (editDelContact.style.display === 'flex') {
+            editDelContact.style.display = 'none';
+        } else {
+            editDelContact.style.display = 'flex';
+        }
+    } else {
+        openAndCloseAddContact();
+    }
+}
 
 function checkIfAnimationActive() {
     let modal = document.getElementById('addContact'); 
@@ -139,7 +152,6 @@ function checkIfAnimationActive() {
         document.getElementById('modalBackground').classList.add('change-opacity');
       }
 }
-
 
 async function createContact() {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -162,7 +174,6 @@ async function createContact() {
     showInfoToast('Contact succesfully created')
 }
 
-
 async function selectCreatedContact(contactName){
     try {
        await renderContacts();
@@ -175,14 +186,12 @@ async function selectCreatedContact(contactName){
     }
 }
 
-
 async function closeAndClear(){
     openAndCloseAddContact();
     document.getElementById('inputContactName').value = '';
     document.getElementById('inputMailAddress').value = '';
     document.getElementById('inputPhoneNumber').value = '';
 }
-
 
 async function deleteContact(id) {
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
@@ -195,7 +204,6 @@ async function deleteContact(id) {
     showInfoToast('Contact deleted');
 }
 
-
 async function editContact(index) {
     let content = document.getElementById('addContact');
     let initials = generateInitials(contactsArray[index].name);
@@ -203,7 +211,6 @@ async function editContact(index) {
     content.innerHTML = '';
     content.innerHTML = editContactCardContent(contactsArray[index],initials, index);
 }
-
 
 async function saveChangesOnContact(id, index) {
     let initials = generateInitials(document.getElementById('inputContactName').value);
@@ -224,7 +231,6 @@ async function saveChangesOnContact(id, index) {
     updateAndRenderContacts(index);
     showInfoToast('Contact changes saved');
 }
-
 
 async function updateAndRenderContacts (index) {
     try {
@@ -255,17 +261,20 @@ async function setActiveUserInitials() {
 
 function goBackToList() {
     document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
+    let editDelContact = document.getElementById('edit-del-contact-responsive');
     let container = document.getElementById('contactInformation');
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
     if(responsiveButtonBottom.src= '../assets/icons/more.png') {
         container.classList.remove('contactFadeAndSlideIn');
         document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
         responsiveButtonBottom.src = '../assets/icons/add-contact.png';
+        editDelContact.style.display = 'none';
     }
     setTimeout(() => {
         container.classList.remove('fadeAndSlideIn');
         document.getElementById('contact-information-responsive').classList.remove('contactFadeAndSlideIn');
         responsiveButtonBottom.src = '../assets/icons/add-contact.png';
+        editDelContact.style.display = 'none';
     }, 50);
 }
 
