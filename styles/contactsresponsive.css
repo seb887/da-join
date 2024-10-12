@@ -198,7 +198,7 @@
       margin: 23px;
     }
     .contact-information {
-      position: absolute;
+      position: fixed;
       left: 0px;
       top: 0px;
       padding-left: 120px;
@@ -208,7 +208,7 @@
       background-color: #f6f7f8;
     }
     #contactInformation {
-      position: absolute;
+      position: fixed;
       left: 180px;
     }
     .seperator-contacts-title {
@@ -353,7 +353,11 @@
     }
     .contact-information {
       padding-left: 95px;
+      position: absolute;
       width: 100%;
+    }
+    #contactInformation {
+      position: absolute;
     }
     article .initials-container {
       min-width: 60px;
