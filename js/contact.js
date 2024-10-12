@@ -358,7 +358,7 @@ function editContactCardContent(contact, initials, index){
         </div>
         <div class="add-contact-modal-right">   
           <div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
-          <span style="font-size:47px;" id="initialsArticle">${initials}</span>
+          <span id="initialsArticle">${initials}</span>
         </div>
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>

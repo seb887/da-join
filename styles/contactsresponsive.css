@@ -91,6 +91,9 @@
     height: 3px;
     width: 50px;
   }
+  .initials-container-edit #initialsArticle {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 890px) {

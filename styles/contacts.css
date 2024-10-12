@@ -637,6 +637,10 @@ article {
   pointer-events: auto;
 }
 
+.initials-container-edit #initialsArticle {
+  font-size: 47px;
+}
+
 .return-to-list-responsive {
   position: fixed;
   display: none;
