@@ -1025,6 +1025,7 @@ article {
   .contact-information {
     padding-left: 95px;
     position: absolute;
+    width: 100%;
   }
   #contactInformation {
     position: absolute;
