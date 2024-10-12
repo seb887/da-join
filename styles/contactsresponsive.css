@@ -1,0 +1,397 @@
+@media (max-width: 1300px) {
+    .add-contact-modal {
+      width: 800px;
+      height: 500px;
+    }
+    .modal-header-logo-left {
+      width: 300px;
+      padding: 30px
+    }
+    .add-contact-modal-person img {
+      width: 80px;
+      height: 80px;
+    }
+    .add-contact-modal-person {
+      padding: 20px;
+    }
+    .initials-container-edit {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 80px;
+      height: 80px;
+    }
+    .input-field-right input {
+      width: 360px;
+    }
+    #inputContactName {
+      background-position: 326px 18.2px;
+    }
+    #inputMailAddress {
+      background-position: 326px 18.2px;
+    }
+    #inputPhoneNumber {
+      background-position: 326px 16px;
+    }
+    .contact-list-container {
+      width: unset;
+      margin-left: 230px;
+    }
+    .contact-data h4 {
+      font-size: 14px;
+    }
+    #contacts {
+      width: 270px;
+    }
+    .single-contact {
+      width: 240px;
+    }
+    .initials-container {
+      margin-right: 15px;
+    }
+    .contact-data a {
+      font-size: 14px;
+    }
+    button {
+      width: 240px;
+    }
+    .contacts-title b {
+      font-size: 47px;
+    }
+    .contacts-title {
+      margin: 30px;
+      flex-direction: column;
+      gap: 0px;
+      align-items: unset;
+    }
+    .contacts-title p {
+      font-size: 20px;
+    }
+    article {
+      margin-left: -160px;
+      top: 230px;
+    }
+    article .initials-container {
+      min-width: 80px;
+      min-height: 80px;
+    }
+    article .initials-container span {
+      font-size: 24px;
+    }
+    article h2 {
+      font-size: 28px;
+    }
+    .contact-information-header {
+      padding: 20px 0px 20px 0px;
+    }
+    .seperator-contacts-title {
+      position: fixed;
+      rotate: 180deg;
+      top: 217px;
+      padding-left: 90px;
+      height: 3px;
+      width: 50px;
+    }
+  }
+
+  @media (max-width: 890px) {
+    @keyframes slideInAddContact {
+      0%{
+        transform: translate(-50%, -50%) translateY(150vw);
+      }
+      100%{
+        transform: translate(-50%, -50%) translateX(0)
+      }
+    }
+    @keyframes slideOutAddContact {
+      0%{
+        transform: translate(-50%, -50%) translateX(0);
+      }
+      100%{
+        transform: translate(-50%, -50%) translateY(150vw);
+      }
+    }
+    @keyframes fadeAndSlideInResponsive {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    #info-toast {
+      width: 300px;
+      height: 50px;
+      font-size: 16px;
+      right: 500%;
+      transform: translateX(200%);
+    }
+    #info-toast.show {
+      bottom: unset;
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+    }
+    .article-edit-and-delete {
+      display: none;
+    }
+    .contactFadeAndSlideIn {
+      animation-name: fadeAndSlideInResponsive;
+    }
+    .hide-info-responsive {
+      display: none;
+    }
+    .return-to-list-responsive {
+      display: flex;
+    }
+    .hidden-overlay {
+      display: flex;
+    }
+    .add-contact-modal-person img {
+      width: 120px;
+      height: 120px;
+    }
+    .add-contact-modal {
+      flex-direction: column;
+      width: 396px;
+      height: 700px;
+    }
+    .logo-modal img {
+      display: none;
+    }
+    .modal-header-logo-left {
+      width: unset;
+      height: 352px;
+      border-radius: 30px 30px 0px 0px;
+    }
+    .header-modal h1 {
+      font-size: 47px;
+    }
+    .header-modal h2 {
+      font-size: 20px;
+    }
+    .add-contact-modal-right {
+      flex-direction: column;
+      position: fixed;
+      left: 18px;
+      top: 250px;
+    }
+    .add-contact-button-bottom button:nth-child(1) {
+       display: none;
+    }
+    .add-contact-button-bottom {
+      justify-content: center;
+    }
+    #closeAddContact {
+      filter: invert();
+      position: fixed;
+      width: unset;
+      left: 345px;
+      bottom: 610px;
+    }
+    .input-field-right {
+      margin-top: 35px;
+    }
+    .initials-container-edit {
+      width: 120px;
+      height: 120px;
+      margin: 23px;
+    }
+    .contact-information {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      padding-left: 120px;
+      width: 150vh;
+      height: 100%;
+      padding-top: 50px;
+      background-color: #f6f7f8;
+    }
+    #contactInformation {
+      position: absolute;
+      left: 180px;
+    }
+    .seperator-contacts-title {
+      top: 90px;
+    }
+    .contacts-title {
+      transform: translate(-50%, -50%);
+      margin: unset;
+    }
+    @keyframes fadeAndSlideIn {
+      0% {
+        left: 100%;
+      }
+      100% {
+        left: 50%;
+      }
+    }
+    .contact-list-container {
+      width: 100%;
+      margin-left: unset;
+      margin-top: unset;
+      padding-top: 90px;
+      height: calc(100vh - 80px);
+    }
+    .add-new-contacts {
+      display: none;
+    }
+    #contacts {
+      width: 100%;
+    }
+    .single-contact {
+      width: 352px;
+    }
+    .nameHeader {
+      width: 352px;
+    }
+    .edit-del-contact-responsive {
+      width: 116px;
+      height: 110px;
+      display: none;
+      border-radius: 20px 20px 0px 20px;
+      background-color: white;
+      box-shadow: 0px 4px 4px 0px #00000040;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px;
+    }
+    .edit-del-contact-responsive div {
+      width: 96px;
+      height: 40px;
+      padding: 8px;
+      transition: ease-in-out 200ms;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .edit-del-contact-responsive div:hover {
+      background-color: #d1d1d14d;
+    }
+    .edit-del-contact-responsive img {
+      width: 18px;
+    }
+  }
+  
+  @media (max-width: 427px) {
+    #inputPhoneNumber {
+      background-position: 225px 9px;
+    }
+    #inputMailAddress {
+      background-position: 223px 11px;
+    }
+    #inputContactName {
+      background-position: 225px 11.5px;
+    }
+    .add-contact-modal-person {
+      padding: 0px;
+    }
+    .input-field-right :nth-child(2) {
+      margin: 16px 0px;
+    }
+    .input-field-right {
+      margin-top: 15px;
+      gap: 0px;
+    }
+    .input-field-right input {
+      width: 255px;
+      height: 38px;
+      font-size: 16px;
+    }
+    .add-contact-modal-person img {
+      width: 80px;
+      height: 80px;
+    }
+    .add-contact-modal {
+      width: 285px;
+      height: 440px;
+    }
+    .modal-header-logo-left {
+      height: 170px;
+    }
+    .header-modal h1 {
+      font-size: 30px;
+    }
+    .header-modal h2 {
+      font-size: 16px;
+    }
+    .add-contact-modal-right {
+      left: 13.5px;
+      top: 130px;
+    }
+    #closeAddContact {
+      width: unset;
+      left: 238px;
+      bottom: 350px;
+    }
+    .initials-container-edit {
+      width: 80px;
+      height: 80px;
+      margin: 1.5px;
+    }
+    .add-contact-button-bottom button:nth-child(2)  {
+        width: 175px;
+        height: 50px;
+        font-size: 16px;
+        padding: unset;
+        justify-content: center;
+    } 
+    .single-contact {
+      width: 282px;
+    }
+    .nameHeader {
+      width: 282px;
+    }
+    .contacts-title b {
+      font-size: 36px;
+    }
+    .contacts-title p {
+      font-size: 16px;
+    }
+    .contact-information {
+      padding-left: 95px;
+      width: 100%;
+    }
+    article .initials-container {
+      min-width: 60px;
+      min-height: 60px;
+    }
+    article .initials-container span {
+      font-size: 20px;
+    }
+    article h2 {
+      font-size: 24px;
+    }
+    .contact-information-header {
+      font-size: 16px;
+    }
+    .aifs b {
+      font-size: 14px;
+    }
+    .aifs a {
+      font-size: 14px;
+    }
+    .aifs span {
+      font-size: 14px;
+    }
+    .add-contact-responsive {
+      width: 50px;
+      height: 50px;
+    }
+    .add-contact-responsive img {
+      width: 28px;
+    }
+    .return-to-list-responsive img {
+      width: 18px;
+      height: 18px;
+    }
+    .return-to-list-responsive {
+      position: absolute;
+    }
+    .edit-del-contact-responsive {
+      margin-bottom: 15%;
+    }
+  }
