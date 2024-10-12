@@ -6,6 +6,8 @@ let animationActive = false;
 function initContacts() {
     renderContacts();
     setActiveUserInitials();
+    document.getElementById('contact-information-responsive').classList.add('hide-info-responsive');
+    document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
 }
 
 async function getContacts() {
@@ -61,12 +63,21 @@ function checkForExistingLetter(contact, index) {
 
 function openContact(index) {
     let container = document.getElementById('contactInformation');
+    let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
     if(document.getElementById('contactName').innerText == contactsArray[index].name){
         container.classList.toggle('contactFadeAndSlideIn');
-    }else{
+        document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive');
+        responsiveButtonBottom.src = '../assets/icons/more.png';
+        document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
+    } else { 
         container.classList.remove('contactFadeAndSlideIn');
+        document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
+        responsiveButtonBottom.src = '../assets/icons/add-contact.png';
         setTimeout(() => {
             container.classList.add('contactFadeAndSlideIn');
+            document.getElementById('contact-information-responsive').classList.add('fadeAndSlideInResponsive');
+            responsiveButtonBottom.src = '../assets/icons/more.png';
+            document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
         }, 50);
     }
     setContactInformation(index)
@@ -75,12 +86,12 @@ function openContact(index) {
 
 async function setContactInformation(index) {
     document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
-    document.getElementById('contactName').innerText = contactsArray[index].name
-    document.getElementById('mailAddress').innerText = contactsArray[index].email
-    document.getElementById('phoneNumber').innerText = contactsArray[index].phone
-    document.getElementById('initialsArticle').innerText = generateInitials(contactsArray[index].name) 
-    document.getElementById('delContact').onclick = () => {deleteContact(contactsArray[index].id)}
-    document.getElementById('editContact').onclick = () => {editContact(index)}
+    document.getElementById('contactName').innerText = contactsArray[index].name;
+    document.getElementById('mailAddress').innerText = contactsArray[index].email;
+    document.getElementById('phoneNumber').innerText = contactsArray[index].phone;
+    document.getElementById('initialsArticle').innerText = generateInitials(contactsArray[index].name);
+    document.getElementById('delContact').onclick = () => {deleteContact(contactsArray[index].id)};
+    document.getElementById('editContact').onclick = () => {editContact(index)};
     setSelectedContactBackground(index);   
 }
 
@@ -240,6 +251,22 @@ async function setActiveUserInitials() {
     let activeUserName = user.activeName
     let initials = await generateInitials(activeUserName);
     document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
+}
+
+function goBackToList() {
+    document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
+    let container = document.getElementById('contactInformation');
+    let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
+    if(responsiveButtonBottom.src= '../assets/icons/more.png') {
+        container.classList.remove('contactFadeAndSlideIn');
+        document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
+        responsiveButtonBottom.src = '../assets/icons/add-contact.png';
+    }
+    setTimeout(() => {
+        container.classList.remove('fadeAndSlideIn');
+        document.getElementById('contact-information-responsive').classList.remove('contactFadeAndSlideIn');
+        responsiveButtonBottom.src = '../assets/icons/add-contact.png';
+    }, 50);
 }
 
 function contactContent(index) {

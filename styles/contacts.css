@@ -323,6 +323,13 @@ article {
   animation-fill-mode: forwards;
 }
 
+.fadeAndSlideInResponsive {
+  display: flex !important;
+  animation-name: fadeAndSlideInResponsive;
+  animation-duration: 150ms;
+  animation-fill-mode: forwards;
+}
+
 #contactInformation a {
     color: var(--accent-primary);
     overflow-wrap: anywhere;
@@ -625,6 +632,30 @@ article {
   width: 100%;
 }
 
+.return-to-list-responsive {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  margin-left: 90%;
+  top: 140px;
+}
+
+.return-to-list-responsive:hover {
+  cursor: pointer;
+  background-color: #d1d1d199;
+  border-radius: 50%;
+}
+
+.hide-z-index-responsive {
+  z-index: -500;
+}
+
+.change-icon-bottom {
+  content: url(../assets/icons/more.png);
+}
+
 @keyframes slideInAddContact {
   0%{
     opacity: 0;
@@ -734,7 +765,7 @@ article {
     font-size: 20px;
   }
   article {
-    margin-left: -140px;
+    margin-left: -160px;
     top: 230px;
   }
   article .initials-container {
@@ -776,6 +807,26 @@ article {
     100%{
       transform: translate(-50%, -50%) translateY(150vw);
     }
+  }
+  @keyframes fadeAndSlideInResponsive {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .article-edit-and-delete {
+    display: none;
+  }
+  .contactFadeAndSlideIn {
+    animation-name: fadeAndSlideInResponsive;
+  }
+  .hide-info-responsive {
+    display: none;
+  }
+  .return-to-list-responsive {
+    display: flex;
   }
   .hidden-overlay {
     display: flex;
@@ -831,13 +882,35 @@ article {
     margin: 23px;
   }
   .contact-information {
-    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    padding-left: 120px;
+    width: 150vh;
+    height: 100%;
+    padding-top: 50px;
+    background-color: #f6f7f8;
   }
   #contactInformation {
-    display: none;
+    position: fixed;
+    left: 180px;
   }
-  .contactFadeAndSlideIn {
-    display: none !important;
+  .seperator-contacts-title {
+    top: 90px;
+  }
+  .contacts-title {
+    transform: translate(-50%, -50%);
+    margin: unset;
+  }
+  @keyframes fadeAndSlideIn {
+    0% {
+      left: 100%;
+      opacity: 0.5;
+    }
+    100% {
+      left: 50%;
+      opacity: 1;
+    }
   }
   .contact-list-container {
     width: 100%;
@@ -845,7 +918,6 @@ article {
     margin-top: unset;
     padding-top: 90px;
     height: calc(100vh - 80px);
-    overflow: auto;
   }
   .add-new-contacts {
     display: none;

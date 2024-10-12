@@ -123,6 +123,7 @@ h1 {
   height: 158px;
   padding: 10px;
   border-radius: 20px 0px 20px 20px;
+  z-index: 1;
 }
 
 .dropdown-profile-buttons {

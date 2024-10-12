@@ -125,13 +125,13 @@
             </span>
           </div>
           <div class="contact-name">
-            <h4>Test Test</h4>
-            <a href="mailto:">test.test@test.de</a>
+            <h4></h4>
+            <a href="mailto:"></a>
           </div>
         </div>
       </div>
     </section>
-    <section class="contact-information">
+    <section id="contact-information-responsive" class="contact-information">
       <div class="contacts-title">
         <b>Contacts</b>
           <div class="seperator-contacts-title"></div>
@@ -145,7 +145,7 @@
         </div>
         <div class="article-name">
           <div class="contact-name">
-            <h2 id="contactName">Test Test</h2>
+            <h2 id="contactName"></h2>
           </div>
           <div class="article-edit-and-delete">
             <div id="editContact" onclick="editContact()"  class="edit-contact flex-d-r">
@@ -162,9 +162,9 @@
       <div class="contact-information-header flex-d-r">Contact Information</div>
       <div class="aifs flex-d-c">
         <b>Email</b>
-        <a id="mailAddress" href="#">test@test.de</a>
+        <a id="mailAddress" href="#"></a>
         <b>Phone</b>
-        <span id="phoneNumber">+49 152 1112457</span>
+        <span id="phoneNumber"></span>
       </div>
     </article>
 
@@ -179,9 +179,13 @@
     </div>
     <div class="hidden-overlay">
       <div onclick="openAndCloseAddContact()" class="add-contact-responsive">
-      <img src="../assets/icons/add-contact.png">
+      <img id="responsive-button-bottom" src="../assets/icons/add-contact.png">
       </div>
-  </div>
+    </div>
+
+      <div id="goBackToList" onclick="goBackToList()" class="return-to-list-responsive">
+        <img src="../assets/icons/back.png">
+      </div>
 
     </div>
     <footer>
