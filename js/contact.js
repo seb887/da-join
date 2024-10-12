@@ -4,10 +4,10 @@ let contactsArray = [];
 let animationActive = false;
 
 function initContacts() {
+    document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
+    document.getElementById('contact-information-responsive').classList.add('hide-info-responsive');
     renderContacts();
     setActiveUserInitials();
-    document.getElementById('contact-information-responsive').classList.add('hide-info-responsive');
-    document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
 }
 
 async function getContacts() {

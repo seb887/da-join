@@ -452,6 +452,19 @@ body {
   border-radius: 10px;
 }
 
+.footer-animation {
+  animation: footer-animation 300ms forwards;
+}
+
+@keyframes footer-animation {
+  0% {
+    bottom: 0px;
+  } 
+  100% {
+    bottom: -180px;
+  }
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 1280px) {
@@ -526,6 +539,9 @@ body {
 }
 
 @media (max-width: 650px) {
+  body {
+    margin-bottom: 500px;
+  }
   .content {
     margin-left: unset;
   }
@@ -595,9 +611,6 @@ body {
     width: unset;
     padding-left: 12px;
   }
-  body {
-    margin-bottom: 500px;
-  }
 }
 
 @media (max-width: 427px) {
@@ -626,9 +639,6 @@ body {
   }
   .add-task-header {
     padding-left: 25px;
-  }
-  body {
-    margin-bottom: 580px;
   }
   .prio-buttons {
     width: 90px;
@@ -659,8 +669,5 @@ body {
   }
   .add-task-header {
     padding-left: 18px;
-  }
-  body {
-    margin-bottom: 820px;
   }
 }
