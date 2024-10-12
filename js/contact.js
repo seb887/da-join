@@ -332,8 +332,8 @@ function addContactCardContent(){
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
                   <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="24" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" maxlength="14" required>
+                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
+                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
                 <div class="add-contact-button-bottom">
                   <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
                   <button type="submit">Create contact</button>
@@ -364,8 +364,8 @@ function editContactCardContent(contact, initials, index){
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
                   <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="24"  required>
-                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" maxlength="14" required>
+                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
+                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
                 <div class="add-contact-button-bottom">
                   <button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete</button>
                   <button style="justify-content: center; width: 111px;" type="submit">Save</button>
