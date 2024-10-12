@@ -307,11 +307,13 @@
   padding: 48px 40px;
   gap: 24px;
   width: 526px;
+  height: auto;
   max-height: 875px;
   border-radius: 30px;
   background-color: var(--bg-primary);
   font-size: 20px;
   font-weight: 400;
+  overflow: auto;
 }
 
 .task-modal-card span {

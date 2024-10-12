@@ -222,7 +222,7 @@ async function listContactsToAssignedTo() {
   let id = Object.keys(await getContacts());
   renderedContacts = [];
   allContacts.forEach((contact, index) => {
-    console.log(contact.name + id[index]), (contact.id = id[index]);
+    // console.log(contact.name + id[index]), (contact.id = id[index]);
   });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
