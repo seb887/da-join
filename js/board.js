@@ -6,6 +6,8 @@ const kanbanListAwaitFeedback = document.getElementById(
 );
 const kanbanListDone = document.getElementById('kanban-list-done');
 const taskModal = document.getElementById('task-modal');
+const taskModalCard = document.getElementById('task-modal-card');
+const taskModalEditCard = document.getElementById('task-modal-edit-card');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
 const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
@@ -107,25 +109,15 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function getDataForModal(event) {
-  const id = event.currentTarget.id;
-
-  for (let element of tasks) {
-    if (id == element.id) {
-      // console.log('task modal element id:', element.id);
-      taskModal.innerHTML = createTaskModalHTML(element);
-    }
-  }
-}
-
 function openTaskModal(event) {
   taskModal.style.display = 'flex';
-  getDataForModal(event);
+  getDataForSingleTask(event);
 }
 
 function closeTaskModal() {
   taskModal.style.display = 'none';
-  // taskModal.innerHTML = '';
+  taskModalCard.style.display = 'flex';
+  taskModalEditCard.style.display = 'none';
 }
 
 function closeTaskModalESC(event) {
@@ -143,19 +135,19 @@ function closeAddTaskModal() {
   addTaskModal.style.display = 'none';
 }
 
-function checkTaskModalSubtasks(task) {
-  if (task.data.subtasks && task.data.subtasks.length > 0) {
-    return `
-    <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
-      Subtasks:
-      <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
-        ${renderSubtasksModal(task)}
-      </div>
-  </div>`;
-  } else {
-    return '';
-  }
-}
+// function checkTaskModalSubtasks(task) {
+//   if (task.data.subtasks && task.data.subtasks.length > 0) {
+//     return `
+//     <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
+//       Subtasks:
+//       <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
+//         ${renderSubtasksModal(task)}
+//       </div>
+//   </div>`;
+//   } else {
+//     return '';
+//   }
+// }
 
 function checkTaskSubtasks(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
@@ -170,49 +162,6 @@ function checkTaskSubtasks(task) {
   } else {
     return '';
   }
-}
-
-function renderSubtasksModal(task) {
-  const subtasksArr = task.data.subtasks;
-  let taskId = task.id;
-  let subtasksHTML = '';
-
-  console.log('subtasksArr', subtasksArr);
-
-  for (let i = 0; i < subtasksArr.length; i++) {
-    console.log('renderSubtasks', taskId, i);
-
-    subtasksHTML += `
-      <div class="task-modal-subtask-container">
-        <img
-          src="../assets/icons/checkbox-empty.svg"
-          alt="checkbox icon"
-          onclick="setSubtaskChecked('${taskId}', '${i}')"
-        />
-        ${subtasksArr[i].title}
-      </div>
-    `;
-  }
-  return subtasksHTML;
-}
-
-function setSubtaskChecked(taskId, subtaskId) {
-  // set subtask checked in tasks arr (only for test)
-  for (let element of tasks) {
-    if (element.id == taskId) {
-      element.data.subtasks[subtaskId].checked =
-        !element.data.subtasks[subtaskId].checked;
-      console.log(tasks);
-    }
-  }
-
-  // checked subtask directly pushToFirebase
-  // change icon to checked in task modal
-  // renderBoard
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // DRAG AND DROP
@@ -281,30 +230,7 @@ function cancelSearchTask() {
   controlVisibilityInputClearBtn();
 }
 
-async function deleteTask(event) {
-  const taskId = event.target.id;
-
-  await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
-    method: 'DELETE',
-  });
-
-  closeTaskModal();
-  renderBoard();
-}
-
-function openEditTaskModal(event) {
-  const taskId = event.target.id;
-
-  for (let element of tasks) {
-    if (taskId == element.id) {
-      // console.log('task modal element id:', element.id);
-      taskModal.innerHTML = createEditTaskModalHTML(element);
-    }
-  }
-}
-
-async function editTask(event) {
-  const taskId = event.target.id;
+function getEditInputs() {
   inputTitle = document.getElementById('input-title');
   inputDescription = document.getElementById('input-description');
   inputDate = document.getElementById('input-date');
@@ -314,19 +240,11 @@ async function editTask(event) {
   buttonLowImg = document.getElementById('button-low-img');
   buttonMediumImg = document.getElementById('button-medium-img');
   buttonUrgentImg = document.getElementById('button-urgent-img');
-
-  for (let element of tasks) {
-    if (taskId == element.id) {
-      element.data.title = inputTitle.value;
-      element.data.description = inputDescription.value;
-      element.data.date = inputDate.value;
-      element.data.prio = currentPrio;
-
-      await updateTaskInFirebase(element.id, element.data);
-      closeTaskModal();
-      renderBoard();
-    }
-  }
+  subtasksList = document.getElementById('subtasks-list');
+  addSubtasksImg = document.getElementById('add-subtask-img');
+  submitSubtasksImg = document.getElementById('submit-subtask-img');
+  cancelSubtasksImg = document.getElementById('cancel-subtask-img');
+  inputSubtask = document.getElementById('input-subtask');
 }
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation

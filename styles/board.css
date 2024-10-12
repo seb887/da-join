@@ -186,7 +186,6 @@
   width: auto;
   border-radius: 8px;
   color: white;
-  background-color: red;
 }
 
 .task-modal-card-title-container {
@@ -291,6 +290,19 @@
 
 .task-modal-card {
   display: flex;
+  flex-direction: column;
+  padding: 48px 40px;
+  gap: 24px;
+  width: 526px;
+  max-height: 875px;
+  border-radius: 30px;
+  background-color: var(--bg-primary);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.task-modal-edit-card {
+  display: none;
   flex-direction: column;
   padding: 48px 40px;
   gap: 24px;

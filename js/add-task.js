@@ -3,11 +3,11 @@ let inputTitle = document.getElementById('input-title');
 let inputDescription = document.getElementById('input-description');
 let inputDate = document.getElementById('input-date');
 let selectCategory = document.getElementById('select-category');
-const subtasksList = document.getElementById('subtasks-list');
-const addSubtasksImg = document.getElementById('add-subtask-img');
-const submitSubtasksImg = document.getElementById('submit-subtask-img');
-const cancelSubtasksImg = document.getElementById('cancel-subtask-img');
-const inputSubtask = document.getElementById('input-subtask');
+let subtasksList = document.getElementById('subtasks-list');
+let addSubtasksImg = document.getElementById('add-subtask-img');
+let submitSubtasksImg = document.getElementById('submit-subtask-img');
+let cancelSubtasksImg = document.getElementById('cancel-subtask-img');
+let inputSubtask = document.getElementById('input-subtask');
 let buttonLow = document.getElementById('button-low');
 let buttonMedium = document.getElementById('button-medium');
 let buttonUrgent = document.getElementById('button-urgent');
@@ -54,7 +54,6 @@ function createNewTask() {
     description: inputDescription.value,
     date: inputDate.value,
     category: selectCategory.value,
-    bgCategory: setCategoryBackgroundColor(selectCategory.value),
     board: 'todo',
     prio: currentPrio,
     subtasks: subtasks,
@@ -62,14 +61,6 @@ function createNewTask() {
   };
 
   checkInputs(newTask);
-}
-
-function setCategoryBackgroundColor(category) {
-  if (category == 'User Story') {
-    return '#0038FF';
-  } else if (category == 'Technical Task') {
-    return '#1FD7C1';
-  }
 }
 
 function checkInputs(taskObj) {
@@ -97,6 +88,8 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
   inputSubtask.value = '';
 }
+
+// PRIO
 
 function setPrio(prio) {
   if (prio == 'urgent') {
@@ -149,7 +142,11 @@ function controlPrioButtonStyle() {
   }
 }
 
+// SUBTASKS
+
 function controlSubtaskIcons() {
+  console.log(inputSubtask.value.length);
+
   if (inputSubtask.value.length > 0) {
     addSubtasksImg.style.display = 'none';
     submitSubtasksImg.style.display = 'flex';
