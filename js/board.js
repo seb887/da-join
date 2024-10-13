@@ -118,6 +118,7 @@ function closeTaskModal() {
   taskModal.style.display = 'none';
   taskModalCard.style.display = 'flex';
   taskModalEditCard.style.display = 'none';
+  renderBoard();
 }
 
 function closeTaskModalESC(event) {
@@ -154,14 +155,45 @@ function renderSubtaskProgressBar(task) {
     return `
       <div class="subtask-progress-bar-container">
         <div class="subtask-progress-bar">
-            <div class="subtask-progress-bar-done"></div>
+            <div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(
+              task
+            )}px"></div>
         </div>
-        <div class="subtask-counter">1/2 Subtasks</div>
+        ${calcSubtaskCounter(task)}
       </div>
     `;
   } else {
     return '';
   }
+}
+
+function calcSubtaskCounter(task) {
+  let subtaskChecked = 0;
+  let subtasksAll = task.data.subtasks.length;
+
+  for (const element of task.data.subtasks) {
+    if (element.checked) {
+      subtaskChecked++;
+    }
+  }
+
+  return `<div class="subtask-counter">${subtaskChecked}/${subtasksAll} Subtasks</div>`;
+}
+
+function calcSubtaskProgressBar(task) {
+  let progressBarFull = 128;
+  let progressBarDone = 0;
+  let subtaskChecked = 0;
+  let subtasksAll = task.data.subtasks.length;
+
+  for (const element of task.data.subtasks) {
+    if (element.checked) {
+      subtaskChecked++;
+    }
+  }
+  progressBarDone = (progressBarFull / subtasksAll) * subtaskChecked;
+
+  return progressBarDone;
 }
 
 // DRAG AND DROP
