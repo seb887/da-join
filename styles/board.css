@@ -144,6 +144,10 @@
   width: 270px;
 }
 
+.kanban-add-task-buttons {
+  cursor: pointer;
+}
+
 .kanban-list {
   display: flex;
   flex-direction: column;
@@ -543,9 +547,9 @@
   visibility: visible;
 }
 
-  /* Responsive */
+/* Responsive */
 
-@media (max-width: 1550px) {
+/* @media (max-width: 1550px) {
   .board-content-section {
     width: 900px;
   }
@@ -558,7 +562,7 @@
     align-items: flex-start;
     min-width: 180px;
   }
-  .kanban-headline { 
+  .kanban-headline {
     width: 180px;
   }
   .kanban-container {
@@ -567,7 +571,7 @@
   .add-task-modal-card {
     height: 700px;
   }
-}
+} */
 
 @media (max-width: 1150px) {
   .board-content-section {
