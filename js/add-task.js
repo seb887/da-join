@@ -1,5 +1,5 @@
 // DOM ELEMENTS
-let inputTitle = document.getElementById('input-title');
+let inputTitle = document.querySelectorAll('#input-title');
 let inputDescription = document.getElementById('input-description');
 let inputDate = document.getElementById('input-date');
 let selectCategory = document.getElementById('select-category');
@@ -50,11 +50,11 @@ async function saveTaskToFirebase(newTask) {
 
 function createNewTask() {
   let newTask = {
-    title: inputTitle.value,
+    title: getInputTitle(),
     description: inputDescription.value,
     date: inputDate.value,
     category: selectCategory.value,
-    board: 'todo',
+    board: currentKanbanBoard,
     prio: currentPrio,
     subtasks: subtasks,
     assignedTo: matches,
@@ -63,20 +63,23 @@ function createNewTask() {
   checkInputs(newTask);
 }
 
+function getInputTitle() {
+  for (const element of inputTitle) {
+    if (element.value.length > 0) console.log(element.value);
+  }
+}
+
 function checkInputs(taskObj) {
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
-      // return;
       alert('Please insert a title');
     } else if (taskObj.category == 'Select task category') {
-      // return;
       alert('Please select a category');
     }
   } else {
-    console.log('create new task: ', taskObj);
     saveTaskToFirebase(taskObj);
     subtasksList.innerHTML = '';
-    // closeAddTaskModal();
+    currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
   }
@@ -255,7 +258,9 @@ async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   renderedContacts = [];
-  allContacts.forEach((contact, index) => {(contact.id = id[index]) });
+  allContacts.forEach((contact, index) => {
+    contact.id = id[index];
+  });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
@@ -327,7 +332,6 @@ function showOrHideContactsOnInput() {
   }
 }
 
-
 function displayMatchingContacts() {
   let input = document.getElementById('searchContact');
   renderedContacts.forEach((contact) => {
@@ -340,7 +344,6 @@ function displayMatchingContacts() {
       ).parentElement.parentElement.style.display = '';
   });
 }
-
 
 function renderAssignedContacts() {
   let container = document.getElementById('assigned-contacts-list');

@@ -19,6 +19,7 @@ const taskModalSubtasksList = document.getElementById(
 const tasks = [];
 const contacts = [];
 let currentDraggedElementId = '';
+let currentKanbanBoard = 'todo';
 
 // FUNCTIONS
 async function renderBoard() {
@@ -69,8 +70,6 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
 
 function renderKanbanLists(tasksArr) {
   clearKanbanLists();
-
-  console.log(tasksArr);
 
   renderData(filterData('todo', tasksArr), kanbanListTodo);
   renderData(filterData('in progress', tasksArr), kanbanListInProgress);
@@ -126,16 +125,19 @@ function closeTaskModal() {
 function closeTaskModalESC(event) {
   if (event.key === 'Escape') {
     closeTaskModal();
+    closeAddTaskModal();
   }
 }
 
-function openAddTaskModal() {
+function openAddTaskModal(kanbanBoard) {
   addTaskModal.style.display = 'flex';
+  currentKanbanBoard = kanbanBoard;
   // addTaskModal.innerHTML = createAddTaskModalHTML();
 }
 
 function closeAddTaskModal() {
   addTaskModal.style.display = 'none';
+  clearInputs();
 }
 
 // function checkTaskModalSubtasks(task) {
@@ -295,9 +297,13 @@ async function renderAssignedToInCard() {
     card.innerHTML = '';
     assignedTo[0].forEach((assignedContact, index) => {
       card.innerHTML += `
-      <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${assignedContact.initials}</div>
+      <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${
+        assignedContact.initials
+      }</div>
     `;
-    document.getElementById(`${assignedContact.id + '-cpb'}`).style.backgroundColor = assignedContact.color;
+      document.getElementById(
+        `${assignedContact.id + '-cpb'}`
+      ).style.backgroundColor = assignedContact.color;
     });
   });
 }

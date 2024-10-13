@@ -200,6 +200,8 @@
             <img
               src="../assets/icons/plus-button.png"
               alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('todo'); setPrio('medium')"
             />
           </div>
           <div
@@ -217,6 +219,8 @@
             <img
               src="../assets/icons/plus-button.png"
               alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('in progress'); setPrio('medium')"
             />
           </div>
           <div
@@ -234,6 +238,8 @@
             <img
               src="../assets/icons/plus-button.png"
               alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('await feedback'); setPrio('medium')"
             />
           </div>
           <div
@@ -375,7 +381,6 @@
             class="add-task-input-title"
             id="input-title"
             name="title"
-            value="${element.data.title}"
           />
         </div>
         <div class="form-container description-container">
@@ -406,7 +411,6 @@
             class="add-task-input-date"
             id="input-date"
             name="date"
-            value="${element.data.date}"
           />
         </div>
 

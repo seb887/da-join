@@ -144,6 +144,10 @@
   width: 270px;
 }
 
+.kanban-add-task-buttons {
+  cursor: pointer;
+}
+
 .kanban-list {
   display: flex;
   flex-direction: column;
