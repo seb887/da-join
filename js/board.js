@@ -149,7 +149,7 @@ function closeAddTaskModal() {
 //   }
 // }
 
-function checkTaskSubtasks(task) {
+function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
       <div class="subtask-progress-bar-container">

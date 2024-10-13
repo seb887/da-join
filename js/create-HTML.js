@@ -15,7 +15,7 @@ function createCardHTML(element) {
             <div class="card-title">${element.data.title}</div>
             <div class="card-description">${element.data.description}</div>
           </div>
-          ${checkTaskSubtasks(element)}
+          ${renderSubtaskProgressBar(element)}
           <div class="card-footer">
               <div id="card-footer" class="task-collaborators">
               <div class="card-profile-badge-1">AB</div>

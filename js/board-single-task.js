@@ -56,25 +56,40 @@ function setPrioImg(prio) {
 }
 
 function renderSubtasksModal(task) {
-  const subtasksArr = task.data.subtasks;
+  let subtasksArr = task.data.subtasks;
   let taskId = task.id;
   let subtasksHTML = '';
 
   checkSubtasksArr(subtasksArr);
 
   for (let i = 0; i < subtasksArr.length; i++) {
-    console.log('renderSubtasks', taskId, i);
+    // console.log('renderSubtasks', taskId, i);
 
-    subtasksHTML += `
-            <div class="task-modal-subtask-container">
-              <img
-                src="../assets/icons/checkbox-empty.svg"
-                alt="checkbox icon"
-                onclick="setSubtaskChecked('${taskId}', '${i}')"
-              />
-              ${subtasksArr[i].title}
-            </div>
-          `;
+    if (subtasksArr[i].checked) {
+      console.log(true);
+      subtasksHTML += `
+        <div class="task-modal-subtask-container">
+          <img
+            src="../assets/icons/checkbox-checked.svg"
+            alt="checkbox icon"
+            onclick="setSubtaskStatus('${taskId}', '${i}')"
+          />
+          ${subtasksArr[i].title}
+        </div>
+    `;
+    } else {
+      console.log(false);
+      subtasksHTML += `
+        <div class="task-modal-subtask-container">
+          <img
+            src="../assets/icons/checkbox-empty.svg"
+            alt="checkbox icon"
+            onclick="setSubtaskStatus('${taskId}', '${i}')"
+          />
+          ${subtasksArr[i].title}
+        </div>
+      `;
+    }
   }
   return subtasksHTML;
 }
@@ -87,20 +102,16 @@ function checkSubtasksArr(subtasksArr) {
   }
 }
 
-// TODO: ANPASSEN
-function setSubtaskChecked(taskId, subtaskId) {
-  // set subtask checked in tasks arr (only for test)
+async function setSubtaskStatus(taskId, subtaskId) {
   for (let element of tasks) {
     if (element.id == taskId) {
       element.data.subtasks[subtaskId].checked =
         !element.data.subtasks[subtaskId].checked;
-      console.log(tasks);
+
+      await updateTaskInFirebase(element.id, element.data);
+      renderSingleTaskModal(element);
     }
   }
-
-  // checked subtask directly pushToFirebase
-  // change icon to checked in task modal
-  // renderBoard
 }
 
 async function deleteTask(id) {
@@ -128,7 +139,7 @@ function openEditTaskModal(taskId) {
       currentPrio = element.data.prio;
       controlPrioButtonStyle();
       subtasks = element.data.subtasks;
-      renderSubtasks();
+      renderSubtasksList();
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
   }

@@ -171,12 +171,12 @@ function submitInputSubtask() {
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
   controlSubtaskIcons();
-  renderSubtasks();
+  renderSubtasksList();
 
   console.log(subtasks);
 }
 
-function renderSubtasks() {
+function renderSubtasksList() {
   subtasksList.innerHTML = '';
 
   for (let element of subtasks) {
