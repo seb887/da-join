@@ -542,3 +542,50 @@
 .show {
   visibility: visible;
 }
+
+  /* Responsive */
+
+@media (max-width: 1550px) {
+  .board-content-section {
+    width: 900px;
+  }
+  .kanban-card {
+    width: 180px;
+    height: 200px;
+    gap: 5px;
+  }
+  .kanban-list {
+    align-items: flex-start;
+    min-width: 180px;
+  }
+  .kanban-headline { 
+    width: 180px;
+  }
+  .kanban-container {
+    min-width: 180px;
+  }
+  .add-task-modal-card {
+    height: 700px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .board-content-section {
+    width: 645px;
+  }
+  h1 {
+    font-size: 47px;
+  }
+  .input-container {
+    width: 180px;
+    input {
+      width: 70px;
+    }
+    .input-search-img {
+      margin-left: 8px;
+    }
+  }
+  .add-task-modal-card {
+    width: 800px;
+  }
+}
