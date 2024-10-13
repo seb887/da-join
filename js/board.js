@@ -70,6 +70,8 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
 function renderKanbanLists(tasksArr) {
   clearKanbanLists();
 
+  console.log(tasksArr);
+
   renderData(filterData('todo', tasksArr), kanbanListTodo);
   renderData(filterData('in progress', tasksArr), kanbanListInProgress);
   renderData(filterData('await feedback', tasksArr), kanbanListAwaitFeedback);
