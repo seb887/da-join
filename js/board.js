@@ -97,7 +97,9 @@ function renderData(tasksArr, kanbanList) {
   } else {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
-      renderAssignedToInCard();
+      console.log(tasksArr[i].id);
+      
+      renderAssignedToInCard(tasksArr[i].id);
     }
   }
 }
@@ -285,12 +287,12 @@ async function returnTasksFromFirebase() {
   return taskAsObject;
 }
 
-async function renderAssignedToInCard() {
+async function renderAssignedToInCard(taskId) {
   let tasks = await returnTasksFromFirebase();
-  let assignedTo = await getAllAssignedTo();
-  let card = document.getElementById('card-footer');
+  let assignedTo = await getAllAssignedTo(); 
+  let card = document.getElementById('card-footer'+ taskId);
   tasks.forEach((tasks, index) => {
-    card.innerHTML = '';
+    card.innerHTML= '';
     assignedTo[0].forEach((assignedContact, index) => {
       card.innerHTML += `
       <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${assignedContact.initials}</div>
