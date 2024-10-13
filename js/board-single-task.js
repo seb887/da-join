@@ -63,10 +63,7 @@ function renderSubtasksModal(task) {
   checkSubtasksArr(subtasksArr);
 
   for (let i = 0; i < subtasksArr.length; i++) {
-    // console.log('renderSubtasks', taskId, i);
-
     if (subtasksArr[i].checked) {
-      console.log(true);
       subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
@@ -78,7 +75,6 @@ function renderSubtasksModal(task) {
         </div>
     `;
     } else {
-      console.log(false);
       subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
@@ -126,8 +122,6 @@ async function deleteTask(id) {
 }
 
 function openEditTaskModal(taskId) {
-  console.log(taskId);
-
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 
@@ -139,7 +133,7 @@ function openEditTaskModal(taskId) {
       currentPrio = element.data.prio;
       controlPrioButtonStyle();
       subtasks = element.data.subtasks;
-      renderSubtasksList();
+      renderSubtasksList(taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
   }

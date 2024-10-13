@@ -218,6 +218,7 @@ body {
   display: flex;
   gap: 12px;
   padding-right: 24px;
+  cursor: pointer;
 }
 
 .subtask-buttons img {

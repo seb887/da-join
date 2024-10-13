@@ -176,23 +176,25 @@ function submitInputSubtask() {
   console.log(subtasks);
 }
 
-function renderSubtasksList() {
+function renderSubtasksList(taskId) {
   subtasksList.innerHTML = '';
 
-  for (let element of subtasks) {
+  for (let i = 0; i < subtasks.length; i++) {
     subtasksList.innerHTML += `
       <li class="subtasks">
-        <div class="subtask-title">${element.title}</div>
+        <div class="subtask-title">${subtasks[i].title}</div>
         <div class="subtask-buttons">
           <img
             src="../assets/icons/edit.png"
             alt="edit icon"
             id="edit-subtask"
+            onclick="editSubtask('${taskId}', '${i}')"
           />
           <img
             src="../assets/icons/delete.png"
             alt="trash icon"
             id="delete-subtask"
+            onclick="deleteSubtask('${taskId}', '${i}')"
           />
         </div>
 
@@ -200,6 +202,37 @@ function renderSubtasksList() {
     `;
   }
 }
+
+async function editSubtask(taskId, index) {
+  if (taskId === undefined) {
+    console.log('taskId is undefined');
+  } else {
+    console.log('taskId is defined', taskId);
+
+    for (let element of tasks) {
+      if (element.id == taskId) {
+        // await updateTaskInFirebase(element.id, element.data);
+      }
+    }
+  }
+}
+
+async function deleteSubtask(taskId, index) {
+  if (taskId == 'undefined') {
+    subtasks.splice(index, 1);
+    renderSubtasksList();
+  } else {
+    for (let element of tasks) {
+      if (element.id == taskId) {
+        element.data.subtasks.splice(index, 1);
+        await updateTaskInFirebase(element.id, element.data);
+        renderSubtasksList();
+      }
+    }
+  }
+}
+
+// INFO TOAST
 
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
