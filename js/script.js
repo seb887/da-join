@@ -25,6 +25,7 @@ function saveActiveUserToLocalStorage(user) {
 
 function guestLogInOrLogOut() {
     localStorage.removeItem('activeUser');
+    localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
     window.location.href='login.html';
 }
 

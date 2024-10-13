@@ -5,6 +5,8 @@ function init() {
     document.getElementById("signed-up-overlay").style.zIndex = -5;
     setTimeout(playLogoAnimation, 250);
     document.getElementById("whole-body-id").innerHTML = renderLogIn();
+    localStorage.removeItem('firstLogin');
+    firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
 }
 
 function playLogoAnimation() {
