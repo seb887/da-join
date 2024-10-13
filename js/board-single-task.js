@@ -11,6 +11,7 @@ const modalSubtasksList = document.getElementById(
 );
 const taskDeleteBtn = document.getElementById('task-delete-button');
 const taskEditBtn = document.getElementById('task-edit-button');
+const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
 
 // VARIABLES
 
@@ -113,24 +114,27 @@ async function deleteTask(id) {
   renderBoard();
 }
 
-function openEditTaskModal(id) {
-  const taskId = id;
+function openEditTaskModal(taskId) {
   console.log(taskId);
+
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 
-  //   for (let element of tasks) {
-  //     if (taskId == element.id) {
-  //       // console.log('task modal element id:', element.id);
-  //       taskModal.innerHTML = createEditTaskModalHTML(element);
-  //     }
-  //   }
+  for (let element of tasks) {
+    if (taskId == element.id) {
+      inputTitle.value = element.data.title;
+      inputDescription.value = element.data.description;
+      inputDate.value = element.data.date;
+      currentPrio = element.data.prio;
+      controlPrioButtonStyle();
+      subtasks = element.data.subtasks;
+      renderSubtasks();
+      editTaskSubmitBtn.onclick = () => editTask(taskId);
+    }
+  }
 }
 
-async function editTask(event) {
-  const taskId = event.target.id;
-  getEditInputs();
-
+async function editTask(taskId) {
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = inputTitle.value;

@@ -26,7 +26,7 @@ function createCardHTML(element) {
               <img
                   src="../assets/icons/prio-${element.data.prio}.png"
                   alt="prio icon"
-                  id="button-${element.data.prio}-img"
+                  class="button-${element.data.prio}-img"
               />
               </div>
           </div>

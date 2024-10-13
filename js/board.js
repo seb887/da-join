@@ -230,23 +230,6 @@ function cancelSearchTask() {
   controlVisibilityInputClearBtn();
 }
 
-function getEditInputs() {
-  inputTitle = document.getElementById('input-title');
-  inputDescription = document.getElementById('input-description');
-  inputDate = document.getElementById('input-date');
-  buttonLow = document.getElementById('button-low');
-  buttonMedium = document.getElementById('button-medium');
-  buttonUrgent = document.getElementById('button-urgent');
-  buttonLowImg = document.getElementById('button-low-img');
-  buttonMediumImg = document.getElementById('button-medium-img');
-  buttonUrgentImg = document.getElementById('button-urgent-img');
-  subtasksList = document.getElementById('subtasks-list');
-  addSubtasksImg = document.getElementById('add-subtask-img');
-  submitSubtasksImg = document.getElementById('submit-subtask-img');
-  cancelSubtasksImg = document.getElementById('cancel-subtask-img');
-  inputSubtask = document.getElementById('input-subtask');
-}
-
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
 function showInfoToast(text) {
   event.preventDefault();

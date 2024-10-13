@@ -21,7 +21,7 @@ const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
 CONTACT_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
-const subtasks = [];
+let subtasks = [];
 let assignedContacts = [];
 let renderedContacts = [];
 let dropedDown = false;
@@ -333,13 +333,13 @@ function renderContactArray() {
   });
 }
 
-window.onscroll = function(ev) {
+window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
   if (scrollPosition >= totalHeight) {
-      document.getElementById("footer").classList.add("footer-animation");
+    document.getElementById('footer').classList.add('footer-animation');
   } else {
-    document.getElementById("footer").classList.remove("footer-animation");
+    document.getElementById('footer').classList.remove('footer-animation');
   }
 };
 

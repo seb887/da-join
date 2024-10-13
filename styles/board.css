@@ -294,7 +294,7 @@
   padding: 48px 40px;
   gap: 24px;
   width: 526px;
-  max-height: 875px;
+  max-height: 950px;
   border-radius: 30px;
   background-color: var(--bg-primary);
   font-size: 20px;
@@ -308,7 +308,7 @@
   gap: 24px;
   width: 526px;
   height: auto;
-  max-height: 875px;
+  max-height: 950px;
   border-radius: 30px;
   background-color: var(--bg-primary);
   font-size: 20px;
@@ -362,6 +362,17 @@
 }
 
 .task-modal-card-prio img {
+  width: 17px;
+  height: 12px;
+}
+
+.button-medium-img {
+  width: 17px;
+  height: 6px;
+}
+
+.button-low-img,
+.button-urgent-img {
   width: 17px;
   height: 12px;
 }
@@ -508,7 +519,19 @@
 
 .edit-task-buttons-container button {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
   gap: 8px;
+
+  height: 49px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--bg-secondary);
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 #info-toast.show {

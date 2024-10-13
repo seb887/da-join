@@ -195,6 +195,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-height: 96px;
+  overflow: auto;
 }
 
 .subtasks {
@@ -203,9 +205,9 @@ body {
   align-items: center;
 }
 
-.subtasks:hover {
+/* .subtasks:hover {
   background: var(--font-secondary);
-}
+} */
 
 .subtask-title {
   display: list-item;
@@ -459,7 +461,7 @@ body {
 @keyframes footer-animation {
   0% {
     bottom: 0px;
-  } 
+  }
   100% {
     bottom: -180px;
   }
