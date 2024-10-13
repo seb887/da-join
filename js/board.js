@@ -290,14 +290,14 @@ async function returnTasksFromFirebase() {
 async function renderAssignedToInCard() {
   let tasks = await returnTasksFromFirebase();
   let assignedTo = await getAllAssignedTo();
-
   let card = document.getElementById('card-footer');
-  tasks.forEach((taks) => {
-    assignedTo.forEach((assignedContact) => {
-      card.innerHTML = '';
+  tasks.forEach((tasks, index) => {
+    card.innerHTML = '';
+    assignedTo[0].forEach((assignedContact, index) => {
       card.innerHTML += `
-    <div class="card-profile-badge-3">ALALAL</div>
+      <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${assignedContact.initials}</div>
     `;
+    document.getElementById(`${assignedContact.id + '-cpb'}`).style.backgroundColor = assignedContact.color;
     });
   });
 }

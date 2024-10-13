@@ -255,9 +255,7 @@ async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   renderedContacts = [];
-  allContacts.forEach((contact, index) => {
-    console.log(contact.name + id[index]), (contact.id = id[index]);
-  });
+  allContacts.forEach((contact, index) => {(contact.id = id[index]) });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
@@ -329,6 +327,7 @@ function showOrHideContactsOnInput() {
   }
 }
 
+
 function displayMatchingContacts() {
   let input = document.getElementById('searchContact');
   renderedContacts.forEach((contact) => {
@@ -341,6 +340,7 @@ function displayMatchingContacts() {
       ).parentElement.parentElement.style.display = '';
   });
 }
+
 
 function renderAssignedContacts() {
   let container = document.getElementById('assigned-contacts-list');
