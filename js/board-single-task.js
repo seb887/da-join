@@ -1,5 +1,7 @@
 // DOM ELEMENTS
-
+const editInputTitle = document.getElementById('edit-input-title');
+const editInputDescription = document.getElementById('edit-input-description');
+const editInputDate = document.getElementById('edit-input-date');
 const taskCategory = document.getElementById('task-modal-card-category');
 const taskTitle = document.getElementById('task-modal-card-title');
 const taskDescription = document.getElementById('task-modal-card-description');
@@ -127,9 +129,9 @@ function openEditTaskModal(taskId) {
 
   for (let element of tasks) {
     if (taskId == element.id) {
-      inputTitle.value = element.data.title;
-      inputDescription.value = element.data.description;
-      inputDate.value = element.data.date;
+      editInputTitle.value = element.data.title;
+      editInputDescription.value = element.data.description;
+      editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
       controlPrioButtonStyle();
       subtasks = element.data.subtasks;
@@ -142,9 +144,9 @@ function openEditTaskModal(taskId) {
 async function editTask(taskId) {
   for (let element of tasks) {
     if (taskId == element.id) {
-      element.data.title = inputTitle.value;
-      element.data.description = inputDescription.value;
-      element.data.date = inputDate.value;
+      element.data.title = editInputTitle.value;
+      element.data.description = editInputDescription.value;
+      element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
 
       await updateTaskInFirebase(element.id, element.data);

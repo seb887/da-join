@@ -98,8 +98,8 @@ function renderData(tasksArr, kanbanList) {
   } else {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
-      console.log(tasksArr[i].id);
-      
+      // console.log(tasksArr[i].id);
+
       renderAssignedToInCard(tasksArr[i].id);
     }
   }
@@ -237,7 +237,6 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove('highlight-kanban-list');
 }
 
-// SEARCH TASKS
 function searchTask() {
   clearKanbanLists(); // Leert den Content Bereich
   controlVisibilityInputClearBtn();
@@ -293,10 +292,10 @@ async function returnTasksFromFirebase() {
 
 async function renderAssignedToInCard(taskId) {
   let tasks = await returnTasksFromFirebase();
-  let assignedTo = await getAllAssignedTo(); 
-  let card = document.getElementById('card-footer'+ taskId);
+  let assignedTo = await getAllAssignedTo();
+  let card = document.getElementById('card-footer' + taskId);
   tasks.forEach((tasks, index) => {
-    card.innerHTML= '';
+    card.innerHTML = '';
     assignedTo[0].forEach((assignedContact, index) => {
       card.innerHTML += `
       <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${
