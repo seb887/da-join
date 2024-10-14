@@ -115,9 +115,10 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function openTaskModal(event) {
+function openTaskModal(event, taskId) {
   taskModal.style.display = 'flex';
   getDataForSingleTask(event);
+  displayTaskModalContacts(taskId);
 }
 
 function closeTaskModal() {
@@ -296,6 +297,7 @@ async function returnTasksFromFirebase() {
 
 async function renderAssignedToInCard(taskId, task) {
   let card = document.getElementById('card-footer'+ taskId);
+  if(task.data.assignedTo){
     card.innerHTML= '';
     task.data.assignedTo.forEach((assignedContact, index) => {      
       card.innerHTML += 
@@ -303,6 +305,7 @@ async function renderAssignedToInCard(taskId, task) {
       <div style="background-color:${assignedContact.color}" id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${assignedContact.initials}</div>
       `;
     });
+  }
 }
 
 async function getAllAssignedTo() {
@@ -314,4 +317,12 @@ async function getAllAssignedTo() {
     }
   });
   return assignTo;
+}
+
+
+function displayTaskModalContacts(taskId , assignedTo){
+  let container = document.getElementById('task-modal-contacts');
+  console.log(container);
+  
+  container.innerHTML += ''
 }
