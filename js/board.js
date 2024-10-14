@@ -113,9 +113,10 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function openTaskModal(event) {
+function openTaskModal(event, taskId) {
   taskModal.style.display = 'flex';
   getDataForSingleTask(event);
+  displayTaskModalContacts(taskId);
 }
 
 function closeTaskModal() {
@@ -316,4 +317,12 @@ async function getAllAssignedTo() {
     }
   });
   return assignTo;
+}
+
+
+function displayTaskModalContacts(taskId , assignedTo){
+  let container = document.getElementById('task-modal-contacts');
+  console.log(container);
+  
+  container.innerHTML += ''
 }

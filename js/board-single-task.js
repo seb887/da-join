@@ -20,6 +20,7 @@ const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
 // FUNCTIONS
 function getDataForSingleTask(event) {
   const id = event.currentTarget.id;
+  
 
   for (let element of tasks) {
     if (id == element.id) {
@@ -156,6 +157,7 @@ async function editTask(taskId) {
       element.data.description = editInputDescription.value;
       element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
+
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
       renderBoard();

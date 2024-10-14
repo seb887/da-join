@@ -2,7 +2,7 @@ function createCardHTML(element) {
   return `
       <div
         class="kanban-card" id="${element.id}"
-        onclick="openTaskModal(event)"
+        onclick="openTaskModal(event, '${element.id}')"
         draggable="true"
         ondragstart="drag(event)"
       >
