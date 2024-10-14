@@ -62,11 +62,16 @@ function renderSubtasksModal(task) {
   let taskId = task.id;
   let subtasksHTML = '';
 
-  checkSubtasksArr(subtasksArr);
+  if (subtasksArr == undefined) {
+    taskModalSubtasks.style.display = 'none';
+    console.log('subtasksArr is undefined');
+    return;
+  } else {
+    taskModalSubtasks.style.display = 'flex';
 
-  for (let i = 0; i < subtasksArr.length; i++) {
-    if (subtasksArr[i].checked) {
-      subtasksHTML += `
+    for (let i = 0; i < subtasksArr.length; i++) {
+      if (subtasksArr[i].checked) {
+        subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
             src="../assets/icons/checkbox-checked.svg"
@@ -76,8 +81,8 @@ function renderSubtasksModal(task) {
           ${subtasksArr[i].title}
         </div>
     `;
-    } else {
-      subtasksHTML += `
+      } else {
+        subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
             src="../assets/icons/checkbox-empty.svg"
@@ -87,6 +92,7 @@ function renderSubtasksModal(task) {
           ${subtasksArr[i].title}
         </div>
       `;
+      }
     }
   }
   return subtasksHTML;
@@ -95,6 +101,7 @@ function renderSubtasksModal(task) {
 function checkSubtasksArr(subtasksArr) {
   if (subtasksArr == undefined) {
     taskModalSubtasks.style.display = 'none';
+    return;
   } else {
     taskModalSubtasks.style.display = 'flex';
   }
@@ -124,6 +131,8 @@ async function deleteTask(id) {
 }
 
 function openEditTaskModal(taskId) {
+  console.log(taskId);
+
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 

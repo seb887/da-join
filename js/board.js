@@ -294,13 +294,17 @@ async function returnTasksFromFirebase() {
 async function renderAssignedToInCard(taskId, task) {
   let card = document.getElementById('card-footer' + taskId);
   card.innerHTML = '';
-  task.data.assignedTo.forEach((assignedContact, index) => {
-    card.innerHTML += `
-      <div style="background-color:${assignedContact.color}" id="${
-      assignedContact.id + '-cpb'
-    }" class="card-profile-badge-3">${assignedContact.initials}</div>
-      `;
-  });
+  if (task.data.assignedTo == undefined) {
+    return;
+  } else {
+    task.data.assignedTo.forEach((assignedContact, index) => {
+      card.innerHTML += `
+        <div style="background-color:${assignedContact.color}" id="${
+        assignedContact.id + '-cpb'
+      }" class="card-profile-badge-3">${assignedContact.initials}</div>
+        `;
+    });
+  }
 }
 
 async function getAllAssignedTo() {
