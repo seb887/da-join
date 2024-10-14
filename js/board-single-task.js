@@ -64,7 +64,6 @@ function renderSubtasksModal(task) {
 
   if (subtasksArr == undefined) {
     taskModalSubtasks.style.display = 'none';
-    console.log('subtasksArr is undefined');
     return;
   } else {
     taskModalSubtasks.style.display = 'flex';
