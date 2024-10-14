@@ -18,7 +18,6 @@ function createCardHTML(element) {
           ${renderSubtaskProgressBar(element)}
           <div class="card-footer">
               <div id="card-footer${element.id}" class="task-collaborators">
-
               </div>
               <div class="task-prio">
               <img

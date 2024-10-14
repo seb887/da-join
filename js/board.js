@@ -93,14 +93,15 @@ function filterData(board, tasksArr) {
 }
 
 function renderData(tasksArr, kanbanList) {
+  // console.log(tasksArr);
+
   if (tasksArr.length == 0) {
     kanbanList.innerHTML = `<div class="no-tasks-card">No tasks</div>`;
   } else {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
-      // console.log(tasksArr[i].id);
-
-      renderAssignedToInCard(tasksArr[i].id);
+      renderAssignedToInCard(tasksArr[i].id, tasksArr[i]);
+      // console.log(tasksArr[i]);
     }
   }
 }
@@ -290,22 +291,15 @@ async function returnTasksFromFirebase() {
   return taskAsObject;
 }
 
-async function renderAssignedToInCard(taskId) {
-  let tasks = await returnTasksFromFirebase();
-  let assignedTo = await getAllAssignedTo();
+async function renderAssignedToInCard(taskId, task) {
   let card = document.getElementById('card-footer' + taskId);
-  tasks.forEach((tasks, index) => {
-    card.innerHTML = '';
-    assignedTo[0].forEach((assignedContact, index) => {
-      card.innerHTML += `
-      <div id="${assignedContact.id + '-cpb'}" class="card-profile-badge-3">${
-        assignedContact.initials
-      }</div>
-    `;
-      document.getElementById(
-        `${assignedContact.id + '-cpb'}`
-      ).style.backgroundColor = assignedContact.color;
-    });
+  card.innerHTML = '';
+  task.data.assignedTo.forEach((assignedContact, index) => {
+    card.innerHTML += `
+      <div style="background-color:${assignedContact.color}" id="${
+      assignedContact.id + '-cpb'
+    }" class="card-profile-badge-3">${assignedContact.initials}</div>
+      `;
   });
 }
 

@@ -148,7 +148,6 @@ async function editTask(taskId) {
       element.data.description = editInputDescription.value;
       element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
-
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
       renderBoard();
