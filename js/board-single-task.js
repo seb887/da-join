@@ -1,5 +1,7 @@
 // DOM ELEMENTS
-
+const editInputTitle = document.getElementById('edit-input-title');
+const editInputDescription = document.getElementById('edit-input-description');
+const editInputDate = document.getElementById('edit-input-date');
 const taskCategory = document.getElementById('task-modal-card-category');
 const taskTitle = document.getElementById('task-modal-card-title');
 const taskDescription = document.getElementById('task-modal-card-description');
@@ -61,11 +63,16 @@ function renderSubtasksModal(task) {
   let taskId = task.id;
   let subtasksHTML = '';
 
-  checkSubtasksArr(subtasksArr);
+  if (subtasksArr == undefined) {
+    taskModalSubtasks.style.display = 'none';
+    console.log('subtasksArr is undefined');
+    return;
+  } else {
+    taskModalSubtasks.style.display = 'flex';
 
-  for (let i = 0; i < subtasksArr.length; i++) {
-    if (subtasksArr[i].checked) {
-      subtasksHTML += `
+    for (let i = 0; i < subtasksArr.length; i++) {
+      if (subtasksArr[i].checked) {
+        subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
             src="../assets/icons/checkbox-checked.svg"
@@ -75,8 +82,8 @@ function renderSubtasksModal(task) {
           ${subtasksArr[i].title}
         </div>
     `;
-    } else {
-      subtasksHTML += `
+      } else {
+        subtasksHTML += `
         <div class="task-modal-subtask-container">
           <img
             src="../assets/icons/checkbox-empty.svg"
@@ -86,6 +93,7 @@ function renderSubtasksModal(task) {
           ${subtasksArr[i].title}
         </div>
       `;
+      }
     }
   }
   return subtasksHTML;
@@ -94,6 +102,7 @@ function renderSubtasksModal(task) {
 function checkSubtasksArr(subtasksArr) {
   if (subtasksArr == undefined) {
     taskModalSubtasks.style.display = 'none';
+    return;
   } else {
     taskModalSubtasks.style.display = 'flex';
   }
@@ -123,14 +132,16 @@ async function deleteTask(id) {
 }
 
 function openEditTaskModal(taskId) {
+  console.log(taskId);
+
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 
   for (let element of tasks) {
     if (taskId == element.id) {
-      inputTitle.value = element.data.title;
-      inputDescription.value = element.data.description;
-      inputDate.value = element.data.date;
+      editInputTitle.value = element.data.title;
+      editInputDescription.value = element.data.description;
+      editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
       controlPrioButtonStyle();
       subtasks = element.data.subtasks;
@@ -143,9 +154,9 @@ function openEditTaskModal(taskId) {
 async function editTask(taskId) {
   for (let element of tasks) {
     if (taskId == element.id) {
-      element.data.title = inputTitle.value;
-      element.data.description = inputDescription.value;
-      element.data.date = inputDate.value;
+      element.data.title = editInputTitle.value;
+      element.data.description = editInputDescription.value;
+      element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
 
       await updateTaskInFirebase(element.id, element.data);

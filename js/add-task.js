@@ -1,5 +1,5 @@
 // DOM ELEMENTS
-let inputTitle = document.querySelectorAll('#input-title');
+let inputTitle = document.getElementById('input-title');
 let inputDescription = document.getElementById('input-description');
 let inputDate = document.getElementById('input-date');
 let selectCategory = document.getElementById('select-category');
@@ -50,7 +50,7 @@ async function saveTaskToFirebase(newTask) {
 
 function createNewTask() {
   let newTask = {
-    title: getInputTitle(),
+    title: inputTitle.value,
     description: inputDescription.value,
     date: inputDate.value,
     category: selectCategory.value,
@@ -60,13 +60,9 @@ function createNewTask() {
     assignedTo: matches,
   };
 
-  checkInputs(newTask);
-}
+  console.log(newTask);
 
-function getInputTitle() {
-  for (const element of inputTitle) {
-    if (element.value.length > 0) console.log(element.value);
-  }
+  checkInputs(newTask);
 }
 
 function checkInputs(taskObj) {
