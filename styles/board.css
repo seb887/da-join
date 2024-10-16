@@ -547,6 +547,14 @@
   visibility: visible;
 }
 
+#task-modal-assigned-contacts-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px 0px 0px 16px;
+  gap: 16px;
+}
+
 /* Responsive */
 
 /* @media (max-width: 1550px) {

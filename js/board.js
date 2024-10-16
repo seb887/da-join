@@ -101,7 +101,7 @@ function renderData(tasksArr, kanbanList) {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
       renderAssignedToInCard(tasksArr[i].id, tasksArr[i]);
-      // console.log(tasksArr[i]);
+
     }
   }
 }
@@ -113,10 +113,10 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function openTaskModal(event, taskId) {
+function openTaskModal(event, id) {
   taskModal.style.display = 'flex';
   getDataForSingleTask(event);
-  displayTaskModalContacts(taskId);
+  displayTaskModalContacts(id);
 }
 
 function closeTaskModal() {
@@ -320,9 +320,23 @@ async function getAllAssignedTo() {
 }
 
 
-function displayTaskModalContacts(taskId , assignedTo){
-  let container = document.getElementById('task-modal-contacts');
-  console.log(container);
+async function displayTaskModalContacts(id){
+  let container = document.getElementById('task-modal-assigned-contacts');
+  container.innerHTML = '';
+  tasks.forEach((task) => {
+    if(task.id == id)
+    {
+      task.data.assignedTo.forEach((assignedContact) => {
+        container.innerHTML += `
+        <div id= "task-modal-assigned-contacts-container">
+          <div class="task-modal-contact-profile-img">${assignedContact.initials}</div>
+          <div class="task-modal-contact-name">${assignedContact.name}</div>
+        </div>
+                               `
+      }) 
+    }  
+  });
   
-  container.innerHTML += ''
+  
+  
 }
