@@ -10,6 +10,7 @@ function initContacts() {
     setActiveUserInitials();
 }
 
+
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();

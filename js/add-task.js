@@ -261,28 +261,27 @@ async function listContactsToAssignedTo() {
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
+    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
     renderedContacts.push(contact);
   });
 }
 
-function inspectCheckboxes() {
+function inspectCheckboxes(path) {
   let allDivs = document.getElementById('input-assigned-to');
   assignedContacts = [];
   allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
     if (cb.checked) {
       assignedContacts.push(cb.value);
       cb.parentElement.parentElement.classList.add('selected');
-      renderAssignedContacts();
+      renderAssignedContacts(path);
     }
     if (!cb.checked) {
       cb.parentElement.parentElement.classList.remove('selected');
-      renderAssignedContacts();
+      renderAssignedContacts(path);
     }
   });
 }
+
 
 function dropDownContacts() {
   const contactList = document.getElementById('input-assigned-to');
@@ -341,8 +340,8 @@ function displayMatchingContacts() {
   });
 }
 
-function renderAssignedContacts() {
-  let container = document.getElementById('assigned-contacts-list');
+function renderAssignedContacts(path) {
+  let container = document.getElementById(path);
   container.innerHTML = '';
   matches = [];
   matches = renderedContacts.filter((contact) =>
@@ -384,7 +383,7 @@ function assignedToContactsContent(contact, id, index) {
           <div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}</div>
           <div>${contact['name']}</div>
         </div>
-        <input onchange ="inspectCheckboxes()" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
+        <input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
       </div>
   </label>
     `;
@@ -398,7 +397,7 @@ function assignedToContactsContentFilter(contact, id) {
           <div id= "${id}-container" class= "initial-div">${contact['initials']}</div>
           <div>${contact['name']}</div>
         </div>
-        <input onchange ="inspectCheckboxes()" value="${id}" id="${id}cb" type ="checkbox">
+        <input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${id}" id="${id}cb" type ="checkbox">
       </div>
   </label>
     `;

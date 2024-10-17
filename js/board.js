@@ -14,6 +14,7 @@ const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
 const taskModalSubtasksList = document.getElementById(
   'task-modal-card-subtasks-list'
 );
+const contactContainer = document.getElementById('assigned-contacts-list');
 
 // VARIABLES
 const tasks = [];
@@ -27,6 +28,7 @@ async function renderBoard() {
   await loadContactsFromFirebase();
   clearInputs();
   setActiveUserInitials();
+  listContactsToAssignedTo()
   searchInput.value = '';
 }
 
@@ -92,7 +94,7 @@ function filterData(board, tasksArr) {
   }
 }
 
-function renderData(tasksArr, kanbanList) {
+function renderData(tasksArr, kanbanList, path ='') {
   // console.log(tasksArr);
 
   if (tasksArr.length == 0) {
@@ -100,7 +102,7 @@ function renderData(tasksArr, kanbanList) {
   } else {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
-      renderAssignedToInCard(tasksArr[i].id, tasksArr[i]);
+      renderAssignedToInCard(tasksArr[i].id, tasksArr[i], 'card-footer');
 
     }
   }
@@ -292,8 +294,8 @@ async function returnTasksFromFirebase() {
   return taskAsObject;
 }
 
-async function renderAssignedToInCard(taskId, task) {
-  let card = document.getElementById('card-footer' + taskId);
+async function renderAssignedToInCard(taskId, task, path='') {
+  let card = document.getElementById(path + taskId);
   card.innerHTML = '';
   if (task.data.assignedTo == undefined) {
     return;
@@ -328,15 +330,44 @@ async function displayTaskModalContacts(id){
     {
       task.data.assignedTo.forEach((assignedContact) => {
         container.innerHTML += `
-        <div id= "task-modal-assigned-contacts-container">
-          <div class="task-modal-contact-profile-img">${assignedContact.initials}</div>
+        <div class= "task-modal-assigned-contacts-container">
+          <div style="background-color:${assignedContact.color}"class="task-modal-contact-profile-img">${assignedContact.initials}</div>
           <div class="task-modal-contact-name">${assignedContact.name}</div>
-        </div>
-                               `
+        </div> `
       }) 
     }  
   });
-  
-  
-  
+}
+
+
+async function listContactsToAssignedToinBoard() {
+  let allContacts = Object.values(await getContacts());
+  let id = Object.keys(await getContacts());
+  renderedContacts = [];
+  allContacts.forEach((contact, index) => {
+    contact.id = id[index];
+  });
+  allContacts.sort((a, b) => a.name.localeCompare(b.name));
+  contactContainer.innerHTML = '';
+  allContacts.forEach((contact, index) => {
+    contactContainer.innerHTML += assignedToContactsContent(contact);
+    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    renderedContacts.push(contact);
+  });
+}
+
+function dropDownContactsEditTask() {
+  const contactList = document.getElementById('assigned-contacts-list');
+  if (contactList.style.display == 'flex') {
+    contactList.style.display = 'none';
+    document.getElementById('searchContact').placeholder =
+      'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+  } else {
+    contactList.style.display = 'flex';
+    document.getElementById('searchContact').placeholder = '';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
+  }
 }

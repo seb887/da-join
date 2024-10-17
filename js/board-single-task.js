@@ -131,12 +131,10 @@ async function deleteTask(id) {
   renderBoard();
 }
 
-function openEditTaskModal(taskId) {
-  console.log(taskId);
 
+function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
-
   for (let element of tasks) {
     if (taskId == element.id) {
       editInputTitle.value = element.data.title;
@@ -162,6 +160,8 @@ async function editTask(taskId) {
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
       renderBoard();
+      renderAssignedContacts('assigned-contacts-list');
+
     }
   }
 }
@@ -173,3 +173,5 @@ function setCategoryBackgroundColor(category) {
     return '#1FD7C1';
   }
 }
+
+
