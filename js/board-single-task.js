@@ -2,6 +2,7 @@
 const editInputTitle = document.getElementById('edit-input-title');
 const editInputDescription = document.getElementById('edit-input-description');
 const editInputDate = document.getElementById('edit-input-date');
+const editInputSubtask = document.getElementById('edit-input-subtask');
 const taskCategory = document.getElementById('task-modal-card-category');
 const taskTitle = document.getElementById('task-modal-card-title');
 const taskDescription = document.getElementById('task-modal-card-description');
@@ -11,6 +12,7 @@ const taskPrioImg = document.getElementById('task-modal-card-prio-img');
 const modalSubtasksList = document.getElementById(
   'task-modal-card-subtasks-list'
 );
+const editSubtaskList = document.getElementById('edit-subtasks-list');
 const taskDeleteBtn = document.getElementById('task-delete-button');
 const taskEditBtn = document.getElementById('task-edit-button');
 const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
@@ -20,7 +22,6 @@ const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
 // FUNCTIONS
 function getDataForSingleTask(event) {
   const id = event.currentTarget.id;
-  
 
   for (let element of tasks) {
     if (id == element.id) {
@@ -144,7 +145,7 @@ function openEditTaskModal(taskId) {
       currentPrio = element.data.prio;
       controlPrioButtonStyle();
       subtasks = element.data.subtasks;
-      renderSubtasksList(taskId);
+      renderSubtasksList(editSubtaskList, taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
   }

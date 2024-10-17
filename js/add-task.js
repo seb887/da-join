@@ -144,8 +144,6 @@ function controlPrioButtonStyle() {
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  console.log(inputSubtask.value.length);
-
   if (inputSubtask.value.length > 0) {
     addSubtasksImg.style.display = 'none';
     submitSubtasksImg.style.display = 'flex';
@@ -164,22 +162,24 @@ function cancelInputSubtask() {
 
 function submitInputSubtask() {
   const subtaskObj = {
-    title: inputSubtask.value,
+    title: inputSubtask.value || editInputTitle,
     checked: false,
   };
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
+  editInputSubtask.value = '';
   controlSubtaskIcons();
-  renderSubtasksList();
+  renderSubtasksList(subtasksList);
+  renderSubtasksList(editSubtasksList);
 
   console.log(subtasks);
 }
 
-function renderSubtasksList(taskId) {
-  subtasksList.innerHTML = '';
+function renderSubtasksList(list, taskId) {
+  list.innerHTML = '';
 
   for (let i = 0; i < subtasks.length; i++) {
-    subtasksList.innerHTML += `
+    list.innerHTML += `
       <li class="subtasks">
         <div class="subtask-title">${subtasks[i].title}</div>
         <div class="subtask-buttons">
@@ -220,13 +220,13 @@ async function editSubtask(taskId, index) {
 async function deleteSubtask(taskId, index) {
   if (taskId == 'undefined') {
     subtasks.splice(index, 1);
-    renderSubtasksList();
+    renderSubtasksList(subtasksList);
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
         element.data.subtasks.splice(index, 1);
         await updateTaskInFirebase(element.id, element.data);
-        renderSubtasksList();
+        renderSubtasksList(subtasksList);
       }
     }
   }
