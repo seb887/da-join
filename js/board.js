@@ -326,7 +326,7 @@ async function displayTaskModalContacts(id) {
   let container = document.getElementById('task-modal-assigned-contacts');
   container.innerHTML = '';
   tasks.forEach((task) => {
-    if (task.id == id) {
+    if (task.data.assignedTo && task.id == id) {
       task.data.assignedTo.forEach((assignedContact) => {
         container.innerHTML += `
         <div class= "task-modal-assigned-contacts-container">
