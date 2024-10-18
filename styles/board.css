@@ -604,3 +604,29 @@
     width: 800px;
   }
 }
+
+.task-modal-slide-in {
+  animation: slideIn 250ms ease-out forwards;
+}
+
+.task-modal-slide-out {
+  animation: slideOut 250ms ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}

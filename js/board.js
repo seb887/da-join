@@ -22,6 +22,7 @@ const contacts = [];
 let currentDraggedElementId = '';
 let currentKanbanBoard = 'todo';
 let animationActiveBoard = false;
+let modalActive = false;
 
 // FUNCTIONS
 async function renderBoard() {
@@ -117,33 +118,41 @@ function clearKanbanLists() {
 
 function openTaskModal(event, id) {
   taskModal.style.display = 'flex';
+  modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(event);
   displayTaskModalContacts(id);
 }
 
 function closeTaskModal() {
+  setTimeout(() => {
   taskModal.style.display = 'none';
   taskModalCard.style.display = 'flex';
   taskModalEditCard.style.display = 'none';
+  }, 250);
+  modalSlideInOrOut('task-modal-card');
   renderBoard();
 }
 
 function closeTaskModalESC(event) {
   if (event.key === 'Escape') {
-    closeTaskModal();
     closeAddTaskModal();
+    closeTaskModal();
   }
 }
 
 function openAddTaskModal(kanbanBoard) {
   addTaskModal.style.display = 'flex';
   currentKanbanBoard = kanbanBoard;
+  modalSlideInOrOut('add-task-modal-card');
 
   // addTaskModal.innerHTML = createAddTaskModalHTML();
 }
 
 function closeAddTaskModal() {
-  addTaskModal.style.display = 'none';
+  modalSlideInOrOut('add-task-modal-card');
+  setTimeout(() => {
+    addTaskModal.style.display = 'none';
+  }, 250);
   clearInputs();
 }
 
@@ -398,4 +407,19 @@ function openAndCloseAddContactBoard(){
   document.getElementById('modalBackground').style.display = 'flex';
   checkIfAnimationActive()
   animationActiveBoard = !animationActiveBoard;
+}
+
+
+function modalSlideInOrOut(modalId){
+if(!modalActive){
+  document.getElementById(modalId).classList.add("task-modal-slide-in")
+  document.getElementById(modalId).classList.remove("task-modal-slide-out")
+  document.body.style.overflow = "hidden";
+}
+else{
+  document.getElementById(modalId).classList.remove("task-modal-slide-in")
+  document.getElementById(modalId).classList.add("task-modal-slide-out")
+  document.body.style.overflow = "visible";
+}
+  modalActive = !modalActive; 
 }
