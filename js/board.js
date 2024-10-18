@@ -21,6 +21,7 @@ const tasks = [];
 const contacts = [];
 let currentDraggedElementId = '';
 let currentKanbanBoard = 'todo';
+let animationActiveBoard = false;
 
 // FUNCTIONS
 async function renderBoard() {
@@ -137,6 +138,7 @@ function closeTaskModalESC(event) {
 function openAddTaskModal(kanbanBoard) {
   addTaskModal.style.display = 'flex';
   currentKanbanBoard = kanbanBoard;
+
   // addTaskModal.innerHTML = createAddTaskModalHTML();
 }
 
@@ -368,4 +370,32 @@ function dropDownContactsEditTask() {
     document.getElementById('arrowAssignTo').src =
       '../assets/icons/arrow-up.png';
   }
+}
+
+
+function checkIfAnimationActiveBoard() {
+  let modal = document.getElementById('addContact'); 
+  if (animationActive) {
+      modal.classList.remove('animation-slide-in');
+      modal.classList.add('animation-slide-out');
+      setTimeout(() => {
+          modal.style.display ='none';
+          document.getElementById('modalBackground').style.display = 'none';
+      }, 250);
+    } else {
+      modal.classList.remove('animation-slide-out');
+      modal.classList.add('animation-slide-in');
+      document.getElementById('modalBackground').classList.add('change-opacity');
+    }
+}
+
+
+function openAndCloseAddContactBoard(){ 
+  let modal = document.getElementById('add-task-modal');
+  modal.innerHTML = '';
+  modal.innerHTML = addContactCardContent();  
+  modal.style.display ='flex';
+  document.getElementById('modalBackground').style.display = 'flex';
+  checkIfAnimationActive()
+  animationActiveBoard = !animationActiveBoard;
 }

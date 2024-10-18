@@ -254,16 +254,14 @@ async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   renderedContacts = [];
-  allContacts.forEach((contact, index) => {
-    contact.id = id[index];
-  });
+  allContacts.forEach((contact, index) => {contact.id = id[index];});
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
+    if(document.getElementById(contact['id'] + '-container')){
+      document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    }
     renderedContacts.push(contact);
   });
 }
