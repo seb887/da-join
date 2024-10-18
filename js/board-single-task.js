@@ -26,6 +26,7 @@ function getDataForSingleTask(event) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
+      console.log(element.id);
     }
   }
 }
@@ -131,7 +132,6 @@ async function deleteTask(id) {
   renderBoard();
 }
 
-
 function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
@@ -161,7 +161,6 @@ async function editTask(taskId) {
       closeTaskModal();
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
-
     }
   }
 }
@@ -173,5 +172,3 @@ function setCategoryBackgroundColor(category) {
     return '#1FD7C1';
   }
 }
-
-
