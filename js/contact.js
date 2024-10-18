@@ -141,6 +141,7 @@ function openContactOrOpenMore() {
 function checkIfAnimationActive() {
     let modal = document.getElementById('addContact'); 
     if (animationActive) {
+        document.body.style.overflowY = 'visible';
         modal.classList.remove('animation-slide-in');
         modal.classList.add('animation-slide-out');
         setTimeout(() => {
@@ -150,6 +151,7 @@ function checkIfAnimationActive() {
       } else {
         modal.classList.remove('animation-slide-out');
         modal.classList.add('animation-slide-in');
+        document.body.style.overflowY = 'hidden';
         document.getElementById('modalBackground').classList.add('change-opacity');
       }
 }
