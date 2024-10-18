@@ -261,7 +261,9 @@ async function listContactsToAssignedTo() {
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
     renderedContacts.push(contact);
   });
 }
@@ -281,7 +283,6 @@ function inspectCheckboxes(path) {
     }
   });
 }
-
 
 function dropDownContacts() {
   const contactList = document.getElementById('input-assigned-to');

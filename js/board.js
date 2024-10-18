@@ -28,7 +28,7 @@ async function renderBoard() {
   await loadContactsFromFirebase();
   clearInputs();
   setActiveUserInitials();
-  listContactsToAssignedTo()
+  listContactsToAssignedTo();
   searchInput.value = '';
 }
 
@@ -94,7 +94,7 @@ function filterData(board, tasksArr) {
   }
 }
 
-function renderData(tasksArr, kanbanList, path ='') {
+function renderData(tasksArr, kanbanList, path = '') {
   // console.log(tasksArr);
 
   if (tasksArr.length == 0) {
@@ -103,7 +103,6 @@ function renderData(tasksArr, kanbanList, path ='') {
     for (let i = 0; i < tasksArr.length; i++) {
       kanbanList.innerHTML += createCardHTML(tasksArr[i]);
       renderAssignedToInCard(tasksArr[i].id, tasksArr[i], 'card-footer');
-
     }
   }
 }
@@ -294,7 +293,7 @@ async function returnTasksFromFirebase() {
   return taskAsObject;
 }
 
-async function renderAssignedToInCard(taskId, task, path='') {
+async function renderAssignedToInCard(taskId, task, path = '') {
   let card = document.getElementById(path + taskId);
   card.innerHTML = '';
   if (task.data.assignedTo == undefined) {
@@ -321,24 +320,21 @@ async function getAllAssignedTo() {
   return assignTo;
 }
 
-
-async function displayTaskModalContacts(id){
+async function displayTaskModalContacts(id) {
   let container = document.getElementById('task-modal-assigned-contacts');
   container.innerHTML = '';
   tasks.forEach((task) => {
-    if(task.id == id)
-    {
+    if (task.id == id) {
       task.data.assignedTo.forEach((assignedContact) => {
         container.innerHTML += `
         <div class= "task-modal-assigned-contacts-container">
           <div style="background-color:${assignedContact.color}"class="task-modal-contact-profile-img">${assignedContact.initials}</div>
           <div class="task-modal-contact-name">${assignedContact.name}</div>
-        </div> `
-      }) 
-    }  
+        </div> `;
+      });
+    }
   });
 }
-
 
 async function listContactsToAssignedToinBoard() {
   let allContacts = Object.values(await getContacts());
@@ -351,7 +347,9 @@ async function listContactsToAssignedToinBoard() {
   contactContainer.innerHTML = '';
   allContacts.forEach((contact, index) => {
     contactContainer.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
     renderedContacts.push(contact);
   });
 }
