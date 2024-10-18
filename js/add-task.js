@@ -61,7 +61,6 @@ function createNewTask() {
   };
 
   console.log(newTask);
-  showInfoToast('text')
   checkInputs(newTask);
 }
 
