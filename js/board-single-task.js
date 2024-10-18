@@ -26,7 +26,7 @@ function getDataForSingleTask(event) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
-      console.log(element.id);
+      console.log('single task', element.id);
     }
   }
 }
@@ -150,15 +150,18 @@ function openEditTaskModal(taskId) {
 }
 
 async function editTask(taskId) {
+  console.log('edited', taskId);
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = editInputTitle.value;
       element.data.description = editInputDescription.value;
       element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
+      element.data.assignedTo = getSelectedContactsEditTask();
 
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
+      openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }
@@ -171,4 +174,15 @@ function setCategoryBackgroundColor(category) {
   } else if (category == 'Technical Task') {
     return '#1FD7C1';
   }
+}
+
+function getSelectedContactsEditTask() {
+  let selectedContacts = [];
+  let matchArray = renderedContacts.filter((contact) =>
+    assignedContacts.some((id) => id.slice(0, -2) === contact.id)
+  );
+  matchArray.forEach((match, index) => {
+    selectedContacts.push(match);
+  });
+  return selectedContacts;
 }
