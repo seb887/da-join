@@ -92,12 +92,15 @@ function clearInputs() {
 function setPrio(prio) {
   if (prio == 'urgent') {
     currentPrio = 'urgent';
+    console.log(currentPrio);
     controlPrioButtonStyle();
   } else if (prio == 'medium') {
     currentPrio = 'medium';
+    console.log(currentPrio);
     controlPrioButtonStyle();
   } else if (prio == 'low') {
     currentPrio = 'low';
+    console.log(currentPrio);
     controlPrioButtonStyle();
   }
 }

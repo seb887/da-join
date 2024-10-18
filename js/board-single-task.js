@@ -26,6 +26,7 @@ function getDataForSingleTask(event) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
+      console.log('single task', element.id);
     }
   }
 }
@@ -131,7 +132,6 @@ async function deleteTask(id) {
   renderBoard();
 }
 
-
 function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
@@ -150,6 +150,7 @@ function openEditTaskModal(taskId) {
 }
 
 async function editTask(taskId) {
+  console.log('edited', taskId);
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = editInputTitle.value;
@@ -160,6 +161,7 @@ async function editTask(taskId) {
 
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
+      openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }
@@ -174,13 +176,13 @@ function setCategoryBackgroundColor(category) {
   }
 }
 
-function getSelectedContactsEditTask(){
-    let selectedContacts = [];
-    let matchArray = renderedContacts.filter((contact) =>
-      assignedContacts.some((id) => id.slice(0, -2) === contact.id)
-    );
-    matchArray.forEach((match, index) => {
-      selectedContacts.push(match)
-    });
-    return selectedContacts;
+function getSelectedContactsEditTask() {
+  let selectedContacts = [];
+  let matchArray = renderedContacts.filter((contact) =>
+    assignedContacts.some((id) => id.slice(0, -2) === contact.id)
+  );
+  matchArray.forEach((match, index) => {
+    selectedContacts.push(match);
+  });
+  return selectedContacts;
 }
