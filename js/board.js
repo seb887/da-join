@@ -28,7 +28,7 @@ async function renderBoard() {
   await loadContactsFromFirebase();
   clearInputs();
   setActiveUserInitials();
-  listContactsToAssignedTo()
+  listContactsToAssignedToinBoard();
   searchInput.value = '';
 }
 

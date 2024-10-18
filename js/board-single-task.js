@@ -156,12 +156,12 @@ async function editTask(taskId) {
       element.data.description = editInputDescription.value;
       element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
+      element.data.assignedTo = getSelectedContactsEditTask();
 
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
-
     }
   }
 }
@@ -174,4 +174,13 @@ function setCategoryBackgroundColor(category) {
   }
 }
 
-
+function getSelectedContactsEditTask(){
+    let selectedContacts = [];
+    let matchArray = renderedContacts.filter((contact) =>
+      assignedContacts.some((id) => id.slice(0, -2) === contact.id)
+    );
+    matchArray.forEach((match, index) => {
+      selectedContacts.push(match)
+    });
+    return selectedContacts;
+}
