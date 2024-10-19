@@ -118,18 +118,21 @@ function clearKanbanLists() {
 
 function openTaskModal(event, id) {
   taskModal.style.display = 'flex';
+  taskModalCard.style.display = 'flex'
   modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(event);
   displayTaskModalContacts(id);
 }
 
 function closeTaskModal() {
+  taskModalCard.style.display = 'flex';
   setTimeout(() => {
   taskModal.style.display = 'none';
-  taskModalCard.style.display = 'flex';
+  
   taskModalEditCard.style.display = 'none';
   }, 250);
-  modalSlideInOrOut('task-modal-card');
+  if(document.getElementById('task-modal-edit-card').style.display == "flex"){taskModalCard.style.display = 'none' ; modalSlideInOrOut('task-modal-edit-card')}
+  else {modalSlideInOrOut('task-modal-card')}
   renderBoard();
 }
 
@@ -399,27 +402,21 @@ function checkIfAnimationActiveBoard() {
 }
 
 
-function openAndCloseAddContactBoard(){ 
-  let modal = document.getElementById('add-task-modal');
-  modal.innerHTML = '';
-  modal.innerHTML = addContactCardContent();  
-  modal.style.display ='flex';
-  document.getElementById('modalBackground').style.display = 'flex';
-  checkIfAnimationActive()
-  animationActiveBoard = !animationActiveBoard;
-}
-
-
 function modalSlideInOrOut(modalId){
 if(!modalActive){
-  document.getElementById(modalId).classList.add("task-modal-slide-in")
-  document.getElementById(modalId).classList.remove("task-modal-slide-out")
+  document.getElementById(modalId).classList.add("task-modal-slide-in");
+  document.getElementById(modalId).classList.remove("task-modal-slide-out");
   document.body.style.overflow = "hidden";
 }
 else{
-  document.getElementById(modalId).classList.remove("task-modal-slide-in")
-  document.getElementById(modalId).classList.add("task-modal-slide-out")
+  document.getElementById(modalId).classList.remove("task-modal-slide-in");
+  document.getElementById(modalId).classList.add("task-modal-slide-out");
   document.body.style.overflow = "visible";
 }
-  modalActive = !modalActive; 
+  modalActive = !modalActive;
+  setTimeout(() => {
+    document.getElementById(modalId).classList.remove("task-modal-slide-in");
+    document.getElementById(modalId).classList.remove("task-modal-slide-out");
+  }, 350);
+  
 }
