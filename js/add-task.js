@@ -85,6 +85,8 @@ function clearInputs() {
   inputDescription.value = '';
   selectCategory.value = 'Select task category';
   inputSubtask.value = '';
+  subtasks = [];
+  renderSubtasksList(subtasksList);
 }
 
 // PRIO
@@ -169,7 +171,7 @@ function submitInputSubtask() {
   };
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
-  editInputSubtask.value = '';
+  // editInputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasksList(subtasksList);
   renderSubtasksList(editSubtasksList);
