@@ -80,7 +80,7 @@
     </header>
 
     <aside class="sidebar">
-      <a href="../index.html"
+      <a href="../html/summary.html"
         ><img
           class="sidebar-logo"
           src="../assets/img/logo-white.png"
@@ -512,7 +512,7 @@
               name="subtasks"
               placeholder="Add new subtask"
               class="add-task-input-subtasks"
-              id="edit-input-subtask"
+              id="input-subtask"
               oninput="controlSubtaskIcons()"
             />
             <img
@@ -535,7 +535,7 @@
           </div>
           <ul
             class="subtasks-list"
-            id="edit-subtasks-list"
+            id="subtasks-list"
           ></ul>
         </div>
 
@@ -554,6 +554,7 @@
       </div>
     </section>
 
+    <!-- TODO: -->
     <!-- ADD TASK MODAL SECTION -->
     <section
       class="task-modal"
@@ -608,7 +609,7 @@
               >
                 Assigned to
               </div>
-              <div
+              <select
                 id="input-assigned-to"
                 class="add-task-select"
                 name="assigned to"
@@ -627,7 +628,9 @@
               </select>
             </div>
           </div>
+
           <div class="seperator"></div>
+
           <div class="right-container">
             <div class="form-container date-container">
               <div
@@ -736,17 +739,20 @@
                 <img
                   src="../assets/icons/add-subtask.png"
                   alt="add subtask icon"
+                  class="add-subtask-img"
                   id="add-subtask-img"
                 />
                 <img
                   src="../assets/icons/submit-subtask.png"
                   alt="submit subtask icon"
+                  class="submit-subtask-img"
                   id="submit-subtask-img"
                   onclick="submitInputSubtask()"
                 />
                 <img
                   src="../assets/icons/cancel-subtask.png"
                   alt="plus icon"
+                  class="cancel-subtask-img"
                   id="cancel-subtask-img"
                   onclick="cancelInputSubtask()"
                 />
