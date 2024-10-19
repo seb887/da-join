@@ -26,6 +26,7 @@ let modalActive = false;
 
 // FUNCTIONS
 async function renderBoard() {
+
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   clearInputs();
