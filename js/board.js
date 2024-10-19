@@ -150,9 +150,10 @@ function openAddTaskModal(kanbanBoard) {
 
 function closeAddTaskModal() {
   // modalSlideInOrOut('add-task-modal-card');
-  setTimeout(() => {
-    addTaskModal.style.display = 'none';
-  }, 250);
+  // setTimeout(() => {
+  //   addTaskModal.style.display = 'none';
+  // }, 250);
+  addTaskModal.style.display = 'none';
   clearInputs();
 }
 
@@ -234,13 +235,6 @@ async function drop(board) {
   }
 
   renderBoard();
-}
-
-async function updateTaskInFirebase(taskId, updatedTask) {
-  await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
-    method: 'PUT',
-    body: JSON.stringify(updatedTask),
-  });
 }
 
 function highlight(id) {

@@ -22,6 +22,7 @@ const BASE_URL =
 CONTACT_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 let subtasks = [];
+let editSubtasks = [];
 let assignedContacts = [];
 let renderedContacts = [];
 let dropedDown = false;
@@ -77,6 +78,7 @@ function checkInputs(taskObj) {
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
+    setTimeout(() => closeAddTaskModal(), 1500);
   }
 }
 
@@ -86,7 +88,9 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
   inputSubtask.value = '';
   subtasks = [];
-  renderSubtasksList(subtasksList);
+  renderSubtasksList();
+  setPrio('medium');
+  hideSubtaskIcons();
 }
 
 // PRIO
@@ -108,6 +112,12 @@ function setPrio(prio) {
 }
 
 function controlPrioButtonStyle() {
+  styleButtonUrgent();
+  styleButtonMedium();
+  styleButtonLow();
+}
+
+function styleButtonUrgent() {
   if (currentPrio == 'urgent') {
     buttonUrgent.style.background = '#ff3d00';
     buttonUrgent.style.color = 'white';
@@ -119,7 +129,9 @@ function controlPrioButtonStyle() {
     buttonUrgent.style.fontWeight = 'normal';
     buttonUrgentImg.src = '../assets/icons/prio-urgent.png';
   }
+}
 
+function styleButtonMedium() {
   if (currentPrio == 'medium') {
     buttonMedium.style.background = '#FFA800';
     buttonMedium.style.color = 'white';
@@ -131,7 +143,9 @@ function controlPrioButtonStyle() {
     buttonMedium.style.fontWeight = 'normal';
     buttonMediumImg.src = '../assets/icons/prio-medium.png';
   }
+}
 
+function styleButtonLow() {
   if (currentPrio == 'low') {
     buttonLow.style.background = '#7ae229';
     buttonLow.style.color = 'white';
@@ -149,14 +163,25 @@ function controlPrioButtonStyle() {
 
 function controlSubtaskIcons() {
   if (inputSubtask.value.length > 0) {
-    addSubtasksImg.style.display = 'none';
-    submitSubtasksImg.style.display = 'flex';
-    cancelSubtasksImg.style.display = 'flex';
+    // if (inputSubtask.value.length > 0) {
+    console.log('show subtasks icons');
+    showSubtaskIcons();
   } else {
-    addSubtasksImg.style.display = 'flex';
-    submitSubtasksImg.style.display = 'none';
-    cancelSubtasksImg.style.display = 'none';
+    console.log('hide subtasks icons');
+    hideSubtaskIcons();
   }
+}
+
+function showSubtaskIcons() {
+  addSubtasksImg.style.display = 'none';
+  submitSubtasksImg.style.display = 'flex';
+  cancelSubtasksImg.style.display = 'flex';
+}
+
+function hideSubtaskIcons() {
+  addSubtasksImg.style.display = 'flex';
+  submitSubtasksImg.style.display = 'none';
+  cancelSubtasksImg.style.display = 'none';
 }
 
 function cancelInputSubtask() {
@@ -166,52 +191,52 @@ function cancelInputSubtask() {
 
 function submitInputSubtask() {
   const subtaskObj = {
-    title: inputSubtask.value || editInputTitle,
+    title: inputSubtask.value,
     checked: false,
   };
+
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
-  // editInputSubtask.value = '';
   controlSubtaskIcons();
-  renderSubtasksList(subtasksList);
-  renderSubtasksList(editSubtasksList);
-
-  console.log(subtasks);
+  renderSubtasksList();
 }
 
-function renderSubtasksList(list, taskId) {
-  list.innerHTML = '';
+function renderSubtasksList(taskId) {
+  subtasksList.innerHTML = '';
 
   if (subtasks == undefined) {
     return;
   } else {
     for (let i = 0; i < subtasks.length; i++) {
-      list.innerHTML += `
+      subtasksList.innerHTML += createSubtasksListHTML(i, taskId);
+    }
+  }
+}
+
+function createSubtasksListHTML(index, id) {
+  return `
       <li class="subtasks">
-        <div class="subtask-title">${subtasks[i].title}</div>
+        <div class="subtask-title">${subtasks[index].title}</div>
         <div class="subtask-buttons">
           <img
             src="../assets/icons/edit.png"
             alt="edit icon"
             id="edit-subtask"
-            onclick="editSubtask('${taskId}', '${i}')"
+            onclick="editSingleSubtask('${id}', '${index}')"
           />
           <img
             src="../assets/icons/delete.png"
             alt="trash icon"
             id="delete-subtask"
-            onclick="deleteSubtask('${taskId}', '${i}')"
+            onclick="deleteSubtask('${id}', '${index}')"
           />
         </div>
-
       </li>
     `;
-    }
-  }
 }
 
 // TODO: Noch einprogrammieren mit Input Feld
-async function editSubtask(taskId, index) {
+async function editSingleSubtask(taskId, index) {
   if (taskId === undefined) {
     console.log('taskId is undefined');
   } else {
@@ -228,13 +253,13 @@ async function editSubtask(taskId, index) {
 async function deleteSubtask(taskId, index) {
   if (taskId == 'undefined') {
     subtasks.splice(index, 1);
-    renderSubtasksList(subtasksList);
+    renderSubtasksList();
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
         element.data.subtasks.splice(index, 1);
         await updateTaskInFirebase(element.id, element.data);
-        renderSubtasksList(subtasksList);
+        renderSubtasksList();
       }
     }
   }

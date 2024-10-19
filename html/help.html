@@ -24,17 +24,44 @@
       rel="stylesheet"
       href="../styles/help.css"
     />
-    <script src="../js/script.js" defer></script>
+    <script
+      src="../js/script.js"
+      defer
+    ></script>
   </head>
 
   <body onload="init()">
     <header class="header">
-      <img class="logo-responsive" src="../assets/img/logo-black.png">
-      <div id="dropdown-profile" class="dropdown-profile">
-        <div onclick="location.href='help.html'; removeFirstLogin()" class="dropdown-profile-buttons help-button">Help</div>
-        <a class="dropdown-profile-buttons" href="legal-notice.html">Legal Notice</a>
-        <a class="dropdown-profile-buttons" href="privacy-policy.html">Privacy Policy</a>
-        <div onclick="guestLogInOrLogOut(); removeFirstLogin()" class="dropdown-profile-buttons">Log out</div>
+      <img
+        class="logo-responsive"
+        src="../assets/img/logo-black.png"
+      />
+      <div
+        id="dropdown-profile"
+        class="dropdown-profile"
+      >
+        <div
+          onclick="location.href='help.html'; removeFirstLogin()"
+          class="dropdown-profile-buttons help-button"
+        >
+          Help
+        </div>
+        <a
+          class="dropdown-profile-buttons"
+          href="legal-notice.html"
+          >Legal Notice</a
+        >
+        <a
+          class="dropdown-profile-buttons"
+          href="privacy-policy.html"
+          >Privacy Policy</a
+        >
+        <div
+          onclick="guestLogInOrLogOut(); removeFirstLogin()"
+          class="dropdown-profile-buttons"
+        >
+          Log out
+        </div>
       </div>
       <p class="project-tool-info">Kanban Project Management Tool</p>
       <div class="header-user-box">
@@ -47,7 +74,7 @@
     </header>
 
     <aside class="sidebar">
-      <a href="../index.html"
+      <a href="../html/summary.html"
         ><img
           class="sidebar-logo"
           src="../assets/img/logo-white.png"
@@ -208,44 +235,55 @@
       </div>
     </main>
     <footer>
-      <div class="nav-links-responsive"><a
-        href="../html/summary.html"
-        class="nav-links"
-      >
-        <img
-          src="../assets/icons/summary.png"
-          alt="summary icon"
-        />Summary</a
-      ></div>
-      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
-        href="../html/add-task.html"
-        class="nav-links"
-      >
-        <img
-          src="../assets/icons/add-task.png"
-          alt="add task icon"
-        />
-        Add Task</a
-      ></div>
-      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
-        href="../html/board.html"
-        class="nav-links"
-      >
-        <img
-          src="../assets/icons/board.png"
-          alt="board icon"
-        />
-        Board</a
-      ></div>
-      <div class="nav-links-responsive"><a onclick="removeFirstLogin()"
-        href="../html/contacts.html"
-        class="nav-links"
-      >
-        <img
-          src="../assets/icons/contacts.png"
-          alt="contacts icon"
-        />Contacts</a
-      ></div>
+      <div class="nav-links-responsive">
+        <a
+          href="../html/summary.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/summary.png"
+            alt="summary icon"
+          />Summary</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/add-task.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/add-task.png"
+            alt="add task icon"
+          />
+          Add Task</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/board.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/board.png"
+            alt="board icon"
+          />
+          Board</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/contacts.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/contacts.png"
+            alt="contacts icon"
+          />Contacts</a
+        >
+      </div>
     </footer>
   </body>
 </html>
