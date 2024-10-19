@@ -26,7 +26,6 @@ let modalActive = false;
 
 // FUNCTIONS
 async function renderBoard() {
-
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   clearInputs();
@@ -119,12 +118,8 @@ function clearKanbanLists() {
 
 function openTaskModal(event, id) {
   taskModal.style.display = 'flex';
-<<<<<<< HEAD
   taskModalCard.style.display = 'flex'
   modalSlideInOrOut('task-modal-card');
-=======
-  // modalSlideInOrOut('task-modal-card');
->>>>>>> ee86866897b821a7948a526b59ccd8049630c59f
   getDataForSingleTask(event);
   displayTaskModalContacts(id);
 }
@@ -132,20 +127,12 @@ function openTaskModal(event, id) {
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
   setTimeout(() => {
-<<<<<<< HEAD
   taskModal.style.display = 'none';
   
   taskModalEditCard.style.display = 'none';
   }, 250);
   if(document.getElementById('task-modal-edit-card').style.display == "flex"){taskModalCard.style.display = 'none' ; modalSlideInOrOut('task-modal-edit-card')}
   else {modalSlideInOrOut('task-modal-card')}
-=======
-    taskModal.style.display = 'none';
-    taskModalCard.style.display = 'flex';
-    taskModalEditCard.style.display = 'none';
-  }, 250);
-  // modalSlideInOrOut('task-modal-card');
->>>>>>> ee86866897b821a7948a526b59ccd8049630c59f
   renderBoard();
 }
 
@@ -159,17 +146,17 @@ function closeTaskModalESC(event) {
 function openAddTaskModal(kanbanBoard) {
   addTaskModal.style.display = 'flex';
   currentKanbanBoard = kanbanBoard;
-  // modalSlideInOrOut('add-task-modal-card');
+  modalSlideInOrOut('add-task-modal-card');
 
   // addTaskModal.innerHTML = createAddTaskModalHTML();
 }
 
 function closeAddTaskModal() {
-  // modalSlideInOrOut('add-task-modal-card');
-  // setTimeout(() => {
-  //   addTaskModal.style.display = 'none';
-  // }, 250);
-  addTaskModal.style.display = 'none';
+  modalSlideInOrOut('add-task-modal-card');
+  setTimeout(() => {
+    addTaskModal.style.display = 'none';
+  }, 250);
+  // addTaskModal.style.display = 'none';
   clearInputs();
 }
 
@@ -407,7 +394,6 @@ function checkIfAnimationActiveBoard() {
   }
 }
 
-<<<<<<< HEAD
 
 function modalSlideInOrOut(modalId){
 if(!modalActive){
@@ -418,36 +404,11 @@ if(!modalActive){
 else{
   document.getElementById(modalId).classList.remove("task-modal-slide-in");
   document.getElementById(modalId).classList.add("task-modal-slide-out");
-  document.body.style.overflow = "visible";
+  document.body.style.overflow = "unset";
 }
   modalActive = !modalActive;
   setTimeout(() => {
     document.getElementById(modalId).classList.remove("task-modal-slide-in");
     document.getElementById(modalId).classList.remove("task-modal-slide-out");
   }, 350);
-  
 }
-=======
-function openAndCloseAddContactBoard() {
-  let modal = document.getElementById('add-task-modal');
-  modal.innerHTML = '';
-  modal.innerHTML = addContactCardContent();
-  modal.style.display = 'flex';
-  document.getElementById('modalBackground').style.display = 'flex';
-  checkIfAnimationActiveBoard();
-  animationActiveBoard = !animationActiveBoard;
-}
-
-function modalSlideInOrOut(modalId) {
-  if (!modalActive) {
-    document.getElementById(modalId).classList.add('task-modal-slide-in');
-    document.getElementById(modalId).classList.remove('task-modal-slide-out');
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.getElementById(modalId).classList.remove('task-modal-slide-in');
-    document.getElementById(modalId).classList.add('task-modal-slide-out');
-    document.body.style.overflow = 'visible';
-  }
-  modalActive = !modalActive;
-}
->>>>>>> ee86866897b821a7948a526b59ccd8049630c59f
