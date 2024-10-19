@@ -547,7 +547,7 @@
   visibility: visible;
 }
 
-.task-modal-assigned-contacts-container{
+.task-modal-assigned-contacts-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -555,7 +555,7 @@
   gap: 16px;
 }
 
-.task-modal-contact-name{
+.task-modal-contact-name {
   font-size: 19px;
 }
 /* Responsive */

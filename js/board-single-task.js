@@ -26,7 +26,7 @@ function getDataForSingleTask(event) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
-      console.log('single task', element.id);
+      console.log('SINGLETASK ID:', element.id);
     }
   }
 }
@@ -150,7 +150,8 @@ function openEditTaskModal(taskId) {
 }
 
 async function editTask(taskId) {
-  console.log('edited', taskId);
+  console.log('EDITED TASK ID', taskId);
+  console.log('-----------------------------------');
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = editInputTitle.value;
@@ -161,7 +162,7 @@ async function editTask(taskId) {
 
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
-      openTaskModal(taskId);
+      // openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }

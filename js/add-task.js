@@ -180,8 +180,11 @@ function submitInputSubtask() {
 function renderSubtasksList(list, taskId) {
   list.innerHTML = '';
 
-  for (let i = 0; i < subtasks.length; i++) {
-    list.innerHTML += `
+  if (subtasks == undefined) {
+    return;
+  } else {
+    for (let i = 0; i < subtasks.length; i++) {
+      list.innerHTML += `
       <li class="subtasks">
         <div class="subtask-title">${subtasks[i].title}</div>
         <div class="subtask-buttons">
@@ -201,6 +204,7 @@ function renderSubtasksList(list, taskId) {
 
       </li>
     `;
+    }
   }
 }
 
@@ -256,13 +260,17 @@ async function listContactsToAssignedTo() {
   let allContacts = Object.values(await getContacts());
   let id = Object.keys(await getContacts());
   renderedContacts = [];
-  allContacts.forEach((contact, index) => {contact.id = id[index];});
+  allContacts.forEach((contact, index) => {
+    contact.id = id[index];
+  });
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    if(document.getElementById(contact['id'] + '-container')){
-      document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    if (document.getElementById(contact['id'] + '-container')) {
+      document.getElementById(
+        contact['id'] + '-container'
+      ).style.backgroundColor = contact['color'];
     }
     renderedContacts.push(contact);
   });
@@ -366,15 +374,15 @@ function renderContactArray() {
   });
 }
 
-window.onscroll = function (ev) {
-  const scrollPosition = window.innerHeight + Math.round(window.scrollY);
-  const totalHeight = document.documentElement.scrollHeight;
-  if (scrollPosition >= totalHeight) {
-    document.getElementById('footer').classList.add('footer-animation');
-  } else {
-    document.getElementById('footer').classList.remove('footer-animation');
-  }
-};
+// window.onscroll = function (ev) {
+//   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
+//   const totalHeight = document.documentElement.scrollHeight;
+//   if (scrollPosition >= totalHeight) {
+//     document.getElementById('footer').classList.add('footer-animation');
+//   } else {
+//     document.getElementById('footer').classList.remove('footer-animation');
+//   }
+// };
 
 function assignedToContactsContent(contact, id, index) {
   return `
