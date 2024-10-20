@@ -1,20 +1,21 @@
 // DOM ELEMENTS
-let inputTitle = document.getElementById('input-title');
-let inputDescription = document.getElementById('input-description');
-let inputDate = document.getElementById('input-date');
-let selectCategory = document.getElementById('select-category');
-let subtasksList = document.getElementById('subtasks-list');
-let addSubtasksImg = document.getElementById('add-subtask-img');
-let submitSubtasksImg = document.getElementById('submit-subtask-img');
-let cancelSubtasksImg = document.getElementById('cancel-subtask-img');
-let inputSubtask = document.getElementById('input-subtask');
-let buttonLow = document.getElementById('button-low');
-let buttonMedium = document.getElementById('button-medium');
-let buttonUrgent = document.getElementById('button-urgent');
-let buttonLowImg = document.getElementById('button-low-img');
-let buttonMediumImg = document.getElementById('button-medium-img');
-let buttonUrgentImg = document.getElementById('button-urgent-img');
-let inputAssignedTo = document.getElementById('input-assigned-to');
+const inputTitle = document.getElementById('input-title');
+const inputDescription = document.getElementById('input-description');
+const inputDate = document.getElementById('input-date');
+const selectCategory = document.getElementById('select-category');
+const subtasksList = document.getElementById('subtasks-list');
+const addSubtasksImg = document.getElementById('add-subtask-img');
+const submitSubtasksImg = document.getElementById('submit-subtask-img');
+const cancelSubtasksImg = document.getElementById('cancel-subtask-img');
+
+const inputSubtask = document.getElementById('input-subtask');
+const buttonLow = document.getElementById('button-low');
+const buttonMedium = document.getElementById('button-medium');
+const buttonUrgent = document.getElementById('button-urgent');
+const buttonLowImg = document.getElementById('button-low-img');
+const buttonMediumImg = document.getElementById('button-medium-img');
+const buttonUrgentImg = document.getElementById('button-urgent-img');
+const inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
 const BASE_URL =
@@ -31,6 +32,7 @@ let matches = [];
 // DEFAULTS
 let currentDate = new Date();
 inputDate.valueAsDate = currentDate;
+
 let currentPrio = 'medium';
 
 // FUNCTIONS
@@ -98,66 +100,56 @@ function clearInputs() {
 // PRIO
 
 function setPrio(prio) {
+  switch (prio) {
+    case 'urgent':
+      currentPrio = 'urgent';
+      stylePrioButton('urgent', '#ff3d00');
+      break;
+    case 'medium':
+      currentPrio = 'medium';
+      stylePrioButton('medium', '#FFA800');
+      break;
+    case 'low':
+      currentPrio = 'low';
+      stylePrioButton('low', '#7ae229');
+      break;
+  }
+}
+
+function stylePrioButton(prio, color) {
+  const button = document.getElementById(`button-${prio}`);
+  const buttonImg = document.getElementById(`button-${prio}-img`);
+
+  button.style.background = color;
+  button.style.color = 'white';
+  button.style.fontWeight = 'bold';
+  buttonImg.src = `../assets/icons/prio-${prio}-white.png`;
+
+  setNoPrio(prio);
+}
+
+function setNoPrio(prio) {
+  let noPrio = [];
+
   if (prio == 'urgent') {
-    currentPrio = 'urgent';
-    // console.log('CURRENT PRIO:', currentPrio);
-    controlPrioButtonStyle();
+    noPrio = ['medium', 'low'];
   } else if (prio == 'medium') {
-    currentPrio = 'medium';
-    // console.log('CURRENT PRIO:', currentPrio);
-    controlPrioButtonStyle();
+    noPrio = ['urgent', 'low'];
   } else if (prio == 'low') {
-    currentPrio = 'low';
-    // console.log('CURRENT PRIO:', currentPrio);
-    controlPrioButtonStyle();
+    noPrio = ['urgent', 'medium'];
   }
+
+  styleNoPrio(noPrio);
 }
 
-function controlPrioButtonStyle() {
-  styleButtonUrgent();
-  styleButtonMedium();
-  styleButtonLow();
-}
-
-function styleButtonUrgent() {
-  if (currentPrio == 'urgent') {
-    buttonUrgent.style.background = '#ff3d00';
-    buttonUrgent.style.color = 'white';
-    buttonUrgent.style.fontWeight = 'bold';
-    buttonUrgentImg.src = '../assets/icons/prio-urgent-white.png';
-  } else {
-    buttonUrgent.style.background = 'white';
-    buttonUrgent.style.color = 'black';
-    buttonUrgent.style.fontWeight = 'normal';
-    buttonUrgentImg.src = '../assets/icons/prio-urgent.png';
-  }
-}
-
-function styleButtonMedium() {
-  if (currentPrio == 'medium') {
-    buttonMedium.style.background = '#FFA800';
-    buttonMedium.style.color = 'white';
-    buttonMedium.style.fontWeight = 'bold';
-    buttonMediumImg.src = '../assets/icons/prio-medium-white.png';
-  } else {
-    buttonMedium.style.background = 'white';
-    buttonMedium.style.color = 'black';
-    buttonMedium.style.fontWeight = 'normal';
-    buttonMediumImg.src = '../assets/icons/prio-medium.png';
-  }
-}
-
-function styleButtonLow() {
-  if (currentPrio == 'low') {
-    buttonLow.style.background = '#7ae229';
-    buttonLow.style.color = 'white';
-    buttonLow.style.fontWeight = 'bold';
-    buttonLowImg.src = '../assets/icons/prio-low-white.png';
-  } else {
-    buttonLow.style.background = 'white';
-    buttonLow.style.color = 'black';
-    buttonLow.style.fontWeight = 'normal';
-    buttonLowImg.src = '../assets/icons/prio-low.png';
+function styleNoPrio(noPrio) {
+  for (let element of noPrio) {
+    const noPrioButton = document.getElementById(`button-${element}`);
+    const noPrioButtonImg = document.getElementById(`button-${element}-img`);
+    noPrioButton.style.background = 'white';
+    noPrioButton.style.color = 'black';
+    noPrioButton.style.fontWeight = 'normal';
+    noPrioButtonImg.src = `../assets/icons/prio-${element}.png`;
   }
 }
 
@@ -217,20 +209,27 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      <li class="subtasks">
-        <div class="subtask-title">${subtasks[index].title}</div>
+      <li id="subtask-${index}" class="subtasks">
+        <div id="single-subtask-title" class="subtask-title">${subtasks[index].title}</div>
+        <input id="input-edit-subtask" type="text"/>
         <div class="subtask-buttons">
           <img
-            src="../assets/icons/edit.png"
+            src="../assets/icons/edit-subtask.png"
             alt="edit icon"
             id="edit-subtask"
             onclick="editSingleSubtask('${id}', '${index}')"
           />
+           <img
+            src="../assets/icons/submit-subtask.png"
+            alt="submit icon"
+            id="submit-edit-subtask"
+            onclick="submitSingleSubtask('${id}', '${index}')"
+          />
           <img
-            src="../assets/icons/delete.png"
+            src="../assets/icons/delete-subtask.png"
             alt="trash icon"
             id="delete-subtask"
-            onclick="deleteSubtask('${id}', '${index}')"
+            onclick="deleteSingleSubtask('${id}', '${index}')"
           />
         </div>
       </li>
@@ -239,20 +238,33 @@ function createSubtasksListHTML(index, id) {
 
 // TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
-  if (taskId == undefined) {
-    console.log('taskId is undefined');
+  if (taskId == 'undefined') {
+    const singlgeSubtaskTitle = document.getElementById('single-subtask-title');
+    const inputEditSubtask = document.getElementById('input-edit-subtask');
+    const editSubtaskBtn = document.getElementById('edit-subtask');
+    const submitEditSubtaskBtn = document.getElementById('submit-edit-subtask');
+    const deleteSubtaskBtn = document.getElementById('delete-subtask');
+    const subtask = document.getElementById(`subtask-${index}`);
+
+    singlgeSubtaskTitle.style.display = 'none';
+    inputEditSubtask.style.display = 'flex';
+    editSubtaskBtn.style.display = 'none';
+    submitEditSubtaskBtn.style.display = 'flex';
+
+    subtask.style.borderBottom = '1px solid #29abe2';
+    subtask.value = subtasks[index];
   } else {
     console.log('taskId is defined', taskId);
 
-    for (let element of tasks) {
-      if (element.id == taskId) {
-        // await updateTaskInFirebase(element.id, element.data);
-      }
-    }
+    // for (let element of tasks) {
+    //   if (element.id == taskId) {
+    //     // await updateTaskInFirebase(element.id, element.data);
+    //   }
+    // }
   }
 }
 
-async function deleteSubtask(taskId, index) {
+async function deleteSingleSubtask(taskId, index) {
   if (taskId == 'undefined') {
     subtasks.splice(index, 1);
     renderSubtasksList();
@@ -407,9 +419,9 @@ window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
   if (scrollPosition >= totalHeight) {
-  document.getElementById('footer').classList.add('footer-animation');
+    document.getElementById('footer').classList.add('footer-animation');
   } else {
-  document.getElementById('footer').classList.remove('footer-animation');
+    document.getElementById('footer').classList.remove('footer-animation');
   }
 };
 

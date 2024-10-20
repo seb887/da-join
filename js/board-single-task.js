@@ -143,6 +143,7 @@ async function deleteTask(id) {
 function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
+
   for (let element of tasks) {
     if (taskId == element.id) {
       editInputTitle.value = element.data.title;

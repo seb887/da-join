@@ -142,6 +142,7 @@ function closeTaskModal() {
 
 function openAddTaskModal(kanbanBoard) {
   addTaskModal.style.display = 'flex';
+
   currentKanbanBoard = kanbanBoard;
   modalSlideInOrOut('add-task-modal-card');
 
