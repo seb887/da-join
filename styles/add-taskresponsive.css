@@ -190,6 +190,11 @@
     .add-task-footer {
       padding: 20px;
     }
+    #info-toast {
+      width: 290px;
+      height: 66px;
+      font-size: 14px;
+    }
   }
   
   @media (max-width: 359px) {
