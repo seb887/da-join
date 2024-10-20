@@ -362,18 +362,32 @@ async function listContactsToAssignedToinBoard() {
 
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
+  const container = document.getElementById('task-modal-card')
+  console.log('fire');
+  
+  container.addEventListener('click',(e) =>{
+    console.log('clicked');
+  })
   if (contactList.style.display == 'flex') {
-    contactList.style.display = 'none';
+    closeDropdownMenu(contactList);
+  } else {
+    openDropdownMenu(contactList)
+  }
+}
+
+function closeDropdownMenu(contactList){
+  contactList.style.display = 'none';
     document.getElementById('searchContact').placeholder =
       'Select contacts to assign';
     document.getElementById('arrowAssignTo').src =
       '../assets/icons/arrow-down.png';
-  } else {
-    contactList.style.display = 'flex';
-    document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
-  }
+}
+
+function openDropdownMenu(contactList){
+  contactList.style.display = 'flex';
+  document.getElementById('searchContact').placeholder = '';
+  document.getElementById('arrowAssignTo').src =
+    '../assets/icons/arrow-up.png';
 }
 
 function checkIfAnimationActiveBoard() {
