@@ -403,15 +403,15 @@ function renderContactArray() {
   });
 }
 
-// window.onscroll = function (ev) {
-//   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
-//   const totalHeight = document.documentElement.scrollHeight;
-//   if (scrollPosition >= totalHeight) {
-//     document.getElementById('footer').classList.add('footer-animation');
-//   } else {
-//     document.getElementById('footer').classList.remove('footer-animation');
-//   }
-// };
+window.onscroll = function (ev) {
+  const scrollPosition = window.innerHeight + Math.round(window.scrollY);
+  const totalHeight = document.documentElement.scrollHeight;
+  if (scrollPosition >= totalHeight) {
+    document.getElementById('footer').classList.add('footer-animation');
+  } else {
+    document.getElementById('footer').classList.remove('footer-animation');
+  }
+};
 
 function assignedToContactsContent(contact, id, index) {
   return `
