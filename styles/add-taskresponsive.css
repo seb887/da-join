@@ -72,7 +72,7 @@
   
   @media (max-width: 650px) {
     #add-task-error {
-      font-size: 18px;
+      font-size: 16px;
       padding-left: 20px;
     }
     body {
@@ -89,6 +89,7 @@
       width: unset;
     }
     .add-task-submit-button {
+      width: 183px;
       height: 56px;
     }
     .add-task-cancel-button {
@@ -167,7 +168,11 @@
       width: 320px;
     }
     .add-task-submit-button {
-      width: 214px;
+      width: 135px;
+      padding: 12px;
+    }
+    .add-task-submit-button span {
+      font-size: 14px;
     }
     h1 {
       font-size: 40px;
@@ -178,6 +183,12 @@
     .prio-buttons {
       width: 90px;
       font-size: 14px;
+    }
+    .required-div {
+      font-size: 14px;
+    }
+    .add-task-footer {
+      padding: 20px;
     }
   }
   
