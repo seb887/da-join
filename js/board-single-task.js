@@ -143,7 +143,9 @@ async function deleteTask(id) {
 function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
+
   selectAllAssignedContacts(taskId);
+
   for (let element of tasks) {
     if (taskId == element.id) {
       editInputTitle.value = element.data.title;
@@ -161,6 +163,7 @@ function openEditTaskModal(taskId) {
 async function editTask(taskId) {
   console.log('EDITED TASK ID', taskId);
   console.log('-----------------------------------');
+
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = editInputTitle.value;

@@ -10,6 +10,8 @@ const taskModalCard = document.getElementById('task-modal-card');
 const taskModalEditCard = document.getElementById('task-modal-edit-card');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
+const clearInputBtn = document.getElementById('search-clear-btn');
+
 const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
 const taskModalSubtasksList = document.getElementById(
   'task-modal-card-subtasks-list'
@@ -252,6 +254,8 @@ function searchTask() {
 
   let inputText = searchInput.value.toLowerCase();
 
+  console.log(tasks);
+
   const filteredData = tasks.filter(
     (element) =>
       element.data.title.toLowerCase().includes(inputText) ||
@@ -409,17 +413,14 @@ function modalSlideInOrOut(modalId) {
   }, 350);
 }
 
-
-function selectAllAssignedContacts(taskId){
-  document.getElementById('assigned-contacts-list').innerHTML = ''
-  tasks.forEach((task)=>{    
-    if(task.data.assignedTo && task.id == taskId){
-        task.data.assignedTo.forEach((contact)=>{
+function selectAllAssignedContacts(taskId) {
+  document.getElementById('assigned-contacts-list').innerHTML = '';
+  tasks.forEach((task) => {
+    if (task.data.assignedTo && task.id == taskId) {
+      task.data.assignedTo.forEach((contact) => {
         document.getElementById(contact.id + 'cb').checked = true;
-        inspectCheckboxes('assigned-contacts-list')
-      })
+        inspectCheckboxes('assigned-contacts-list');
+      });
     }
-  })
+  });
 }
-
-

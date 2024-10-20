@@ -506,23 +506,25 @@
               id="input-subtask"
               oninput="controlSubtaskIcons()"
             />
-            <img
-              src="../assets/icons/add-subtask.png"
-              alt="add subtask icon"
-              id="add-subtask-img"
-            />
-            <img
-              src="../assets/icons/submit-subtask.png"
-              alt="submit subtask icon"
-              id="submit-subtask-img"
-              onclick="submitInputSubtask()"
-            />
-            <img
-              src="../assets/icons/cancel-subtask.png"
-              alt="plus icon"
-              id="cancel-subtask-img"
-              onclick="cancelInputSubtask()"
-            />
+            <div class="add-task-input-buttons">
+              <img
+                src="../assets/icons/add-subtask.png"
+                alt="add subtask icon"
+                id="add-subtask-img"
+              />
+              <img
+                src="../assets/icons/cancel-subtask.png"
+                alt="plus icon"
+                id="cancel-subtask-img"
+                onclick="cancelInputSubtask()"
+              />
+              <img
+                src="../assets/icons/submit-subtask.png"
+                alt="submit subtask icon"
+                id="submit-subtask-img"
+                onclick="submitInputSubtask()"
+              />
+            </div>
           </div>
           <ul
             class="subtasks-list"
