@@ -118,7 +118,7 @@ function clearKanbanLists() {
 
 function openTaskModal(event, id) {
   taskModal.style.display = 'flex';
-  taskModalCard.style.display = 'flex'
+  taskModalCard.style.display = 'flex';
   modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(event);
   displayTaskModalContacts(id);
@@ -127,20 +127,17 @@ function openTaskModal(event, id) {
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
   setTimeout(() => {
-  taskModal.style.display = 'none';
-  
-  taskModalEditCard.style.display = 'none';
-  }, 250);
-  if(document.getElementById('task-modal-edit-card').style.display == "flex"){taskModalCard.style.display = 'none' ; modalSlideInOrOut('task-modal-edit-card')}
-  else {modalSlideInOrOut('task-modal-card')}
-  renderBoard();
-}
+    taskModal.style.display = 'none';
 
-function closeTaskModalESC(event) {
-  if (event.key === 'Escape') {
-    closeAddTaskModal();
-    closeTaskModal();
+    taskModalEditCard.style.display = 'none';
+  }, 250);
+  if (document.getElementById('task-modal-edit-card').style.display == 'flex') {
+    taskModalCard.style.display = 'none';
+    modalSlideInOrOut('task-modal-edit-card');
+  } else {
+    modalSlideInOrOut('task-modal-card');
   }
+  renderBoard();
 }
 
 function openAddTaskModal(kanbanBoard) {
@@ -394,21 +391,19 @@ function checkIfAnimationActiveBoard() {
   }
 }
 
-
-function modalSlideInOrOut(modalId){
-if(!modalActive){
-  document.getElementById(modalId).classList.add("task-modal-slide-in");
-  document.getElementById(modalId).classList.remove("task-modal-slide-out");
-  document.body.style.overflow = "hidden";
-}
-else{
-  document.getElementById(modalId).classList.remove("task-modal-slide-in");
-  document.getElementById(modalId).classList.add("task-modal-slide-out");
-  document.body.style.overflow = "unset";
-}
+function modalSlideInOrOut(modalId) {
+  if (!modalActive) {
+    document.getElementById(modalId).classList.add('task-modal-slide-in');
+    document.getElementById(modalId).classList.remove('task-modal-slide-out');
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.getElementById(modalId).classList.remove('task-modal-slide-in');
+    document.getElementById(modalId).classList.add('task-modal-slide-out');
+    document.body.style.overflow = 'unset';
+  }
   modalActive = !modalActive;
   setTimeout(() => {
-    document.getElementById(modalId).classList.remove("task-modal-slide-in");
-    document.getElementById(modalId).classList.remove("task-modal-slide-out");
+    document.getElementById(modalId).classList.remove('task-modal-slide-in');
+    document.getElementById(modalId).classList.remove('task-modal-slide-out');
   }, 350);
 }

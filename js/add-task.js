@@ -98,15 +98,15 @@ function clearInputs() {
 function setPrio(prio) {
   if (prio == 'urgent') {
     currentPrio = 'urgent';
-    console.log(currentPrio);
+    // console.log('CURRENT PRIO:', currentPrio);
     controlPrioButtonStyle();
   } else if (prio == 'medium') {
     currentPrio = 'medium';
-    console.log(currentPrio);
+    // console.log('CURRENT PRIO:', currentPrio);
     controlPrioButtonStyle();
   } else if (prio == 'low') {
     currentPrio = 'low';
-    console.log(currentPrio);
+    // console.log('CURRENT PRIO:', currentPrio);
     controlPrioButtonStyle();
   }
 }
@@ -237,7 +237,7 @@ function createSubtasksListHTML(index, id) {
 
 // TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
-  if (taskId === undefined) {
+  if (taskId == undefined) {
     console.log('taskId is undefined');
   } else {
     console.log('taskId is defined', taskId);
