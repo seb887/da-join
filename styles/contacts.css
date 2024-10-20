@@ -579,10 +579,9 @@ article {
   position: fixed;
   width: 326px;
   height: 74px;
-  bottom: 15%;
   font-size: 20px;
   right: 0%;
-  top: 50%;
+  top: 70%;
   background-color: #2A3647;
   border-radius: 20px;
   color: white;
@@ -594,7 +593,7 @@ article {
 
 #info-toast.show {
   opacity: 1;
-  transform: translateX(-100%);
+  transform: translateX(-70%);
 }
 
 .show {

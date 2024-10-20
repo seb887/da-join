@@ -147,6 +147,10 @@
   .return-to-list-responsive {
     display: flex;
   }
+  .return-to-list-responsive img {
+    width: 24.6px;
+    height: 23.92px;
+  }
   .hidden-overlay {
     display: flex;
   }
@@ -243,10 +247,10 @@
     width: 100%;
   }
   .single-contact {
-    width: 352px;
+    width: 80%;
   }
   .nameHeader {
-    width: 352px;
+    width: 80%;
   }
   .edit-del-contact-responsive {
     width: 116px;
@@ -280,6 +284,9 @@
 }
 
 @media (max-width: 427px) {
+  .contact-data a {
+    font-size: 11px;
+  }
   #inputPhoneNumber {
     background-position: 225px 9px;
   }
@@ -342,12 +349,6 @@
       padding: unset;
       justify-content: center;
   } 
-  .single-contact {
-    width: 282px;
-  }
-  .nameHeader {
-    width: 282px;
-  }
   .contacts-title b {
     font-size: 36px;
   }

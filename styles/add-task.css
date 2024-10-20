@@ -235,7 +235,7 @@ body {
   justify-content: space-between;
   align-items: end;
   margin-top: 48px;
-  margin-bottom: 48px;
+  margin-bottom: 25px;
   width: 968px;
   background-color: var(--bg-primary);
 }

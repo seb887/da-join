@@ -66,13 +66,15 @@ function createNewTask() {
 }
 
 function checkInputs(taskObj) {
+  let error = document.getElementById('add-task-error');
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
-      alert('Please insert a title');
+      error.innerHTML = 'Please insert a title';
     } else if (taskObj.category == 'Select task category') {
-      alert('Please select a category');
+      error.innerHTML = 'Please select a category';
     }
   } else {
+    error.innerHTML = '';
     saveTaskToFirebase(taskObj);
     subtasksList.innerHTML = '';
     currentKanbanBoard = 'todo';
@@ -401,15 +403,15 @@ function renderContactArray() {
   });
 }
 
-window.onscroll = function (ev) {
-  const scrollPosition = window.innerHeight + Math.round(window.scrollY);
-  const totalHeight = document.documentElement.scrollHeight;
-  if (scrollPosition >= totalHeight) {
-    document.getElementById('footer').classList.add('footer-animation');
-  } else {
-    document.getElementById('footer').classList.remove('footer-animation');
-  }
-};
+// window.onscroll = function (ev) {
+//   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
+//   const totalHeight = document.documentElement.scrollHeight;
+//   if (scrollPosition >= totalHeight) {
+//     document.getElementById('footer').classList.add('footer-animation');
+//   } else {
+//     document.getElementById('footer').classList.remove('footer-animation');
+//   }
+// };
 
 function assignedToContactsContent(contact, id, index) {
   return `
