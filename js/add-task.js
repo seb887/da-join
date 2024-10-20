@@ -334,18 +334,17 @@ function inspectCheckboxes(path) {
 }
 
 function dropDownContacts() {
-  const contactList = document.getElementById('input-assigned-to');
-  if (contactList.style.display == 'flex') {
-    contactList.style.display = 'none';
-    document.getElementById('searchContact').placeholder =
-      'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
+  const modal = document.getElementById('task-modal-edit-card');
+  event.stopPropagation();
+  if(modal){
+    modal.addEventListener('click', (e) =>{
+      closeDropdownMenu(inputAssignedTo);
+  })
+}
+  if (inputAssignedTo.style.display == 'flex') {
+    closeDropdownMenu(inputAssignedTo);
   } else {
-    contactList.style.display = 'flex';
-    document.getElementById('searchContact').placeholder = '';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
+    openDropdownMenu(inputAssignedTo);
   }
 }
 
