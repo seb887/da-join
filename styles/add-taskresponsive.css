@@ -89,7 +89,6 @@
       width: unset;
     }
     .add-task-submit-button {
-      width: 183px;
       height: 56px;
     }
     .add-task-cancel-button {
@@ -168,7 +167,7 @@
       width: 320px;
     }
     .add-task-submit-button {
-      width: 150px;
+      width: 214px;
     }
     h1 {
       font-size: 40px;
