@@ -408,3 +408,15 @@ function modalSlideInOrOut(modalId) {
     document.getElementById(modalId).classList.remove('task-modal-slide-out');
   }, 350);
 }
+
+
+function selectAllAssignedContacts(taskId){
+  tasks.forEach((task)=>{    
+    if(task.id == taskId){
+      task.data.assignedTo.forEach((contact)=>{
+        document.getElementById(contact.id + 'cb').checked = true;
+        inspectCheckboxes('assigned-contacts-list')
+      })
+    }
+  })
+}
