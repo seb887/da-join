@@ -249,7 +249,7 @@ body {
 
 .add-task-cancel-button {
   display: flex;
-  justify-content: center;
+  width: 126px;
   align-items: center;
   padding: 16px;
   gap: 4px;
@@ -257,16 +257,26 @@ body {
   border-radius: 10px;
   background-color: transparent;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
   cursor: pointer;
+  transition: ease-in-out 125ms;
+  background-image: url(/assets/icons/close.png);
+  background-repeat: no-repeat;
+  background-position: 90px 16px;
+}
+.add-task-cancel-button:hover{
+  cursor: pointer;
+  color: #29ABE2;
+  border-color: #29ABE2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
 }
 
 .add-task-submit-button {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 16px;
-  width: 183px;
+  width: 214px;
   height: 56px;
   gap: 4px;
   border-radius: 10px;
@@ -276,10 +286,13 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: ease-in-out 120ms;
+  background-image: url(/assets/icons/check.png);
+  background-repeat: no-repeat;
+  background-position: 180px 22px;
 }
 
 .add-task-submit-button:hover {
-  background: #29abe2;
+  background-color: #29abe2;
   border: 0px;
   box-shadow: #8c8c8c 0px 5px 7px;
 }

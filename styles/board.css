@@ -99,6 +99,13 @@
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
+  transition: ease-in-out 250ms;
+}
+
+.add-task-button:hover {
+  background: #29abe2;
+  border: 0px;
+  box-shadow: #8c8c8c 0px 5px 7px;
 }
 
 .add-task-button img {
