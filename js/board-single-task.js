@@ -150,7 +150,7 @@ function openEditTaskModal(taskId) {
       editInputDescription.value = element.data.description;
       editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
-      controlPrioButtonStyle();
+      // controlPrioButtonStyle();
       subtasks = element.data.subtasks;
       renderSubtasksList(taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
