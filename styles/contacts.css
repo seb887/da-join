@@ -30,13 +30,31 @@ body {
   background-color: var(--bg-hover);
 }
 
-.contact-list-container::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 
+/* Scrollbar im body für Firefox ausblenden */
+body {
+  -ms-overflow-style: none;  /* Für Internet Explorer/Edge */
+  scrollbar-width: none;     /* Für Firefox */
+}
+
+/* Scrollbar im body für WebKit-basierte Browser (Chrome, Safari) ausblenden */
+body::-webkit-scrollbar {
+  display: none;             /* Für WebKit-basierte Browser */
+}
+
+/* Scrollbar in der .contact-list-container wieder anzeigen */
 .contact-list-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: auto;  /* Für IE/Edge */
+  scrollbar-width: auto;     /* Für Firefox */
+}
+
+/* Scrollbar in der .contact-list-container für WebKit-basierte Browser sichtbar machen */
+.contact-list-container::-webkit-scrollbar {
+  display: block;      /* Für WebKit-basierte Browser */
+  width: 22px;   /* Breite des vertikalen Scrollbalkens */
 }
 
 .contact-list-container {

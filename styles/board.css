@@ -247,6 +247,7 @@
 
 .task-collaborators {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .card-profile-badge-1,
