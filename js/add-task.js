@@ -210,25 +210,28 @@ function renderSubtasksList(taskId) {
 function createSubtasksListHTML(index, id) {
   return `
       <li id="subtask-${index}" class="subtasks">
-        <div id="single-subtask-title" class="subtask-title">${subtasks[index].title}</div>
-        <input id="input-edit-subtask" type="text"/>
+        <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
+        <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
         <div class="subtask-buttons">
           <img
             src="../assets/icons/edit-subtask.png"
             alt="edit icon"
-            id="edit-subtask"
+            id="edit-subtask-${index}"
+            class="edit-subtask"
             onclick="editSingleSubtask('${id}', '${index}')"
           />
            <img
             src="../assets/icons/submit-subtask.png"
             alt="submit icon"
-            id="submit-edit-subtask"
-            onclick="submitSingleSubtask('${id}', '${index}')"
+            id="submit-edit-subtask-${index}"
+            class="submit-edit-subtask"
+            onclick="submitEditedSingleSubtask('${id}', '${index}')"
           />
           <img
             src="../assets/icons/delete-subtask.png"
             alt="trash icon"
-            id="delete-subtask"
+            id="delete-subtask-${index}"
+            class="delete-subtask"
             onclick="deleteSingleSubtask('${id}', '${index}')"
           />
         </div>
@@ -239,20 +242,26 @@ function createSubtasksListHTML(index, id) {
 // TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
   if (taskId == 'undefined') {
-    const singlgeSubtaskTitle = document.getElementById('single-subtask-title');
-    const inputEditSubtask = document.getElementById('input-edit-subtask');
-    const editSubtaskBtn = document.getElementById('edit-subtask');
-    const submitEditSubtaskBtn = document.getElementById('submit-edit-subtask');
-    const deleteSubtaskBtn = document.getElementById('delete-subtask');
+    const singleSubtaskTitle = document.getElementById(
+      `single-subtask-title-${index}`
+    );
+    const inputEditSubtask = document.getElementById(
+      `input-edit-subtask-${index}`
+    );
+    const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
+    const submitEditSubtaskBtn = document.getElementById(
+      `submit-edit-subtask-${index}`
+    );
+    const deleteSubtaskBtn = document.getElementById(`delete-subtask-${index}`);
     const subtask = document.getElementById(`subtask-${index}`);
 
-    singlgeSubtaskTitle.style.display = 'none';
+    singleSubtaskTitle.style.display = 'none';
     inputEditSubtask.style.display = 'flex';
     editSubtaskBtn.style.display = 'none';
     submitEditSubtaskBtn.style.display = 'flex';
-
     subtask.style.borderBottom = '1px solid #29abe2';
-    subtask.value = subtasks[index];
+
+    inputEditSubtask.value = subtasks[index].title;
   } else {
     console.log('taskId is defined', taskId);
 
@@ -261,6 +270,34 @@ async function editSingleSubtask(taskId, index) {
     //     // await updateTaskInFirebase(element.id, element.data);
     //   }
     // }
+  }
+}
+
+function submitEditedSingleSubtask(taskId, index) {
+  const singleSubtaskTitle = document.getElementById(
+    `single-subtask-title-${index}`
+  );
+  const inputEditSubtask = document.getElementById(
+    `input-edit-subtask-${index}`
+  );
+  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
+  const submitEditSubtaskBtn = document.getElementById(
+    `submit-edit-subtask-${index}`
+  );
+  const deleteSubtaskBtn = document.getElementById(`delete-subtask-${index}`);
+  const subtask = document.getElementById(`subtask-${index}`);
+
+  if (taskId == 'undefined') {
+    subtasks[index].title = inputEditSubtask.value;
+
+    singleSubtaskTitle.style.display = 'flex';
+    inputEditSubtask.style.display = 'none';
+    editSubtaskBtn.style.display = 'flex';
+    submitEditSubtaskBtn.style.display = 'none';
+    subtask.style.borderBottom = 'none';
+
+    console.log(subtasks);
+    renderSubtasksList();
   }
 }
 
@@ -336,11 +373,11 @@ function inspectCheckboxes(path) {
 function dropDownContacts() {
   const modal = document.getElementById('task-modal-edit-card');
   event.stopPropagation();
-  if(modal){
-    modal.addEventListener('click', (e) =>{
+  if (modal) {
+    modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);
-  })
-}
+    });
+  }
   if (inputAssignedTo.style.display == 'flex') {
     closeDropdownMenu(inputAssignedTo);
   } else {

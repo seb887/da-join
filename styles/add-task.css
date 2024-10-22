@@ -232,7 +232,7 @@ body {
   list-style-type: disc;
 }
 
-#input-edit-subtask {
+.input-edit-subtask {
   display: none;
   border: none;
   outline: none;
@@ -254,15 +254,15 @@ body {
   height: 24px;
 }
 
-#edit-subtask {
+.edit-subtask {
   display: flex;
 }
 
-#submit-edit-subtask {
+.submit-edit-subtask {
   display: none;
 }
 
-#delete-subtask {
+.delete-subtask {
   display: flex;
 }
 
@@ -479,7 +479,7 @@ body {
   width: 100%;
   height: 50px;
   font-size: 20px;
-  outline-color: #29ABE2;
+  outline-color: #29abe2;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 12px 21px;
