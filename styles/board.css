@@ -247,6 +247,7 @@
 
 .task-collaborators {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .card-profile-badge-1,
@@ -310,6 +311,7 @@
   background-color: var(--bg-primary);
   font-size: 20px;
   font-weight: 400;
+  overflow-y: auto;
 }
 
 .task-modal-edit-card {

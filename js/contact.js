@@ -54,7 +54,7 @@ function generateInitials (name){
 
 
 function checkForExistingLetter(contact, index) {
-    let name = contact.name.charAt(0);
+    let name = contact.name.charAt(0).toUpperCase();
     let nameHeader = document.getElementById(name);
     if(!nameHeader) {
         document.getElementById('contacts').innerHTML += nameHeaderContent(name);
