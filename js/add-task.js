@@ -241,39 +241,6 @@ function createSubtasksListHTML(index, id) {
 
 // TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
-  if (taskId == 'undefined') {
-    const singleSubtaskTitle = document.getElementById(
-      `single-subtask-title-${index}`
-    );
-    const inputEditSubtask = document.getElementById(
-      `input-edit-subtask-${index}`
-    );
-    const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
-    const submitEditSubtaskBtn = document.getElementById(
-      `submit-edit-subtask-${index}`
-    );
-    const deleteSubtaskBtn = document.getElementById(`delete-subtask-${index}`);
-    const subtask = document.getElementById(`subtask-${index}`);
-
-    singleSubtaskTitle.style.display = 'none';
-    inputEditSubtask.style.display = 'flex';
-    editSubtaskBtn.style.display = 'none';
-    submitEditSubtaskBtn.style.display = 'flex';
-    subtask.style.borderBottom = '1px solid #29abe2';
-
-    inputEditSubtask.value = subtasks[index].title;
-  } else {
-    console.log('taskId is defined', taskId);
-
-    // for (let element of tasks) {
-    //   if (element.id == taskId) {
-    //     // await updateTaskInFirebase(element.id, element.data);
-    //   }
-    // }
-  }
-}
-
-function submitEditedSingleSubtask(taskId, index) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
@@ -284,7 +251,43 @@ function submitEditedSingleSubtask(taskId, index) {
   const submitEditSubtaskBtn = document.getElementById(
     `submit-edit-subtask-${index}`
   );
-  const deleteSubtaskBtn = document.getElementById(`delete-subtask-${index}`);
+  const subtask = document.getElementById(`subtask-${index}`);
+
+  if (taskId == 'undefined') {
+    singleSubtaskTitle.style.display = 'none';
+    inputEditSubtask.style.display = 'flex';
+    editSubtaskBtn.style.display = 'none';
+    submitEditSubtaskBtn.style.display = 'flex';
+    subtask.style.borderBottom = '1px solid #29abe2';
+
+    inputEditSubtask.value = subtasks[index].title;
+  } else {
+    for (let element of tasks) {
+      if (element.id == taskId) {
+        singleSubtaskTitle.style.display = 'none';
+        inputEditSubtask.style.display = 'flex';
+        editSubtaskBtn.style.display = 'none';
+        submitEditSubtaskBtn.style.display = 'flex';
+        subtask.style.borderBottom = '1px solid #29abe2';
+
+        inputEditSubtask.value = element.data.subtasks[index].title;
+        // await updateTaskInFirebase(element.id, element.data);
+      }
+    }
+  }
+}
+
+async function submitEditedSingleSubtask(taskId, index) {
+  const singleSubtaskTitle = document.getElementById(
+    `single-subtask-title-${index}`
+  );
+  const inputEditSubtask = document.getElementById(
+    `input-edit-subtask-${index}`
+  );
+  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
+  const submitEditSubtaskBtn = document.getElementById(
+    `submit-edit-subtask-${index}`
+  );
   const subtask = document.getElementById(`subtask-${index}`);
 
   if (taskId == 'undefined') {
@@ -296,8 +299,22 @@ function submitEditedSingleSubtask(taskId, index) {
     submitEditSubtaskBtn.style.display = 'none';
     subtask.style.borderBottom = 'none';
 
-    console.log(subtasks);
     renderSubtasksList();
+  } else {
+    for (let element of tasks) {
+      if (element.id == taskId) {
+        singleSubtaskTitle.style.display = 'flex';
+        inputEditSubtask.style.display = 'none';
+        editSubtaskBtn.style.display = 'flex';
+        submitEditSubtaskBtn.style.display = 'none';
+        subtask.style.borderBottom = 'none';
+
+        element.data.subtasks[index].title = inputEditSubtask.value;
+
+        await updateTaskInFirebase(element.id, element.data);
+        renderSubtasksList();
+      }
+    }
   }
 }
 
