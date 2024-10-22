@@ -310,11 +310,17 @@ async function renderAssignedToInCard(taskId, task, path = '') {
     return;
   } else {
     task.data.assignedTo.forEach((assignedContact, index) => {
-      card.innerHTML += `
+      if(index <= 2){
+        card.innerHTML += `
         <div style="background-color:${assignedContact.color}" id="${
         assignedContact.id + '-cpb'
       }" class="card-profile-badge-3">${assignedContact.initials}</div>
-        `;
+        `}
+      else if(index == 3){card.innerHTML += `
+        <div style="background-color:gray" id="${
+        assignedContact.id + '-cpb'
+      }" class="card-profile-badge-3">+ ${task.data.assignedTo.length - 3}</div>
+        `;}
     });
   }
 }
