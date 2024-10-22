@@ -310,16 +310,16 @@ async function renderAssignedToInCard(taskId, task, path = '') {
     return;
   } else {
     task.data.assignedTo.forEach((assignedContact, index) => {
-      if(index <= 2){
+      if(index < 4){
         card.innerHTML += `
         <div style="background-color:${assignedContact.color}" id="${
         assignedContact.id + '-cpb'
       }" class="card-profile-badge-3">${assignedContact.initials}</div>
         `}
-      else if(index == 3){card.innerHTML += `
-        <div style="background-color:gray" id="${
+      else if(index == 4){card.innerHTML += `
+        <div style="background-color:#2A3647; text-align: center;" id="${
         assignedContact.id + '-cpb'
-      }" class="card-profile-badge-3">+ ${task.data.assignedTo.length - 3}</div>
+      }" class="card-profile-badge-3">+${task.data.assignedTo.length - 3}</div>
         `;}
     });
   }
