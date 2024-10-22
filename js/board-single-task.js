@@ -141,6 +141,8 @@ async function deleteTask(id) {
 }
 
 function openEditTaskModal(taskId) {
+  console.log('OPEN EDIT TASK ID:', taskId);
+
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 

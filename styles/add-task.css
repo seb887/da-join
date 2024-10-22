@@ -420,7 +420,7 @@ body {
   overflow-wrap: anywhere;
   max-height: 250px;
   width: 435px;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   flex-direction: column;
   background-color: white;
 }
