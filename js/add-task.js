@@ -32,6 +32,7 @@ let matches = [];
 // DEFAULTS
 let currentDate = new Date();
 inputDate.valueAsDate = currentDate;
+// boardInputDate.valueAsDate = currentDate;
 
 let currentPrio = 'medium';
 

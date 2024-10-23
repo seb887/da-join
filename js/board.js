@@ -299,7 +299,7 @@ async function renderAssignedToInCard(taskId, task, path = '') {
         <div style="background-color:#2A3647; text-align: center;" id="${
           assignedContact.id + '-cpb'
         }" class="card-profile-badge-3">+${
-          task.data.assignedTo.length - 3
+          task.data.assignedTo.length - 4
         }</div>
         `;
       }

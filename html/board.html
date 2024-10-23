@@ -602,6 +602,248 @@
               >
                 Assigned to
               </div>
+              <div
+                id="add-task-contact-container"
+                class="add-task-select"
+              >
+                <div
+                  style="cursor: pointer"
+                  onclick="dropDownContacts()"
+                >
+                  <input
+                    oninput="filterContacts(event)"
+                    autocomplete="off"
+                    placeholder="Select contacts to assign"
+                    type="text"
+                    id="searchContact"
+                  /><img
+                    id="arrowAssignTo"
+                    src="../assets/icons/arrow-down.png"
+                    alt="arrow-down"
+                  />
+                </div>
+                <div
+                  class="add-task-select"
+                  id="input-assigned-to"
+                ></div>
+              </div>
+              <!-- </select> -->
+            </div>
+            <div id="assigned-contacts-list"></div>
+          </div>
+          <div class="seperator"></div>
+          <div class="right-container">
+            <div class="form-container date-container">
+              <div
+                for="date"
+                class="add-task-labels"
+              >
+                Due date<span class="required-marker">*</span>
+              </div>
+              <input
+                type="date"
+                class="add-task-input-date"
+                id="input-date"
+                name="date"
+              />
+            </div>
+
+            <div class="form-container date-container">
+              <div
+                for="prio"
+                class="add-task-labels"
+              >
+                Prio
+              </div>
+              <div class="prio-buttons-container">
+                <button
+                  class="prio-buttons"
+                  id="button-urgent"
+                  onclick="setPrio('urgent')"
+                >
+                  Urgent
+                  <img
+                    src="../assets/icons/prio-urgent.png"
+                    alt="prio urgent icon"
+                    id="button-urgent-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons"
+                  id="button-medium"
+                  onclick="setPrio('medium')"
+                >
+                  Medium
+                  <img
+                    src="../assets/icons/prio-medium-white.png"
+                    alt="prio medium icon"
+                    id="button-medium-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons"
+                  id="button-low"
+                  onclick="setPrio('low')"
+                >
+                  Low
+                  <img
+                    src="../assets/icons/prio-low.png"
+                    alt="prio low icon"
+                    id="button-low-img"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div class="form-container category-container">
+              <div
+                for="category"
+                class="add-task-labels"
+              >
+                Category<span class="required-marker">*</span>
+              </div>
+              <select
+                type="text"
+                class="add-task-select"
+                id="select-category"
+                name="category"
+              >
+                <option
+                  value="Select task category"
+                  disabled
+                  selected
+                  hidden
+                >
+                  Select task category
+                </option>
+                <option value="User Story">User Story</option>
+                <option value="Technical Task">Technical Task</option>
+              </select>
+            </div>
+
+            <div class="form-container subtasks-container">
+              <div
+                for="subtasks"
+                class="add-task-labels"
+              >
+                Subtasks
+              </div>
+              <div class="add-task-input">
+                <input
+                  type="subtasks"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                  class="add-task-input-subtasks"
+                  id="input-subtask"
+                  oninput="controlSubtaskIcons()"
+                />
+                <div class="add-task-input-buttons">
+                  <img
+                    src="../assets/icons/add-subtask.png"
+                    alt="add subtask icon"
+                    id="add-subtask-img"
+                  />
+                  <img
+                    src="../assets/icons/cancel-subtask.png"
+                    alt="plus icon"
+                    id="cancel-subtask-img"
+                    onclick="cancelInputSubtask()"
+                  />
+                  <img
+                    src="../assets/icons/submit-subtask.png"
+                    alt="submit subtask icon"
+                    id="submit-subtask-img"
+                    onclick="submitInputSubtask()"
+                  />
+                </div>
+              </div>
+              <ul
+                class="subtasks-list"
+                id="subtasks-list"
+              ></ul>
+            </div>
+          </div>
+        </div>
+        <div class="add-task-footer">
+          <div class="required-div">
+            <span class="required-marker">*</span>This field is required
+          </div>
+          <div class="add-task-buttons-container">
+            <button
+              class="add-task-cancel-button"
+              onclick="clearInputs()"
+            >
+              Cancel
+            </button>
+            <div
+              class="add-task-submit-button"
+              onclick="createNewTask()"
+            >
+              <span>Create Task</span>
+              <img
+                src="../assets/icons/check.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <span
+          id="add-task-error"
+          style="color: red"
+        ></span>
+        <div
+          id="info-toast"
+          class="hidden"
+        >
+          <p id="infoText"></p>
+          <img
+            src="../assets/icons/board.png"
+            width="30px"
+            height="30px"
+            alt="task icon"
+          />
+        </div>
+
+        <!-- <div class="form-container title-container">
+              <div
+                for="title"
+                class="add-task-labels"
+              >
+                Title<span class="required-marker">*</span>
+              </div>
+              <input
+                type="text"
+                class="add-task-input-title"
+                id="input-title"
+                name="title"
+                placeholder="Enter a title"
+              />
+            </div>
+            <div class="form-container description-container">
+              <div
+                for="description"
+                class="add-task-labels"
+              >
+                Description
+              </div>
+              <textarea
+                type="text"
+                class="add-task-input-description"
+                id="input-description"
+                name="description"
+                rows="4"
+                placeholder="Enter a description"
+              ></textarea>
+            </div>
+            <div class="form-container assigned-to-container">
+              <div
+                for="assigned to"
+                class="add-task-labels"
+              >
+                Assigned to
+              </div>
               <select
                 id="input-assigned-to"
                 class="add-task-select"
@@ -788,7 +1030,7 @@
             height="30px"
             alt="task icon"
           />
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -850,6 +1092,7 @@
     </footer>
     <script src="../js/add-task.js"></script>
     <script src="../js/board.js"></script>
+    <script src="../js/board-add-task.js"></script>
     <script src="../js/board-single-task.js"></script>
     <script src="../js/create-HTML.js"></script>
 
