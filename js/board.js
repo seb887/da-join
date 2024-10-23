@@ -45,7 +45,6 @@ async function loadContactsFromFirebase() {
   } else {
     contacts.length = 0;
     pushDataFromFirebaseToArr(contactsFromFirebase, contacts);
-    // console.log('contacts:', contacts);
   }
 }
 
@@ -99,8 +98,6 @@ function filterData(board, tasksArr) {
 }
 
 function renderData(tasksArr, kanbanList, path = '') {
-  // console.log(tasksArr);
-
   if (tasksArr.length == 0) {
     kanbanList.innerHTML = `<div class="no-tasks-card">No tasks</div>`;
   } else {
@@ -147,8 +144,6 @@ function openAddTaskModal(kanbanBoard) {
 
   currentKanbanBoard = kanbanBoard;
   modalSlideInOrOut('add-task-modal-card');
-
-  // addTaskModal.innerHTML = createAddTaskModalHTML();
 }
 
 function closeAddTaskModal() {
@@ -156,23 +151,8 @@ function closeAddTaskModal() {
   setTimeout(() => {
     addTaskModal.style.display = 'none';
   }, 250);
-  // addTaskModal.style.display = 'none';
   clearInputs();
 }
-
-// function checkTaskModalSubtasks(task) {
-//   if (task.data.subtasks && task.data.subtasks.length > 0) {
-//     return `
-//     <div class="task-modal-card-subtasks" id="task-modal-card-subtasks">
-//       Subtasks:
-//       <div class="task-modal-card-subtasks-list" id="task-modal-card-subtasks-list" >
-//         ${renderSubtasksModal(task)}
-//       </div>
-//   </div>`;
-//   } else {
-//     return '';
-//   }
-// }
 
 function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
@@ -249,18 +229,16 @@ function removeHighlight(id) {
 }
 
 function searchTask() {
-  clearKanbanLists(); // Leert den Content Bereich
+  clearKanbanLists();
   controlVisibilityInputClearBtn();
 
   let inputText = searchInput.value.toLowerCase();
-
-  console.log(tasks);
 
   const filteredData = tasks.filter(
     (element) =>
       element.data.title.toLowerCase().includes(inputText) ||
       element.data.description.toLowerCase().includes(inputText)
-  ); // Filtert das Arr nach der Eingabe im Input
+  );
 
   renderKanbanLists(filteredData);
 }
@@ -310,17 +288,21 @@ async function renderAssignedToInCard(taskId, task, path = '') {
     return;
   } else {
     task.data.assignedTo.forEach((assignedContact, index) => {
-      if(index <= 2){
+      if (index <= 2) {
         card.innerHTML += `
         <div style="background-color:${assignedContact.color}" id="${
-        assignedContact.id + '-cpb'
-      }" class="card-profile-badge-3">${assignedContact.initials}</div>
-        `}
-      else if(index == 3){card.innerHTML += `
+          assignedContact.id + '-cpb'
+        }" class="card-profile-badge-3">${assignedContact.initials}</div>
+        `;
+      } else if (index == 3) {
+        card.innerHTML += `
         <div style="background-color:gray" id="${
-        assignedContact.id + '-cpb'
-      }" class="card-profile-badge-3">+ ${task.data.assignedTo.length - 3}</div>
-        `;}
+          assignedContact.id + '-cpb'
+        }" class="card-profile-badge-3">+ ${
+          task.data.assignedTo.length - 3
+        }</div>
+        `;
+      }
     });
   }
 }
@@ -372,32 +354,28 @@ async function listContactsToAssignedToinBoard() {
 
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
-  const container = document.getElementById('task-modal-card')
-  console.log('fire');
-  
-  container.addEventListener('click',(e) =>{
-    console.log('clicked');
-  })
+  const container = document.getElementById('task-modal-card');
+
+  container.addEventListener('click', (e) => {});
   if (contactList.style.display == 'flex') {
     closeDropdownMenu(contactList);
   } else {
-    openDropdownMenu(contactList)
+    openDropdownMenu(contactList);
   }
 }
 
-function closeDropdownMenu(contactList){
+function closeDropdownMenu(contactList) {
   contactList.style.display = 'none';
-    document.getElementById('searchContact').placeholder =
-      'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
+  document.getElementById('searchContact').placeholder =
+    'Select contacts to assign';
+  document.getElementById('arrowAssignTo').src =
+    '../assets/icons/arrow-down.png';
 }
 
-function openDropdownMenu(contactList){
+function openDropdownMenu(contactList) {
   contactList.style.display = 'flex';
   document.getElementById('searchContact').placeholder = '';
-  document.getElementById('arrowAssignTo').src =
-    '../assets/icons/arrow-up.png';
+  document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
 }
 
 function checkIfAnimationActiveBoard() {

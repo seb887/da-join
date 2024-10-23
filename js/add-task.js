@@ -63,7 +63,6 @@ function createNewTask() {
     assignedTo: matches,
   };
 
-  console.log(newTask);
   checkInputs(newTask);
 }
 
@@ -158,10 +157,8 @@ function styleNoPrio(noPrio) {
 function controlSubtaskIcons() {
   if (inputSubtask.value.length > 0) {
     // if (inputSubtask.value.length > 0) {
-    console.log('show subtasks icons');
     showSubtaskIcons();
   } else {
-    console.log('hide subtasks icons');
     hideSubtaskIcons();
   }
 }

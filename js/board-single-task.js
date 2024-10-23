@@ -33,7 +33,6 @@ function getDataForSingleTask(event) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
-      console.log('SINGLE TASK ID:', element.id);
     }
   }
 }
@@ -130,7 +129,6 @@ async function setSubtaskStatus(taskId, subtaskId) {
 
 async function deleteTask(id) {
   const taskId = id;
-  console.log('DELETE TASK ID:', taskId);
 
   await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
@@ -141,8 +139,6 @@ async function deleteTask(id) {
 }
 
 function openEditTaskModal(taskId) {
-  console.log('OPEN EDIT TASK ID:', taskId);
-
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
 
@@ -154,8 +150,13 @@ function openEditTaskModal(taskId) {
       editInputDescription.value = element.data.description;
       editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
-      // controlPrioButtonStyle();
-      subtasks = element.data.subtasks;
+
+      if (element.data.subtasks == undefined) {
+        subtasks = [];
+      } else {
+        subtasks = element.data.subtasks;
+      }
+
       renderSubtasksList(taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
@@ -163,15 +164,13 @@ function openEditTaskModal(taskId) {
 }
 
 async function editTask(taskId) {
-  console.log('EDITED TASK ID', taskId);
-  console.log('-----------------------------------');
-
   for (let element of tasks) {
     if (taskId == element.id) {
       element.data.title = editInputTitle.value;
       element.data.description = editInputDescription.value;
       element.data.date = editInputDate.value;
       element.data.prio = currentPrio;
+      element.data.subtasks = subtasks;
       element.data.assignedTo = getSelectedContactsEditTask();
 
       await updateTaskInFirebase(element.id, element.data);
