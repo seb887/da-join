@@ -3,12 +3,15 @@ const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatab
 
 const monthString = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
 
+
+
 function initSummary() {
     setSummaries();
     greeting();
     setActiveUserInitials();
     checkFirstLogin();
 }
+
 
 function greeting() {
     let myDate = new Date();

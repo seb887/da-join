@@ -1,4 +1,32 @@
-CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'
 
 let contactsArray = [];
 let animationActive = false;
@@ -265,7 +293,7 @@ async function setActiveUserInitials() {
     let user = await response.json();
     let activeUserName = user.activeName
     let initials = await generateInitials(activeUserName);
-    document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
+    document.getElementById('user-initials').innerHTML = `&lt;p>${initials}&lt;/p>`
 }
 
 function goBackToList() {
@@ -289,98 +317,120 @@ function goBackToList() {
 
 function contactContent(index) {
     return `
-        <div onclick ="openContact('${index}')" class="single-contact">
-        <div id="initialsContainer${index}" class="initials-container">
-            <span id="initials${index}"></span>
-          </div>
-          <div class="contact-data">
-            <h4 id="contactName${index}"></h4>
-            <a href="#" id="contactMail${index}"></a>
-          </div>
-        </div>
+        &lt;div onclick ="openContact('${index}')" class="single-contact">
+        &lt;div id="initialsContainer${index}" class="initials-container">
+            &lt;span id="initials${index}">&lt;/span>
+          &lt;/div>
+          &lt;div class="contact-data">
+            &lt;h4 id="contactName${index}">&lt;/h4>
+            &lt;a href="#" id="contactMail${index}">&lt;/a>
+          &lt;/div>
+        &lt;/div>
     `;
 }
 
 function nameHeaderContent(letter) {
     return`
-        <div class="nameHeader" id ="${letter}">
-            <h3>${letter}</h3>
-        </div>
-        <div class="seperator">
-            <div class="line">
-            </div>
-        </div>
+        &lt;div class="nameHeader" id ="${letter}">
+            &lt;h3>${letter}&lt;/h3>
+        &lt;/div>
+        &lt;div class="seperator">
+            &lt;div class="line">
+            &lt;/div>
+        &lt;/div>
     `
 }
 
 function addNewContactsContent () {
     return `
-        <div class="add-new-contacts">
-            <button onclick="openAndCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
-        </div>
+        &lt;div class="add-new-contacts">
+            &lt;button onclick="openAndCloseAddContact()">Add new contact&lt;img src="../assets/icons/person_add.png">&lt;/img>&lt;/button>
+        &lt;/div>
     `
 }
 
 function addContactCardContent(){
     return ` 
-        <div class="modal-header-logo-left">
-          <div class="logo-modal">
-            <img src="../assets/img/logo-white.png" alt="logo-white">
-          </div>
-          <div class="header-modal">
-            <h1>Add Contact</h1>
-            <h2>Tasks are better with a team!</h2>
-            <div class="header-seperator"></div>
-          </div>
-        </div>
-        <div class="add-contact-modal-right">   
-          <div class="add-contact-modal-person">
-            <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
-          </div>
-          <div class="input-field-right">
-              <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
-                <div class="add-contact-button-bottom">
-                  <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
-                  <button type="submit">Create contact</button>
-                </div>
-              </form>
-          </div>
-        </div>
+        &lt;div class="modal-header-logo-left">
+          &lt;div class="logo-modal">
+            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
+          &lt;/div>
+          &lt;div class="header-modal">
+            &lt;h1>Add Contact&lt;/h1>
+            &lt;h2>Tasks are better with a team!&lt;/h2>
+            &lt;div class="header-seperator">&lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div class="add-contact-modal-right">   
+          &lt;div class="add-contact-modal-person">
+            &lt;img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
+          &lt;/div>
+          &lt;div class="input-field-right">
+              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
+              &lt;form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
+                  &lt;input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
+                  &lt;input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
+                  &lt;input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
+                &lt;div class="add-contact-button-bottom">
+                  &lt;button type="button" onclick="openAndCloseAddContact()">Cancel&lt;/button>
+                  &lt;button type="submit">Create contact&lt;/button>
+                &lt;/div>
+              &lt;/form>
+          &lt;/div>
+        &lt;/div>
     `
 }
 
 function editContactCardContent(contact, initials, index){
     return `
-        <div class="modal-header-logo-left">
-          <div class="logo-modal">
-            <img src="../assets/img/logo-white.png" alt="logo-white">
-          </div>
-          <div class="header-modal">
-            <h1>Edit Contact</h1>
-            <h2></h2>
-            <div class="header-seperator"></div>
-          </div>
-        </div>
-        <div class="add-contact-modal-right">   
-          <div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
-          <span id="initialsArticle">${initials}</span>
-        </div>
-          <div class="input-field-right">
-              <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
-                  <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
-                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
-                <div class="add-contact-button-bottom">
-                  <button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete</button>
-                  <button style="justify-content: center; width: 111px;" type="submit">Save</button>
-                </div>
-              </form>
-          </div>
-        </div>
+        &lt;div class="modal-header-logo-left">
+          &lt;div class="logo-modal">
+            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
+          &lt;/div>
+          &lt;div class="header-modal">
+            &lt;h1>Edit Contact&lt;/h1>
+            &lt;h2>&lt;/h2>
+            &lt;div class="header-seperator">&lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div class="add-contact-modal-right">   
+          &lt;div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
+          &lt;span id="initialsArticle">${initials}&lt;/span>
+        &lt;/div>
+          &lt;div class="input-field-right">
+              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
+              &lt;form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
+                  &lt;input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
+                  &lt;input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
+                  &lt;input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
+                &lt;div class="add-contact-button-bottom">
+                  &lt;button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete&lt;/button>
+                  &lt;button style="justify-content: center; width: 111px;" type="submit">Save&lt;/button>
+                &lt;/div>
+              &lt;/form>
+          &lt;/div>
+        &lt;/div>
     `
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#setDataOfContact">setDataOfContact</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 23 2024 20:54:05 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
