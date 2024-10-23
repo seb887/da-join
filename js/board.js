@@ -366,7 +366,7 @@ function dropDownContactsEditTask() {
 
 function closeDropdownMenu(contactList) {
   contactList.style.display = 'none';
-  document.getElementById('searchContact').placeholder =
+  document.getElementById('searchContact-board').placeholder =
     'Select contacts to assign';
   document.getElementById('arrowAssignTo').src =
     '../assets/icons/arrow-down.png';
@@ -374,7 +374,7 @@ function closeDropdownMenu(contactList) {
 
 function openDropdownMenu(contactList) {
   contactList.style.display = 'flex';
-  document.getElementById('searchContact').placeholder = '';
+  document.getElementById('searchContact-board').placeholder = '';
   document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
 }
 
