@@ -286,6 +286,7 @@
             id="task-modal-card-category"
           ></div>
           <img
+          class="close-task-modal"
             src="../assets/icons/cancel.png"
             alt="cancel icon"
             onclick="closeTaskModal()"
@@ -559,9 +560,13 @@
         id="add-task-modal-card"
         onclick="event.stopPropagation()"
       >
+      <div class="task-modal-card-header-container">
         <header class="add-task-modal-header">
           <h1>Add Task</h1>
         </header>
+        <img class="close-task-modal" src="../assets/icons/cancel.png" alt="cancel icon" onclick="closeTaskModal()">
+      </div>
+
         <div class="add-task-form">
           <div class="left-container">
             <div class="form-container title-container">
@@ -766,7 +771,7 @@
             </div>
           </div>
         </div>
-        <div class="add-task-footer">
+        <div class="add-task-footer-board">
           <div class="required-div">
             <span class="required-marker">*</span>This field is required
           </div>

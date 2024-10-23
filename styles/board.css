@@ -122,7 +122,6 @@
   max-width: 1300px;
   top: calc(200px + 96px);
   left: 232px;
-  overflow-y: scroll;
 }
 
 .nav-links-board {
@@ -340,7 +339,7 @@
   width: 100%;
 }
 
-.task-modal-card-header-container img {
+.close-task-modal {
   width: 14px;
   height: 14px;
   cursor: pointer;
@@ -478,17 +477,28 @@
 }
 
 .add-task-modal-card {
-  padding: 64px 74px;
+  display: flex;
+  padding: 0px 74px;
+  flex-direction: column;
   width: 1116px;
+  justify-content: center;
   height: 870px;
   border-radius: 30px;
   background-color: white;
+  gap: 24px;
+}
+
+.add-task-footer-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 48px;
+    width: 100%;
 }
 
 .add-task-modal-header {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
   /* padding: 80px 64px 55px 64px; */
   /* width: calc(100vw - 232px); */
   /* max-width: 1208px; */
@@ -572,7 +582,7 @@
 }
 /* Responsive */
 
-/* @media (max-width: 1550px) {
+ @media (max-width: 1550px) {
   .board-content-section {
     width: 900px;
   }
@@ -594,7 +604,7 @@
   .add-task-modal-card {
     height: 700px;
   }
-} */
+}
 
 @media (max-width: 1150px) {
   .board-content-section {
