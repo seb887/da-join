@@ -659,6 +659,23 @@
 /* Responsive */
 
  @media (max-width: 1550px) {
+  .task-modal-card {
+    padding: 38px 30px;
+    gap: 16px;
+    width: 475px;
+    max-height: 595px;
+    font-size: 16px;
+}
+.task-modal-edit-card {
+  padding: 38px 30px;
+  gap: 16px;
+  width: 475px;
+  max-height: 595px;
+  font-size: 16px;
+}
+  .add-task-input-description-board {
+    height: 65px;
+  }
   .board-content-section {
     width: 900px;
   }
@@ -679,7 +696,7 @@
   }
   .add-task-modal-card {
     width: 950px;
-    height: 500px;
+    height: 595px;
     gap: 8px;
   }
   .prio-buttons-board {
