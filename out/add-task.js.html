@@ -1,4 +1,32 @@
-// DOM ELEMENTS
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add-task.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add-task.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// DOM ELEMENTS
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
 const inputDate = document.getElementById('input-date');
@@ -239,7 +267,7 @@ function renderSubtasksList(taskId) {
   if (subtasks == undefined) {
     return;
   } else {
-    for (let i = 0; i < subtasks.length; i++) {
+    for (let i = 0; i &lt; subtasks.length; i++) {
       subtasksList.innerHTML += createSubtasksListHTML(i, taskId);
     }
   }
@@ -247,33 +275,33 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      <li id="subtask-${index}" class="subtasks">
-        <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
-        <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        <div class="subtask-buttons">
-          <img
+      &lt;li id="subtask-${index}" class="subtasks">
+        &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
+        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
+        &lt;div class="subtask-buttons">
+          &lt;img
             src="../assets/icons/edit-subtask.png"
             alt="edit icon"
             id="edit-subtask-${index}"
             class="edit-subtask"
             onclick="editSingleSubtask('${id}', '${index}')"
           />
-           <img
+           &lt;img
             src="../assets/icons/submit-subtask.png"
             alt="submit icon"
             id="submit-edit-subtask-${index}"
             class="submit-edit-subtask"
             onclick="submitEditedSingleSubtask('${id}', '${index}')"
           />
-          <img
+          &lt;img
             src="../assets/icons/delete-subtask.png"
             alt="trash icon"
             id="delete-subtask-${index}"
             class="delete-subtask"
             onclick="deleteSingleSubtask('${id}', '${index}')"
           />
-        </div>
-      </li>
+        &lt;/div>
+      &lt;/li>
     `;
 }
 
@@ -518,38 +546,61 @@ window.onscroll = function (ev) {
 
 function assignedToContactsContent(contact, id, index) {
   return `
-  <label for ="${contact['id']}cb">
-      <div class ="add-task-contact-list">
-        <div>
-          <div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}</div>
-          <div>${contact['name']}</div>
-        </div>
-        <input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
-      </div>
-  </label>
+  &lt;label for ="${contact['id']}cb">
+      &lt;div class ="add-task-contact-list">
+        &lt;div>
+          &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
+          &lt;div>${contact['name']}&lt;/div>
+        &lt;/div>
+        &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
+      &lt;/div>
+  &lt;/label>
     `;
 }
 
 function assignedToContactsContentFilter(contact, id) {
   return `
-  <label for ="${id}cb">
-      <div class ="add-task-contact-list">
-        <div>
-          <div id= "${id}-container" class= "initial-div">${contact['initials']}</div>
-          <div>${contact['name']}</div>
-        </div>
-        <input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${id}" id="${id}cb" type ="checkbox">
-      </div>
-  </label>
+  &lt;label for ="${id}cb">
+      &lt;div class ="add-task-contact-list">
+        &lt;div>
+          &lt;div id= "${id}-container" class= "initial-div">${contact['initials']}&lt;/div>
+          &lt;div>${contact['name']}&lt;/div>
+        &lt;/div>
+        &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${id}" id="${id}cb" type ="checkbox">
+      &lt;/div>
+  &lt;/label>
     `;
 }
 
 function assignedInitialContent(match, index) {
   return `
-  <div id="addContactList${index}" class ="assigned-contacts-initial-container">
-      <div>
-        <div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}</div>
-      </div>
-  </div>
+  &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
+      &lt;div>
+        &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
+      &lt;/div>
+  &lt;/div>
 `;
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 23 2024 21:49:33 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
