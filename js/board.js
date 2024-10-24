@@ -158,6 +158,11 @@ function closeAddTaskModal() {
   clearInputs();
 }
 
+function cancelAddTask() {
+  clearInputs();
+  closeAddTaskModal();
+}
+
 function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
