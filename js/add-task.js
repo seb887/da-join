@@ -149,7 +149,7 @@ function setPrio(prio) {
  * This function styles the selected button and calls the setNoPrio function
  * 
  * @param {string} prio - This is the priority string 
- * @param {string}} color - This is the defined background color for the prio button
+ * @param {string} color - This is the defined background color for the prio button
  */
 function stylePrioButton(prio, color) {
   const button = document.getElementById(`button-${prio}`);
@@ -182,6 +182,11 @@ function setNoPrio(prio) {
   styleNoPrio(noPrio);
 }
 
+
+/**
+ * 
+ * @param {array} noPrio - 
+ */
 function styleNoPrio(noPrio) {
   for (let element of noPrio) {
     const noPrioButton = document.getElementById(`button-${element}`);
