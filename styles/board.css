@@ -434,7 +434,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 42px;
+  min-width: 42px;
   height: 42px;
   border-radius: 100%;
   background-color: #416bb3;
@@ -611,6 +611,7 @@
 
 .task-modal-contact-name {
   font-size: 19px;
+  overflow-wrap: anywhere;
 }
 
 .prio-buttons-board, .prio-buttons-board-edit {
@@ -675,12 +676,22 @@
   background-color: #d1d1d1;
 }
 
+#edit-button-low-img, #edit-button-urgent-img {
+  width: 20px;
+  height: 14.5px;
+}
+
+#edit-button-medium-img {
+  width: 20px;
+  height: 7.5px;
+}
+
 /* Responsive */
 
  @media (max-width: 1500px) {
   .no-tasks-card {
-  width: 180px;
-}
+    width: 180px;
+  }
   .task-modal-card {
     padding: 38px 30px;
     gap: 16px;

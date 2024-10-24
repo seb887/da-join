@@ -418,7 +418,7 @@ body {
   overflow-y: scroll;
   overflow-wrap: anywhere;
   max-height: 250px;
-  width: 435px;
+  width: 100%;
   /* justify-content: space-evenly; */
   flex-direction: column;
   background-color: white;
