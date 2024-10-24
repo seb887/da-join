@@ -836,6 +836,9 @@
 }
 
 @media (max-width: 890px) {
+  .add-task-button span {
+    display: none;
+  }
   .board-content-section {
     width: 100%;
     display: flex;
@@ -850,16 +853,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--bg-primary);
-    width: 98%;
+    width: 90%; /* Definiere eine Breite für den Container */
+    margin: 0 auto; /* Zentriert das Element horizontal */
     height: unset;
     position: relative;
     top: 30px;
-    margin-left: unset;
   h1 {
     font-size: 47px;
   }
   .input-container {
+    position: absolute;
+    top: 140px;
+    left: 0px;
     width: 98%;
     height: 45px;
     input {
@@ -871,9 +876,8 @@
     }
   }
   .add-task-button {
-    width: 140px;
-    height: 45px;
-    font-size: 18px;
+    width: 40px;
+    height: 40px;
   }
   .no-tasks-card {
     width: 130px;
@@ -890,14 +894,15 @@
     font-size: 27px;
     align-items: center;
   }
-  .kanban-container {
-    min-width: 396px;
-  }
   .kanban-add-task-buttons {
     width: 20px;
   }
   .card-label-container {
     font-size: 16px;
+  }
+  .board-header {
+    padding: 80px 0px 55px 0px;
+    width: 100%;
   }
 }
 
