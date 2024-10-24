@@ -161,7 +161,12 @@
 }
 
 .kanban-add-task-buttons {
+  transition: filter 200ms ease-in-out;
+}
+
+.kanban-add-task-buttons:hover {
   cursor: pointer;
+  filter: invert(68%) sepia(50%) saturate(7173%) hue-rotate(161deg) brightness(94%) contrast(103%);
 }
 
 .kanban-list {
@@ -369,6 +374,11 @@
 .task-modal-card-title {
   font-size: 61px;
   font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.task-modal-card-description {
+  overflow-wrap: anywhere;
 }
 
 .task-modal-card-date,
@@ -688,7 +698,7 @@
 
 /* Responsive */
 
- @media (max-width: 1500px) {
+ @media (max-width: 1450px) {
   .no-tasks-card {
     width: 180px;
   }
