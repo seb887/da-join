@@ -613,7 +613,7 @@
   font-size: 19px;
 }
 
-.prio-buttons-board {
+.prio-buttons-board, .prio-buttons-board-edit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -669,9 +669,15 @@
   margin-left: 222px;
 }
 
+.seperator-board {
+  width: 2px;
+  height: 424px;
+  background-color: #d1d1d1;
+}
+
 /* Responsive */
 
- @media (max-width: 1550px) {
+ @media (max-width: 1500px) {
   .no-tasks-card {
   width: 180px;
 }
@@ -693,10 +699,10 @@
     height: 65px;
   }
   .board-content-section {
-    width: 900px;
+    width: unset;
   }
   .kanban-card {
-    width: 180px;
+    width: 190px;
     gap: 5px;
   }
   .kanban-list {
@@ -717,6 +723,10 @@
   .prio-buttons-board {
     width: 85px;
     font-size: 12px;
+  }
+  .prio-buttons-board-edit {
+    width: 115px;
+    font-size: 16px;
   }
   .add-task-form-board {
     justify-content: center;
@@ -739,9 +749,16 @@
   #searchContact-board {
     font-size: 16px;
   }
+  .seperator-board {
+    height: 390px;
+    width: 0.5px;
+  }
 }
 
 @media (max-width: 1150px) {
+  .seperator-board {
+    height: 380px;
+  }
   .board-content-section {
     width: unset;
   }
@@ -791,6 +808,9 @@
     }
     .card-label-container {
       font-size: 14px;
+    }
+    .add-task-modal-card {
+      width: 800px;
     }
 }
 
