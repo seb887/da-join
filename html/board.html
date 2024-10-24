@@ -286,7 +286,7 @@
             id="task-modal-card-category"
           ></div>
           <img
-          class="close-task-modal"
+            class="close-task-modal"
             src="../assets/icons/cancel.png"
             alt="cancel icon"
             onclick="closeTaskModal()"
@@ -361,9 +361,16 @@
         id="task-modal-edit-card"
         onclick="event.stopPropagation()"
       >
-      <div class="task-modal-edit-card-close" onclick="closeTaskModal(); closeDropdownMenu(inputAssignedTo)">
-<img class="close-task-modal" src="../assets/icons/cancel.png" alt="cancel icon">
-      </div>
+        <div
+          class="task-modal-edit-card-close"
+          onclick="closeTaskModal(); closeDropdownMenu(inputAssignedTo)"
+        >
+          <img
+            class="close-task-modal"
+            src="../assets/icons/cancel.png"
+            alt="cancel icon"
+          />
+        </div>
         <div class="form-container title-container">
           <div
             for="title"
@@ -419,38 +426,38 @@
           <div class="prio-buttons-container">
             <button
               class="prio-buttons"
-              id="button-urgent"
+              id="edit-button-urgent"
               onclick="setPrio('urgent')"
             >
               Urgent
               <img
                 src="../assets/icons/prio-urgent.png"
                 alt="prio urgent icon"
-                id="button-urgent-img"
+                id="edit-button-urgent-img"
               />
             </button>
             <button
               class="prio-buttons"
-              id="button-medium"
+              id="edit-button-medium"
               onclick="setPrio('medium')"
             >
               Medium
               <img
                 src="../assets/icons/prio-medium.png"
                 alt="prio medium icon"
-                id="button-medium-img"
+                id="edit-button-medium-img"
               />
             </button>
             <button
               class="prio-buttons"
-              id="button-low"
+              id="edit-button-low"
               onclick="setPrio('low')"
             >
               Low
               <img
                 src="../assets/icons/prio-low.png"
                 alt="prio low icon"
-                id="button-low-img"
+                id="edit-button-low-img"
               />
             </button>
           </div>
@@ -507,7 +514,7 @@
               name="subtasks"
               placeholder="Add new subtask"
               class="add-task-input-subtasks-board"
-              id="input-subtask"
+              id="edit-input-subtask"
               oninput="controlSubtaskIcons()"
             />
             <div class="add-task-input-buttons">
@@ -563,12 +570,17 @@
         id="add-task-modal-card"
         onclick="event.stopPropagation()"
       >
-      <div class="task-modal-card-header-container">
-        <header class="add-task-modal-header">
-          <h1>Add Task</h1>
-        </header>
-        <img class="close-task-modal" src="../assets/icons/cancel.png" alt="cancel icon" onclick="closeAddTaskModal()">
-      </div>
+        <div class="task-modal-card-header-container">
+          <header class="add-task-modal-header">
+            <h1>Add Task</h1>
+          </header>
+          <img
+            class="close-task-modal"
+            src="../assets/icons/cancel.png"
+            alt="cancel icon"
+            onclick="closeAddTaskModal()"
+          />
+        </div>
 
         <div class="add-task-form-board">
           <div class="left-container-board">

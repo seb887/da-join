@@ -43,10 +43,9 @@ async function renderAddTask() {
   setActiveUserInitials();
 }
 
-
 /**
  * This is an asynchronous function that sends a new task to the database and at the end renders the board.
- * 
+ *
  * @param {object} newTask - This is the object that should be saved to the database
  */
 async function saveTaskToFirebase(newTask) {
@@ -58,9 +57,9 @@ async function saveTaskToFirebase(newTask) {
   renderBoard();
 }
 /**
- * 
+ *
  * This function creates a new task object with several properties and calls the checkInputs function with the new object.
- * 
+ *
  */
 function createNewTask() {
   let newTask = {
@@ -77,12 +76,11 @@ function createNewTask() {
   checkInputs(newTask);
 }
 
-
 /**
- * This function checks the input fields for the title and category. 
+ * This function checks the input fields for the title and category.
  * If one of the inputfields is empty a textmessage appears to insert a title or select a task.
  * If the required fields are filled the all inputfields are cleared and the object will be saved to the database.
- * 
+ *
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  */
 function checkInputs(taskObj) {
@@ -104,11 +102,10 @@ function checkInputs(taskObj) {
   }
 }
 
-
 /**
- * 
+ *
  *This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
- * 
+ *
  */
 function clearInputs() {
   inputTitle.value = '';
@@ -125,47 +122,68 @@ function clearInputs() {
 
 /**
  * This function checks the prio string parameter if it is urgent, medium or low and calls the stylePrioButton function with the defined string and color
- * 
- * @param {string} prio - This is the prio status transmitted as string 
+ *
+ * @param {string} prio - This is the prio status transmitted as string
  */
 function setPrio(prio) {
   switch (prio) {
     case 'urgent':
       currentPrio = 'urgent';
-      stylePrioButton('urgent', '#ff3d00');
+      checkIfEditIsOnPrio('urgent', '#ff3d00');
       break;
     case 'medium':
       currentPrio = 'medium';
-      stylePrioButton('medium', '#FFA800');
+      checkIfEditIsOnPrio('medium', '#FFA800');
       break;
     case 'low':
       currentPrio = 'low';
-      stylePrioButton('low', '#7ae229');
+      checkIfEditIsOnPrio('low', '#7ae229');
       break;
   }
 }
 
 /**
- * This function styles the selected button and calls the setNoPrio function
- * 
- * @param {string} prio - This is the priority string 
+ * This function check if edit is on and calls the stylePrioButton function and setNoPrio function
+ *
+ * @param {string} prio - This is the priority string
  * @param {string}} color - This is the defined background color for the prio button
  */
-function stylePrioButton(prio, color) {
-  const button = document.getElementById(`button-${prio}`);
-  const buttonImg = document.getElementById(`button-${prio}-img`);
+function checkIfEditIsOnPrio(prio, color) {
+  if (isEditOn) {
+    console.log('edit is on');
+    const button = document.getElementById(`edit-button-${prio}`);
+    const buttonImg = document.getElementById(`edit-button-${prio}-img`);
 
+    stylePrioButton(prio, color, button, buttonImg);
+    setNoPrio(prio);
+  } else {
+    console.log('edit is off');
+    const button = document.getElementById(`button-${prio}`);
+    const buttonImg = document.getElementById(`button-${prio}-img`);
+
+    stylePrioButton(prio, color, button, buttonImg);
+    setNoPrio(prio);
+  }
+}
+
+/**
+ * This function styles the selected button
+ *
+ * @param {string} prio - This is the priority string
+ * @param {string}} color - This is the defined background color for the prio button
+ * @param {string}} button - This is the prio button
+ * @param {string}} buttonImg - This is the prio button img
+ */
+function stylePrioButton(prio, color, button, buttonImg) {
   button.style.background = color;
   button.style.color = 'white';
   button.style.fontWeight = 'bold';
   buttonImg.src = `../assets/icons/prio-${prio}-white.png`;
-
-  setNoPrio(prio);
 }
 
 /**
  * This function restets the unselected prio button to default value
- * 
+ *
  * @param {string} prio - This is actual prio status
  */
 function setNoPrio(prio) {
@@ -179,18 +197,32 @@ function setNoPrio(prio) {
     noPrio = ['urgent', 'medium'];
   }
 
-  styleNoPrio(noPrio);
+  checkIfEditIsOnNoPrio(noPrio);
 }
 
-function styleNoPrio(noPrio) {
+function checkIfEditIsOnNoPrio(noPrio) {
   for (let element of noPrio) {
-    const noPrioButton = document.getElementById(`button-${element}`);
-    const noPrioButtonImg = document.getElementById(`button-${element}-img`);
-    noPrioButton.style.background = 'white';
-    noPrioButton.style.color = 'black';
-    noPrioButton.style.fontWeight = 'normal';
-    noPrioButtonImg.src = `../assets/icons/prio-${element}.png`;
+    if (isEditOn) {
+      const noPrioButton = document.getElementById(`edit-button-${element}`);
+      const noPrioButtonImg = document.getElementById(
+        `edit-button-${element}-img`
+      );
+
+      styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
+    } else {
+      const noPrioButton = document.getElementById(`button-${element}`);
+      const noPrioButtonImg = document.getElementById(`button-${element}-img`);
+
+      styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
+    }
   }
+}
+
+function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
+  noPrioButton.style.background = 'white';
+  noPrioButton.style.color = 'black';
+  noPrioButton.style.fontWeight = 'normal';
+  noPrioButtonImg.src = `../assets/icons/prio-${noPrioElement}.png`;
 }
 
 // SUBTASKS
