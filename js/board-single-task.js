@@ -150,6 +150,7 @@ function openEditTaskModal(taskId) {
       editInputDescription.value = element.data.description;
       editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
+      console.log(currentPrio);
 
       if (element.data.subtasks == undefined) {
         subtasks = [];
@@ -157,6 +158,7 @@ function openEditTaskModal(taskId) {
         subtasks = element.data.subtasks;
       }
 
+      setPrio(currentPrio);
       renderSubtasksList(taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
