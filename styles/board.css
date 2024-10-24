@@ -230,6 +230,8 @@
 }
 
 .subtask-progress-bar-container {
+  width: 100%; /* Container ist immer 100% breit */
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -238,7 +240,7 @@
 .subtask-progress-bar {
   /* padding: 16px 0; */
   border-radius: 8px;
-  width: 128px;
+  width: 100px;
   height: 8px;
   background-color: #f4f4f4;
 }
@@ -696,6 +698,10 @@
   height: 7.5px;
 }
 
+:root {
+  --progress-bar-full: 128px; /* Standardbreite */
+}
+
 /* Responsive */
 
  @media (max-width: 1450px) {
@@ -773,6 +779,9 @@
   .seperator-board {
     height: 390px;
     width: 0.5px;
+  }
+  .subtask-progress-bar-container {
+    gap: 10px;
   }
 }
 

@@ -168,9 +168,7 @@ function renderSubtaskProgressBar(task) {
     return `
       <div class="subtask-progress-bar-container">
         <div class="subtask-progress-bar">
-            <div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(
-              task
-            )}px"></div>
+            <div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(task)}%"></div>
         </div>
         ${calcSubtaskCounter(task)}
       </div>
@@ -194,7 +192,7 @@ function calcSubtaskCounter(task) {
 }
 
 function calcSubtaskProgressBar(task) {
-  let progressBarFull = 128;
+  let progressBarFull = 100;
   let progressBarDone = 0;
   let subtaskChecked = 0;
   let subtasksAll = task.data.subtasks.length;
