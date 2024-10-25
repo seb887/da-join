@@ -29,7 +29,4 @@ function boardCreateNewTask() {
     subtasks: subtasks,
     assignedTo: matches,
   };
-
-  console.log(newTask);
-  // checkInputs(newTask);
 }

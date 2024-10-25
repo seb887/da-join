@@ -150,14 +150,12 @@ function setPrio(prio) {
  */
 function checkIfEditIsOnPrio(prio, color) {
   if (isEditOn) {
-    console.log('edit is on');
     const button = document.getElementById(`edit-button-${prio}`);
     const buttonImg = document.getElementById(`edit-button-${prio}-img`);
 
     stylePrioButton(prio, color, button, buttonImg);
     setNoPrio(prio);
   } else {
-    console.log('edit is off');
     const button = document.getElementById(`button-${prio}`);
     const buttonImg = document.getElementById(`button-${prio}-img`);
 
@@ -228,8 +226,7 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  if (inputSubtask.value.length > 0) {
-    // if (inputSubtask.value.length > 0) {
+  if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
     showSubtaskIcons();
   } else {
     hideSubtaskIcons();
@@ -237,42 +234,68 @@ function controlSubtaskIcons() {
 }
 
 function showSubtaskIcons() {
-  addSubtasksImg.style.display = 'none';
-  submitSubtasksImg.style.display = 'flex';
-  cancelSubtasksImg.style.display = 'flex';
+  if (isEditOn) {
+    editAddSubtasksImg.style.display = 'none';
+    editSubmitSubtasksImg.style.display = 'flex';
+    editCancelSubtasksImg.style.display = 'flex';
+  } else {
+    addSubtasksImg.style.display = 'none';
+    submitSubtasksImg.style.display = 'flex';
+    cancelSubtasksImg.style.display = 'flex';
+  }
 }
 
 function hideSubtaskIcons() {
-  addSubtasksImg.style.display = 'flex';
-  submitSubtasksImg.style.display = 'none';
-  cancelSubtasksImg.style.display = 'none';
+  if (isEditOn) {
+    editAddSubtasksImg.style.display = 'flex';
+    editSubmitSubtasksImg.style.display = 'none';
+    editCancelSubtasksImg.style.display = 'none';
+  } else {
+    addSubtasksImg.style.display = 'flex';
+    submitSubtasksImg.style.display = 'none';
+    cancelSubtasksImg.style.display = 'none';
+  }
 }
 
 function cancelInputSubtask() {
-  inputSubtask.value = '';
+  if (isEditOn) {
+    editInputSubtask.value = '';
+  } else {
+    inputSubtask.value = '';
+  }
+
   controlSubtaskIcons();
 }
 
 function submitInputSubtask() {
   const subtaskObj = {
-    title: inputSubtask.value,
+    title: isEditOn ? editInputSubtask.value : inputSubtask.value,
     checked: false,
   };
 
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
+  editInputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasksList();
 }
 
 function renderSubtasksList(taskId) {
-  subtasksList.innerHTML = '';
+  let list = subtasksList;
+
+  if (isEditOn) {
+    list = editSubtasksList;
+  } else {
+    list = subtasksList;
+  }
+
+  list.innerHTML = '';
 
   if (subtasks == undefined) {
     return;
   } else {
     for (let i = 0; i < subtasks.length; i++) {
-      subtasksList.innerHTML += createSubtasksListHTML(i, taskId);
+      list.innerHTML += createSubtasksListHTML(i, taskId);
     }
   }
 }
