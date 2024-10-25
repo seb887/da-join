@@ -162,6 +162,7 @@
 
 .kanban-add-task-buttons {
   transition: filter 200ms ease-in-out;
+  width: 24px;
 }
 
 .kanban-add-task-buttons:hover {
@@ -230,6 +231,8 @@
 }
 
 .subtask-progress-bar-container {
+  width: 100%; /* Container ist immer 100% breit */
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -238,7 +241,7 @@
 .subtask-progress-bar {
   /* padding: 16px 0; */
   border-radius: 8px;
-  width: 128px;
+  width: 100px;
   height: 8px;
   background-color: #f4f4f4;
 }
@@ -774,6 +777,9 @@
     height: 390px;
     width: 0.5px;
   }
+  .subtask-progress-bar-container {
+    gap: 10px;
+  }
 }
 
 @media (max-width: 1150px) {
@@ -845,6 +851,7 @@
     gap: 12px;
     flex-direction: column;
     padding: 0px;
+    margin-top: 20px;
   }
   .kanban-list {
     height: unset;
@@ -863,9 +870,9 @@
   }
   .input-container {
     position: absolute;
-    top: 140px;
+    top: 150px;
     left: 0px;
-    width: 98%;
+    width: 100%;
     height: 45px;
     input {
       width: 100%;
@@ -880,17 +887,17 @@
     height: 40px;
   }
   .no-tasks-card {
-    width: 130px;
+    width: 100%;
   }
   .kanban-card {
-    width: 98%;
+    width: 100%;
     padding: 12px;
   }
   .kanban-list {
     min-width: 100%;
   }
   .kanban-headline {
-    width: 98%;
+    width: 100%;
     font-size: 27px;
     align-items: center;
   }
@@ -903,6 +910,18 @@
   .board-header {
     padding: 80px 0px 55px 0px;
     width: 100%;
+  }
+  .headline-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .subtask-progress-bar {
+    width: 100%;
+  }
+  .kanban-add-task-buttons {
+    width: 30px;
+    height: 30px;
   }
 }
 

@@ -3,6 +3,14 @@ const editInputTitle = document.getElementById('edit-input-title');
 const editInputDescription = document.getElementById('edit-input-description');
 const editInputDate = document.getElementById('edit-input-date');
 const editInputSubtask = document.getElementById('edit-input-subtask');
+const editAddSubtasksImg = document.getElementById('edit-add-subtask-img');
+const editSubmitSubtasksImg = document.getElementById(
+  'edit-submit-subtask-img'
+);
+const editCancelSubtasksImg = document.getElementById(
+  'edit-cancel-subtask-img'
+);
+
 const taskCategory = document.getElementById('task-modal-card-category');
 const taskTitle = document.getElementById('task-modal-card-title');
 const taskDescription = document.getElementById('task-modal-card-description');
@@ -146,6 +154,7 @@ function openEditTaskModal(taskId) {
   isEditOn = true;
 
   selectAllAssignedContacts(taskId);
+  hideSubtaskIcons();
 
   for (let element of tasks) {
     if (taskId == element.id) {
@@ -153,7 +162,6 @@ function openEditTaskModal(taskId) {
       editInputDescription.value = element.data.description;
       editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
-      console.log(currentPrio);
 
       if (element.data.subtasks == undefined) {
         subtasks = [];
