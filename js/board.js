@@ -372,17 +372,32 @@ function dropDownContactsEditTask() {
 }
 
 function closeDropdownMenu(contactList) {
+  sContactAdd = document.getElementById('searchContact');
+  sContactBoard = document.getElementById('searchContact-board');
   contactList.style.display = 'none';
-  document.getElementById('searchContact-board').placeholder =
-    'Select contacts to assign';
+  if(sContactBoard)
+    {sContactBoard.placeholder 
+      = 'Select contacts to assign';
+    }
+  else if(sContactAdd){sContactAdd.placeholder 
+    = 'Select contacts to assign';
+  } 
   document.getElementById('arrowAssignTo').src =
     '../assets/icons/arrow-down.png';
 }
 
 function openDropdownMenu(contactList) {
+  sContactAdd = document.getElementById('searchContact');
+  sContactBoard = document.getElementById('searchContact-board');
   contactList.style.display = 'flex';
-  document.getElementById('searchContact-board').placeholder = '';
-  document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
+  if (sContactAdd) {
+    sContactAdd.placeholder = ''
+    sContactAdd.src = '../assets/icons/arrow-up.png';
+  }
+  else if(sContactBoard){
+    sContactBoard.placeholder = ''
+    sContactBoard.src = '../assets/icons/arrow-up.png';
+  }
 }
 
 function checkIfAnimationActiveBoard() {
