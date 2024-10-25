@@ -198,12 +198,7 @@ function setNoPrio(prio) {
   checkIfEditIsOnNoPrio(noPrio);
 }
 
-
-/**
- * 
- * @param {array} noPrio - 
- */
-function styleNoPrio(noPrio) {
+function checkIfEditIsOnNoPrio(noPrio) {
   for (let element of noPrio) {
     if (isEditOn) {
       const noPrioButton = document.getElementById(`edit-button-${element}`);
