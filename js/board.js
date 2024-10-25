@@ -125,17 +125,21 @@ function openTaskModal(event, id) {
 
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
+
   setTimeout(() => {
     taskModal.style.display = 'none';
 
     taskModalEditCard.style.display = 'none';
   }, 250);
+
   if (document.getElementById('task-modal-edit-card').style.display == 'flex') {
     taskModalCard.style.display = 'none';
     modalSlideInOrOut('task-modal-edit-card');
   } else {
     modalSlideInOrOut('task-modal-card');
   }
+
+  isEditOn = false;
   renderBoard();
 }
 
@@ -152,6 +156,11 @@ function closeAddTaskModal() {
     addTaskModal.style.display = 'none';
   }, 250);
   clearInputs();
+}
+
+function cancelAddTask() {
+  clearInputs();
+  closeAddTaskModal();
 }
 
 function renderSubtaskProgressBar(task) {

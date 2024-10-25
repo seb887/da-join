@@ -19,6 +19,8 @@ const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
 
 // VARIABLES
 
+let isEditOn = false;
+
 // FUNCTIONS
 async function updateTaskInFirebase(taskId, updatedTask) {
   await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
@@ -141,6 +143,7 @@ async function deleteTask(id) {
 function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
+  isEditOn = true;
 
   selectAllAssignedContacts(taskId);
 
@@ -150,6 +153,7 @@ function openEditTaskModal(taskId) {
       editInputDescription.value = element.data.description;
       editInputDate.value = element.data.date;
       currentPrio = element.data.prio;
+      console.log(currentPrio);
 
       if (element.data.subtasks == undefined) {
         subtasks = [];
@@ -157,6 +161,7 @@ function openEditTaskModal(taskId) {
         subtasks = element.data.subtasks;
       }
 
+      setPrio(currentPrio);
       renderSubtasksList(taskId);
       editTaskSubmitBtn.onclick = () => editTask(taskId);
     }
@@ -175,6 +180,7 @@ async function editTask(taskId) {
 
       await updateTaskInFirebase(element.id, element.data);
       closeTaskModal();
+
       // openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
