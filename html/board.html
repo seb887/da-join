@@ -477,7 +477,7 @@
           >
             <div
               style="cursor: pointer"
-              onclick="dropDownContacts()"
+              onclick="dropDownContacts('searchContact-board')"
             >
               <input
                 oninput="filterContacts(event)"
@@ -628,28 +628,28 @@
               >
                 <div
                   style="cursor: pointer"
-                  onclick="dropDownContacts()"
+                  onclick="dropDownContacts('searchContact-board-addTask', 1)"
                 >
                   <input
                     oninput="filterContacts(event)"
                     autocomplete="off"
                     placeholder="Select contacts to assign"
                     type="text"
-                    id="searchContact-board"
+                    id="searchContact-board-addTask"
                   /><img
-                    id="arrowAssignTo"
+                    id="arrowAssignToAddTask"
                     src="../assets/icons/arrow-down.png"
                     alt="arrow-down"
                   />
                 </div>
                 <div
                   class="add-task-select-board"
-                  id="input-assigned-to"
+                  id="input-assigned-to-addTask"
                 ></div>
               </div>
               <!-- </select> -->
             </div>
-            <div id="assigned-contacts-list"></div>
+            <div id="assigned-contacts-list-addTask"></div>
           </div>
           <div class="seperator-board"></div>
           <div class="right-container-board">

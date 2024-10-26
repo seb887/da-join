@@ -643,7 +643,7 @@
   cursor: pointer;
 }
 
-#searchContact-board {
+#searchContact-board, #searchContact-board-addTask {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -661,7 +661,7 @@
   color: black;
   background-color: white;
 }
-#searchContact-board:hover {
+#searchContact-board:hover, #searchContact-board-addTask:hover {
   cursor: pointer;
   border: 1px solid #000000;
 }
@@ -770,7 +770,7 @@
   .add-task-input-title-board, .add-task-input-date-board, .add-task-input-description-board, .add-task-input-subtasks-board, .add-task-select-board {
     font-size: 16px;
   }
-  #searchContact-board {
+  #searchContact-board, #searchContact-board-addTask {
     font-size: 16px;
   }
   .seperator-board {

@@ -11,6 +11,9 @@ const taskModalEditCard = document.getElementById('task-modal-edit-card');
 const addTaskModal = document.getElementById('add-task-modal');
 const searchInput = document.getElementById('search-input');
 const clearInputBtn = document.getElementById('search-clear-btn');
+let sContactAdd = document.getElementById('searchContact');
+let sContactBoard = document.getElementById('searchContact-board');
+let sContactBoardAddTask = document.getElementById('searchContact-board-addTask');
 
 const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
 const taskModalSubtasksList = document.getElementById(
@@ -371,35 +374,32 @@ function dropDownContactsEditTask() {
 }
 
 function closeDropdownMenu(contactList) {
-  sContactAdd = document.getElementById('searchContact');
-  sContactBoard = document.getElementById('searchContact-board');
   contactList.style.display = 'none';
   if(sContactBoard)
-    {sContactBoard.placeholder = 'Select contacts to assign';
-      document.getElementById('arrowAssignTo').src =
-    '../assets/icons/arrow-down.png';
-    console.log('close');
+    {
+      sContactBoard.placeholder = 'Select contacts to assign';
+      sContactBoardAddTask.placeholder = 'Select contacts to assign';
+      document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
+      document.getElementById('arrowAssignToAddTask').src = '../assets/icons/arrow-down.png';
     }
-  else if(sContactAdd){sContactAdd.placeholder 
-    = 'Select contacts to assign';
-    document.getElementById('arrowAssignTo').src =
-    '../assets/icons/arrow-down.png';
+  else if(sContactAdd){
+      sContactAdd.placeholder = 'Select contacts to assign';
+      document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
   } 
+  
 }
 
 function openDropdownMenu(contactList) {
-  sContactAdd = document.getElementById('searchContact');
-  sContactBoard = document.getElementById('searchContact-board');
   contactList.style.display = 'flex';
   if (sContactAdd) {
     sContactAdd.placeholder = ''
     document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
-    
   }
   else if(sContactBoard){
     sContactBoard.placeholder = ''
+    sContactBoardAddTask.placeholder = ''
     document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
-    console.log('open');
+    document.getElementById('arrowAssignToAddTask').src = '../assets/icons/arrow-up.png';
   }
 }
 
