@@ -362,7 +362,6 @@ async function listContactsToAssignedToinBoard() {
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
   const container = document.getElementById('task-modal-card');
-
   container.addEventListener('click', (e) => {});
   if (contactList.style.display == 'flex') {
     closeDropdownMenu(contactList);
@@ -376,14 +375,16 @@ function closeDropdownMenu(contactList) {
   sContactBoard = document.getElementById('searchContact-board');
   contactList.style.display = 'none';
   if(sContactBoard)
-    {sContactBoard.placeholder 
-      = 'Select contacts to assign';
+    {sContactBoard.placeholder = 'Select contacts to assign';
+      document.getElementById('arrowAssignTo').src =
+    '../assets/icons/arrow-down.png';
+    console.log('close');
     }
   else if(sContactAdd){sContactAdd.placeholder 
     = 'Select contacts to assign';
-  } 
-  document.getElementById('arrowAssignTo').src =
+    document.getElementById('arrowAssignTo').src =
     '../assets/icons/arrow-down.png';
+  } 
 }
 
 function openDropdownMenu(contactList) {
@@ -392,11 +393,13 @@ function openDropdownMenu(contactList) {
   contactList.style.display = 'flex';
   if (sContactAdd) {
     sContactAdd.placeholder = ''
-    sContactAdd.src = '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
+    
   }
   else if(sContactBoard){
     sContactBoard.placeholder = ''
-    sContactBoard.src = '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
+    console.log('open');
   }
 }
 

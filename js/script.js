@@ -33,7 +33,9 @@ function setActiveUserInitials() {
     if (activeUser) {
         let initials = generateInitials(activeUser.name);
         document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
-        document.getElementById('name').innerHTML = activeUser.name;
+        if (document.getElementById('name')) {
+            document.getElementById('name').innerHTML = activeUser.name;
+        }
     } else {
         document.getElementById('user-initials').innerHTML = `<p>G</p>`
     }
