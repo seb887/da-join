@@ -699,6 +699,32 @@
   height: 7.5px;
 }
 
+.task-modal-slide-in {
+  animation: slideIn 250ms ease-out forwards;
+}
+
+.task-modal-slide-out {
+  animation: slideOut 250ms ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(300%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
 /* Responsive */
 
  @media (max-width: 1450px) {
@@ -848,6 +874,12 @@
 }
 
 @media (max-width: 890px) {
+  .kanban-container {
+    align-items: flex-start;
+  }
+  #kanban-list-todo {
+    display: flex;
+  }
   .add-task-button span {
     display: none;
   }
@@ -861,18 +893,21 @@
   }
   .kanban-list {
     height: unset;
+    flex-direction: unset;
+    width: 100%;
   }
   .content-board {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%; /* Definiere eine Breite für den Container */
-    margin: 0 auto; /* Zentriert das Element horizontal */
+    width: 90%;
+    margin: 0 auto;
     height: unset;
     position: relative;
     top: 30px;
-  h1 {
+    	h1 {
     font-size: 47px;
+    }
   }
   .input-container {
     position: absolute;
@@ -896,11 +931,8 @@
     width: 100%;
   }
   .kanban-card {
-    width: 100%;
+    min-width: 252px;
     padding: 12px;
-  }
-  .kanban-list {
-    min-width: 100%;
   }
   .kanban-headline {
     width: 100%;
@@ -929,31 +961,55 @@
     width: 30px;
     height: 30px;
   }
+  .task-modal-card {
+    transform: translate(-50%, -50%);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+  }
+  .task-modal {
+    height: 100vh;
+  }
+  @keyframes slideIn {
+    from {
+      left: 500%;
+    }
+    to {
+      left: 50%;
+    }
+  }
+  @keyframes slideOut {
+    from {
+      left: 50%;
+    }
+    to {
+      left: 500%;
+    }
+  }
 }
 
-.task-modal-slide-in {
-  animation: slideIn 250ms ease-out forwards;
-}
-
-.task-modal-slide-out {
-  animation: slideOut 250ms ease-out forwards;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(300%);
+@media (max-width: 427px) {
+  .kanban-card {
+    min-width: 180px;
   }
-  to {
-    transform: translateX(0);
+  .kanban-list {
+    gap: 14px;
   }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
+  .card-profile-badge-3 {
+    width: 24px;
+    height: 24px;
+    font-size: 8px;
   }
-  to {
-    transform: translateX(300%);
+  .card-label-container {
+    font-size: 14px;
   }
-}
+  .card-title {
+    font-size: 14px;
+  }
+  .card-description {
+    font-size: 12px;
+  }
+  .subtask-counter {
+    font-size: 10px;
+  }
 }
