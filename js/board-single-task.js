@@ -152,7 +152,6 @@ function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
   isEditOn = true;
-
   selectAllAssignedContacts(taskId);
   hideSubtaskIcons();
 

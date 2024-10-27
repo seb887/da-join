@@ -15,7 +15,7 @@ const buttonUrgent = document.getElementById('button-urgent');
 const buttonLowImg = document.getElementById('button-low-img');
 const buttonMediumImg = document.getElementById('button-medium-img');
 const buttonUrgentImg = document.getElementById('button-urgent-img');
-const inputAssignedTo = document.getElementById('input-assigned-to');
+let inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
 const BASE_URL =
@@ -455,13 +455,15 @@ async function listContactsToAssignedTo() {
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    if (document.getElementById(contact['id'] + '-container')) {
-      document.getElementById(
-        contact['id'] + '-container'
-      ).style.backgroundColor = contact['color'];
-    }
+    setBackgroundColor(contact);
     renderedContacts.push(contact);
   });
+}
+
+function setBackgroundColor(contact){
+  if (document.getElementById(contact['id'] + '-container')) {
+    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+  }
 }
 
 function inspectCheckboxes(path) {
@@ -480,8 +482,11 @@ function inspectCheckboxes(path) {
   });
 }
 
-function dropDownContacts() {
-  const modal = document.getElementById('task-modal-edit-card');
+function dropDownContacts(containerId, addTask) {
+  let modal = document.getElementById(containerId);
+  if (addTask) {
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
+  }
   event.stopPropagation();
   if (modal) {
     modal.addEventListener('click', (e) => {
@@ -493,6 +498,7 @@ function dropDownContacts() {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
+  inputAssignedTo =document.getElementById('input-assigned-to')
 }
 
 function filterContacts(event) {
