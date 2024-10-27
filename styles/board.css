@@ -314,7 +314,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   background-color: #0000005c;
   z-index: 99;
 }
@@ -874,6 +874,10 @@
 }
 
 @media (max-width: 890px) {
+  #add-task-modal {
+    opacity: 0;
+    z-index: -999;
+  }
   .kanban-container {
     align-items: flex-start;
   }
@@ -966,9 +970,6 @@
     position: fixed;
     left: 50%;
     top: 50%;
-  }
-  .task-modal {
-    height: 100vh;
   }
   @keyframes slideIn {
     from {
