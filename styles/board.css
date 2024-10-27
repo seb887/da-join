@@ -709,14 +709,14 @@
     padding: 38px 30px;
     gap: 16px;
     width: 475px;
-    max-height: 595px;
+    max-height: 700px;
     font-size: 16px;
   }
 .task-modal-edit-card {
     padding: 38px 30px;
     gap: 16px;
     width: 475px;
-    max-height: 595px;
+    max-height: 700px;
     font-size: 16px;
   }
   .add-task-input-description-board {
@@ -783,6 +783,12 @@
 }
 
 @media (max-width: 1150px) {
+  .task-modal-edit-card {
+    max-height: 595px;
+  }
+  .task-modal-card {
+    max-height: 595px;
+  }
   .seperator-board {
     height: 380px;
   }
