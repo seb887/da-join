@@ -147,8 +147,11 @@ function closeTaskModal() {
 }
 
 function openAddTaskModal(kanbanBoard) {
+  if (window.innerWidth < 890) {
+    window.location.href = 'add-task.html';
+    return;
+  }
   addTaskModal.style.display = 'flex';
-
   currentKanbanBoard = kanbanBoard;
   modalSlideInOrOut('add-task-modal-card');
 }
