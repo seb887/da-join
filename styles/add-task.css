@@ -433,7 +433,8 @@ body {
   }
 }
 
-#add-task-contact-container {
+#add-task-contact-container, 
+#add-task-contact-container-addTask {
   background-color: transparent;
   border: none;
   position: relative;
