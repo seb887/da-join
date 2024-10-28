@@ -965,11 +965,25 @@
     width: 30px;
     height: 30px;
   }
-  .task-modal-card {
-    transform: translate(-50%, -50%);
-    position: fixed;
-    left: 50%;
-    top: 50%;
+  .task-modal-edit-card {
+    width: 396px;
+    max-height: calc(95vh);
+  }
+  .task-modal-card, .task-modal-edit-card {
+    width: 396px;
+    max-height: calc(95vh);
+  }
+  .task-modal-card-title {
+    font-size: 36px;
+  }
+  .task-modal-contact-name {
+    font-size: 16px;
+  }
+  .task-modal-card-category {
+    font-size: 16px;
+  }
+  .prio-buttons-board-edit {
+    width: 100px;
   }
   @keyframes slideIn {
     from {
@@ -1012,5 +1026,20 @@
   }
   .subtask-counter {
     font-size: 10px;
+  }
+  .task-modal-card, .task-modal-edit-card {
+    width: 300px;
+  }
+  .prio-buttons-board-edit {
+    width: 70px;
+    font-size: 10px;
+  }
+  #edit-button-low-img, #edit-button-urgent-img {
+    width: 16px;
+    height: 10.5px;
+  }
+  #edit-button-medium-img {
+    width: 18px;
+    height: 6.5px;
   }
 }
