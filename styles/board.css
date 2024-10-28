@@ -8,7 +8,11 @@
   top: 96px;
 }
 
-.add-task-input-title-board, .add-task-input-date-board, .add-task-input-description-board, .add-task-input-subtasks-board, .add-task-select-board {
+.add-task-input-title-board,
+.add-task-input-date-board,
+.add-task-input-description-board,
+.add-task-input-subtasks-board,
+.add-task-select-board {
   font-size: 20px;
   font-weight: 400;
   padding: 12px 21px;
@@ -167,7 +171,8 @@
 
 .kanban-add-task-buttons:hover {
   cursor: pointer;
-  filter: invert(68%) sepia(50%) saturate(7173%) hue-rotate(161deg) brightness(94%) contrast(103%);
+  filter: invert(68%) sepia(50%) saturate(7173%) hue-rotate(161deg)
+    brightness(94%) contrast(103%);
 }
 
 .kanban-list {
@@ -514,11 +519,11 @@
 }
 
 .add-task-footer-board {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-top: 48px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 48px;
+  width: 100%;
 }
 
 .add-task-form-board {
@@ -627,7 +632,8 @@
   overflow-wrap: anywhere;
 }
 
-.prio-buttons-board, .prio-buttons-board-edit {
+.prio-buttons-board,
+.prio-buttons-board-edit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -643,7 +649,8 @@
   cursor: pointer;
 }
 
-#searchContact-board, #searchContact-board-addTask {
+#searchContact-board,
+#searchContact-board-addTask {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -661,7 +668,8 @@
   color: black;
   background-color: white;
 }
-#searchContact-board:hover, #searchContact-board-addTask:hover {
+#searchContact-board:hover,
+#searchContact-board-addTask:hover {
   cursor: pointer;
   border: 1px solid #000000;
 }
@@ -689,7 +697,8 @@
   background-color: #d1d1d1;
 }
 
-#edit-button-low-img, #edit-button-urgent-img {
+#edit-button-low-img,
+#edit-button-urgent-img {
   width: 20px;
   height: 14.5px;
 }
@@ -727,7 +736,7 @@
 
 /* Responsive */
 
- @media (max-width: 1450px) {
+@media (max-width: 1450px) {
   .no-tasks-card {
     width: 180px;
   }
@@ -738,7 +747,7 @@
     max-height: 700px;
     font-size: 16px;
   }
-.task-modal-edit-card {
+  .task-modal-edit-card {
     padding: 38px 30px;
     gap: 16px;
     width: 475px;
@@ -793,10 +802,15 @@
   .right-container-board {
     width: 280px;
   }
-  .add-task-input-title-board, .add-task-input-date-board, .add-task-input-description-board, .add-task-input-subtasks-board, .add-task-select-board {
+  .add-task-input-title-board,
+  .add-task-input-date-board,
+  .add-task-input-description-board,
+  .add-task-input-subtasks-board,
+  .add-task-select-board {
     font-size: 16px;
   }
-  #searchContact-board, #searchContact-board-addTask {
+  #searchContact-board,
+  #searchContact-board-addTask {
     font-size: 16px;
   }
   .seperator-board {
@@ -843,34 +857,34 @@
   .no-tasks-card {
     width: 130px;
   }
-    .board-content-section {
-      width: unset;
-      gap: 12px;
-    }
-    .kanban-card {
-      width: 130px;
-      padding: 12px;
-    }
-    .kanban-list {
-      min-width: 130px;
-    }
-    .kanban-headline {
-      width: 130px;
-      font-size: 14px;
-      align-items: center;
-    }
-    .kanban-container {
-      min-width: 140px;
-    }
-    .kanban-add-task-buttons {
-      width: 20px;
-    }
-    .card-label-container {
-      font-size: 14px;
-    }
-    .add-task-modal-card {
-      width: 800px;
-    }
+  .board-content-section {
+    width: unset;
+    gap: 12px;
+  }
+  .kanban-card {
+    width: 130px;
+    padding: 12px;
+  }
+  .kanban-list {
+    min-width: 130px;
+  }
+  .kanban-headline {
+    width: 130px;
+    font-size: 14px;
+    align-items: center;
+  }
+  .kanban-container {
+    min-width: 140px;
+  }
+  .kanban-add-task-buttons {
+    width: 20px;
+  }
+  .card-label-container {
+    font-size: 14px;
+  }
+  .add-task-modal-card {
+    width: 800px;
+  }
 }
 
 @media (max-width: 890px) {
@@ -909,8 +923,8 @@
     height: unset;
     position: relative;
     top: 30px;
-    	h1 {
-    font-size: 47px;
+    h1 {
+      font-size: 47px;
     }
   }
   .input-container {
