@@ -34,11 +34,10 @@ body {
 .privacy-policy-content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
-.headline {
-  margin-bottom: 32px;
+.content-header {
+  margin-bottom: 35px;
 }
 
 .show {

@@ -1012,6 +1012,11 @@
 }
 
 @media (max-width: 427px) {
+  .content-board {
+    h1 {
+        font-size: 40px;
+    }
+  }
   #searchContact-board, #searchContact-board-addTask {
     font-size: 14px;
   }

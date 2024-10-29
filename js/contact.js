@@ -35,7 +35,7 @@ async function renderContacts(newContact) {
 
 /**
  * 
- * This function sets blablabla
+ * This function sets data of a contact
  * 
  * @param {object} contact - This is a single object
  * @param {number} index - This is the index for Each contact
