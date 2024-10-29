@@ -169,6 +169,7 @@ body {
 }
 
 .add-task-input input {
+  width: 100%;
   padding: 0;
   border: none;
   border-radius: 0;
@@ -185,6 +186,7 @@ body {
 
 .add-task-input img:hover {
   background-color: #d1d1d1;
+  border-radius: 50%;
 }
 
 #add-subtask-img {
@@ -211,7 +213,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0;
-  gap: 16px;
+  gap: 4px;
   max-height: 96px;
   overflow: auto;
 }
@@ -220,12 +222,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 40px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
-
-/* .subtasks:hover {
-  background: var(--font-secondary);
-} */
 
 .subtask-title {
   display: list-item;
@@ -239,14 +239,40 @@ body {
   font-size: 20px;
   font-weight: 400;
   background-color: transparent;
-  /* padding: 0 0 10px 10px; */
+  width: 100%;
 }
 
 .subtask-buttons {
   display: flex;
-  gap: 12px;
-  padding-right: 24px;
+  gap: 4px;
+  padding-right: 20px;
   cursor: pointer;
+  visibility: hidden;
+}
+
+.buttons-seperator {
+  background-color: #000000;
+  width: 1px;
+  height: 24px;
+}
+
+.subtask-hover {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+}
+
+.subtask-no-hover {
+  background-color: transparent;
+  border-radius: none;
+}
+
+/* .subtasks:hover {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+} */
+
+.subtasks:hover > .subtask-buttons {
+  visibility: visible;
 }
 
 .subtask-buttons img {
@@ -267,7 +293,7 @@ body {
 }
 
 .subtask-buttons img:hover {
-  scale: 1.2;
+  scale: 1.05;
 }
 
 .add-task-footer {
@@ -433,7 +459,7 @@ body {
   }
 }
 
-#add-task-contact-container, 
+#add-task-contact-container,
 #add-task-contact-container-addTask {
   background-color: transparent;
   border: none;
@@ -442,7 +468,7 @@ body {
   img {
     position: absolute;
     top: 12px;
-    right: 21px;
+    right: 8px;
     height: 24px;
     width: 24px;
   }

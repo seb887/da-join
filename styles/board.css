@@ -8,7 +8,11 @@
   top: 96px;
 }
 
-.add-task-input-title-board, .add-task-input-date-board, .add-task-input-description-board, .add-task-input-subtasks-board, .add-task-select-board {
+.add-task-input-title-board,
+.add-task-input-date-board,
+.add-task-input-description-board,
+.add-task-input-subtasks-board,
+.add-task-select-board {
   font-size: 20px;
   font-weight: 400;
   padding: 12px 21px;
@@ -167,7 +171,8 @@
 
 .kanban-add-task-buttons:hover {
   cursor: pointer;
-  filter: invert(68%) sepia(50%) saturate(7173%) hue-rotate(161deg) brightness(94%) contrast(103%);
+  filter: invert(68%) sepia(50%) saturate(7173%) hue-rotate(161deg)
+    brightness(94%) contrast(103%);
 }
 
 .kanban-list {
@@ -463,6 +468,7 @@
   padding: 6px 16px;
   gap: 16px;
   color: black;
+  overflow-wrap: anywhere;
 }
 
 .task-modal-subtask-container img {
@@ -514,11 +520,11 @@
 }
 
 .add-task-footer-board {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-top: 48px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 48px;
+  width: 100%;
 }
 
 .add-task-form-board {
@@ -627,7 +633,8 @@
   overflow-wrap: anywhere;
 }
 
-.prio-buttons-board, .prio-buttons-board-edit {
+.prio-buttons-board,
+.prio-buttons-board-edit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -643,7 +650,8 @@
   cursor: pointer;
 }
 
-#searchContact-board, #searchContact-board-addTask {
+#searchContact-board,
+#searchContact-board-addTask {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -661,7 +669,8 @@
   color: black;
   background-color: white;
 }
-#searchContact-board:hover, #searchContact-board-addTask:hover {
+#searchContact-board:hover,
+#searchContact-board-addTask:hover {
   cursor: pointer;
   border: 1px solid #000000;
 }
@@ -689,7 +698,8 @@
   background-color: #d1d1d1;
 }
 
-#edit-button-low-img, #edit-button-urgent-img {
+#edit-button-low-img,
+#edit-button-urgent-img {
   width: 20px;
   height: 14.5px;
 }
@@ -705,6 +715,11 @@
 
 .task-modal-slide-out {
   animation: slideOut 250ms ease-out forwards;
+}
+
+#edit-add-subtask-img {
+  width: 14px;
+  height: 14px;
 }
 
 @keyframes slideIn {
@@ -727,7 +742,7 @@
 
 /* Responsive */
 
- @media (max-width: 1450px) {
+@media (max-width: 1450px) {
   .no-tasks-card {
     width: 180px;
   }
@@ -738,7 +753,7 @@
     max-height: 700px;
     font-size: 16px;
   }
-.task-modal-edit-card {
+  .task-modal-edit-card {
     padding: 38px 30px;
     gap: 16px;
     width: 475px;
@@ -793,10 +808,15 @@
   .right-container-board {
     width: 280px;
   }
-  .add-task-input-title-board, .add-task-input-date-board, .add-task-input-description-board, .add-task-input-subtasks-board, .add-task-select-board {
+  .add-task-input-title-board,
+  .add-task-input-date-board,
+  .add-task-input-description-board,
+  .add-task-input-subtasks-board,
+  .add-task-select-board {
     font-size: 16px;
   }
-  #searchContact-board, #searchContact-board-addTask {
+  #searchContact-board,
+  #searchContact-board-addTask {
     font-size: 16px;
   }
   .seperator-board {
@@ -843,37 +863,40 @@
   .no-tasks-card {
     width: 130px;
   }
-    .board-content-section {
-      width: unset;
-      gap: 12px;
-    }
-    .kanban-card {
-      width: 130px;
-      padding: 12px;
-    }
-    .kanban-list {
-      min-width: 130px;
-    }
-    .kanban-headline {
-      width: 130px;
-      font-size: 14px;
-      align-items: center;
-    }
-    .kanban-container {
-      min-width: 140px;
-    }
-    .kanban-add-task-buttons {
-      width: 20px;
-    }
-    .card-label-container {
-      font-size: 14px;
-    }
-    .add-task-modal-card {
-      width: 800px;
-    }
+  .board-content-section {
+    width: unset;
+    gap: 12px;
+  }
+  .kanban-card {
+    width: 130px;
+    padding: 12px;
+  }
+  .kanban-list {
+    min-width: 130px;
+  }
+  .kanban-headline {
+    width: 130px;
+    font-size: 14px;
+    align-items: center;
+  }
+  .kanban-container {
+    min-width: 140px;
+  }
+  .kanban-add-task-buttons {
+    width: 20px;
+  }
+  .card-label-container {
+    font-size: 14px;
+  }
+  .add-task-modal-card {
+    width: 800px;
+  }
 }
 
 @media (max-width: 890px) {
+  .add-task-input-date {
+    font-size: 12px;
+  }
   #add-task-modal {
     opacity: 0;
     z-index: -999;
@@ -909,8 +932,8 @@
     height: unset;
     position: relative;
     top: 30px;
-    	h1 {
-    font-size: 47px;
+    h1 {
+      font-size: 47px;
     }
   }
   .input-container {
@@ -965,31 +988,38 @@
     width: 30px;
     height: 30px;
   }
-  .task-modal-card {
-    transform: translate(-50%, -50%);
-    position: fixed;
-    left: 50%;
-    top: 50%;
+  .task-modal-edit-card {
+    width: 396px;
+    max-height: calc(85vh);
   }
-  @keyframes slideIn {
-    from {
-      left: 500%;
-    }
-    to {
-      left: 50%;
-    }
+  .task-modal-card, .task-modal-edit-card {
+    width: 396px;
+    max-height: calc(85vh);
   }
-  @keyframes slideOut {
-    from {
-      left: 50%;
-    }
-    to {
-      left: 500%;
-    }
+  .task-modal-card-title {
+    font-size: 36px;
   }
+  .task-modal-contact-name {
+    font-size: 16px;
+  }
+  .task-modal-card-category {
+    font-size: 16px;
+  }
+  .prio-buttons-board-edit {
+    width: 100px;
+  }
+
 }
 
 @media (max-width: 427px) {
+  #searchContact-board, #searchContact-board-addTask {
+    font-size: 14px;
+  }
+  #add-task-contact-container, #add-task-contact-container-addTask {
+    img {
+        right: 4px !important;
+    }
+  }
   .kanban-card {
     min-width: 180px;
   }
@@ -1012,5 +1042,20 @@
   }
   .subtask-counter {
     font-size: 10px;
+  }
+  .task-modal-card, .task-modal-edit-card {
+    width: 300px;
+  }
+  .prio-buttons-board-edit {
+    width: 70px;
+    font-size: 10px;
+  }
+  #edit-button-low-img, #edit-button-urgent-img {
+    width: 16px;
+    height: 10.5px;
+  }
+  #edit-button-medium-img {
+    width: 18px;
+    height: 6.5px;
   }
 }
