@@ -109,7 +109,7 @@ function checkInputs(taskObj) {
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => closeAddTaskModal(), 1500);
+    setTimeout(() => window.location.href = 'board.html', 1500);
   }
 }
 

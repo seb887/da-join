@@ -468,6 +468,7 @@
   padding: 6px 16px;
   gap: 16px;
   color: black;
+  overflow-wrap: anywhere;
 }
 
 .task-modal-subtask-container img {
@@ -989,11 +990,11 @@
   }
   .task-modal-edit-card {
     width: 396px;
-    max-height: calc(95vh);
+    max-height: calc(85vh);
   }
   .task-modal-card, .task-modal-edit-card {
     width: 396px;
-    max-height: calc(95vh);
+    max-height: calc(85vh);
   }
   .task-modal-card-title {
     font-size: 36px;
@@ -1011,6 +1012,14 @@
 }
 
 @media (max-width: 427px) {
+  #searchContact-board, #searchContact-board-addTask {
+    font-size: 14px;
+  }
+  #add-task-contact-container, #add-task-contact-container-addTask {
+    img {
+        right: 4px !important;
+    }
+  }
   .kanban-card {
     min-width: 180px;
   }

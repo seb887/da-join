@@ -478,3 +478,13 @@ function switchIds(){
   
   //Display none im css bei den Kontakten und keine Farbe bei den Kontakten?? --> Da weitermachen!!!
  }
+
+ window.onscroll = function (ev) {
+  const scrollPosition = window.innerHeight + Math.round(window.scrollY);
+  const totalHeight = document.documentElement.scrollHeight;
+  if (scrollPosition >= totalHeight) {
+    document.getElementById('footer').classList.add('footer-animation');
+  } else {
+    document.getElementById('footer').classList.remove('footer-animation');
+  }
+};

@@ -248,6 +248,19 @@ footer {
     background-color: #2A3647;
 }
 
+.footer-animation {
+  animation: footer-animation 300ms forwards;
+}
+
+@keyframes footer-animation {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: -180px;
+  }
+}
+
 .nav-links-responsive {
   display: flex;
   align-items: center;
