@@ -169,6 +169,7 @@ body {
 }
 
 .add-task-input input {
+  width: 100%;
   padding: 0;
   border: none;
   border-radius: 0;
@@ -185,6 +186,7 @@ body {
 
 .add-task-input img:hover {
   background-color: #d1d1d1;
+  border-radius: 50%;
 }
 
 #add-subtask-img {
@@ -237,6 +239,7 @@ body {
   font-size: 20px;
   font-weight: 400;
   background-color: transparent;
+  width: 100%;
 }
 
 .subtask-buttons {

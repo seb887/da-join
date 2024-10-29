@@ -716,6 +716,11 @@
   animation: slideOut 250ms ease-out forwards;
 }
 
+#edit-add-subtask-img {
+  width: 14px;
+  height: 14px;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(300%);
@@ -888,6 +893,9 @@
 }
 
 @media (max-width: 890px) {
+  .add-task-input-date {
+    font-size: 12px;
+  }
   #add-task-modal {
     opacity: 0;
     z-index: -999;
@@ -999,22 +1007,7 @@
   .prio-buttons-board-edit {
     width: 100px;
   }
-  @keyframes slideIn {
-    from {
-      left: 500%;
-    }
-    to {
-      left: 50%;
-    }
-  }
-  @keyframes slideOut {
-    from {
-      left: 50%;
-    }
-    to {
-      left: 500%;
-    }
-  }
+
 }
 
 @media (max-width: 427px) {
