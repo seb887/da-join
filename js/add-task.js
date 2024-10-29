@@ -646,4 +646,3 @@ function assignedInitialContent(match, index) {
   </div>
 `;
 }
-t;

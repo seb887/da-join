@@ -348,23 +348,6 @@ async function displayTaskModalContacts(id) {
   });
 }
 
-async function listContactsToAssignedToinBoard() {
-  let allContacts = Object.values(await getContacts());
-  let id = Object.keys(await getContacts());
-  renderedContacts = [];
-  allContacts.forEach((contact, index) => {
-    contact.id = id[index];
-  });
-  allContacts.sort((a, b) => a.name.localeCompare(b.name));
-  contactContainer.innerHTML = '';
-  allContacts.forEach((contact, index) => {
-    contactContainer.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
-    renderedContacts.push(contact);
-  });
-}
 
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
