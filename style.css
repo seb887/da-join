@@ -234,6 +234,24 @@ h1 {
   top: 96px;
 }
 
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-arrow {
+  width: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow-div:hover {
+  cursor: pointer;
+  background-color: #cdcdcd;
+  border-radius: 50%;
+}
+
 /*======================
        Responsive
 =======================*/
