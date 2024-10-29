@@ -213,3 +213,11 @@ function getSelectedContactsEditTask() {
   });
   return selectedContacts;
 }
+
+
+async function updateContactsinTask() {
+  tasks.forEach((task) => {
+    console.log(task);
+    
+  })
+}

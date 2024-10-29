@@ -348,23 +348,6 @@ async function displayTaskModalContacts(id) {
   });
 }
 
-async function listContactsToAssignedToinBoard() {
-  let allContacts = Object.values(await getContacts());
-  let id = Object.keys(await getContacts());
-  renderedContacts = [];
-  allContacts.forEach((contact, index) => {
-    contact.id = id[index];
-  });
-  allContacts.sort((a, b) => a.name.localeCompare(b.name));
-  contactContainer.innerHTML = '';
-  allContacts.forEach((contact, index) => {
-    contactContainer.innerHTML += assignedToContactsContent(contact);
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
-    renderedContacts.push(contact);
-  });
-}
 
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
@@ -453,28 +436,3 @@ function selectAllAssignedContacts(taskId) {
 }
 
 
-function switchIds(){
-  let contactContainer1 = document.getElementById('add-task-contact-container');
-  let contactContainer2 = document.getElementById('add-task-contact-container-addTask');
-  contactContainer1.id = 'add-task-contact-container-addTask';
-  contactContainer2.id = 'add-task-contact-container';
-  let searchContact1 = document.getElementById('searchContact-board');
-  let searchContact2 = document.getElementById('searchContact-board-addTask');
-  searchContact1.id = 'searchContact-board-addTask';
-  searchContact2.id = 'searchContact-board';
-  let inputAssignedTo1 = document.getElementById('input-assigned-to');
-  let inputAssignedTo2 = document.getElementById('input-assigned-to-addTask');
-  inputAssignedTo1.id = 'input-assigned-to-addTask';
-  inputAssignedTo2.id = 'input-assigned-to';
-  let assignedContactList1 = document.getElementById('assigned-contacts-list');
-  let assignedContactList2 = document.getElementById('assigned-contacts-list-addTask');
-  assignedContactList1.id = 'assigned-contacts-list-addTask';
-  assignedContactList2.id ='assigned-contacts-list';
-  let arrowAssignTo1 = document.getElementById('arrowAssignTo');
-  let arrowAssignTo2 = document.getElementById('arrowAssignToAddTask');
-  arrowAssignTo1.id = 'arrowAssignToAddTask';
-  arrowAssignTo2.id = 'arrowAssignTo';
-  renderBoard();
-  
-  //Display none im css bei den Kontakten und keine Farbe bei den Kontakten?? --> Da weitermachen!!!
- }
