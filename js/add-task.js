@@ -62,21 +62,10 @@ async function saveTaskToFirebase(newTask) {
  *
  */
 function createNewTask() {
-  const dateNow = new Date();
-  const options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-  };
-
   let newTask = {
     title: inputTitle.value,
     description: inputDescription.value,
     date: inputDate.value,
-    created: dateNow.toLocaleDateString('de-DE', options),
     category: selectCategory.value,
     board: currentKanbanBoard,
     prio: currentPrio,
@@ -109,7 +98,7 @@ function checkInputs(taskObj) {
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => window.location.href = 'board.html', 1500);
+    setTimeout(() => closeAddTaskModal(), 1500);
   }
 }
 
@@ -179,9 +168,9 @@ function checkIfEditIsOnPrio(prio, color) {
  * This function styles the selected button
  *
  * @param {string} prio - This is the priority string
- * @param {string} color - This is the defined background color for the prio button
- * @param {string} button - This is the prio button
- * @param {string} buttonImg - This is the prio button img
+ * @param {string}} color - This is the defined background color for the prio button
+ * @param {string}} button - This is the prio button
+ * @param {string}} buttonImg - This is the prio button img
  */
 function stylePrioButton(prio, color, button, buttonImg) {
   button.style.background = color;
@@ -193,7 +182,7 @@ function stylePrioButton(prio, color, button, buttonImg) {
 /**
  * This function restets the unselected prio button to default value
  *
- * @param {string} prio - This is the current prio status
+ * @param {string} prio - This is actual prio status
  */
 function setNoPrio(prio) {
   let noPrio = [];
@@ -313,7 +302,7 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      <li id="subtask-${index}" class="subtasks" onmouseover="setSubtaskHoverEffect(${index})" onmouseout="setSubtaskNoHoverEffect(${index})">
+      <li id="subtask-${index}" class="subtasks">
         <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
         <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
         <div class="subtask-buttons">
@@ -331,7 +320,6 @@ function createSubtasksListHTML(index, id) {
             class="submit-edit-subtask"
             onclick="submitEditedSingleSubtask('${id}', '${index}')"
           />
-          <div class="buttons-seperator"></div>
           <img
             src="../assets/icons/delete-subtask.png"
             alt="trash icon"
@@ -342,18 +330,6 @@ function createSubtasksListHTML(index, id) {
         </div>
       </li>
     `;
-}
-
-function setSubtaskHoverEffect(index) {
-  const subtask = document.getElementById(`subtask-${index}`);
-
-  subtask.classList.add('subtask-hover');
-}
-
-function setSubtaskNoHoverEffect(index) {
-  const subtask = document.getElementById(`subtask-${index}`);
-
-  subtask.classList.remove('subtask-hover');
 }
 
 // TODO: Noch einprogrammieren mit Input Feld
@@ -369,8 +345,6 @@ async function editSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
-
-  subtask.removeAttribute('onmouseover');
 
   if (taskId == 'undefined') {
     singleSubtaskTitle.style.display = 'none';
@@ -388,8 +362,6 @@ async function editSingleSubtask(taskId, index) {
         editSubtaskBtn.style.display = 'none';
         submitEditSubtaskBtn.style.display = 'flex';
         subtask.style.borderBottom = '1px solid #29abe2';
-        subtask.style.borderRadius = 'none';
-        subtask.style.backgroundColor = 'transparent';
 
         inputEditSubtask.value = element.data.subtasks[index].title;
         // await updateTaskInFirebase(element.id, element.data);
@@ -410,8 +382,6 @@ async function submitEditedSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
-
-  subtask.classList.remove('subtask-no-hover');
 
   if (taskId == 'undefined') {
     subtasks[index].title = inputEditSubtask.value;
@@ -490,11 +460,9 @@ async function listContactsToAssignedTo() {
   });
 }
 
-function setBackgroundColor(contact) {
+function setBackgroundColor(contact){
   if (document.getElementById(contact['id'] + '-container')) {
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
+    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
   }
 }
 
@@ -517,7 +485,7 @@ function inspectCheckboxes(path) {
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
   if (addTask) {
-    inputAssignedTo = document.getElementById('input-assigned-to-addTask');
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
   }
   event.stopPropagation();
   if (modal) {
@@ -530,7 +498,7 @@ function dropDownContacts(containerId, addTask) {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
-  inputAssignedTo = document.getElementById('input-assigned-to');
+  inputAssignedTo =document.getElementById('input-assigned-to')
 }
 
 function filterContacts(event) {

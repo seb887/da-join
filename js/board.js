@@ -471,3 +471,108 @@ function switchIds(){
     document.getElementById('footer').classList.remove('footer-animation');
   }
 };
+
+async function listContactsToAssignedToinBoard() {
+  let allContacts = Object.values(await getContacts());
+  let id = Object.keys(await getContacts());
+  renderedContacts = [];
+  allContacts.forEach((contact, index) => {
+    contact.id = id[index];
+  });
+  allContacts.sort((a, b) => a.name.localeCompare(b.name));
+  contactContainer.innerHTML = '';
+  allContacts.forEach((contact, index) => {
+    contactContainer.innerHTML += assignedToContactsContent(contact);
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
+    renderedContacts.push(contact);
+  });
+}
+
+function renderContactsinAddTask(){
+  let list = document.getElementById('input-assigned-to-addTask')
+  renderedContacts.forEach((contact) =>{
+    list.innerHTML += assignedToContactsContent(contact) 
+  })
+}
+
+
+function createCompareArray(){
+  let taskArray = [];
+  tasks.forEach((task, index) =>{
+    if(task.data.assignedTo){ //Alle assignedTo in einem Task werden angesprochen
+    task.data.assignedTo.forEach(element => {
+      renderedContacts.forEach((contact) =>{
+        if(contact.id == element.id){
+          let arr = [{
+            pattern : contact , 
+            example : element,
+            taskId : task.id
+          }]
+          taskArray.push(arr)
+        }
+        else{ return }
+      })
+    }); 
+    }
+  })
+  return taskArray;
+} 
+
+
+function compareArray(){
+  let comparsion = createCompareArray();
+  let assignedContactsToUpdate = [];
+  comparsion.forEach((element) =>{
+    let example = element[0]['example'];
+    let pattern = element[0]['pattern'];
+      example['name'] !== pattern['name'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) : null
+      example['email'] !== pattern['email'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null      
+      example['initials'] !== pattern['initials'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null     
+      example['phone'] !== pattern['phone'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null
+  })
+  return assignedContactsToUpdate;
+}
+
+
+function findMatchInRenderedContacts(contactId){
+  let indexOfRenderedContact = '';
+  renderedContacts.forEach((contact, index) => {
+    let match = contact.id.match(contactId);
+    if(match != null){
+      indexOfRenderedContact = index
+    }                       
+  })
+  return indexOfRenderedContact
+}
+
+
+function findIndexInTaskAssignedTo(taskId, contactId){
+  let indexInAssignedTo = '';
+ tasks.forEach((task) =>{
+ if(taskId == task.id){
+  task.data.assignedTo.forEach((contact, index) =>{
+    if(contact.id == contactId){
+        indexInAssignedTo = index;
+    }
+  })
+ }
+ })
+ return indexInAssignedTo
+}
+
+
+async function updateComparedTasks(contactId, taskId){
+  let assignedContactsToUpdate = compareArray();
+  let indexInRenderedContacts = findMatchInRenderedContacts(contactId);
+  
+  assignedContactsToUpdate.forEach(async(contact, index) =>{
+    let contactToPut = renderedContacts[findMatchInRenderedContacts(contact.contactId)]
+    let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
+    await fetch(fetchURL ,{
+      method: 'PUT',
+      body: JSON.stringify(contactToPut)
+    })    
+  })
+}
