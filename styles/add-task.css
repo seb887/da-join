@@ -256,10 +256,20 @@ body {
   height: 24px;
 }
 
-.subtasks:hover {
+.subtask-hover {
   background-color: #e7e7e7;
   border-radius: 10px;
 }
+
+.subtask-no-hover {
+  background-color: transparent;
+  border-radius: none;
+}
+
+/* .subtasks:hover {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+} */
 
 .subtasks:hover > .subtask-buttons {
   visibility: visible;
