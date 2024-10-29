@@ -313,7 +313,7 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      <li id="subtask-${index}" class="subtasks">
+      <li id="subtask-${index}" class="subtasks" onmouseover="setSubtaskHoverEffect(${index})" onmouseout="setSubtaskNoHoverEffect(${index})">
         <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
         <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
         <div class="subtask-buttons">
@@ -344,6 +344,18 @@ function createSubtasksListHTML(index, id) {
     `;
 }
 
+function setSubtaskHoverEffect(index) {
+  const subtask = document.getElementById(`subtask-${index}`);
+
+  subtask.classList.add('subtask-hover');
+}
+
+function setSubtaskNoHoverEffect(index) {
+  const subtask = document.getElementById(`subtask-${index}`);
+
+  subtask.classList.remove('subtask-hover');
+}
+
 // TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
   const singleSubtaskTitle = document.getElementById(
@@ -357,6 +369,8 @@ async function editSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+
+  subtask.removeAttribute('onmouseover');
 
   if (taskId == 'undefined') {
     singleSubtaskTitle.style.display = 'none';
@@ -396,6 +410,8 @@ async function submitEditedSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+
+  subtask.classList.remove('subtask-no-hover');
 
   if (taskId == 'undefined') {
     subtasks[index].title = inputEditSubtask.value;
