@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: script.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,86 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: script.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let activeUser = JSON.parse(localStorage.getItem('activeUser'));
+let firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
 
+function init() {
+    setActiveUserInitials();
+}
 
-    <h3> </h3>
+function removeFirstLogin() {
+    localStorage.removeItem('firstLogin');
+    firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
+    setTimeout(checkFirstLogin, 10); 
+}
 
+function checkFirstLogin() {
+    if (!firstLogin) {
+        document.getElementById('greeting-overlay-responsive').classList.add('d-none');
+        document.getElementById('time-of-the-day').classList.add('d-none');
+        document.getElementById('name').classList.add('d-none');
+    }
+}
 
+function saveActiveUserToLocalStorage(user) {
+    localStorage.setItem('activeUser', JSON.stringify(user));
+}
 
+function guestLogInOrLogOut() {
+    localStorage.removeItem('activeUser');
+    localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
+    window.location.href='login.html';
+}
 
+function setActiveUserInitials() {
+    if (activeUser) {
+        let initials = generateInitials(activeUser.name);
+        document.getElementById('user-initials').innerHTML = `&lt;p>${initials}&lt;/p>`
+        if (document.getElementById('name')) {
+            document.getElementById('name').innerHTML = activeUser.name;
+        }
+    } else {
+        document.getElementById('user-initials').innerHTML = `&lt;p>G&lt;/p>`
+    }
+}
 
+/**
+ * This function sets initials of a user
+ * 
+ * @param {string} name - The initials are the 2 first starting letters of an username (name)
+ */
+function generateInitials (name){
+    let words = name.split(' ');
+    let firstInitial = words[0].charAt(0).toUpperCase();
+    let lastInitial = [];
+    if(words.length > 1){
+        lastInitial = words[words.length - 1].charAt(0).toUpperCase();
+    }
+    return firstInitial + lastInitial;      
+}
 
+function showProfileDropDownMenu() {
+    document.getElementById('dropdown-profile').classList.toggle('show');
+}
 
-
-
-
-    
-
-
-
-
-
+/**
+ * This function gets you back to the previous page you visited
+ */
+function goBack() {
+    window.history.back();
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

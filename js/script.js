@@ -41,6 +41,11 @@ function setActiveUserInitials() {
     }
 }
 
+/**
+ * This function sets initials of a user
+ * 
+ * @param {string} name - The initials are the 2 first starting letters of an username (name)
+ */
 function generateInitials (name){
     let words = name.split(' ');
     let firstInitial = words[0].charAt(0).toUpperCase();
@@ -53,4 +58,11 @@ function generateInitials (name){
 
 function showProfileDropDownMenu() {
     document.getElementById('dropdown-profile').classList.toggle('show');
+}
+
+/**
+ * This function gets you back to the previous page you visited
+ */
+function goBack() {
+    window.history.back();
 }

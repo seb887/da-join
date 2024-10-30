@@ -56,6 +56,7 @@ async function saveTaskToFirebase(newTask) {
 
   renderBoard();
 }
+
 /**
  *
  * This function creates a new task object with several properties and calls the checkInputs function with the new object.

@@ -43,7 +43,7 @@ const buttonUrgent = document.getElementById('button-urgent');
 const buttonLowImg = document.getElementById('button-low-img');
 const buttonMediumImg = document.getElementById('button-medium-img');
 const buttonUrgentImg = document.getElementById('button-urgent-img');
-const inputAssignedTo = document.getElementById('input-assigned-to');
+let inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
 const BASE_URL =
@@ -71,10 +71,9 @@ async function renderAddTask() {
   setActiveUserInitials();
 }
 
-
 /**
  * This is an asynchronous function that sends a new task to the database and at the end renders the board.
- * 
+ *
  * @param {object} newTask - This is the object that should be saved to the database
  */
 async function saveTaskToFirebase(newTask) {
@@ -85,10 +84,11 @@ async function saveTaskToFirebase(newTask) {
 
   renderBoard();
 }
+
 /**
- * 
+ *
  * This function creates a new task object with several properties and calls the checkInputs function with the new object.
- * 
+ *
  */
 function createNewTask() {
   let newTask = {
@@ -105,12 +105,11 @@ function createNewTask() {
   checkInputs(newTask);
 }
 
-
 /**
- * This function checks the input fields for the title and category. 
+ * This function checks the input fields for the title and category.
  * If one of the inputfields is empty a textmessage appears to insert a title or select a task.
  * If the required fields are filled the all inputfields are cleared and the object will be saved to the database.
- * 
+ *
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  */
 function checkInputs(taskObj) {
@@ -132,11 +131,10 @@ function checkInputs(taskObj) {
   }
 }
 
-
 /**
- * 
+ *
  *This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
- * 
+ *
  */
 function clearInputs() {
   inputTitle.value = '';
@@ -153,47 +151,66 @@ function clearInputs() {
 
 /**
  * This function checks the prio string parameter if it is urgent, medium or low and calls the stylePrioButton function with the defined string and color
- * 
- * @param {string} prio - This is the prio status transmitted as string 
+ *
+ * @param {string} prio - This is the prio status transmitted as string
  */
 function setPrio(prio) {
   switch (prio) {
     case 'urgent':
       currentPrio = 'urgent';
-      stylePrioButton('urgent', '#ff3d00');
+      checkIfEditIsOnPrio('urgent', '#ff3d00');
       break;
     case 'medium':
       currentPrio = 'medium';
-      stylePrioButton('medium', '#FFA800');
+      checkIfEditIsOnPrio('medium', '#FFA800');
       break;
     case 'low':
       currentPrio = 'low';
-      stylePrioButton('low', '#7ae229');
+      checkIfEditIsOnPrio('low', '#7ae229');
       break;
   }
 }
 
 /**
- * This function styles the selected button and calls the setNoPrio function
- * 
- * @param {string} prio - This is the priority string 
+ * This function check if edit is on and calls the stylePrioButton function and setNoPrio function
+ *
+ * @param {string} prio - This is the priority string
  * @param {string}} color - This is the defined background color for the prio button
  */
-function stylePrioButton(prio, color) {
-  const button = document.getElementById(`button-${prio}`);
-  const buttonImg = document.getElementById(`button-${prio}-img`);
+function checkIfEditIsOnPrio(prio, color) {
+  if (isEditOn) {
+    const button = document.getElementById(`edit-button-${prio}`);
+    const buttonImg = document.getElementById(`edit-button-${prio}-img`);
 
+    stylePrioButton(prio, color, button, buttonImg);
+    setNoPrio(prio);
+  } else {
+    const button = document.getElementById(`button-${prio}`);
+    const buttonImg = document.getElementById(`button-${prio}-img`);
+
+    stylePrioButton(prio, color, button, buttonImg);
+    setNoPrio(prio);
+  }
+}
+
+/**
+ * This function styles the selected button
+ *
+ * @param {string} prio - This is the priority string
+ * @param {string}} color - This is the defined background color for the prio button
+ * @param {string}} button - This is the prio button
+ * @param {string}} buttonImg - This is the prio button img
+ */
+function stylePrioButton(prio, color, button, buttonImg) {
   button.style.background = color;
   button.style.color = 'white';
   button.style.fontWeight = 'bold';
   buttonImg.src = `../assets/icons/prio-${prio}-white.png`;
-
-  setNoPrio(prio);
 }
 
 /**
  * This function restets the unselected prio button to default value
- * 
+ *
  * @param {string} prio - This is actual prio status
  */
 function setNoPrio(prio) {
@@ -207,25 +224,38 @@ function setNoPrio(prio) {
     noPrio = ['urgent', 'medium'];
   }
 
-  styleNoPrio(noPrio);
+  checkIfEditIsOnNoPrio(noPrio);
 }
 
-function styleNoPrio(noPrio) {
+function checkIfEditIsOnNoPrio(noPrio) {
   for (let element of noPrio) {
-    const noPrioButton = document.getElementById(`button-${element}`);
-    const noPrioButtonImg = document.getElementById(`button-${element}-img`);
-    noPrioButton.style.background = 'white';
-    noPrioButton.style.color = 'black';
-    noPrioButton.style.fontWeight = 'normal';
-    noPrioButtonImg.src = `../assets/icons/prio-${element}.png`;
+    if (isEditOn) {
+      const noPrioButton = document.getElementById(`edit-button-${element}`);
+      const noPrioButtonImg = document.getElementById(
+        `edit-button-${element}-img`
+      );
+
+      styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
+    } else {
+      const noPrioButton = document.getElementById(`button-${element}`);
+      const noPrioButtonImg = document.getElementById(`button-${element}-img`);
+
+      styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
+    }
   }
+}
+
+function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
+  noPrioButton.style.background = 'white';
+  noPrioButton.style.color = 'black';
+  noPrioButton.style.fontWeight = 'normal';
+  noPrioButtonImg.src = `../assets/icons/prio-${noPrioElement}.png`;
 }
 
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  if (inputSubtask.value.length > 0) {
-    // if (inputSubtask.value.length > 0) {
+  if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
     showSubtaskIcons();
   } else {
     hideSubtaskIcons();
@@ -233,42 +263,68 @@ function controlSubtaskIcons() {
 }
 
 function showSubtaskIcons() {
-  addSubtasksImg.style.display = 'none';
-  submitSubtasksImg.style.display = 'flex';
-  cancelSubtasksImg.style.display = 'flex';
+  if (isEditOn) {
+    editAddSubtasksImg.style.display = 'none';
+    editSubmitSubtasksImg.style.display = 'flex';
+    editCancelSubtasksImg.style.display = 'flex';
+  } else {
+    addSubtasksImg.style.display = 'none';
+    submitSubtasksImg.style.display = 'flex';
+    cancelSubtasksImg.style.display = 'flex';
+  }
 }
 
 function hideSubtaskIcons() {
-  addSubtasksImg.style.display = 'flex';
-  submitSubtasksImg.style.display = 'none';
-  cancelSubtasksImg.style.display = 'none';
+  if (isEditOn) {
+    editAddSubtasksImg.style.display = 'flex';
+    editSubmitSubtasksImg.style.display = 'none';
+    editCancelSubtasksImg.style.display = 'none';
+  } else {
+    addSubtasksImg.style.display = 'flex';
+    submitSubtasksImg.style.display = 'none';
+    cancelSubtasksImg.style.display = 'none';
+  }
 }
 
 function cancelInputSubtask() {
-  inputSubtask.value = '';
+  if (isEditOn) {
+    editInputSubtask.value = '';
+  } else {
+    inputSubtask.value = '';
+  }
+
   controlSubtaskIcons();
 }
 
 function submitInputSubtask() {
   const subtaskObj = {
-    title: inputSubtask.value,
+    title: isEditOn ? editInputSubtask.value : inputSubtask.value,
     checked: false,
   };
 
   subtasks.push(subtaskObj);
   inputSubtask.value = '';
+  editInputSubtask.value = '';
   controlSubtaskIcons();
   renderSubtasksList();
 }
 
 function renderSubtasksList(taskId) {
-  subtasksList.innerHTML = '';
+  let list = subtasksList;
+
+  if (isEditOn) {
+    list = editSubtasksList;
+  } else {
+    list = subtasksList;
+  }
+
+  list.innerHTML = '';
 
   if (subtasks == undefined) {
     return;
   } else {
     for (let i = 0; i &lt; subtasks.length; i++) {
-      subtasksList.innerHTML += createSubtasksListHTML(i, taskId);
+      list.innerHTML += createSubtasksListHTML(i, taskId);
     }
   }
 }
@@ -428,13 +484,15 @@ async function listContactsToAssignedTo() {
   inputAssignedTo.innerHTML = '';
   allContacts.forEach((contact, index) => {
     inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    if (document.getElementById(contact['id'] + '-container')) {
-      document.getElementById(
-        contact['id'] + '-container'
-      ).style.backgroundColor = contact['color'];
-    }
+    setBackgroundColor(contact);
     renderedContacts.push(contact);
   });
+}
+
+function setBackgroundColor(contact){
+  if (document.getElementById(contact['id'] + '-container')) {
+    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+  }
 }
 
 function inspectCheckboxes(path) {
@@ -453,8 +511,11 @@ function inspectCheckboxes(path) {
   });
 }
 
-function dropDownContacts() {
-  const modal = document.getElementById('task-modal-edit-card');
+function dropDownContacts(containerId, addTask) {
+  let modal = document.getElementById(containerId);
+  if (addTask) {
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
+  }
   event.stopPropagation();
   if (modal) {
     modal.addEventListener('click', (e) => {
@@ -466,6 +527,7 @@ function dropDownContacts() {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
+  inputAssignedTo =document.getElementById('input-assigned-to')
 }
 
 function filterContacts(event) {
@@ -591,13 +653,13 @@ function assignedInitialContent(match, index) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 23 2024 21:49:33 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:05:19 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>

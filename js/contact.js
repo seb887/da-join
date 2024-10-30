@@ -47,18 +47,6 @@ function setDataOfContact(contact, index) {
     document.getElementById(`initialsContainer${index}`).style.backgroundColor = contactsArray[index].color;
 }
 
-
-function generateInitials (name){
-    let words = name.split(' ');
-    let firstInitial = words[0].charAt(0).toUpperCase();
-    let lastInitial = [];
-    if(words.length > 1){
-        lastInitial = words[words.length - 1].charAt(0).toUpperCase();
-    }
-    return firstInitial + lastInitial;      
-}
-
-
 function checkForExistingLetter(contact, index) {
     let name = contact.name.charAt(0).toUpperCase();
     let nameHeader = document.getElementById(name);
@@ -144,6 +132,9 @@ function openContactOrOpenMore() {
     }
 }
 
+/**
+ * This function checks if the animation of the modal is on
+ */
 function checkIfAnimationActive() {
     let modal = document.getElementById('addContact'); 
     if (animationActive) {
