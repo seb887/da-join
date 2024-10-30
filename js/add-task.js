@@ -227,10 +227,18 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
-    showSubtaskIcons();
+  if (editInputSubtask == null) {
+    if (inputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   } else {
-    hideSubtaskIcons();
+    if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   }
 }
 
@@ -275,8 +283,13 @@ function submitInputSubtask() {
   };
 
   subtasks.push(subtaskObj);
-  inputSubtask.value = '';
-  editInputSubtask.value = '';
+
+  if (editInputSubtask == null) {
+    inputSubtask.value = '';
+  } else {
+    editInputSubtask.value = '';
+  }
+
   controlSubtaskIcons();
   renderSubtasksList();
 }
@@ -333,7 +346,6 @@ function createSubtasksListHTML(index, id) {
     `;
 }
 
-// TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
@@ -461,9 +473,11 @@ async function listContactsToAssignedTo() {
   });
 }
 
-function setBackgroundColor(contact){
+function setBackgroundColor(contact) {
   if (document.getElementById(contact['id'] + '-container')) {
-    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
   }
 }
 
@@ -486,7 +500,7 @@ function inspectCheckboxes(path) {
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
   if (addTask) {
-    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
   event.stopPropagation();
   if (modal) {
@@ -499,7 +513,7 @@ function dropDownContacts(containerId, addTask) {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
-  inputAssignedTo =document.getElementById('input-assigned-to')
+  inputAssignedTo = document.getElementById('input-assigned-to');
 }
 
 function filterContacts(event) {
