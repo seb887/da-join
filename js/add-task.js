@@ -93,20 +93,19 @@ function checkInputs(taskObj) {
       error.innerHTML = 'Please select a category';
     }
   } else {
+    document.body.style.pointerEvents = 'none';
     error.innerHTML = '';
     saveTaskToFirebase(taskObj);
     subtasksList.innerHTML = '';
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => closeAddTaskModal(), 1500);
+    setTimeout(() => window.location.href = 'board.html', 1200);
   }
 }
 
 /**
- *
- *This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
- *
+ * This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
  */
 function clearInputs() {
   inputTitle.value = '';
@@ -227,10 +226,18 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
-    showSubtaskIcons();
+  if (editInputSubtask == null) {
+    if (inputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   } else {
-    hideSubtaskIcons();
+    if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   }
 }
 
@@ -275,8 +282,13 @@ function submitInputSubtask() {
   };
 
   subtasks.push(subtaskObj);
-  inputSubtask.value = '';
-  editInputSubtask.value = '';
+
+  if (editInputSubtask == null) {
+    inputSubtask.value = '';
+  } else {
+    editInputSubtask.value = '';
+  }
+
   controlSubtaskIcons();
   renderSubtasksList();
 }
@@ -333,7 +345,6 @@ function createSubtasksListHTML(index, id) {
     `;
 }
 
-// TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
@@ -461,9 +472,11 @@ async function listContactsToAssignedTo() {
   });
 }
 
-function setBackgroundColor(contact){
+function setBackgroundColor(contact) {
   if (document.getElementById(contact['id'] + '-container')) {
-    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
   }
 }
 
@@ -486,7 +499,7 @@ function inspectCheckboxes(path) {
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
   if (addTask) {
-    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
   
   if (modal) {
@@ -499,7 +512,7 @@ function dropDownContacts(containerId, addTask) {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
-  inputAssignedTo =document.getElementById('input-assigned-to')
+  inputAssignedTo = document.getElementById('input-assigned-to');
 }
 
 function filterContacts(event) {
