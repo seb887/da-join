@@ -105,9 +105,7 @@ function checkInputs(taskObj) {
 }
 
 /**
- *
- *This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
- *
+ * This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
  */
 function clearInputs() {
   inputTitle.value = '';
