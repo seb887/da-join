@@ -33,7 +33,9 @@ let modalActive = false;
 async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
-  await updateComparedTasks();
+  setTimeout(async () => {
+    await updateComparedTasks();
+  }, 6000);
   await listContactsToAssignedTo();
   clearInputs();
   setActiveUserInitials();
