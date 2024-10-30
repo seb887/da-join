@@ -488,7 +488,7 @@ function dropDownContacts(containerId, addTask) {
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask')
   }
-  event.stopPropagation();
+  
   if (modal) {
     modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);

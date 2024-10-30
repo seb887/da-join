@@ -35,7 +35,7 @@ async function renderBoard() {
   await loadContactsFromFirebase();
   setTimeout(async () => {
     await updateComparedTasks();
-  }, 6000);
+  }, 1500);
   await listContactsToAssignedTo();
   clearInputs();
   setActiveUserInitials();
@@ -565,9 +565,9 @@ async function findIndexInTaskAssignedTo(taskId, contactId){
 
 async function updateComparedTasks(contactId, taskId){
   let assignedContactsToUpdate = await compareArray();
-  let indexInRenderedContacts = await findMatchInRenderedContacts(contactId);
-  
-  assignedContactsToUpdate.forEach(async(contact, index) =>{
+  if(assignedContactsToUpdate.length > 0){
+    console.log(assignedContactsToUpdate.length + ' Änderungen zu bearbeiten.');
+    assignedContactsToUpdate.forEach(async(contact, index) =>{
     let contactToPut = renderedContacts[await findMatchInRenderedContacts(contact.contactId)]
     let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + await findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
     await fetch(fetchURL ,{
@@ -575,4 +575,9 @@ async function updateComparedTasks(contactId, taskId){
       body: JSON.stringify(contactToPut)
     })    
   })
+  await renderBoard();
+}
+else{
+  console.log('Keine Änderungen in den Contacts');
+}
 }
