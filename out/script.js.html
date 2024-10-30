@@ -29,16 +29,27 @@
             <pre class="prettyprint source linenums"><code>let activeUser = JSON.parse(localStorage.getItem('activeUser'));
 let firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
 
+/**
+ * This function sets the initials of the user who is logged in
+ */
 function init() {
     setActiveUserInitials();
 }
 
+/**
+ * After logging in, the firstLogin is set as an item in the localStorage. This function
+ * prevents the greeting message from showing up in responsive, if the user visits a different
+ * page than the summary
+ */
 function removeFirstLogin() {
     localStorage.removeItem('firstLogin');
     firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
     setTimeout(checkFirstLogin, 10); 
 }
 
+/**
+ * This function checks if the user just logged in
+ */
 function checkFirstLogin() {
     if (!firstLogin) {
         document.getElementById('greeting-overlay-responsive').classList.add('d-none');
@@ -47,16 +58,33 @@ function checkFirstLogin() {
     }
 }
 
+/**
+ * This function sets an active user to the storage, meaning the initials of the
+ * current user can show up in every page
+ */
 function saveActiveUserToLocalStorage(user) {
     localStorage.setItem('activeUser', JSON.stringify(user));
 }
 
+/**
+ * Active user is removed from the local storage. This function serves as a log out function
+ * If the user chooses to log in as a guest, the firstLogin is added to the localStorage
+ */
 function guestLogInOrLogOut() {
     localStorage.removeItem('activeUser');
     localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
     window.location.href='login.html';
 }
 
+/**
+ * Sets the initials of the active user in the UI. If an active user is present, 
+ * it generates and displays their initials in the HTML element with the ID `user-initials`. 
+ * If an element with the ID `name` is present, it also updates it to show the active user’s full name.
+ * If no active user exists, it displays "G" to indicate a guest user.
+ * 
+ * This function also handles the user login state, updating local storage if 
+ * the user logs in as a guest.
+ */
 function setActiveUserInitials() {
     if (activeUser) {
         let initials = generateInitials(activeUser.name);
@@ -84,6 +112,11 @@ function generateInitials (name){
     return firstInitial + lastInitial;      
 }
 
+/**
+ * This function toggles between showing and hiding the dropdown-profile, which is a div
+ * right under the user initials in the right top corner. The div contains different links
+ * which direct the user to the next pages
+ */
 function showProfileDropDownMenu() {
     document.getElementById('dropdown-profile').classList.toggle('show');
 }
@@ -104,13 +137,13 @@ function goBack() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:40:00 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 20:32:46 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>

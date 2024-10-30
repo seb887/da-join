@@ -435,7 +435,6 @@ function selectAllAssignedContacts(taskId) {
   });
 }
 
-
 function switchIds(){
   let contactContainer1 = document.getElementById('add-task-contact-container');
   let contactContainer2 = document.getElementById('add-task-contact-container-addTask');
@@ -520,7 +519,6 @@ function createCompareArray(){
   return taskArray;
 } 
 
-
 function compareArray(){
   let comparsion = createCompareArray();
   let assignedContactsToUpdate = [];
@@ -535,7 +533,6 @@ function compareArray(){
   return assignedContactsToUpdate;
 }
 
-
 function findMatchInRenderedContacts(contactId){
   let indexOfRenderedContact = '';
   renderedContacts.forEach((contact, index) => {
@@ -546,7 +543,6 @@ function findMatchInRenderedContacts(contactId){
   })
   return indexOfRenderedContact
 }
-
 
 function findIndexInTaskAssignedTo(taskId, contactId){
   let indexInAssignedTo = '';
@@ -562,11 +558,9 @@ function findIndexInTaskAssignedTo(taskId, contactId){
  return indexInAssignedTo
 }
 
-
 async function updateComparedTasks(contactId, taskId){
   let assignedContactsToUpdate = compareArray();
   let indexInRenderedContacts = findMatchInRenderedContacts(contactId);
-  
   assignedContactsToUpdate.forEach(async(contact, index) =>{
     let contactToPut = renderedContacts[findMatchInRenderedContacts(contact.contactId)]
     let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
