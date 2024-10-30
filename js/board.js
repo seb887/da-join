@@ -437,7 +437,6 @@ function selectAllAssignedContacts(taskId) {
   });
 }
 
-
 function switchIds(){
   let contactContainer1 = document.getElementById('add-task-contact-container');
   let contactContainer2 = document.getElementById('add-task-contact-container-addTask');
@@ -563,7 +562,6 @@ async function findIndexInTaskAssignedTo(taskId, contactId){
  })
  return indexInAssignedTo
 }
-
 
 async function updateComparedTasks(contactId, taskId){
   let assignedContactsToUpdate = await compareArray();
