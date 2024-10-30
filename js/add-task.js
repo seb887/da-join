@@ -93,20 +93,19 @@ function checkInputs(taskObj) {
       error.innerHTML = 'Please select a category';
     }
   } else {
+    document.body.style.pointerEvents = 'none';
     error.innerHTML = '';
     saveTaskToFirebase(taskObj);
     subtasksList.innerHTML = '';
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => closeAddTaskModal(), 1500);
+    setTimeout(() => window.location.href = 'board.html', 1200);
   }
 }
 
 /**
- *
- *This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
- *
+ * This function clears the input fields, renders the subtask list, sets the prio button to the default value ('medium') and hides the subtask icons.
  */
 function clearInputs() {
   inputTitle.value = '';

@@ -1,0 +1,25 @@
+{
+    "opts": {
+        "destination": "./out",
+        "recurse": true,
+        "template": "templates/default",
+        "encoding": "utf8"
+    },
+    "source": {
+        "include": ["./src"],
+        "includePattern": ".+\\.js(doc|on)?$",
+        "excludePattern": "(node_modules|\\.git)"
+    },
+    "plugins": [],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "useLongName": true,
+            "sort": {
+                "files": true,
+                "functions": true
+            }
+        }
+    }
+}

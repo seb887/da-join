@@ -33,9 +33,12 @@ let modalActive = false;
 async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
+  setTimeout(async () => {
+    await updateComparedTasks();
+  }, 6000);
+  await listContactsToAssignedTo();
   clearInputs();
   setActiveUserInitials();
-  listContactsToAssignedTo();
   searchInput.value = '';
 }
 
@@ -72,7 +75,6 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
       data: dataFromFirebase[objectKeys[i]],
     });
   }
-
   renderKanbanLists(tasks);
 }
 
@@ -435,7 +437,6 @@ function selectAllAssignedContacts(taskId) {
   });
 }
 
-
 function switchIds(){
   let contactContainer1 = document.getElementById('add-task-contact-container');
   let contactContainer2 = document.getElementById('add-task-contact-container-addTask');
@@ -498,7 +499,7 @@ function renderContactsinAddTask(){
 }
 
 
-function createCompareArray(){
+async function createCompareArray(){
   let taskArray = [];
   tasks.forEach((task, index) =>{
     if(task.data.assignedTo){ //Alle assignedTo in einem Task werden angesprochen
@@ -521,8 +522,8 @@ function createCompareArray(){
 } 
 
 
-function compareArray(){
-  let comparsion = createCompareArray();
+async function compareArray(){
+  let comparsion = await createCompareArray();
   let assignedContactsToUpdate = [];
   comparsion.forEach((element) =>{
     let example = element[0]['example'];
@@ -536,7 +537,7 @@ function compareArray(){
 }
 
 
-function findMatchInRenderedContacts(contactId){
+async function findMatchInRenderedContacts(contactId){
   let indexOfRenderedContact = '';
   renderedContacts.forEach((contact, index) => {
     let match = contact.id.match(contactId);
@@ -548,7 +549,7 @@ function findMatchInRenderedContacts(contactId){
 }
 
 
-function findIndexInTaskAssignedTo(taskId, contactId){
+async function findIndexInTaskAssignedTo(taskId, contactId){
   let indexInAssignedTo = '';
  tasks.forEach((task) =>{
  if(taskId == task.id){
@@ -562,14 +563,13 @@ function findIndexInTaskAssignedTo(taskId, contactId){
  return indexInAssignedTo
 }
 
-
 async function updateComparedTasks(contactId, taskId){
-  let assignedContactsToUpdate = compareArray();
-  let indexInRenderedContacts = findMatchInRenderedContacts(contactId);
+  let assignedContactsToUpdate = await compareArray();
+  let indexInRenderedContacts = await findMatchInRenderedContacts(contactId);
   
   assignedContactsToUpdate.forEach(async(contact, index) =>{
-    let contactToPut = renderedContacts[findMatchInRenderedContacts(contact.contactId)]
-    let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
+    let contactToPut = renderedContacts[await findMatchInRenderedContacts(contact.contactId)]
+    let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + await findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
     await fetch(fetchURL ,{
       method: 'PUT',
       body: JSON.stringify(contactToPut)

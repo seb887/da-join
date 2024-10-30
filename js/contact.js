@@ -3,6 +3,10 @@ CONTACT_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.
 let contactsArray = [];
 let animationActive = false;
 
+/**
+ * This function is active when the body loads. It sets up the user initials and renders
+ * the contacts in the contact list
+ */
 function initContacts() {
     document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
     document.getElementById('contact-information-responsive').classList.add('hide-info-responsive');
@@ -10,15 +14,20 @@ function initContacts() {
     setActiveUserInitials();
 }
 
-
+/**
+ * Asynchronously fetches a list of contacts from a specified URL.
+ */
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();
     return contacts;
 }
 
-
-async function renderContacts(newContact) {
+/**
+ * Fetches and renders a list of contacts in the DOM, sorting them alphabetically by name
+ * Each contact is assigned a unique ID and rendered within the HTML element with ID 'contacts'
+ */
+async function renderContacts() {
     let allContacts = Object.values(await getContacts());
     let id = Object.keys(await getContacts());
     contactsArray = [];
@@ -47,7 +56,13 @@ function setDataOfContact(contact, index) {
     document.getElementById(`initialsContainer${index}`).style.backgroundColor = contactsArray[index].color;
 }
 
-function checkForExistingLetter(contact, index) {
+/**
+ * Checks if a header for the initial letter of a contact's name exists in the DOM.
+ * If it does not exist, it adds a new header for that letter to the 'contacts' element.
+ *
+ * @param {Object} contact - The contact object containing at least a `name` property.
+ */
+function checkForExistingLetter(contact) {
     let name = contact.name.charAt(0).toUpperCase();
     let nameHeader = document.getElementById(name);
     if(!nameHeader) {
@@ -55,26 +70,28 @@ function checkForExistingLetter(contact, index) {
     };
 }
 
-
+/**
+ * Toggles the display of a contact's detailed information in the UI, animating it with a fade and slide effect.
+ * Updates the contact information and adjusts the responsive button appearance based on the selected contact.
+ * @param {number } index - The index of the contact in the `contactsArray` to display
+ */
 function openContact(index) {
     let container = document.getElementById('contactInformation');
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
-    if(document.getElementById('contactName').innerText == contactsArray[index].name){
-        container.classList.toggle('contactFadeAndSlideIn');
-        document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive');
-        responsiveButtonBottom.src = '../assets/icons/more.png';
-        document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
-    } else { 
-        container.classList.remove('contactFadeAndSlideIn');
-        document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
-        responsiveButtonBottom.src = '../assets/icons/more.png';
+    let isSameContact = document.getElementById('contactName').innerText == contactsArray[index].name;
+
+    container.classList.toggle('contactFadeAndSlideIn', isSameContact);
+    document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive', isSameContact);
+    responsiveButtonBottom.src = '../assets/icons/more.png';
+    document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
+
+    if (!isSameContact) {
         setTimeout(() => {
             container.classList.add('contactFadeAndSlideIn');
             document.getElementById('contact-information-responsive').classList.add('fadeAndSlideInResponsive');
-            document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
         }, 50);
     }
-    setContactInformation(index)
+    setContactInformation(index);
 }
 
 async function setContactInformation(index) {

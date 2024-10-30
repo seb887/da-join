@@ -31,6 +31,10 @@
 let contactsArray = [];
 let animationActive = false;
 
+/**
+ * This function is active when the body loads. It sets up the user initials and renders
+ * the contacts in the contact list
+ */
 function initContacts() {
     document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
     document.getElementById('contact-information-responsive').classList.add('hide-info-responsive');
@@ -38,15 +42,20 @@ function initContacts() {
     setActiveUserInitials();
 }
 
-
+/**
+ * Asynchronously fetches a list of contacts from a specified URL.
+ */
 async function getContacts() {
     let response = await fetch(CONTACT_URL);
     let contacts = await response.json();
     return contacts;
 }
 
-
-async function renderContacts(newContact) {
+/**
+ * Fetches and renders a list of contacts in the DOM, sorting them alphabetically by name
+ * Each contact is assigned a unique ID and rendered within the HTML element with ID 'contacts'
+ */
+async function renderContacts() {
     let allContacts = Object.values(await getContacts());
     let id = Object.keys(await getContacts());
     contactsArray = [];
@@ -75,7 +84,13 @@ function setDataOfContact(contact, index) {
     document.getElementById(`initialsContainer${index}`).style.backgroundColor = contactsArray[index].color;
 }
 
-function checkForExistingLetter(contact, index) {
+/**
+ * Checks if a header for the initial letter of a contact's name exists in the DOM.
+ * If it does not exist, it adds a new header for that letter to the 'contacts' element.
+ *
+ * @param {Object} contact - The contact object containing at least a `name` property.
+ */
+function checkForExistingLetter(contact) {
     let name = contact.name.charAt(0).toUpperCase();
     let nameHeader = document.getElementById(name);
     if(!nameHeader) {
@@ -83,26 +98,28 @@ function checkForExistingLetter(contact, index) {
     };
 }
 
-
+/**
+ * Toggles the display of a contact's detailed information in the UI, animating it with a fade and slide effect.
+ * Updates the contact information and adjusts the responsive button appearance based on the selected contact.
+ * @param {number } index - The index of the contact in the `contactsArray` to display
+ */
 function openContact(index) {
     let container = document.getElementById('contactInformation');
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
-    if(document.getElementById('contactName').innerText == contactsArray[index].name){
-        container.classList.toggle('contactFadeAndSlideIn');
-        document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive');
-        responsiveButtonBottom.src = '../assets/icons/more.png';
-        document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
-    } else { 
-        container.classList.remove('contactFadeAndSlideIn');
-        document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
-        responsiveButtonBottom.src = '../assets/icons/more.png';
+    let isSameContact = document.getElementById('contactName').innerText == contactsArray[index].name;
+
+    container.classList.toggle('contactFadeAndSlideIn', isSameContact);
+    document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive', isSameContact);
+    responsiveButtonBottom.src = '../assets/icons/more.png';
+    document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
+
+    if (!isSameContact) {
         setTimeout(() => {
             container.classList.add('contactFadeAndSlideIn');
             document.getElementById('contact-information-responsive').classList.add('fadeAndSlideInResponsive');
-            document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
         }, 50);
     }
-    setContactInformation(index)
+    setContactInformation(index);
 }
 
 async function setContactInformation(index) {
@@ -412,13 +429,13 @@ function editContactCardContent(contact, initials, index){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 19:40:00 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 22:17:41 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>
