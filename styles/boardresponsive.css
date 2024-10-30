@@ -1,0 +1,322 @@
+@media (max-width: 1450px) {
+    .no-tasks-card {
+      width: 180px;
+    }
+    .task-modal-card {
+      padding: 38px 30px;
+      gap: 16px;
+      width: 475px;
+      max-height: 700px;
+      font-size: 16px;
+    }
+    .task-modal-edit-card {
+      padding: 38px 30px;
+      gap: 16px;
+      width: 475px;
+      max-height: 700px;
+      font-size: 16px;
+    }
+    .add-task-input-description-board {
+      height: 65px;
+    }
+    .board-content-section {
+      width: unset;
+    }
+    .kanban-card {
+      width: 190px;
+      gap: 5px;
+    }
+    .kanban-list {
+      align-items: flex-start;
+      min-width: 180px;
+    }
+    .kanban-headline {
+      width: 180px;
+    }
+    .kanban-container {
+      min-width: 180px;
+    }
+    .add-task-modal-card {
+      width: 950px;
+      height: 595px;
+      gap: 8px;
+    }
+    .prio-buttons-board {
+      width: 85px;
+      font-size: 12px;
+    }
+    .prio-buttons-board-edit {
+      width: 115px;
+      font-size: 16px;
+    }
+    .add-task-form-board {
+      justify-content: center;
+    }
+    .add-task-footer-board {
+      margin-top: 8px;
+    }
+    .add-task-modal-header h1 {
+      font-size: 47px;
+    }
+    .left-container-board {
+      width: 280px;
+    }
+    .right-container-board {
+      width: 280px;
+    }
+    .add-task-input-title-board,
+    .add-task-input-date-board,
+    .add-task-input-description-board,
+    .add-task-input-subtasks-board,
+    .add-task-select-board {
+      font-size: 16px;
+    }
+    #searchContact-board,
+    #searchContact-board-addTask {
+      font-size: 16px;
+    }
+    .seperator-board {
+      height: 390px;
+      width: 0.5px;
+    }
+    .subtask-progress-bar-container {
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 1150px) {
+    .task-modal-edit-card {
+      max-height: 595px;
+    }
+    .task-modal-card {
+      max-height: 595px;
+    }
+    .seperator-board {
+      height: 380px;
+    }
+    .board-content-section {
+      width: unset;
+    }
+    h1 {
+      font-size: 47px;
+    }
+    .input-container {
+      width: 180px;
+      height: 45px;
+      input {
+        width: 100%;
+        font-size: 15px;
+      }
+      .input-search-img {
+        margin-left: 8px;
+      }
+    }
+    .add-task-button {
+      width: 140px;
+      height: 45px;
+      font-size: 18px;
+    }
+    .no-tasks-card {
+      width: 130px;
+    }
+    .board-content-section {
+      width: unset;
+      gap: 12px;
+    }
+    .kanban-card {
+      width: 130px;
+      padding: 12px;
+    }
+    .kanban-list {
+      min-width: 130px;
+    }
+    .kanban-headline {
+      width: 130px;
+      font-size: 14px;
+      align-items: center;
+    }
+    .kanban-container {
+      min-width: 140px;
+    }
+    .kanban-add-task-buttons {
+      width: 20px;
+    }
+    .card-label-container {
+      font-size: 14px;
+    }
+    .add-task-modal-card {
+      width: 800px;
+    }
+  }
+  
+  @media (max-width: 890px) {
+    .add-task-input-date {
+      font-size: 12px;
+    }
+    #add-task-modal {
+      opacity: 0;
+      z-index: -999;
+    }
+    .kanban-container {
+      align-items: flex-start;
+    }
+    #kanban-list-todo {
+      display: flex;
+    }
+    .add-task-button span {
+      display: none;
+    }
+    .board-content-section {
+      width: 100%;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      padding: 0px;
+      margin-top: 20px;
+    }
+    .kanban-list {
+      height: unset;
+      flex-direction: unset;
+      width: 100%;
+    }
+    .content-board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+      height: unset;
+      position: relative;
+      top: 30px;
+      h1 {
+        font-size: 47px;
+      }
+    }
+    .input-container {
+      position: absolute;
+      top: 150px;
+      left: 0px;
+      width: 100%;
+      height: 45px;
+      input {
+        width: 100%;
+        font-size: 15px;
+      }
+      .input-search-img {
+        margin-left: 8px;
+      }
+    }
+    .add-task-button {
+      width: 40px;
+      height: 40px;
+    }
+    .no-tasks-card {
+      width: 100%;
+    }
+    .kanban-card {
+      min-width: 252px;
+      padding: 12px;
+    }
+    .kanban-headline {
+      width: 100%;
+      font-size: 27px;
+      align-items: center;
+    }
+    .kanban-add-task-buttons {
+      width: 20px;
+    }
+    .card-label-container {
+      font-size: 16px;
+    }
+    .board-header {
+      padding: 80px 0px 55px 0px;
+      width: 100%;
+    }
+    .headline-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .subtask-progress-bar {
+      width: 100%;
+    }
+    .kanban-add-task-buttons {
+      width: 30px;
+      height: 30px;
+    }
+    .task-modal-edit-card {
+      width: 396px;
+      max-height: calc(85vh);
+    }
+    .task-modal-card, .task-modal-edit-card {
+      width: 396px;
+      max-height: calc(85vh);
+    }
+    .task-modal-card-title {
+      font-size: 36px;
+    }
+    .task-modal-contact-name {
+      font-size: 16px;
+    }
+    .task-modal-card-category {
+      font-size: 16px;
+    }
+    .prio-buttons-board-edit {
+      width: 100px;
+    }
+  
+  }
+  
+  @media (max-width: 427px) {
+    .content-board {
+      h1 {
+          font-size: 40px;
+      }
+    }
+    #searchContact-board, #searchContact-board-addTask {
+      font-size: 14px;
+    }
+    #add-task-contact-container, #add-task-contact-container-addTask {
+      img {
+          right: 4px !important;
+      }
+    }
+    .kanban-card {
+      min-width: 180px;
+    }
+    .kanban-list {
+      gap: 14px;
+    }
+    .card-profile-badge-3 {
+      width: 24px;
+      height: 24px;
+      font-size: 8px;
+    }
+    .card-label-container {
+      font-size: 14px;
+    }
+    .card-title {
+      font-size: 14px;
+    }
+    .card-description {
+      font-size: 12px;
+    }
+    .subtask-counter {
+      font-size: 10px;
+    }
+    .task-modal-card, .task-modal-edit-card {
+      width: 300px;
+    }
+    .prio-buttons-board-edit {
+      width: 70px;
+      font-size: 10px;
+    }
+    #edit-button-low-img, #edit-button-urgent-img {
+      width: 16px;
+      height: 10.5px;
+    }
+    #edit-button-medium-img {
+      width: 18px;
+      height: 6.5px;
+    }
+  }  
