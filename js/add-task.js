@@ -284,14 +284,8 @@ function submitInputSubtask() {
 
   subtasks.push(subtaskObj);
 
-<<<<<<< Updated upstream
   if (!isEditOn) {
     console.log('clear inputSubtask', isEditOn);
-=======
-  if (editInputSubtask == null) {
-    
-    
->>>>>>> Stashed changes
     inputSubtask.value = '';
   } else {
     console.log('clear editInputSubtask', isEditOn);
@@ -523,16 +517,12 @@ function dropDownContacts(containerId, addTask) {
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
-<<<<<<< Updated upstream
 
   if (modal) {
     modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);
     });
   }
-=======
-  
->>>>>>> Stashed changes
   if (inputAssignedTo.style.display == 'flex') {
     closeDropdownMenu(inputAssignedTo);
   } else {
