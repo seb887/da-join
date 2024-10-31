@@ -722,6 +722,19 @@
   height: 14px;
 }
 
+#input-assigned-to-addTask{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+#assigned-contacts-list-addTask{
+  display: flex; 
+  flex-wrap: wrap;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(300%);

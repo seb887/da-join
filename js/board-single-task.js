@@ -148,10 +148,11 @@ async function deleteTask(id) {
   renderBoard();
 }
 
-function openEditTaskModal(taskId) {
+async function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
   isEditOn = true;
+  await listContactsToAssignedTo();
   selectAllAssignedContacts(taskId);
   hideSubtaskIcons();
 
@@ -212,12 +213,4 @@ function getSelectedContactsEditTask() {
     selectedContacts.push(match);
   });
   return selectedContacts;
-}
-
-
-async function updateContactsinTask() {
-  tasks.forEach((task) => {
-    console.log(task);
-    
-  })
 }

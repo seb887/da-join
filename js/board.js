@@ -14,12 +14,12 @@ const clearInputBtn = document.getElementById('search-clear-btn');
 let sContactAdd = document.getElementById('searchContact');
 let sContactBoard = document.getElementById('searchContact-board');
 let sContactBoardAddTask = document.getElementById('searchContact-board-addTask');
-
 const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
 const taskModalSubtasksList = document.getElementById(
   'task-modal-card-subtasks-list'
 );
 const contactContainer = document.getElementById('assigned-contacts-list');
+const inputATAT = document.getElementById('input-assigned-to-addTask');
 
 // VARIABLES
 const tasks = [];
@@ -30,7 +30,7 @@ let animationActiveBoard = false;
 let modalActive = false;
 
 // FUNCTIONS
-async function renderBoard() {
+async function renderBoard(from) {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   await listContactsToAssignedTo();
@@ -38,6 +38,8 @@ async function renderBoard() {
   setActiveUserInitials();
   await updateComparedTasks();
   searchInput.value = '';
+  console.log(from);
+  
 }
 
 async function loadContactsFromFirebase() {
@@ -124,6 +126,7 @@ function openTaskModal(event, id) {
   modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(event);
   displayTaskModalContacts(id);
+  
 }
 
 function closeTaskModal() {
@@ -143,6 +146,7 @@ function closeTaskModal() {
   }
 
   isEditOn = false;
+  removeAssignedList();
   renderBoard();
 }
 
@@ -152,7 +156,7 @@ function openAddTaskModal(kanbanBoard) {
     return;
   }
   addTaskModal.style.display = 'flex';
-
+  renderAllContactsInAddTask();
   currentKanbanBoard = kanbanBoard;
   modalSlideInOrOut('add-task-modal-card');
 }
@@ -274,7 +278,7 @@ function cancelSearchTask() {
 
 //showInfoToast('Tast added to board') should be moved to the addTask function after creation
 function showInfoToast(text) {
-  event.preventDefault();
+  // event.preventDefault();
   const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');
   infoText.innerText = text;
@@ -578,4 +582,54 @@ async function updateComparedTasks(contactId, taskId){
 else{
   return
 }
+}
+
+
+function renderAllContactsInAddTask(){
+  let inputChild = document.querySelector("#input-assigned-to-addTask > label:nth-child(1)");
+  inputAssignedTo.innerHTML = '';
+  document.getElementById('assigned-contacts-list').innerHTML = ''
+  inputATAT.innerHTML = ''
+  renderedContacts.forEach((contact) =>{ 
+    inputATAT.innerHTML += assignedToContactsContentAddTask(contact);
+    setBackgroundColor(contact);
+  })
+}
+
+
+
+function inspectCheckboxesAddTask(path) {
+  let allDivs = document.getElementById('input-assigned-to-addTask');
+  assignedContacts = []; 
+  allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+    if (cb.checked) {      
+      assignedContacts.push(cb.value);
+      cb.parentElement.parentElement.classList.add('selected');
+      renderAssignedContacts('assigned-contacts-list-addTask');
+    }
+    if (!cb.checked) {
+      cb.parentElement.parentElement.classList.remove('selected');
+      renderAssignedContacts('assigned-contacts-list-addTask');
+    }
+  });
+}// greift auf input-assigned-to zu nicht auf input-assigned-to-addTask
+
+
+function removeAssignedList(){
+  inputAssignedTo.innerHTML = '';
+  document.getElementById('assigned-contacts-list').innerHTML = ''
+  inputATAT.innerHTML = ''
+}
+function assignedToContactsContentAddTask(contact, id, index) {
+  return `
+  <label for ="${contact['id']}cb">
+      <div class ="add-task-contact-list">
+        <div>
+          <div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}</div>
+          <div>${contact['name']}</div>
+        </div>
+        <input onchange ="inspectCheckboxesAddTask('assigned-contacts-list-addTask')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
+      </div>
+  </label>
+    `;
 }

@@ -275,7 +275,7 @@
     <section
       class="task-modal"
       id="task-modal"
-      onclick="closeTaskModal(); closeDropdownMenu(inputAssignedTo)"
+      onclick="closeDropdownMenu(inputAssignedTo); closeTaskModal();"
     >
       <!-- TODO: -->
       <!-- TASK MODAL CARD -->
@@ -631,7 +631,7 @@
                 class="add-task-select-board"
               >
                 <div
-                  style="cursor: pointer"
+                  style="cursor: pointer;"
                   onclick="dropDownContacts('searchContact-board-addTask', 1)"
                 >
                   <input
@@ -647,6 +647,7 @@
                   />
                 </div>
                 <div
+                  style="display: none;"
                   class="add-task-select-board"
                   id="input-assigned-to-addTask"
                 ></div>
