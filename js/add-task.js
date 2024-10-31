@@ -28,6 +28,7 @@ let assignedContacts = [];
 let renderedContacts = [];
 let dropedDown = false;
 let matches = [];
+let isSubtaskEditOn = false;
 
 // DEFAULTS
 let currentDate = new Date();
@@ -317,37 +318,43 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      <li id="subtask-${index}" class="subtasks">
-        <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
-        <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        <div class="subtask-buttons">
-          <img
-            src="../assets/icons/edit-subtask.png"
-            alt="edit icon"
-            id="edit-subtask-${index}"
-            class="edit-subtask"
-            onclick="editSingleSubtask('${id}', '${index}')"
-          />
-           <img
-            src="../assets/icons/submit-subtask.png"
-            alt="submit icon"
-            id="submit-edit-subtask-${index}"
-            class="submit-edit-subtask"
-            onclick="submitEditedSingleSubtask('${id}', '${index}')"
-          />
-          <img
-            src="../assets/icons/delete-subtask.png"
-            alt="trash icon"
-            id="delete-subtask-${index}"
-            class="delete-subtask"
-            onclick="deleteSingleSubtask('${id}', '${index}')"
-          />
-        </div>
-      </li>
-    `;
+  <li id="subtask-${index}" class="subtasks">
+  <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
+  <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
+  <div id="subtask-buttons-${index}" class="subtask-buttons">
+  <img
+  src="../assets/icons/edit-subtask.png"
+  alt="edit icon"
+  id="edit-subtask-${index}"
+  class="edit-subtask"
+  onclick="editSingleSubtask('${id}', '${index}')"
+  />
+  <img
+  src="../assets/icons/submit-subtask.png"
+  alt="submit icon"
+  id="submit-edit-subtask-${index}"
+  class="submit-edit-subtask"
+  onclick="submitEditedSingleSubtask('${id}', '${index}')"
+  />
+  <img
+  src="../assets/icons/delete-subtask.png"
+  alt="trash icon"
+  id="delete-subtask-${index}"
+  class="delete-subtask"
+  onclick="deleteSingleSubtask('${id}', '${index}')"
+  />
+  </div>
+  </li>
+  `;
 }
 
 async function editSingleSubtask(taskId, index) {
+  if (isSubtaskEditOn) {
+    return;
+  } else {
+    isSubtaskEditOn = true;
+  }
+
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
@@ -359,6 +366,7 @@ async function editSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
     singleSubtaskTitle.style.display = 'none';
@@ -382,6 +390,7 @@ async function editSingleSubtask(taskId, index) {
       }
     }
   }
+  subtaskButtons.style.visibility = 'visible';
 }
 
 async function submitEditedSingleSubtask(taskId, index) {
@@ -396,6 +405,7 @@ async function submitEditedSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
     subtasks[index].title = inputEditSubtask.value;
@@ -423,6 +433,8 @@ async function submitEditedSingleSubtask(taskId, index) {
       }
     }
   }
+  subtaskButtons.style.visibility = 'hidden';
+  isSubtaskEditOn = false;
 }
 
 async function deleteSingleSubtask(taskId, index) {
