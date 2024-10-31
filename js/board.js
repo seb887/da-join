@@ -33,12 +33,10 @@ let modalActive = false;
 async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
-  setTimeout(async () => {
-    await updateComparedTasks();
-  }, 1500);
   await listContactsToAssignedTo();
   clearInputs();
   setActiveUserInitials();
+  await updateComparedTasks();
   searchInput.value = '';
 }
 
@@ -566,7 +564,7 @@ async function findIndexInTaskAssignedTo(taskId, contactId){
 async function updateComparedTasks(contactId, taskId){
   let assignedContactsToUpdate = await compareArray();
   if(assignedContactsToUpdate.length > 0){
-    console.log(assignedContactsToUpdate.length + ' Änderungen zu bearbeiten.');
+    console.log('Tasks updated.');
     assignedContactsToUpdate.forEach(async(contact, index) =>{
     let contactToPut = renderedContacts[await findMatchInRenderedContacts(contact.contactId)]
     let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + await findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
@@ -578,6 +576,6 @@ async function updateComparedTasks(contactId, taskId){
   await renderBoard();
 }
 else{
-  console.log('Keine Änderungen in den Contacts');
+  return
 }
 }
