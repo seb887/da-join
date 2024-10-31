@@ -100,7 +100,7 @@ function checkInputs(taskObj) {
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => window.location.href = 'board.html', 1200);
+    setTimeout(() => (window.location.href = 'board.html'), 1200);
   }
 }
 
@@ -283,9 +283,11 @@ function submitInputSubtask() {
 
   subtasks.push(subtaskObj);
 
-  if (editInputSubtask == null) {
+  if (!isEditOn) {
+    console.log('clear inputSubtask', isEditOn);
     inputSubtask.value = '';
   } else {
+    console.log('clear editInputSubtask', isEditOn);
     editInputSubtask.value = '';
   }
 
@@ -501,7 +503,7 @@ function dropDownContacts(containerId, addTask) {
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
-  
+
   if (modal) {
     modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);
