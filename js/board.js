@@ -428,7 +428,7 @@ function selectAllAssignedContacts(taskId) {
   tasks.forEach((task) => {
     if (task.data.assignedTo && task.id == taskId) {
       task.data.assignedTo.forEach((contact) => {
-        document.getElementById(contact.id + 'cb').checked = true;
+        document.getElementById(contact.id + 'cb') ? document.getElementById(contact.id + 'cb').checked = true: null ;
         inspectCheckboxes('assigned-contacts-list');
       });
     }
