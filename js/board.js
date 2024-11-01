@@ -144,6 +144,7 @@ function closeTaskModal() {
   }
   isEditOn = false;
   removeAssignedList();
+  clearAssignedContacts();
   renderBoard();
 }
 
@@ -163,12 +164,14 @@ function closeAddTaskModal() {
   setTimeout(() => {
     addTaskModal.style.display = 'none';
   }, 250);
+  clearAssignedContacts();
   clearInputs();
 
 }
 
 function cancelAddTask() {
   clearInputs();
+  clearAssignedContacts();
   closeAddTaskModal();
 }
 

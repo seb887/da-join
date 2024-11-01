@@ -114,7 +114,6 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
   inputSubtask.value = '';
   subtasks = [];
-  clearAssignedContacts();
   renderSubtasksList();
   setPrio('medium');
   hideSubtaskIcons();
