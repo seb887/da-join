@@ -439,32 +439,6 @@ function selectAllAssignedContacts(taskId) {
   });
 }
 
-function switchIds(){
-  let contactContainer1 = document.getElementById('add-task-contact-container');
-  let contactContainer2 = document.getElementById('add-task-contact-container-addTask');
-  contactContainer1.id = 'add-task-contact-container-addTask';
-  contactContainer2.id = 'add-task-contact-container';
-  let searchContact1 = document.getElementById('searchContact-board');
-  let searchContact2 = document.getElementById('searchContact-board-addTask');
-  searchContact1.id = 'searchContact-board-addTask';
-  searchContact2.id = 'searchContact-board';
-  let inputAssignedTo1 = document.getElementById('input-assigned-to');
-  let inputAssignedTo2 = document.getElementById('input-assigned-to-addTask');
-  inputAssignedTo1.id = 'input-assigned-to-addTask';
-  inputAssignedTo2.id = 'input-assigned-to';
-  let assignedContactList1 = document.getElementById('assigned-contacts-list');
-  let assignedContactList2 = document.getElementById('assigned-contacts-list-addTask');
-  assignedContactList1.id = 'assigned-contacts-list-addTask';
-  assignedContactList2.id ='assigned-contacts-list';
-  let arrowAssignTo1 = document.getElementById('arrowAssignTo');
-  let arrowAssignTo2 = document.getElementById('arrowAssignToAddTask');
-  arrowAssignTo1.id = 'arrowAssignToAddTask';
-  arrowAssignTo2.id = 'arrowAssignTo';
-  renderBoard();
-  
-  //Display none im css bei den Kontakten und keine Farbe bei den Kontakten?? --> Da weitermachen!!!
- }
-
  window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
@@ -620,6 +594,29 @@ function removeAssignedList(){
   document.getElementById('assigned-contacts-list').innerHTML = ''
   inputATAT.innerHTML = ''
 }
+
+function showOrHideContactsOnInputInBoard() {
+  let allDivs = document.getElementById('input-assigned-to');
+  const contactList = document.getElementById('input-assigned-to');
+  if (document.getElementById('searchContact').value.length > 0) {
+    contactList.style.display = 'flex';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      cb.parentElement.parentElement.style.display = 'none';
+    });
+    return true;
+  } else {
+    document.getElementById('input-assigned-to').style.display = 'none';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      cb.parentElement.parentElement.style.display = '';
+    });
+    return false;
+  }
+}
+
 function assignedToContactsContentAddTask(contact, id, index) {
   return `
   <label for ="${contact['id']}cb">
