@@ -164,6 +164,7 @@ function closeAddTaskModal() {
     addTaskModal.style.display = 'none';
   }, 250);
   clearInputs();
+
 }
 
 function cancelAddTask() {
@@ -627,6 +628,15 @@ function displayMatchingContactsInBoard() {
 function filterContactsInBoard(path) {
   if (showOrHideContactsOnInputInBoard(path)) {
     displayMatchingContactsInBoard(path);
+  }
+}
+
+function clearAssignedContacts(){
+  document.getElementById('assigned-contacts-list-addTask').innerHTML = '';
+  input1 ? input1.value = '': null ;
+  input2 ? input2.value = '' : null;
+  if(inputATAT.style.display = 'flex'){
+    dropDownContacts('searchContact-board-addTask', 1)
   }
 }
 
