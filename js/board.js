@@ -20,6 +20,8 @@ const taskModalSubtasksList = document.getElementById(
 );
 const contactContainer = document.getElementById('assigned-contacts-list');
 const inputATAT = document.getElementById('input-assigned-to-addTask');
+const input1 = document.getElementById('searchContact-board');
+const input2 = document.getElementById('searchContact-board-addTask');
 
 // VARIABLES
 const tasks = [];
@@ -30,16 +32,14 @@ let animationActiveBoard = false;
 let modalActive = false;
 
 // FUNCTIONS
-async function renderBoard(from) {
+async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
   await listContactsToAssignedTo();
   clearInputs();
   setActiveUserInitials();
   await updateComparedTasks();
-  searchInput.value = '';
-  console.log(from);
-  
+  searchInput.value = '';  
 }
 
 async function loadContactsFromFirebase() {
@@ -80,7 +80,6 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
 
 function renderKanbanLists(tasksArr) {
   clearKanbanLists();
-
   renderData(filterData('todo', tasksArr), kanbanListTodo);
   renderData(filterData('in progress', tasksArr), kanbanListInProgress);
   renderData(filterData('await feedback', tasksArr), kanbanListAwaitFeedback);
@@ -125,8 +124,7 @@ function openTaskModal(event, id) {
   taskModalCard.style.display = 'flex';
   modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(event);
-  displayTaskModalContacts(id);
-  
+  displayTaskModalContacts(id);  
 }
 
 function closeTaskModal() {
@@ -144,7 +142,6 @@ function closeTaskModal() {
   } else {
     modalSlideInOrOut('task-modal-card');
   }
-
   isEditOn = false;
   removeAssignedList();
   renderBoard();
@@ -234,7 +231,6 @@ async function drop(board) {
       await updateTaskInFirebase(element.id, element.data);
     }
   }
-
   renderBoard();
 }
 
@@ -271,12 +267,11 @@ function controlVisibilityInputClearBtn() {
 
 function cancelSearchTask() {
   searchInput.value = '';
-
   renderKanbanLists(tasks);
   controlVisibilityInputClearBtn();
 }
 
-//showInfoToast('Tast added to board') should be moved to the addTask function after creation
+//showInfoToast('Task added to board') should be moved to the addTask function after creation
 function showInfoToast(text) {
   // event.preventDefault();
   const toast = document.getElementById('info-toast');
@@ -478,7 +473,7 @@ function renderContactsinAddTask(){
 async function createCompareArray(){
   let taskArray = [];
   tasks.forEach((task, index) =>{
-    if(task.data.assignedTo){ //Alle assignedTo in einem Task werden angesprochen
+    if(task.data.assignedTo){
     task.data.assignedTo.forEach(element => {
       renderedContacts.forEach((contact) =>{
         if(contact.id == element.id){
@@ -595,25 +590,43 @@ function removeAssignedList(){
   inputATAT.innerHTML = ''
 }
 
-function showOrHideContactsOnInputInBoard() {
-  let allDivs = document.getElementById('input-assigned-to');
-  const contactList = document.getElementById('input-assigned-to');
-  if (document.getElementById('searchContact').value.length > 0) {
+function showOrHideContactsOnInputInBoard(path) {
+  let arrow = document.getElementById('arrowAssignTo');
+  let arrowAddTask  = document.getElementById('arrowAssignToAddTask');
+  let allDivs = document.getElementById(path);
+  const contactList = document.getElementById(path);
+  if (input1.value.length > 0 || input2.value.length > 0) {
     contactList.style.display = 'flex';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
+    arrow.src ='../assets/icons/arrow-up.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = 'none';
     });
     return true;
   } else {
-    document.getElementById('input-assigned-to').style.display = 'none';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
+    document.getElementById(path).style.display = 'none';
+    arrow.src ='../assets/icons/arrow-down.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = '';
     });
     return false;
+  }
+}
+
+function displayMatchingContactsInBoard() {
+  
+  renderedContacts.forEach((contact) => {
+    if (contact.name.toLowerCase().slice(0, 2) == input1.value.toLowerCase().slice(0, 2)){
+      document.getElementById( `${contact.id}cb`).parentElement.parentElement.style.display = '';
+    }
+    else if (contact.name.toLowerCase().slice(0, 2) == input2.value.toLowerCase().slice(0, 2)){ 
+      document.getElementById( `${contact.id}cb`).parentElement.parentElement.style.display = ''; 
+    }
+  });
+}
+
+function filterContactsInBoard(path) {
+  if (showOrHideContactsOnInputInBoard(path)) {
+    displayMatchingContactsInBoard(path);
   }
 }
 

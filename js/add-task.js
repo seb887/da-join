@@ -490,9 +490,7 @@ function setBackgroundColor(contact) {
   if (document.getElementById(contact['id'] + '-container')) {
     document.getElementById(
       contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
-    console.log(document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color']);
-    
+    ).style.backgroundColor = contact['color'];    
   }
 }
 
