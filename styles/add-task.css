@@ -219,7 +219,8 @@ body {
   overflow: auto;
 }
 
-.subtasks {
+.subtasks,
+.edit-subtasks {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -257,7 +258,7 @@ body {
   height: 24px;
 }
 
-.subtask-hover {
+/* .subtask-hover {
   background-color: #e7e7e7;
   border-radius: 10px;
 }
@@ -265,12 +266,12 @@ body {
 .subtask-no-hover {
   background-color: transparent;
   border-radius: none;
-}
+} */
 
-/* .subtasks:hover {
+.subtasks-hover:hover {
   background-color: #e7e7e7;
   border-radius: 10px;
-} */
+}
 
 .subtasks:hover > .subtask-buttons {
   visibility: visible;

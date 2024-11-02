@@ -318,32 +318,32 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-  <li id="subtask-${index}" class="subtasks">
-  <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
-  <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-  <div id="subtask-buttons-${index}" class="subtask-buttons">
-  <img
-  src="../assets/icons/edit-subtask.png"
-  alt="edit icon"
-  id="edit-subtask-${index}"
-  class="edit-subtask"
-  onclick="editSingleSubtask('${id}', '${index}')"
-  />
-  <img
-  src="../assets/icons/submit-subtask.png"
-  alt="submit icon"
-  id="submit-edit-subtask-${index}"
-  class="submit-edit-subtask"
-  onclick="submitEditedSingleSubtask('${id}', '${index}')"
-  />
-  <img
-  src="../assets/icons/delete-subtask.png"
-  alt="trash icon"
-  id="delete-subtask-${index}"
-  class="delete-subtask"
-  onclick="deleteSingleSubtask('${id}', '${index}')"
-  />
-  </div>
+  <li id="subtask-${index}" class="subtasks subtasks-hover">
+    <div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}</div>
+      <input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
+      <div id="subtask-buttons-${index}" class="subtask-buttons">
+      <img
+      src="../assets/icons/edit-subtask.png"
+      alt="edit icon"
+      id="edit-subtask-${index}"
+      class="edit-subtask"
+      onclick="editSingleSubtask('${id}', '${index}')"
+      />
+      <img
+      src="../assets/icons/submit-subtask.png"
+      alt="submit icon"
+      id="submit-edit-subtask-${index}"
+      class="submit-edit-subtask"
+      onclick="submitEditedSingleSubtask('${id}', '${index}')"
+      />
+      <img
+      src="../assets/icons/delete-subtask.png"
+      alt="trash icon"
+      id="delete-subtask-${index}"
+      class="delete-subtask"
+      onclick="deleteSingleSubtask('${id}', '${index}')"
+      />
+    </div>
   </li>
   `;
 }
@@ -375,6 +375,10 @@ async function editSingleSubtask(taskId, index) {
     submitEditSubtaskBtn.style.display = 'flex';
     subtask.style.borderBottom = '1px solid #29abe2';
 
+    if (isSubtaskEditOn) {
+      let subtaskElement = document.getElementById(`subtask-${index}`);
+      subtaskElement.classList.remove('subtasks-hover');
+    }
     inputEditSubtask.value = subtasks[index].title;
   } else {
     for (let element of tasks) {
@@ -385,6 +389,10 @@ async function editSingleSubtask(taskId, index) {
         submitEditSubtaskBtn.style.display = 'flex';
         subtask.style.borderBottom = '1px solid #29abe2';
 
+        if (isSubtaskEditOn) {
+          let subtaskElement = document.getElementById(`subtask-${index}`);
+          subtaskElement.classList.remove('subtasks-hover');
+        }
         inputEditSubtask.value = element.data.subtasks[index].title;
         // await updateTaskInFirebase(element.id, element.data);
       }
@@ -490,7 +498,7 @@ function setBackgroundColor(contact) {
   if (document.getElementById(contact['id'] + '-container')) {
     document.getElementById(
       contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];    
+    ).style.backgroundColor = contact['color'];
   }
 }
 
