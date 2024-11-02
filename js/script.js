@@ -99,3 +99,19 @@ function showProfileDropDownMenu() {
 function goBack() {
     window.history.back();
 }
+
+/**
+ * The footer disappears once you scrolled down to the bottom of the page, making some
+ * content of the body visible
+ * 
+ * @param {Event} ev - The scroll event triggered when the user scrolls the page.
+ */
+window.onscroll = function (ev) {
+    const scrollPosition = window.innerHeight + Math.round(window.scrollY);
+    const totalHeight = document.documentElement.scrollHeight;
+    if (scrollPosition >= totalHeight) {
+      document.getElementById('footer').classList.add('footer-animation');
+    } else {
+      document.getElementById('footer').classList.remove('footer-animation');
+    }
+  };
