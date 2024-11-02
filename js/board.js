@@ -340,16 +340,31 @@ async function getAllAssignedTo() {
 
 async function displayTaskModalContacts(id) {
   let container = document.getElementById('task-modal-assigned-contacts');
+  let assignedTo = document.getElementById('task-modal-card-assigned-to');
+
   container.innerHTML = '';
   tasks.forEach((task) => {
-    if (task.data.assignedTo && task.id == id) {
-      task.data.assignedTo.forEach((assignedContact) => {
-        container.innerHTML += `
-        <div class= "task-modal-assigned-contacts-container">
-          <div style="background-color:${assignedContact.color}"class="task-modal-contact-profile-img">${assignedContact.initials}</div>
-          <div class="task-modal-contact-name">${assignedContact.name}</div>
-        </div> `;
-      });
+    if (task.id == id) {
+      // if (task.data.assignedTo && task.id == id) {
+
+      if (task.data.assignedTo == undefined) {
+        assignedTo.style.display = 'none';
+      } else {
+        assignedTo.style.display = 'flex';
+
+        task.data.assignedTo.forEach((assignedContact) => {
+          container.innerHTML += `
+          <div class= "task-modal-assigned-contacts-container">
+            <div style="background-color:${assignedContact.color}"class="task-modal-contact-profile-img">${assignedContact.initials}</div>
+            <div class="task-modal-contact-name">${assignedContact.name}</div>
+          </div> `;
+        });
+      }
+
+      // } else if (task.data.assignedTo == undefined) {
+      //   let assignedTo = document.getElementById('task-modal-card-assigned-to');
+
+      //   assignedTo.style.display = 'none';
     }
   });
 }
@@ -693,3 +708,15 @@ function assignedToContactsContentAddTask(contact, id, index) {
   </label>
     `;
 }
+
+// function showHideAssignedToOnTaskCard(taskId) {
+//   let assignedTo = document.getElementById('task-modal-card-assigned-to');
+
+//   for (const element of contacts) {
+//     if (element.data.subtasks.length == 0) {
+//       assignedTo.style.display = 'none';
+//     } else {
+//       assignedTo.style.display = 'flex';
+//     }
+//   }
+// }
