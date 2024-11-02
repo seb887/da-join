@@ -214,7 +214,8 @@ body {
   flex-direction: column;
   padding: 0;
   gap: 4px;
-  height: 104px;
+  height: auto;
+  max-height: 104px;
   overflow: auto;
 }
 

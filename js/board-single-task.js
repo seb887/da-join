@@ -37,9 +37,7 @@ async function updateTaskInFirebase(taskId, updatedTask) {
   });
 }
 
-function getDataForSingleTask(event) {
-  const id = event.currentTarget.id;
-
+function getDataForSingleTask(id) {
   for (let element of tasks) {
     if (id == element.id) {
       renderSingleTaskModal(element);
@@ -176,6 +174,11 @@ async function openEditTaskModal(taskId) {
   }
 }
 
+function closeEditTaskModal() {
+  taskModalCard.style.display = 'flex';
+  taskModalEditCard.style.display = 'none';
+}
+
 async function editTask(taskId) {
   for (let element of tasks) {
     if (taskId == element.id) {
@@ -187,9 +190,9 @@ async function editTask(taskId) {
       element.data.assignedTo = getSelectedContactsEditTask();
 
       await updateTaskInFirebase(element.id, element.data);
-      closeTaskModal();
-
-      // openTaskModal(taskId);
+      closeEditTaskModal();
+      // FIXME: disable animation, if change from edit task modal to default task modal
+      openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }

@@ -13,7 +13,9 @@ const searchInput = document.getElementById('search-input');
 const clearInputBtn = document.getElementById('search-clear-btn');
 let sContactAdd = document.getElementById('searchContact');
 let sContactBoard = document.getElementById('searchContact-board');
-let sContactBoardAddTask = document.getElementById('searchContact-board-addTask');
+let sContactBoardAddTask = document.getElementById(
+  'searchContact-board-addTask'
+);
 const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
 const taskModalSubtasksList = document.getElementById(
   'task-modal-card-subtasks-list'
@@ -39,7 +41,7 @@ async function renderBoard() {
   clearInputs();
   setActiveUserInitials();
   await updateComparedTasks();
-  searchInput.value = '';  
+  searchInput.value = '';
 }
 
 async function loadContactsFromFirebase() {
@@ -119,12 +121,12 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-function openTaskModal(event, id) {
+function openTaskModal(id) {
   taskModal.style.display = 'flex';
   taskModalCard.style.display = 'flex';
   modalSlideInOrOut('task-modal-card');
-  getDataForSingleTask(event);
-  displayTaskModalContacts(id);  
+  getDataForSingleTask(id);
+  displayTaskModalContacts(id);
 }
 
 function closeTaskModal() {
@@ -166,7 +168,6 @@ function closeAddTaskModal() {
   }, 250);
   clearAssignedContacts();
   clearInputs();
-
 }
 
 function cancelAddTask() {
@@ -180,7 +181,9 @@ function renderSubtaskProgressBar(task) {
     return `
       <div class="subtask-progress-bar-container">
         <div class="subtask-progress-bar">
-            <div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(task)}%"></div>
+            <div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(
+              task
+            )}%"></div>
         </div>
         ${calcSubtaskCounter(task)}
       </div>
@@ -351,7 +354,6 @@ async function displayTaskModalContacts(id) {
   });
 }
 
-
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
   const container = document.getElementById('task-modal-card');
@@ -365,31 +367,33 @@ function dropDownContactsEditTask() {
 
 function closeDropdownMenu(contactList) {
   contactList.style.display = 'none';
-  if(sContactBoard)
-    {
-      sContactBoard.placeholder = 'Select contacts to assign';
-      sContactBoardAddTask.placeholder = 'Select contacts to assign';
-      document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
-      document.getElementById('arrowAssignToAddTask').src = '../assets/icons/arrow-down.png';
-    }
-  else if(sContactAdd){
-      sContactAdd.placeholder = 'Select contacts to assign';
-      document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
-  } 
-  
+  if (sContactBoard) {
+    sContactBoard.placeholder = 'Select contacts to assign';
+    sContactBoardAddTask.placeholder = 'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+    document.getElementById('arrowAssignToAddTask').src =
+      '../assets/icons/arrow-down.png';
+  } else if (sContactAdd) {
+    sContactAdd.placeholder = 'Select contacts to assign';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-down.png';
+  }
 }
 
 function openDropdownMenu(contactList) {
   contactList.style.display = 'flex';
   if (sContactAdd) {
-    sContactAdd.placeholder = ''
-    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
-  }
-  else if(sContactBoard){
-    sContactBoard.placeholder = ''
-    sContactBoardAddTask.placeholder = ''
-    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
-    document.getElementById('arrowAssignToAddTask').src = '../assets/icons/arrow-up.png';
+    sContactAdd.placeholder = '';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
+  } else if (sContactBoard) {
+    sContactBoard.placeholder = '';
+    sContactBoardAddTask.placeholder = '';
+    document.getElementById('arrowAssignTo').src =
+      '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignToAddTask').src =
+      '../assets/icons/arrow-up.png';
   }
 }
 
@@ -431,14 +435,16 @@ function selectAllAssignedContacts(taskId) {
   tasks.forEach((task) => {
     if (task.data.assignedTo && task.id == taskId) {
       task.data.assignedTo.forEach((contact) => {
-        document.getElementById(contact.id + 'cb') ? document.getElementById(contact.id + 'cb').checked = true: null ;
+        document.getElementById(contact.id + 'cb')
+          ? (document.getElementById(contact.id + 'cb').checked = true)
+          : null;
         inspectCheckboxes('assigned-contacts-list');
       });
     }
   });
 }
 
- window.onscroll = function (ev) {
+window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
   if (scrollPosition >= totalHeight) {
@@ -466,116 +472,140 @@ async function listContactsToAssignedToinBoard() {
   });
 }
 
-function renderContactsinAddTask(){
-  let list = document.getElementById('input-assigned-to-addTask')
-  renderedContacts.forEach((contact) =>{
-    list.innerHTML += assignedToContactsContent(contact) 
-  })
+function renderContactsinAddTask() {
+  let list = document.getElementById('input-assigned-to-addTask');
+  renderedContacts.forEach((contact) => {
+    list.innerHTML += assignedToContactsContent(contact);
+  });
 }
 
-
-async function createCompareArray(){
+async function createCompareArray() {
   let taskArray = [];
-  tasks.forEach((task, index) =>{
-    if(task.data.assignedTo){
-    task.data.assignedTo.forEach(element => {
-      renderedContacts.forEach((contact) =>{
-        if(contact.id == element.id){
-          let arr = [{
-            pattern : contact , 
-            example : element,
-            taskId : task.id
-          }]
-          taskArray.push(arr)
-        }
-        else{ return }
-      })
-    }); 
+  tasks.forEach((task, index) => {
+    if (task.data.assignedTo) {
+      task.data.assignedTo.forEach((element) => {
+        renderedContacts.forEach((contact) => {
+          if (contact.id == element.id) {
+            let arr = [
+              {
+                pattern: contact,
+                example: element,
+                taskId: task.id,
+              },
+            ];
+            taskArray.push(arr);
+          } else {
+            return;
+          }
+        });
+      });
     }
-  })
+  });
   return taskArray;
-} 
+}
 
-
-async function compareArray(){
+async function compareArray() {
   let comparsion = await createCompareArray();
   let assignedContactsToUpdate = [];
-  comparsion.forEach((element) =>{
+  comparsion.forEach((element) => {
     let example = element[0]['example'];
     let pattern = element[0]['pattern'];
-      example['name'] !== pattern['name'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) : null
-      example['email'] !== pattern['email'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null      
-      example['initials'] !== pattern['initials'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null     
-      example['phone'] !== pattern['phone'] ? assignedContactsToUpdate.push({taskId : element[0]['taskId'], contactId : pattern['id']}) :null
-  })
+    example['name'] !== pattern['name']
+      ? assignedContactsToUpdate.push({
+          taskId: element[0]['taskId'],
+          contactId: pattern['id'],
+        })
+      : null;
+    example['email'] !== pattern['email']
+      ? assignedContactsToUpdate.push({
+          taskId: element[0]['taskId'],
+          contactId: pattern['id'],
+        })
+      : null;
+    example['initials'] !== pattern['initials']
+      ? assignedContactsToUpdate.push({
+          taskId: element[0]['taskId'],
+          contactId: pattern['id'],
+        })
+      : null;
+    example['phone'] !== pattern['phone']
+      ? assignedContactsToUpdate.push({
+          taskId: element[0]['taskId'],
+          contactId: pattern['id'],
+        })
+      : null;
+  });
   return assignedContactsToUpdate;
 }
 
-
-async function findMatchInRenderedContacts(contactId){
+async function findMatchInRenderedContacts(contactId) {
   let indexOfRenderedContact = '';
   renderedContacts.forEach((contact, index) => {
     let match = contact.id.match(contactId);
-    if(match != null){
-      indexOfRenderedContact = index
-    }                       
-  })
-  return indexOfRenderedContact
-}
-
-
-async function findIndexInTaskAssignedTo(taskId, contactId){
-  let indexInAssignedTo = '';
- tasks.forEach((task) =>{
- if(taskId == task.id){
-  task.data.assignedTo.forEach((contact, index) =>{
-    if(contact.id == contactId){
-        indexInAssignedTo = index;
+    if (match != null) {
+      indexOfRenderedContact = index;
     }
-  })
- }
- })
- return indexInAssignedTo
+  });
+  return indexOfRenderedContact;
 }
 
-async function updateComparedTasks(contactId, taskId){
+async function findIndexInTaskAssignedTo(taskId, contactId) {
+  let indexInAssignedTo = '';
+  tasks.forEach((task) => {
+    if (taskId == task.id) {
+      task.data.assignedTo.forEach((contact, index) => {
+        if (contact.id == contactId) {
+          indexInAssignedTo = index;
+        }
+      });
+    }
+  });
+  return indexInAssignedTo;
+}
+
+async function updateComparedTasks(contactId, taskId) {
   let assignedContactsToUpdate = await compareArray();
-  if(assignedContactsToUpdate.length > 0){
+  if (assignedContactsToUpdate.length > 0) {
     console.log('Tasks updated.');
-    assignedContactsToUpdate.forEach(async(contact, index) =>{
-    let contactToPut = renderedContacts[await findMatchInRenderedContacts(contact.contactId)]
-    let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' + await findIndexInTaskAssignedTo(contact.taskId, contact.contactId) + '.json'
-    await fetch(fetchURL ,{
-      method: 'PUT',
-      body: JSON.stringify(contactToPut)
-    })    
-  })
-  await renderBoard();
-}
-else{
-  return
-}
+    assignedContactsToUpdate.forEach(async (contact, index) => {
+      let contactToPut =
+        renderedContacts[await findMatchInRenderedContacts(contact.contactId)];
+      let fetchURL =
+        BASE_URL +
+        'tasks/' +
+        contact.taskId +
+        '/assignedTo/' +
+        (await findIndexInTaskAssignedTo(contact.taskId, contact.contactId)) +
+        '.json';
+      await fetch(fetchURL, {
+        method: 'PUT',
+        body: JSON.stringify(contactToPut),
+      });
+    });
+    await renderBoard();
+  } else {
+    return;
+  }
 }
 
-
-function renderAllContactsInAddTask(){
-  let inputChild = document.querySelector("#input-assigned-to-addTask > label:nth-child(1)");
+function renderAllContactsInAddTask() {
+  let inputChild = document.querySelector(
+    '#input-assigned-to-addTask > label:nth-child(1)'
+  );
   inputAssignedTo.innerHTML = '';
-  document.getElementById('assigned-contacts-list').innerHTML = ''
-  inputATAT.innerHTML = ''
-  renderedContacts.forEach((contact) =>{ 
+  document.getElementById('assigned-contacts-list').innerHTML = '';
+  inputATAT.innerHTML = '';
+  renderedContacts.forEach((contact) => {
     inputATAT.innerHTML += assignedToContactsContentAddTask(contact);
     setBackgroundColor(contact);
-  })
+  });
 }
-
-
 
 function inspectCheckboxesAddTask(path) {
   let allDivs = document.getElementById('input-assigned-to-addTask');
-  assignedContacts = []; 
+  assignedContacts = [];
   allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-    if (cb.checked) {      
+    if (cb.checked) {
       assignedContacts.push(cb.value);
       cb.parentElement.parentElement.classList.add('selected');
       renderAssignedContacts('assigned-contacts-list-addTask');
@@ -585,30 +615,29 @@ function inspectCheckboxesAddTask(path) {
       renderAssignedContacts('assigned-contacts-list-addTask');
     }
   });
-}// greift auf input-assigned-to zu nicht auf input-assigned-to-addTask
+} // greift auf input-assigned-to zu nicht auf input-assigned-to-addTask
 
-
-function removeAssignedList(){
+function removeAssignedList() {
   inputAssignedTo.innerHTML = '';
-  document.getElementById('assigned-contacts-list').innerHTML = ''
-  inputATAT.innerHTML = ''
+  document.getElementById('assigned-contacts-list').innerHTML = '';
+  inputATAT.innerHTML = '';
 }
 
 function showOrHideContactsOnInputInBoard(path) {
   let arrow = document.getElementById('arrowAssignTo');
-  let arrowAddTask  = document.getElementById('arrowAssignToAddTask');
+  let arrowAddTask = document.getElementById('arrowAssignToAddTask');
   let allDivs = document.getElementById(path);
   const contactList = document.getElementById(path);
   if (input1.value.length > 0 || input2.value.length > 0) {
     contactList.style.display = 'flex';
-    arrow.src ='../assets/icons/arrow-up.png';
+    arrow.src = '../assets/icons/arrow-up.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = 'none';
     });
     return true;
   } else {
     document.getElementById(path).style.display = 'none';
-    arrow.src ='../assets/icons/arrow-down.png';
+    arrow.src = '../assets/icons/arrow-down.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = '';
     });
@@ -617,13 +646,21 @@ function showOrHideContactsOnInputInBoard(path) {
 }
 
 function displayMatchingContactsInBoard() {
-  
   renderedContacts.forEach((contact) => {
-    if (contact.name.toLowerCase().slice(0, 2) == input1.value.toLowerCase().slice(0, 2)){
-      document.getElementById( `${contact.id}cb`).parentElement.parentElement.style.display = '';
-    }
-    else if (contact.name.toLowerCase().slice(0, 2) == input2.value.toLowerCase().slice(0, 2)){ 
-      document.getElementById( `${contact.id}cb`).parentElement.parentElement.style.display = ''; 
+    if (
+      contact.name.toLowerCase().slice(0, 2) ==
+      input1.value.toLowerCase().slice(0, 2)
+    ) {
+      document.getElementById(
+        `${contact.id}cb`
+      ).parentElement.parentElement.style.display = '';
+    } else if (
+      contact.name.toLowerCase().slice(0, 2) ==
+      input2.value.toLowerCase().slice(0, 2)
+    ) {
+      document.getElementById(
+        `${contact.id}cb`
+      ).parentElement.parentElement.style.display = '';
     }
   });
 }
@@ -634,12 +671,12 @@ function filterContactsInBoard(path) {
   }
 }
 
-function clearAssignedContacts(){
+function clearAssignedContacts() {
   document.getElementById('assigned-contacts-list-addTask').innerHTML = '';
-  input1 ? input1.value = '': null ;
-  input2 ? input2.value = '' : null;
-  if(inputATAT.style.display = 'flex'){
-    dropDownContacts('searchContact-board-addTask', 1)
+  input1 ? (input1.value = '') : null;
+  input2 ? (input2.value = '') : null;
+  if ((inputATAT.style.display = 'flex')) {
+    dropDownContacts('searchContact-board-addTask', 1);
   }
 }
 

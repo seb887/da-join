@@ -15,8 +15,8 @@
       href="../styles/board.css"
     />
     <link
-    rel="stylesheet"
-    href="../styles/boardresponsive.css"
+      rel="stylesheet"
+      href="../styles/boardresponsive.css"
     />
     <link
       rel="stylesheet"
@@ -375,176 +375,179 @@
             alt="cancel icon"
           />
         </div>
-        <div class="form-container title-container">
-          <div
-            for="title"
-            class="add-task-labels"
-          >
-            Title
-          </div>
-          <input
-            type="text"
-            class="add-task-input-title-board"
-            id="edit-input-title"
-            name="title"
-          />
-        </div>
-        <div class="form-container description-container">
-          <div
-            for="description"
-            class="add-task-labels"
-          >
-            Description
-          </div>
-          <textarea
-            type="text"
-            class="add-task-input-description-board"
-            id="edit-input-description"
-            name="description"
-            rows="3"
-          ></textarea>
-        </div>
 
-        <div class="form-container date-container">
-          <div
-            for="date"
-            class="add-task-labels"
-          >
-            Due date<span class="required-marker">*</span>
-          </div>
-          <input
-            type="date"
-            class="add-task-input-date"
-            id="edit-input-date"
-            name="date"
-          />
-        </div>
-
-        <div class="form-container prio-container">
-          <div
-            for="prio"
-            class="add-task-labels"
-          >
-            Prio
-          </div>
-          <div class="prio-buttons-container">
-            <button
-              class="prio-buttons-board-edit"
-              id="edit-button-urgent"
-              onclick="setPrio('urgent')"
-            >
-              Urgent
-              <img
-                src="../assets/icons/prio-urgent.png"
-                alt="prio urgent icon"
-                id="edit-button-urgent-img"
-              />
-            </button>
-            <button
-              class="prio-buttons-board-edit"
-              id="edit-button-medium"
-              onclick="setPrio('medium')"
-            >
-              Medium
-              <img
-                src="../assets/icons/prio-medium.png"
-                alt="prio medium icon"
-                id="edit-button-medium-img"
-              />
-            </button>
-            <button
-              class="prio-buttons-board-edit"
-              id="edit-button-low"
-              onclick="setPrio('low')"
-            >
-              Low
-              <img
-                src="../assets/icons/prio-low.png"
-                alt="prio low icon"
-                id="edit-button-low-img"
-              />
-            </button>
-          </div>
-        </div>
-
-        <div class="form-container assigned-to-container">
-          <div
-            for="assigned to"
-            class="add-task-labels"
-          >
-            Assigned to
-          </div>
-
-          <div
-            id="add-task-contact-container"
-            class="add-task-select-board"
-          >
+        <div class="edit-content-container">
+          <div class="form-container title-container">
             <div
-              style="cursor: pointer"
-              onclick="dropDownContacts('searchContact-board')"
+              for="title"
+              class="add-task-labels"
             >
-              <input
-                oninput="filterContactsInBoard('input-assigned-to')"
-                autocomplete="off"
-                placeholder="Select contacts to assign"
-                type="text"
-                id="searchContact-board"
-              />
-              <img
-                id="arrowAssignTo"
-                src="../assets/icons/arrow-down.png"
-                alt="arrow-down"
-              />
-              <div
-                class="add-task-select-board"
-                id="input-assigned-to"
-              ></div>
+              Title
             </div>
-          </div>
-
-          <div id="assigned-contacts-list"></div>
-        </div>
-
-        <div class="form-container subtasks-container">
-          <div
-            for="subtasks"
-            class="add-task-labels"
-          >
-            Subtasks
-          </div>
-          <div class="add-task-input">
             <input
-              type="subtasks"
-              name="subtasks"
-              placeholder="Add new subtask"
-              class="add-task-input-subtasks-board"
-              id="edit-input-subtask"
-              oninput="controlSubtaskIcons()"
+              type="text"
+              class="add-task-input-title-board"
+              id="edit-input-title"
+              name="title"
             />
-            <div class="add-task-input-buttons">
-              <img
-                src="../assets/icons/add-subtask.png"
-                alt="add subtask icon"
-                id="edit-add-subtask-img"
-              />
-              <img
-                src="../assets/icons/cancel-subtask.png"
-                alt="plus icon"
-                id="edit-cancel-subtask-img"
-                onclick="cancelInputSubtask()"
-              />
-              <img
-                src="../assets/icons/submit-subtask.png"
-                alt="submit subtask icon"
-                id="edit-submit-subtask-img"
-                onclick="submitInputSubtask()"
-              />
+          </div>
+          <div class="form-container description-container">
+            <div
+              for="description"
+              class="add-task-labels"
+            >
+              Description
+            </div>
+            <textarea
+              type="text"
+              class="add-task-input-description-board"
+              id="edit-input-description"
+              name="description"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <div class="form-container date-container">
+            <div
+              for="date"
+              class="add-task-labels"
+            >
+              Due date<span class="required-marker">*</span>
+            </div>
+            <input
+              type="date"
+              class="add-task-input-date"
+              id="edit-input-date"
+              name="date"
+            />
+          </div>
+
+          <div class="form-container prio-container">
+            <div
+              for="prio"
+              class="add-task-labels"
+            >
+              Prio
+            </div>
+            <div class="prio-buttons-container">
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-urgent"
+                onclick="setPrio('urgent')"
+              >
+                Urgent
+                <img
+                  src="../assets/icons/prio-urgent.png"
+                  alt="prio urgent icon"
+                  id="edit-button-urgent-img"
+                />
+              </button>
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-medium"
+                onclick="setPrio('medium')"
+              >
+                Medium
+                <img
+                  src="../assets/icons/prio-medium.png"
+                  alt="prio medium icon"
+                  id="edit-button-medium-img"
+                />
+              </button>
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-low"
+                onclick="setPrio('low')"
+              >
+                Low
+                <img
+                  src="../assets/icons/prio-low.png"
+                  alt="prio low icon"
+                  id="edit-button-low-img"
+                />
+              </button>
             </div>
           </div>
-          <ul
-            class="subtasks-list"
-            id="edit-subtasks-list"
-          ></ul>
+
+          <div class="form-container assigned-to-container">
+            <div
+              for="assigned to"
+              class="add-task-labels"
+            >
+              Assigned to
+            </div>
+
+            <div
+              id="add-task-contact-container"
+              class="add-task-select-board"
+            >
+              <div
+                style="cursor: pointer"
+                onclick="dropDownContacts('searchContact-board')"
+              >
+                <input
+                  oninput="filterContactsInBoard('input-assigned-to')"
+                  autocomplete="off"
+                  placeholder="Select contacts to assign"
+                  type="text"
+                  id="searchContact-board"
+                />
+                <img
+                  id="arrowAssignTo"
+                  src="../assets/icons/arrow-down.png"
+                  alt="arrow-down"
+                />
+                <div
+                  class="add-task-select-board"
+                  id="input-assigned-to"
+                ></div>
+              </div>
+            </div>
+
+            <div id="assigned-contacts-list"></div>
+          </div>
+
+          <div class="form-container subtasks-container">
+            <div
+              for="subtasks"
+              class="add-task-labels"
+            >
+              Subtasks
+            </div>
+            <div class="add-task-input">
+              <input
+                type="subtasks"
+                name="subtasks"
+                placeholder="Add new subtask"
+                class="add-task-input-subtasks-board"
+                id="edit-input-subtask"
+                oninput="controlSubtaskIcons()"
+              />
+              <div class="add-task-input-buttons">
+                <img
+                  src="../assets/icons/add-subtask.png"
+                  alt="add subtask icon"
+                  id="edit-add-subtask-img"
+                />
+                <img
+                  src="../assets/icons/cancel-subtask.png"
+                  alt="plus icon"
+                  id="edit-cancel-subtask-img"
+                  onclick="cancelInputSubtask()"
+                />
+                <img
+                  src="../assets/icons/submit-subtask.png"
+                  alt="submit subtask icon"
+                  id="edit-submit-subtask-img"
+                  onclick="submitInputSubtask()"
+                />
+              </div>
+            </div>
+            <ul
+              class="subtasks-list"
+              id="edit-subtasks-list"
+            ></ul>
+          </div>
         </div>
 
         <div class="edit-task-buttons-container">
@@ -631,7 +634,7 @@
                 class="add-task-select-board"
               >
                 <div
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   onclick="dropDownContacts('searchContact-board-addTask', 1)"
                 >
                   <input
@@ -647,7 +650,7 @@
                   />
                 </div>
                 <div
-                  style="display: none;"
+                  style="display: none"
                   class="add-task-select-board"
                   id="input-assigned-to-addTask"
                 ></div>

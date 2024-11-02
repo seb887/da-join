@@ -350,6 +350,13 @@
   background-color: var(--bg-primary);
   font-size: 20px;
   font-weight: 400;
+  /* overflow: auto; */
+}
+
+.edit-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   overflow: auto;
 }
 
@@ -722,7 +729,7 @@
   height: 14px;
 }
 
-#input-assigned-to-addTask{
+#input-assigned-to-addTask {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -731,8 +738,8 @@
   overflow-y: scroll;
 }
 
-#assigned-contacts-list-addTask{
-  display: flex; 
+#assigned-contacts-list-addTask {
+  display: flex;
   flex-wrap: wrap;
 }
 
