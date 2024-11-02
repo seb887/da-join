@@ -47,7 +47,7 @@ async function renderContacts() {
  * This function sets data of a contact
  * 
  * @param {object} contact - This is a single object
- * @param {number} index - This is the index for Each contact
+ * @param {number} index - This is the index for each contact
  */
 function setDataOfContact(contact, index) {
     document.getElementById(`initials${index}`).innerText = generateInitials(contact.name);
@@ -94,6 +94,13 @@ function openContact(index) {
     setContactInformation(index);
 }
 
+/**
+ * Updates the contact information display with the details of a selected contact.
+ * Sets the background color, name, email, and phone number, as well as initials and 
+ * assigns event listeners for editing and deleting the contact
+ * 
+ * @param {number} index - The index of the contact in the `contactsArray`
+ */
 async function setContactInformation(index) {
     document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
     document.getElementById('contactName').innerText = contactsArray[index].name;
@@ -107,7 +114,14 @@ async function setContactInformation(index) {
     setSelectedContactBackground(index);   
 }
 
-
+/**
+ * Highlights the background of the selected contact while resetting the background 
+ * of all other contacts. Toggles the background color and text color of the selected 
+ * contact to indicate selection
+ * 
+ * @param {number} index - The index of the contact element to be highlighted in the 
+ * list of contacts
+ */
 function setSelectedContactBackground(index) {
     let allContactDivs = document.querySelectorAll('.single-contact');
     let selectedContactDiv = document.querySelectorAll('.single-contact')[index];
@@ -124,6 +138,10 @@ function setSelectedContactBackground(index) {
         selectedContactDiv.style.color ='white'
 }
 
+/**
+ * Toggles the display of the "Add Contact" modal, resetting its content and managing
+ * the background display and animation state.
+ */
 function openAndCloseAddContact(){ 
     let modal = document.getElementById('addContact');
     modal.innerHTML = '';
@@ -134,6 +152,10 @@ function openAndCloseAddContact(){
     animationActive = !animationActive;
 }
 
+/**
+ * Toggles the display of the edit/delete options or opens the "Add Contact" modal,
+ * based on the current button icon state.
+ */
 function openContactOrOpenMore() {
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
     let srcFilename = responsiveButtonBottom.src.split('/').pop();
@@ -170,6 +192,10 @@ function checkIfAnimationActive() {
       }
 }
 
+/**
+ * Sends a POST request to create a new contact using data from input fields, 
+ * then highlights the new contact and shows a success message
+ */
 async function createContact() {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const initials = generateInitials(document.getElementById('inputContactName').value);
@@ -191,6 +217,12 @@ async function createContact() {
     showInfoToast('Contact succesfully created')
 }
 
+/**
+ * Renders the contacts list, clears the input fields, selects and highlights the 
+ * newly created contact, and closes the "Add Contact" modal
+ *
+ * @param {string} contactName - The name of the newly created contact to select and highlight
+ */
 async function selectCreatedContact(contactName){
     try {
        await renderContacts();
@@ -203,6 +235,9 @@ async function selectCreatedContact(contactName){
     }
 }
 
+/**
+ * Closes the "Add Contact" modal and clears the input fields for name, email, and phone number
+ */
 async function closeAndClear(){
     openAndCloseAddContact();
     document.getElementById('inputContactName').value = '';
@@ -210,6 +245,12 @@ async function closeAndClear(){
     document.getElementById('inputPhoneNumber').value = '';
 }
 
+/**
+ * Deletes a contact from the database by ID, re-renders the contact list, and displays
+ * a deletion confirmation toast
+ *
+ * @param {string} id - The identifier of the contact to delete
+ */
 async function deleteContact(id) {
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
         method: "DELETE"
@@ -221,6 +262,12 @@ async function deleteContact(id) {
     showInfoToast('Contact deleted');
 }
 
+/**
+ * Opens the "Edit Contact" modal with the selected contact's information pre-filled,
+ * allowing the user to edit the contact's details
+ * 
+ * @param {number} index - The index of the contact in `contactsArray` to be edited
+ */
 async function editContact(index) {
     let content = document.getElementById('addContact');
     let initials = generateInitials(contactsArray[index].name);
@@ -229,6 +276,13 @@ async function editContact(index) {
     content.innerHTML = editContactCardContent(contactsArray[index],initials, index);
 }
 
+/**
+ * Saves changes made to an existing contact by updating the contact's information
+ * in the database, then refreshes the contact display and shows a confirmation toast
+ *
+ * @param {string} id - The identifier of the contact to update
+ * @param {number} index - The index of the contact in `contactsArray` to update and re-render
+ */
 async function saveChangesOnContact(id, index) {
     let initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
@@ -249,6 +303,12 @@ async function saveChangesOnContact(id, index) {
     showInfoToast('Contact changes saved');
 }
 
+/**
+ * Updates the contact display by re-rendering the contact list and 
+ * opening the specified contact for viewing or editing
+ *
+ * @param {number} index - The index of the contact in `contactsArray` to be updated and rendered
+ */
 async function updateAndRenderContacts (index) {
     try {
         await renderContacts(contactsArray[index].name);
@@ -259,6 +319,12 @@ async function updateAndRenderContacts (index) {
        } 
 }
 
+/**
+ * Displays a temporary toast message with the specified text,
+ * which fades out after a short duration
+ *
+ * @param {string} text - The message to be displayed in the toast
+ */
 function showInfoToast(text) {
     const toast = document.getElementById("info-toast");
     toast.innerText = text;
@@ -268,6 +334,10 @@ function showInfoToast(text) {
     }, 1500);
 }
 
+/**
+ * Fetches the active user's information from the database and sets their initials 
+ * in the specified HTML element
+ */
 async function setActiveUserInitials() {
     let response =  await fetch('https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users/activeUser.json')
     let user = await response.json();
@@ -276,6 +346,10 @@ async function setActiveUserInitials() {
     document.getElementById('user-initials').innerHTML = `<p>${initials}</p>`
 }
 
+/**
+ * Hides the current contact information display and returns the user to the contact list.
+ * Updates the visibility of relevant UI elements based on the current state
+ */
 function goBackToList() {
     document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
     let editDelContact = document.getElementById('edit-del-contact-responsive');
@@ -293,102 +367,4 @@ function goBackToList() {
         responsiveButtonBottom.src = '../assets/icons/add-contact.png';
         editDelContact.style.display = 'none';
     }, 50);
-}
-
-function contactContent(index) {
-    return `
-        <div onclick ="openContact('${index}')" class="single-contact">
-        <div id="initialsContainer${index}" class="initials-container">
-            <span id="initials${index}"></span>
-          </div>
-          <div class="contact-data">
-            <h4 id="contactName${index}"></h4>
-            <a href="#" id="contactMail${index}"></a>
-          </div>
-        </div>
-    `;
-}
-
-function nameHeaderContent(letter) {
-    return`
-        <div class="nameHeader" id ="${letter}">
-            <h3>${letter}</h3>
-        </div>
-        <div class="seperator">
-            <div class="line">
-            </div>
-        </div>
-    `
-}
-
-function addNewContactsContent () {
-    return `
-        <div class="add-new-contacts">
-            <button onclick="openAndCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
-        </div>
-    `
-}
-
-function addContactCardContent(){
-    return ` 
-        <div class="modal-header-logo-left">
-          <div class="logo-modal">
-            <img src="../assets/img/logo-white.png" alt="logo-white">
-          </div>
-          <div class="header-modal">
-            <h1>Add Contact</h1>
-            <h2>Tasks are better with a team!</h2>
-            <div class="header-seperator"></div>
-          </div>
-        </div>
-        <div class="add-contact-modal-right">   
-          <div class="add-contact-modal-person">
-            <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
-          </div>
-          <div class="input-field-right">
-              <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
-                <div class="add-contact-button-bottom">
-                  <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
-                  <button type="submit">Create contact</button>
-                </div>
-              </form>
-          </div>
-        </div>
-    `
-}
-
-function editContactCardContent(contact, initials, index){
-    return `
-        <div class="modal-header-logo-left">
-          <div class="logo-modal">
-            <img src="../assets/img/logo-white.png" alt="logo-white">
-          </div>
-          <div class="header-modal">
-            <h1>Edit Contact</h1>
-            <h2></h2>
-            <div class="header-seperator"></div>
-          </div>
-        </div>
-        <div class="add-contact-modal-right">   
-          <div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
-          <span id="initialsArticle">${initials}</span>
-        </div>
-          <div class="input-field-right">
-              <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
-                  <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
-                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
-                <div class="add-contact-button-bottom">
-                  <button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete</button>
-                  <button style="justify-content: center; width: 111px;" type="submit">Save</button>
-                </div>
-              </form>
-          </div>
-        </div>
-    `
 }

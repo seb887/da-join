@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact-template.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact-template.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Generates the HTML content for a single contact entry, including initials,
+ * name, and email link, which can be clicked to open the contact details
+ * 
+ * @param {number} index - The index of the contact in the list, used for
+ *                         generating element IDs
+ */
+function contactContent(index) {
+    return `
+        &lt;div onclick ="openContact('${index}')" class="single-contact">
+        &lt;div id="initialsContainer${index}" class="initials-container">
+            &lt;span id="initials${index}">&lt;/span>
+          &lt;/div>
+          &lt;div class="contact-data">
+            &lt;h4 id="contactName${index}">&lt;/h4>
+            &lt;a href="#" id="contactMail${index}">&lt;/a>
+          &lt;/div>
+        &lt;/div>
+    `;
+}
+
+/**
+ * Generates the HTML content for a header section that displays a letter
+ * and includes a separator line below it
+ * 
+ * @param {string} letter - The letter to be displayed as the header
+ */
+function nameHeaderContent(letter) {
+    return`
+        &lt;div class="nameHeader" id ="${letter}">
+            &lt;h3>${letter}&lt;/h3>
+        &lt;/div>
+        &lt;div class="seperator">
+            &lt;div class="line">
+            &lt;/div>
+        &lt;/div>
+    `
+}
+
+/**
+ * Generates the HTML content for a section that allows users to add new contacts,
+ * including a button that triggers the "Add Contact" modal
+ */
+function addNewContactsContent () {
+    return `
+        &lt;div class="add-new-contacts">
+            &lt;button onclick="openAndCloseAddContact()">Add new contact&lt;img src="../assets/icons/person_add.png">&lt;/img>&lt;/button>
+        &lt;/div>
+    `
+}
+
+/**
+ * Generates the HTML content for the "Add Contact" modal, including the header,
+ * input fields for contact details, and buttons for submitting or canceling the action 
+ */
+function addContactCardContent(){
+    return ` 
+        &lt;div class="modal-header-logo-left">
+          &lt;div class="logo-modal">
+            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
+          &lt;/div>
+          &lt;div class="header-modal">
+            &lt;h1>Add Contact&lt;/h1>
+            &lt;h2>Tasks are better with a team!&lt;/h2>
+            &lt;div class="header-seperator">&lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div class="add-contact-modal-right">   
+          &lt;div class="add-contact-modal-person">
+            &lt;img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
+          &lt;/div>
+          &lt;div class="input-field-right">
+              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
+              &lt;form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
+                  &lt;input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
+                  &lt;input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
+                  &lt;input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
+                &lt;div class="add-contact-button-bottom">
+                  &lt;button type="button" onclick="openAndCloseAddContact()">Cancel&lt;/button>
+                  &lt;button type="submit">Create contact&lt;/button>
+                &lt;/div>
+              &lt;/form>
+          &lt;/div>
+        &lt;/div>
+    `
+}
+
+/**
+ * Generates the HTML content for the "Edit Contact" modal, including the current contact's
+ * information pre-filled in the input fields, initials, and buttons for saving changes or deleting the contact
+ * 
+ * @param {Object} contact - The contact object containing the details to be edited
+ * @param {string} initials - The initials of the contact to display in the modal
+ * @param {number} index - The index of the contact in the contacts array, used for identifying the contact during updates
+ */
+function editContactCardContent(contact, initials, index){
+    return `
+        &lt;div class="modal-header-logo-left">
+          &lt;div class="logo-modal">
+            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
+          &lt;/div>
+          &lt;div class="header-modal">
+            &lt;h1>Edit Contact&lt;/h1>
+            &lt;h2>&lt;/h2>
+            &lt;div class="header-seperator">&lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div class="add-contact-modal-right">   
+          &lt;div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
+          &lt;span id="initialsArticle">${initials}&lt;/span>
+        &lt;/div>
+          &lt;div class="input-field-right">
+              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
+              &lt;form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
+                  &lt;input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
+                  &lt;input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
+                  &lt;input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
+                &lt;div class="add-contact-button-bottom">
+                  &lt;button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete&lt;/button>
+                  &lt;button style="justify-content: center; width: 111px;" type="submit">Save&lt;/button>
+                &lt;/div>
+              &lt;/form>
+          &lt;/div>
+        &lt;/div>
+    `
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 02 2024 12:03:03 GMT+0100 (czas środkowoeuropejski standardowy)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

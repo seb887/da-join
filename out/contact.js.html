@@ -75,7 +75,7 @@ async function renderContacts() {
  * This function sets data of a contact
  * 
  * @param {object} contact - This is a single object
- * @param {number} index - This is the index for Each contact
+ * @param {number} index - This is the index for each contact
  */
 function setDataOfContact(contact, index) {
     document.getElementById(`initials${index}`).innerText = generateInitials(contact.name);
@@ -122,6 +122,13 @@ function openContact(index) {
     setContactInformation(index);
 }
 
+/**
+ * Updates the contact information display with the details of a selected contact.
+ * Sets the background color, name, email, and phone number, as well as initials and 
+ * assigns event listeners for editing and deleting the contact
+ * 
+ * @param {number} index - The index of the contact in the `contactsArray`
+ */
 async function setContactInformation(index) {
     document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
     document.getElementById('contactName').innerText = contactsArray[index].name;
@@ -135,7 +142,14 @@ async function setContactInformation(index) {
     setSelectedContactBackground(index);   
 }
 
-
+/**
+ * Highlights the background of the selected contact while resetting the background 
+ * of all other contacts. Toggles the background color and text color of the selected 
+ * contact to indicate selection
+ * 
+ * @param {number} index - The index of the contact element to be highlighted in the 
+ * list of contacts
+ */
 function setSelectedContactBackground(index) {
     let allContactDivs = document.querySelectorAll('.single-contact');
     let selectedContactDiv = document.querySelectorAll('.single-contact')[index];
@@ -152,6 +166,10 @@ function setSelectedContactBackground(index) {
         selectedContactDiv.style.color ='white'
 }
 
+/**
+ * Toggles the display of the "Add Contact" modal, resetting its content and managing
+ * the background display and animation state.
+ */
 function openAndCloseAddContact(){ 
     let modal = document.getElementById('addContact');
     modal.innerHTML = '';
@@ -162,6 +180,10 @@ function openAndCloseAddContact(){
     animationActive = !animationActive;
 }
 
+/**
+ * Toggles the display of the edit/delete options or opens the "Add Contact" modal,
+ * based on the current button icon state.
+ */
 function openContactOrOpenMore() {
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
     let srcFilename = responsiveButtonBottom.src.split('/').pop();
@@ -198,6 +220,10 @@ function checkIfAnimationActive() {
       }
 }
 
+/**
+ * Sends a POST request to create a new contact using data from input fields, 
+ * then highlights the new contact and shows a success message
+ */
 async function createContact() {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const initials = generateInitials(document.getElementById('inputContactName').value);
@@ -219,6 +245,12 @@ async function createContact() {
     showInfoToast('Contact succesfully created')
 }
 
+/**
+ * Renders the contacts list, clears the input fields, selects and highlights the 
+ * newly created contact, and closes the "Add Contact" modal
+ *
+ * @param {string} contactName - The name of the newly created contact to select and highlight
+ */
 async function selectCreatedContact(contactName){
     try {
        await renderContacts();
@@ -231,6 +263,9 @@ async function selectCreatedContact(contactName){
     }
 }
 
+/**
+ * Closes the "Add Contact" modal and clears the input fields for name, email, and phone number
+ */
 async function closeAndClear(){
     openAndCloseAddContact();
     document.getElementById('inputContactName').value = '';
@@ -238,6 +273,12 @@ async function closeAndClear(){
     document.getElementById('inputPhoneNumber').value = '';
 }
 
+/**
+ * Deletes a contact from the database by ID, re-renders the contact list, and displays
+ * a deletion confirmation toast
+ *
+ * @param {string} id - The identifier of the contact to delete
+ */
 async function deleteContact(id) {
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
         method: "DELETE"
@@ -249,6 +290,12 @@ async function deleteContact(id) {
     showInfoToast('Contact deleted');
 }
 
+/**
+ * Opens the "Edit Contact" modal with the selected contact's information pre-filled,
+ * allowing the user to edit the contact's details
+ * 
+ * @param {number} index - The index of the contact in `contactsArray` to be edited
+ */
 async function editContact(index) {
     let content = document.getElementById('addContact');
     let initials = generateInitials(contactsArray[index].name);
@@ -257,6 +304,13 @@ async function editContact(index) {
     content.innerHTML = editContactCardContent(contactsArray[index],initials, index);
 }
 
+/**
+ * Saves changes made to an existing contact by updating the contact's information
+ * in the database, then refreshes the contact display and shows a confirmation toast
+ *
+ * @param {string} id - The identifier of the contact to update
+ * @param {number} index - The index of the contact in `contactsArray` to update and re-render
+ */
 async function saveChangesOnContact(id, index) {
     let initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
@@ -277,6 +331,12 @@ async function saveChangesOnContact(id, index) {
     showInfoToast('Contact changes saved');
 }
 
+/**
+ * Updates the contact display by re-rendering the contact list and 
+ * opening the specified contact for viewing or editing
+ *
+ * @param {number} index - The index of the contact in `contactsArray` to be updated and rendered
+ */
 async function updateAndRenderContacts (index) {
     try {
         await renderContacts(contactsArray[index].name);
@@ -287,6 +347,12 @@ async function updateAndRenderContacts (index) {
        } 
 }
 
+/**
+ * Displays a temporary toast message with the specified text,
+ * which fades out after a short duration
+ *
+ * @param {string} text - The message to be displayed in the toast
+ */
 function showInfoToast(text) {
     const toast = document.getElementById("info-toast");
     toast.innerText = text;
@@ -296,6 +362,10 @@ function showInfoToast(text) {
     }, 1500);
 }
 
+/**
+ * Fetches the active user's information from the database and sets their initials 
+ * in the specified HTML element
+ */
 async function setActiveUserInitials() {
     let response =  await fetch('https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users/activeUser.json')
     let user = await response.json();
@@ -304,6 +374,10 @@ async function setActiveUserInitials() {
     document.getElementById('user-initials').innerHTML = `&lt;p>${initials}&lt;/p>`
 }
 
+/**
+ * Hides the current contact information display and returns the user to the contact list.
+ * Updates the visibility of relevant UI elements based on the current state
+ */
 function goBackToList() {
     document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
     let editDelContact = document.getElementById('edit-del-contact-responsive');
@@ -321,104 +395,6 @@ function goBackToList() {
         responsiveButtonBottom.src = '../assets/icons/add-contact.png';
         editDelContact.style.display = 'none';
     }, 50);
-}
-
-function contactContent(index) {
-    return `
-        &lt;div onclick ="openContact('${index}')" class="single-contact">
-        &lt;div id="initialsContainer${index}" class="initials-container">
-            &lt;span id="initials${index}">&lt;/span>
-          &lt;/div>
-          &lt;div class="contact-data">
-            &lt;h4 id="contactName${index}">&lt;/h4>
-            &lt;a href="#" id="contactMail${index}">&lt;/a>
-          &lt;/div>
-        &lt;/div>
-    `;
-}
-
-function nameHeaderContent(letter) {
-    return`
-        &lt;div class="nameHeader" id ="${letter}">
-            &lt;h3>${letter}&lt;/h3>
-        &lt;/div>
-        &lt;div class="seperator">
-            &lt;div class="line">
-            &lt;/div>
-        &lt;/div>
-    `
-}
-
-function addNewContactsContent () {
-    return `
-        &lt;div class="add-new-contacts">
-            &lt;button onclick="openAndCloseAddContact()">Add new contact&lt;img src="../assets/icons/person_add.png">&lt;/img>&lt;/button>
-        &lt;/div>
-    `
-}
-
-function addContactCardContent(){
-    return ` 
-        &lt;div class="modal-header-logo-left">
-          &lt;div class="logo-modal">
-            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
-          &lt;/div>
-          &lt;div class="header-modal">
-            &lt;h1>Add Contact&lt;/h1>
-            &lt;h2>Tasks are better with a team!&lt;/h2>
-            &lt;div class="header-seperator">&lt;/div>
-          &lt;/div>
-        &lt;/div>
-        &lt;div class="add-contact-modal-right">   
-          &lt;div class="add-contact-modal-person">
-            &lt;img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
-          &lt;/div>
-          &lt;div class="input-field-right">
-              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
-              &lt;form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
-                  &lt;input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  &lt;input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
-                  &lt;input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
-                &lt;div class="add-contact-button-bottom">
-                  &lt;button type="button" onclick="openAndCloseAddContact()">Cancel&lt;/button>
-                  &lt;button type="submit">Create contact&lt;/button>
-                &lt;/div>
-              &lt;/form>
-          &lt;/div>
-        &lt;/div>
-    `
-}
-
-function editContactCardContent(contact, initials, index){
-    return `
-        &lt;div class="modal-header-logo-left">
-          &lt;div class="logo-modal">
-            &lt;img src="../assets/img/logo-white.png" alt="logo-white">
-          &lt;/div>
-          &lt;div class="header-modal">
-            &lt;h1>Edit Contact&lt;/h1>
-            &lt;h2>&lt;/h2>
-            &lt;div class="header-seperator">&lt;/div>
-          &lt;/div>
-        &lt;/div>
-        &lt;div class="add-contact-modal-right">   
-          &lt;div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
-          &lt;span id="initialsArticle">${initials}&lt;/span>
-        &lt;/div>
-          &lt;div class="input-field-right">
-              &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
-              &lt;form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
-                  &lt;input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  &lt;input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
-                  &lt;input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
-                &lt;div class="add-contact-button-bottom">
-                  &lt;button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete&lt;/button>
-                  &lt;button style="justify-content: center; width: 111px;" type="submit">Save&lt;/button>
-                &lt;/div>
-              &lt;/form>
-          &lt;/div>
-        &lt;/div>
-    `
 }</code></pre>
         </article>
     </section>
@@ -429,13 +405,13 @@ function editContactCardContent(contact, initials, index){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 22:17:41 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 02 2024 12:03:03 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>

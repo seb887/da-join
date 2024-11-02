@@ -56,6 +56,7 @@ let assignedContacts = [];
 let renderedContacts = [];
 let dropedDown = false;
 let matches = [];
+let isSubtaskEditOn = false;
 
 // DEFAULTS
 let currentDate = new Date();
@@ -128,7 +129,7 @@ function checkInputs(taskObj) {
     currentKanbanBoard = 'todo';
     clearInputs();
     showInfoToast('Task added to board');
-    setTimeout(() => window.location.href = 'board.html', 1200);
+    setTimeout(() => (window.location.href = 'board.html'), 1200);
   }
 }
 
@@ -254,10 +255,18 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
 // SUBTASKS
 
 function controlSubtaskIcons() {
-  if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
-    showSubtaskIcons();
+  if (editInputSubtask == null) {
+    if (inputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   } else {
-    hideSubtaskIcons();
+    if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
+      showSubtaskIcons();
+    } else {
+      hideSubtaskIcons();
+    }
   }
 }
 
@@ -302,8 +311,15 @@ function submitInputSubtask() {
   };
 
   subtasks.push(subtaskObj);
-  inputSubtask.value = '';
-  editInputSubtask.value = '';
+
+  if (!isEditOn) {
+    console.log('clear inputSubtask', isEditOn);
+    inputSubtask.value = '';
+  } else {
+    console.log('clear editInputSubtask', isEditOn);
+    editInputSubtask.value = '';
+  }
+
   controlSubtaskIcons();
   renderSubtasksList();
 }
@@ -330,38 +346,43 @@ function renderSubtasksList(taskId) {
 
 function createSubtasksListHTML(index, id) {
   return `
-      &lt;li id="subtask-${index}" class="subtasks">
-        &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        &lt;div class="subtask-buttons">
-          &lt;img
-            src="../assets/icons/edit-subtask.png"
-            alt="edit icon"
-            id="edit-subtask-${index}"
-            class="edit-subtask"
-            onclick="editSingleSubtask('${id}', '${index}')"
-          />
-           &lt;img
-            src="../assets/icons/submit-subtask.png"
-            alt="submit icon"
-            id="submit-edit-subtask-${index}"
-            class="submit-edit-subtask"
-            onclick="submitEditedSingleSubtask('${id}', '${index}')"
-          />
-          &lt;img
-            src="../assets/icons/delete-subtask.png"
-            alt="trash icon"
-            id="delete-subtask-${index}"
-            class="delete-subtask"
-            onclick="deleteSingleSubtask('${id}', '${index}')"
-          />
-        &lt;/div>
-      &lt;/li>
-    `;
+  &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
+    &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
+      &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
+      &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
+      &lt;img
+      src="../assets/icons/edit-subtask.png"
+      alt="edit icon"
+      id="edit-subtask-${index}"
+      class="edit-subtask"
+      onclick="editSingleSubtask('${id}', '${index}')"
+      />
+      &lt;img
+      src="../assets/icons/submit-subtask.png"
+      alt="submit icon"
+      id="submit-edit-subtask-${index}"
+      class="submit-edit-subtask"
+      onclick="submitEditedSingleSubtask('${id}', '${index}')"
+      />
+      &lt;img
+      src="../assets/icons/delete-subtask.png"
+      alt="trash icon"
+      id="delete-subtask-${index}"
+      class="delete-subtask"
+      onclick="deleteSingleSubtask('${id}', '${index}')"
+      />
+    &lt;/div>
+  &lt;/li>
+  `;
 }
 
-// TODO: Noch einprogrammieren mit Input Feld
 async function editSingleSubtask(taskId, index) {
+  if (isSubtaskEditOn) {
+    return;
+  } else {
+    isSubtaskEditOn = true;
+  }
+
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
@@ -373,6 +394,7 @@ async function editSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
     singleSubtaskTitle.style.display = 'none';
@@ -381,6 +403,10 @@ async function editSingleSubtask(taskId, index) {
     submitEditSubtaskBtn.style.display = 'flex';
     subtask.style.borderBottom = '1px solid #29abe2';
 
+    if (isSubtaskEditOn) {
+      let subtaskElement = document.getElementById(`subtask-${index}`);
+      subtaskElement.classList.remove('subtasks-hover');
+    }
     inputEditSubtask.value = subtasks[index].title;
   } else {
     for (let element of tasks) {
@@ -391,11 +417,16 @@ async function editSingleSubtask(taskId, index) {
         submitEditSubtaskBtn.style.display = 'flex';
         subtask.style.borderBottom = '1px solid #29abe2';
 
+        if (isSubtaskEditOn) {
+          let subtaskElement = document.getElementById(`subtask-${index}`);
+          subtaskElement.classList.remove('subtasks-hover');
+        }
         inputEditSubtask.value = element.data.subtasks[index].title;
         // await updateTaskInFirebase(element.id, element.data);
       }
     }
   }
+  subtaskButtons.style.visibility = 'visible';
 }
 
 async function submitEditedSingleSubtask(taskId, index) {
@@ -410,6 +441,7 @@ async function submitEditedSingleSubtask(taskId, index) {
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
     subtasks[index].title = inputEditSubtask.value;
@@ -437,6 +469,8 @@ async function submitEditedSingleSubtask(taskId, index) {
       }
     }
   }
+  subtaskButtons.style.visibility = 'hidden';
+  isSubtaskEditOn = false;
 }
 
 async function deleteSingleSubtask(taskId, index) {
@@ -488,9 +522,11 @@ async function listContactsToAssignedTo() {
   });
 }
 
-function setBackgroundColor(contact){
+function setBackgroundColor(contact) {
   if (document.getElementById(contact['id'] + '-container')) {
-    document.getElementById(contact['id'] + '-container').style.backgroundColor = contact['color'];
+    document.getElementById(
+      contact['id'] + '-container'
+    ).style.backgroundColor = contact['color'];
   }
 }
 
@@ -513,9 +549,9 @@ function inspectCheckboxes(path) {
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
   if (addTask) {
-    inputAssignedTo = document.getElementById('input-assigned-to-addTask')
+    inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
-  event.stopPropagation();
+
   if (modal) {
     modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);
@@ -526,7 +562,7 @@ function dropDownContacts(containerId, addTask) {
   } else {
     openDropdownMenu(inputAssignedTo);
   }
-  inputAssignedTo =document.getElementById('input-assigned-to')
+  inputAssignedTo = document.getElementById('input-assigned-to');
 }
 
 function filterContacts(event) {
@@ -652,13 +688,13 @@ function assignedInitialContent(match, index) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Oct 30 2024 22:17:41 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 02 2024 12:03:03 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>
