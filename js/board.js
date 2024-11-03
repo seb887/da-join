@@ -519,6 +519,22 @@ async function createCompareArray() {
   return taskArray;
 }
 
+
+async function deleteNonExistingContactsInTask(){
+  // 1. Compare each ID of renderedContacts (which are all current existing contacts) with all assignedTo Contacts in Tasks
+  // 2. If an ID in a Task doesent match one of the renderedContacts it should get deleted out of the Task.
+  const getAllAssignedContacts = await getAllAssignedTo();
+  
+  const renderedContactIds = renderedContacts.map(contact => contact.id);
+  
+  const result = getAllAssignedContacts.filter(
+    assignedContact => !renderedContactIds.includes(assignedContact.id)
+  );
+  
+  console.log(result);
+}
+
+
 async function compareArray() {
   let comparsion = await createCompareArray();
   let assignedContactsToUpdate = [];

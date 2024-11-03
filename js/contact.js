@@ -78,7 +78,7 @@ function checkForExistingLetter(contact) {
 function openContact(index) {
     let container = document.getElementById('contactInformation');
     let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
-    let isSameContact = document.getElementById('contactName').innerText == contactsArray[index].name;
+    let isSameContact = document.getElementById('contactName').innerText == contactsArray[index].name.trim();
 
     container.classList.toggle('contactFadeAndSlideIn', isSameContact);
     document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive', isSameContact);
@@ -255,11 +255,12 @@ async function deleteContact(id) {
     let response = await fetch(`https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`, {
         method: "DELETE"
     })
+    showInfoToast('Contact deleted');
     console.log(`${id} wurde gelöscht!`);
     renderContacts();
     document.getElementById('contactInformation').classList.toggle('contactFadeAndSlideIn');
     animationActive ? openAndCloseAddContact() : null ;
-    showInfoToast('Contact deleted');
+    
 }
 
 /**
