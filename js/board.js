@@ -282,8 +282,8 @@ function cancelSearchTask() {
 function showInfoToast(text) {
   // event.preventDefault();
   const toast = document.getElementById('info-toast');
-  const infoText = document.getElementById('infoText');
-  infoText.innerText = text;
+  // const infoText = document.getElementById('infoText');
+  toast.innerText = text;
   toast.classList.add('show');
   setTimeout(() => {
     toast.classList.remove('show');
