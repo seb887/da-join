@@ -205,6 +205,8 @@ function setCategoryBackgroundColor(category) {
     return '#0038FF';
   } else if (category == 'Technical Task') {
     return '#1FD7C1';
+  } else if (category == 'Tutorial') {
+    return '#1FD7C1';
   }
 }
 
