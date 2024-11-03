@@ -150,29 +150,36 @@ async function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
   isEditOn = true;
-  await listContactsToAssignedTo();
+
+  editInputTitle.value = "";
+  editInputDescription.value = "";
+  editInputDate.value = "";
+  currentPrio = null;
+  subtasks = [];
+  renderSubtasksList([]);
+
+  const contactsPromise = listContactsToAssignedTo();
+
+  const task = tasks.find(element => element.id === taskId);
+
+  if (task) {
+    editInputTitle.value = task.data.title;
+    editInputDescription.value = task.data.description;
+    editInputDate.value = task.data.date;
+    currentPrio = task.data.prio;
+    subtasks = task.data.subtasks || [];
+
+    setPrio(currentPrio);
+    renderSubtasksList(taskId);
+
+    editTaskSubmitBtn.onclick = () => editTask(taskId);
+  }
+
+  await contactsPromise;
   selectAllAssignedContacts(taskId);
   hideSubtaskIcons();
-
-  for (let element of tasks) {
-    if (taskId == element.id) {
-      editInputTitle.value = element.data.title;
-      editInputDescription.value = element.data.description;
-      editInputDate.value = element.data.date;
-      currentPrio = element.data.prio;
-
-      if (element.data.subtasks == undefined) {
-        subtasks = [];
-      } else {
-        subtasks = element.data.subtasks;
-      }
-
-      setPrio(currentPrio);
-      renderSubtasksList(taskId);
-      editTaskSubmitBtn.onclick = () => editTask(taskId);
-    }
-  }
 }
+
 
 function closeEditTaskModal() {
   taskModalCard.style.display = 'flex';
