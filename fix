@@ -1,0 +1,6 @@
+[main 39f6d9c] add demo data for jsons -
+ 5 files changed, 450 insertions(+)
+ create mode 100644 fix
+ create mode 100644 json/contacts.json
+ create mode 100644 json/tasks.json
+ create mode 100644 json/users.json
