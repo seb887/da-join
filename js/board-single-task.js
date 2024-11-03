@@ -193,6 +193,7 @@ async function editTask(taskId) {
       closeEditTaskModal();
       // FIXME: disable animation, if change from edit task modal to default task modal
       openTaskModal(taskId);
+
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }
