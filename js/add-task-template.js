@@ -1,3 +1,9 @@
+/**
+ * Generates the HTML for a subtask list item
+ *
+ * @param {number} index - The index of the subtask in the list
+ * @param {string} id - The unique identifier for the parent task or subtask
+ */
 function createSubtasksListHTML(index, id) {
   return `
     <li id="subtask-${index}" class="subtasks subtasks-hover">
@@ -30,6 +36,13 @@ function createSubtasksListHTML(index, id) {
     `;
 }
 
+/**
+ * Generates the HTML content for displaying a contact in the "Assigned To" contacts list with a checkbox
+ *
+ * @param {Object} contact - The contact object containing information about the contact
+ * @param {string} id - The unique ID of the parent element
+ * @param {number} index - The index of the contact in the list
+ */
 function assignedToContactsContent(contact, id, index) {
   return `
     <label for ="${contact['id']}cb">
@@ -44,6 +57,12 @@ function assignedToContactsContent(contact, id, index) {
       `;
 }
 
+/**
+ * Generates the HTML content for displaying a contact's initials in the assigned contacts list
+ *
+ * @param {Object} match - The contact object containing information about the contact
+ * @param {number} index - The index of the contact in the list
+ */
 function assignedInitialContent(match, index) {
   return `
     <div id="addContactList${index}" class ="assigned-contacts-initial-container">

@@ -36,6 +36,10 @@ inputDate.valueAsDate = currentDate;
 let currentPrio = 'medium';
 
 // FUNCTIONS
+
+/**
+ * Renders everything that has to be rendered on the site
+ */
 async function renderAddTask() {
   clearInputs();
   listContactsToAssignedTo();
@@ -238,6 +242,11 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
 
 // INFO TOAST
 
+/**
+ * Displays an informational toast message with the provided text and hides it after a set duration
+ *
+ * @param {string} text - The text to display in the informational toast
+ */
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');

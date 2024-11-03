@@ -61,11 +61,13 @@ let isSubtaskEditOn = false;
 // DEFAULTS
 let currentDate = new Date();
 inputDate.valueAsDate = currentDate;
-// boardInputDate.valueAsDate = currentDate;
-
 let currentPrio = 'medium';
 
 // FUNCTIONS
+
+/**
+ * Renders everything that has to be rendered on the site
+ */
 async function renderAddTask() {
   clearInputs();
   listContactsToAssignedTo();
@@ -227,6 +229,13 @@ function setNoPrio(prio) {
   checkIfEditIsOnNoPrio(noPrio);
 }
 
+/**
+ * Checks if editing is enabled and styles the corresponding buttons
+ * for each element in the provided noPrio array
+ *
+ * @param {Array&lt;string>} noPrio - An array of strings representing
+ * the identifiers of elements that need to be styled
+ */
 function checkIfEditIsOnNoPrio(noPrio) {
   for (let element of noPrio) {
     if (isEditOn) {
@@ -245,6 +254,13 @@ function checkIfEditIsOnNoPrio(noPrio) {
   }
 }
 
+/**
+ * Styles the no priority buttons and their associated images
+ *
+ * @param {string} noPrioElement - The identifier for the no priority element
+ * @param {HTMLElement} noPrioButton - The button element to style
+ * @param {HTMLElement} noPrioButtonImg - The image element to update the source
+ */
 function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
   noPrioButton.style.background = 'white';
   noPrioButton.style.color = 'black';
@@ -252,244 +268,13 @@ function styleNoPrioButtons(noPrioElement, noPrioButton, noPrioButtonImg) {
   noPrioButtonImg.src = `../assets/icons/prio-${noPrioElement}.png`;
 }
 
-// SUBTASKS
-
-function controlSubtaskIcons() {
-  if (editInputSubtask == null) {
-    if (inputSubtask.value.length > 0) {
-      showSubtaskIcons();
-    } else {
-      hideSubtaskIcons();
-    }
-  } else {
-    if (inputSubtask.value.length > 0 || editInputSubtask.value.length > 0) {
-      showSubtaskIcons();
-    } else {
-      hideSubtaskIcons();
-    }
-  }
-}
-
-function showSubtaskIcons() {
-  if (isEditOn) {
-    editAddSubtasksImg.style.display = 'none';
-    editSubmitSubtasksImg.style.display = 'flex';
-    editCancelSubtasksImg.style.display = 'flex';
-  } else {
-    addSubtasksImg.style.display = 'none';
-    submitSubtasksImg.style.display = 'flex';
-    cancelSubtasksImg.style.display = 'flex';
-  }
-}
-
-function hideSubtaskIcons() {
-  if (isEditOn) {
-    editAddSubtasksImg.style.display = 'flex';
-    editSubmitSubtasksImg.style.display = 'none';
-    editCancelSubtasksImg.style.display = 'none';
-  } else {
-    addSubtasksImg.style.display = 'flex';
-    submitSubtasksImg.style.display = 'none';
-    cancelSubtasksImg.style.display = 'none';
-  }
-}
-
-function cancelInputSubtask() {
-  if (isEditOn) {
-    editInputSubtask.value = '';
-  } else {
-    inputSubtask.value = '';
-  }
-
-  controlSubtaskIcons();
-}
-
-function submitInputSubtask() {
-  const subtaskObj = {
-    title: isEditOn ? editInputSubtask.value : inputSubtask.value,
-    checked: false,
-  };
-
-  subtasks.push(subtaskObj);
-
-  if (!isEditOn) {
-    console.log('clear inputSubtask', isEditOn);
-    inputSubtask.value = '';
-  } else {
-    console.log('clear editInputSubtask', isEditOn);
-    editInputSubtask.value = '';
-  }
-
-  controlSubtaskIcons();
-  renderSubtasksList();
-}
-
-function renderSubtasksList(taskId) {
-  let list = subtasksList;
-
-  if (isEditOn) {
-    list = editSubtasksList;
-  } else {
-    list = subtasksList;
-  }
-
-  list.innerHTML = '';
-
-  if (subtasks == undefined) {
-    return;
-  } else {
-    for (let i = 0; i &lt; subtasks.length; i++) {
-      list.innerHTML += createSubtasksListHTML(i, taskId);
-    }
-  }
-}
-
-function createSubtasksListHTML(index, id) {
-  return `
-  &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
-    &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-      &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-      &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
-      &lt;img
-      src="../assets/icons/edit-subtask.png"
-      alt="edit icon"
-      id="edit-subtask-${index}"
-      class="edit-subtask"
-      onclick="editSingleSubtask('${id}', '${index}')"
-      />
-      &lt;img
-      src="../assets/icons/submit-subtask.png"
-      alt="submit icon"
-      id="submit-edit-subtask-${index}"
-      class="submit-edit-subtask"
-      onclick="submitEditedSingleSubtask('${id}', '${index}')"
-      />
-      &lt;img
-      src="../assets/icons/delete-subtask.png"
-      alt="trash icon"
-      id="delete-subtask-${index}"
-      class="delete-subtask"
-      onclick="deleteSingleSubtask('${id}', '${index}')"
-      />
-    &lt;/div>
-  &lt;/li>
-  `;
-}
-
-async function editSingleSubtask(taskId, index) {
-  if (isSubtaskEditOn) {
-    return;
-  } else {
-    isSubtaskEditOn = true;
-  }
-
-  const singleSubtaskTitle = document.getElementById(
-    `single-subtask-title-${index}`
-  );
-  const inputEditSubtask = document.getElementById(
-    `input-edit-subtask-${index}`
-  );
-  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
-  const submitEditSubtaskBtn = document.getElementById(
-    `submit-edit-subtask-${index}`
-  );
-  const subtask = document.getElementById(`subtask-${index}`);
-  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
-
-  if (taskId == 'undefined') {
-    singleSubtaskTitle.style.display = 'none';
-    inputEditSubtask.style.display = 'flex';
-    editSubtaskBtn.style.display = 'none';
-    submitEditSubtaskBtn.style.display = 'flex';
-    subtask.style.borderBottom = '1px solid #29abe2';
-
-    if (isSubtaskEditOn) {
-      let subtaskElement = document.getElementById(`subtask-${index}`);
-      subtaskElement.classList.remove('subtasks-hover');
-    }
-    inputEditSubtask.value = subtasks[index].title;
-  } else {
-    for (let element of tasks) {
-      if (element.id == taskId) {
-        singleSubtaskTitle.style.display = 'none';
-        inputEditSubtask.style.display = 'flex';
-        editSubtaskBtn.style.display = 'none';
-        submitEditSubtaskBtn.style.display = 'flex';
-        subtask.style.borderBottom = '1px solid #29abe2';
-
-        if (isSubtaskEditOn) {
-          let subtaskElement = document.getElementById(`subtask-${index}`);
-          subtaskElement.classList.remove('subtasks-hover');
-        }
-        inputEditSubtask.value = element.data.subtasks[index].title;
-        // await updateTaskInFirebase(element.id, element.data);
-      }
-    }
-  }
-  subtaskButtons.style.visibility = 'visible';
-}
-
-async function submitEditedSingleSubtask(taskId, index) {
-  const singleSubtaskTitle = document.getElementById(
-    `single-subtask-title-${index}`
-  );
-  const inputEditSubtask = document.getElementById(
-    `input-edit-subtask-${index}`
-  );
-  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
-  const submitEditSubtaskBtn = document.getElementById(
-    `submit-edit-subtask-${index}`
-  );
-  const subtask = document.getElementById(`subtask-${index}`);
-  const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
-
-  if (taskId == 'undefined') {
-    subtasks[index].title = inputEditSubtask.value;
-
-    singleSubtaskTitle.style.display = 'flex';
-    inputEditSubtask.style.display = 'none';
-    editSubtaskBtn.style.display = 'flex';
-    submitEditSubtaskBtn.style.display = 'none';
-    subtask.style.borderBottom = 'none';
-
-    renderSubtasksList();
-  } else {
-    for (let element of tasks) {
-      if (element.id == taskId) {
-        singleSubtaskTitle.style.display = 'flex';
-        inputEditSubtask.style.display = 'none';
-        editSubtaskBtn.style.display = 'flex';
-        submitEditSubtaskBtn.style.display = 'none';
-        subtask.style.borderBottom = 'none';
-
-        element.data.subtasks[index].title = inputEditSubtask.value;
-
-        await updateTaskInFirebase(element.id, element.data);
-        renderSubtasksList();
-      }
-    }
-  }
-  subtaskButtons.style.visibility = 'hidden';
-  isSubtaskEditOn = false;
-}
-
-async function deleteSingleSubtask(taskId, index) {
-  if (taskId == 'undefined') {
-    subtasks.splice(index, 1);
-    renderSubtasksList();
-  } else {
-    for (let element of tasks) {
-      if (element.id == taskId) {
-        element.data.subtasks.splice(index, 1);
-        await updateTaskInFirebase(element.id, element.data);
-        renderSubtasksList();
-      }
-    }
-  }
-}
-
 // INFO TOAST
 
+/**
+ * Displays an informational toast message with the provided text and hides it after a set duration
+ *
+ * @param {string} text - The text to display in the informational toast
+ */
 function showInfoToast(text) {
   const toast = document.getElementById('info-toast');
   const infoText = document.getElementById('infoText');
@@ -498,185 +283,6 @@ function showInfoToast(text) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 1500);
-}
-
-async function getContacts() {
-  let response = await fetch(CONTACT_URL);
-  let contacts = await response.json();
-  return contacts;
-}
-
-async function listContactsToAssignedTo() {
-  let allContacts = Object.values(await getContacts());
-  let id = Object.keys(await getContacts());
-  renderedContacts = [];
-  allContacts.forEach((contact, index) => {
-    contact.id = id[index];
-  });
-  allContacts.sort((a, b) => a.name.localeCompare(b.name));
-  inputAssignedTo.innerHTML = '';
-  allContacts.forEach((contact, index) => {
-    inputAssignedTo.innerHTML += assignedToContactsContent(contact);
-    setBackgroundColor(contact);
-    renderedContacts.push(contact);
-  });
-}
-
-function setBackgroundColor(contact) {
-  if (document.getElementById(contact['id'] + '-container')) {
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
-  }
-}
-
-function inspectCheckboxes(path) {
-  let allDivs = document.getElementById('input-assigned-to');
-  assignedContacts = [];
-  allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-    if (cb.checked) {
-      assignedContacts.push(cb.value);
-      cb.parentElement.parentElement.classList.add('selected');
-      renderAssignedContacts(path);
-    }
-    if (!cb.checked) {
-      cb.parentElement.parentElement.classList.remove('selected');
-      renderAssignedContacts(path);
-    }
-  });
-}
-
-function dropDownContacts(containerId, addTask) {
-  let modal = document.getElementById(containerId);
-  if (addTask) {
-    inputAssignedTo = document.getElementById('input-assigned-to-addTask');
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      closeDropdownMenu(inputAssignedTo);
-    });
-  }
-  if (inputAssignedTo.style.display == 'flex') {
-    closeDropdownMenu(inputAssignedTo);
-  } else {
-    openDropdownMenu(inputAssignedTo);
-  }
-  inputAssignedTo = document.getElementById('input-assigned-to');
-}
-
-function filterContacts(event) {
-  if (showOrHideContactsOnInput()) {
-    displayMatchingContacts();
-  }
-}
-
-function showOrHideContactsOnInput() {
-  let allDivs = document.getElementById('input-assigned-to');
-  const contactList = document.getElementById('input-assigned-to');
-  if (document.getElementById('searchContact').value.length > 0) {
-    contactList.style.display = 'flex';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
-    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-      cb.parentElement.parentElement.style.display = 'none';
-    });
-    return true;
-  } else {
-    document.getElementById('input-assigned-to').style.display = 'none';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
-    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-      cb.parentElement.parentElement.style.display = '';
-    });
-    return false;
-  }
-}
-
-function displayMatchingContacts() {
-  let input = document.getElementById('searchContact');
-  renderedContacts.forEach((contact) => {
-    if (
-      contact.name.toLowerCase().slice(0, 2) ==
-      input.value.toLowerCase().slice(0, 2)
-    )
-      document.getElementById(
-        `${contact.id}cb`
-      ).parentElement.parentElement.style.display = '';
-  });
-}
-
-function renderAssignedContacts(path) {
-  let container = document.getElementById(path);
-  container.innerHTML = '';
-  matches = [];
-  matches = renderedContacts.filter((contact) =>
-    assignedContacts.some((id) => id.slice(0, -2) === contact.id)
-  );
-  matches.forEach((match, index) => {
-    container.innerHTML += assignedInitialContent(match, index);
-  });
-}
-
-function renderContactArray() {
-  inputAssignedTo.innerHTML = '';
-  renderedContacts.forEach((contact, index) => {
-    inputAssignedTo.innerHTML += assignedToContactsContentFilter(
-      contact,
-      contact['id']
-    );
-    document.getElementById(
-      contact['id'] + '-container'
-    ).style.backgroundColor = contact['color'];
-  });
-}
-
-window.onscroll = function (ev) {
-  const scrollPosition = window.innerHeight + Math.round(window.scrollY);
-  const totalHeight = document.documentElement.scrollHeight;
-  if (scrollPosition >= totalHeight) {
-    document.getElementById('footer').classList.add('footer-animation');
-  } else {
-    document.getElementById('footer').classList.remove('footer-animation');
-  }
-};
-
-function assignedToContactsContent(contact, id, index) {
-  return `
-  &lt;label for ="${contact['id']}cb">
-      &lt;div class ="add-task-contact-list">
-        &lt;div>
-          &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
-          &lt;div>${contact['name']}&lt;/div>
-        &lt;/div>
-        &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
-      &lt;/div>
-  &lt;/label>
-    `;
-}
-
-function assignedToContactsContentFilter(contact, id) {
-  return `
-  &lt;label for ="${id}cb">
-      &lt;div class ="add-task-contact-list">
-        &lt;div>
-          &lt;div id= "${id}-container" class= "initial-div">${contact['initials']}&lt;/div>
-          &lt;div>${contact['name']}&lt;/div>
-        &lt;/div>
-        &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${id}" id="${id}cb" type ="checkbox">
-      &lt;/div>
-  &lt;/label>
-    `;
-}
-
-function assignedInitialContent(match, index) {
-  return `
-  &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
-      &lt;div>
-        &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
-      &lt;/div>
-  &lt;/div>
-`;
 }
 </code></pre>
         </article>
@@ -688,13 +294,13 @@ function assignedInitialContent(match, index) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 02 2024 12:03:03 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 15:50:27 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>
