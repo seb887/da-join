@@ -214,7 +214,7 @@ async function createContact() {
         }) 
     })
     selectCreatedContact(document.getElementById('inputContactName').value);
-    showInfoToast('Contact succesfully created')
+    showInfoToast('Contact succesfully created');
 }
 
 /**
