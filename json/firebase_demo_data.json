@@ -1,0 +1,252 @@
+{
+  "contacts": {
+    "-OAsvr3sIc0i_AWWudpA": {
+      "color": "#32ea18",
+      "email": "max.schneider@gmx.de",
+      "initials": "MS",
+      "name": "Max Schneider",
+      "phone": "015298765432"
+    },
+    "-OAsw3-XESMhKtf5hyxN": {
+      "color": "#301d5e",
+      "email": "lukas.fischer@outlook.com",
+      "initials": "LF",
+      "name": "Lukas Fischer",
+      "phone": "017287654321"
+    },
+    "-OAsw9Qr70oBF9C6yagL": {
+      "color": "#18b88a",
+      "email": "lea.becker@gmx.de",
+      "initials": "LB",
+      "name": "Lea Becker",
+      "phone": "017147925813"
+    },
+    "-OAswGf1xEcv6YZDF2ek": {
+      "color": "#23dba3",
+      "email": "laura.lange@outlook.com",
+      "initials": "LL",
+      "name": "Laura Lange",
+      "phone": "016034680257"
+    },
+    "-OAswMik-mFrDh2RoXr-": {
+      "color": "#1cfcc2",
+      "email": "julia.weber@yahoo.de",
+      "initials": "JW",
+      "name": "Julia Weber",
+      "phone": "017154321678"
+    },
+    "-OAswS0qIyIemLQu7qZ0": {
+      "color": "#d8924e",
+      "email": "jonas.wolf@yahoo.com",
+      "initials": "JW",
+      "name": "Jonas Wolf",
+      "phone": "017135724680"
+    },
+    "-OAswXf-eXA7bI3okHS2": {
+      "color": "#51744e",
+      "email": "jan.neumann@gmail.com",
+      "initials": "JN",
+      "name": "Jan Neumann",
+      "phone": "016012345678"
+    },
+    "-OAswc80oFFqdXBUV0XH": {
+      "color": "#2b9117",
+      "email": "hannah.zimmer@web.de",
+      "initials": "HZ",
+      "name": "Hannah Zimmer",
+      "phone": "017212345678"
+    },
+    "-OAswi4_hTk9JnknAnze": {
+      "color": "#636c9e",
+      "email": "felix.mayer@gmail.com",
+      "initials": "FM",
+      "name": "Felix Mayer",
+      "phone": "015285792468"
+    },
+    "-OAswnLmDNttmw3GD33c": {
+      "color": "#24e435",
+      "email": "emma.hofmann@outlook.de",
+      "initials": "EH",
+      "name": "Emma Hofmann",
+      "phone": "017246802468"
+    },
+    "-OAswsCA970ziCQ9OM2T": {
+      "color": "#9b3843",
+      "email": "elena.schulz@gmx.de",
+      "initials": "ES",
+      "name": "Elena Schulz",
+      "phone": "015264798235"
+    },
+    "-OAswxXu7R64k3W0-Qh6": {
+      "color": "#beca82",
+      "email": "david.krause@gmail.com",
+      "initials": "DK",
+      "name": "David Krause",
+      "phone": "015195847631"
+    },
+    "-OAsx3i-BvSMs6QERc_S": {
+      "color": "#8d22d5",
+      "email": "clara.peters@web.de",
+      "initials": "CP",
+      "name": "Clara Peters",
+      "phone": "015112457896"
+    },
+    "-OAsx9TfFSHV471Poha0": {
+      "color": "#e1429b",
+      "email": "anna.mueller@gmail.com",
+      "initials": "AM",
+      "name": "Anna Müller",
+      "phone": "015123456789"
+    },
+    "-OAsxEVIrUeTaYMuNb1C": {
+      "color": "#649971",
+      "email": "andre@gmbh.de",
+      "initials": "AS",
+      "name": "Andre Schulze",
+      "phone": "34123456"
+    }
+  },
+  "tasks": {
+    "-OAstxFoY3hWGZKiEwYS": {
+      "board": "todo",
+      "category": "Technical Task",
+      "date": "2024-11-04",
+      "description": "Initialisierung des JavaScript-Projekts mit npm und Git-Repository.",
+      "prio": "medium",
+      "title": "Projektinitialisierung"
+    },
+    "-OAsuHK8YM2ggkRKO5fN": {
+      "board": "in progress",
+      "category": "Technical Task",
+      "date": "2024-11-04",
+      "description": "HTML, CSS und JavaScript-Dateien anlegen und grundlegende Struktur erstellen.",
+      "prio": "urgent",
+      "subtasks": [
+        {
+          "checked": true,
+          "title": "HTML Dateien angelegt"
+        },
+        {
+          "checked": false,
+          "title": "CSS Dateien angelegt"
+        },
+        {
+          "checked": false,
+          "title": "Javascript Dateien angelegt"
+        }
+      ],
+      "title": "Erstellung der Grundstruktur"
+    },
+    "-OAsuRXjlNcl3nigg33Y": {
+      "board": "todo",
+      "category": "Technical Task",
+      "date": "2024-11-04",
+      "description": "Eine externe API in das Projekt integrieren, um Daten abzurufen.",
+      "prio": "urgent",
+      "title": "API-Integration"
+    },
+    "-OAsuYQpy1iBITiz69cd": {
+      "board": "await feedback",
+      "category": "Technical Task",
+      "date": "2024-11-04",
+      "description": "Verbindung zur Datenbank herstellen und CRUD-Operationen implementieren.",
+      "prio": "medium",
+      "title": "Datenbankanbindung"
+    },
+    "-OAsuchUzm_XFtnVFDD5": {
+      "board": "in progress",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Das User Interface für bessere Usability und ansprechendes Design optimieren.",
+      "prio": "low",
+      "title": "UI-Design verbessern"
+    },
+    "-OAsuhBwlXVUPO0Y41JG": {
+      "board": "todo",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Unit Tests für kritische Funktionen im JavaScript-Code erstellen.",
+      "prio": "medium",
+      "title": "Unit Tests schreiben"
+    },
+    "-OAsumoNy2tqhbQUxbNI": {
+      "board": "await feedback",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Bekannte Fehler im Projekt beheben, die durch Testing aufgedeckt wurden.",
+      "prio": "urgent",
+      "title": "Bugfixing"
+    },
+    "-OAsuqlz775YYQdeEyh_": {
+      "board": "todo",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Erstellung der technischen Dokumentation und Benutzeranleitung.",
+      "prio": "low",
+      "title": "Dokumentation erstellen"
+    },
+    "-OAsuvVEmWtzyXoctvCZ": {
+      "board": "in progress",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Durchführen eines Code Reviews zur Verbesserung der Codequalität.",
+      "prio": "medium",
+      "title": "Code Review"
+    },
+    "-OAsv1Ggs7YOJ60uz594": {
+      "board": "done",
+      "category": "User Story",
+      "date": "2024-11-04",
+      "description": "Projektabnahme und Übergabe an den Kunden.",
+      "prio": "urgent",
+      "title": "Projektabschluss"
+    }
+  },
+  "users": {
+    "-O8d6ajvqEHZ3p6XQp98": {
+      "email": "bartosz.kuczek4@gmail.com",
+      "name": "Bartosz Kuczek",
+      "password": "asdfg"
+    },
+    "-O8dElN-KHh_B6OWTOIs": {
+      "email": "bartosz.kuczek4@gmail.comasd",
+      "name": "Bartosz Kuczekasdddddddddddddddddddddddddddddddddddddddddddddddd",
+      "password": "asdfg"
+    },
+    "-O8dFODWPx_BgNqLuhf4": {
+      "email": "bartosz.kuczek4@gmail.comaw",
+      "name": "aaaaaaaaaaaaaaaa",
+      "password": "asdfg"
+    },
+    "-O8hjyMKo8s7VvG9Opm2": {
+      "email": "bartosz.kuczek4@gmail.comw",
+      "name": "aaaaaaaaaaaaaaad",
+      "password": "asdfg"
+    },
+    "-O8kvQbFjmGH3sQj0xnY": {
+      "email": "bartosz.kuczek4@gmail.comaa",
+      "name": "Bartosz Kuczekaa",
+      "password": "asdfg"
+    },
+    "-O8t3JP2a3OfPMtRtyZM": {
+      "email": "SADFC@dddddddddddddddddd",
+      "name": "WWWWWWWWWWWWWWW WWWWWWWW",
+      "password": "asdfg"
+    },
+    "-O8t3YeD41oANc-Q55_H": {
+      "email": "bartosz.kuczek4@gmail.co",
+      "name": "Maximilian v Mustermann ",
+      "password": "asdfg"
+    },
+    "-O8t6Cksv3pziecmOiaK": {
+      "email": "bartosz.kuczek4@gmail.comW",
+      "name": "WWWWWWWWW WWWWWWWW",
+      "password": "asdfg"
+    },
+    "-O9B5fbvveC8ZmJWsLL9": {
+      "email": "felix@join.de",
+      "name": "Felix",
+      "password": "joinjoin"
+    }
+  }
+}

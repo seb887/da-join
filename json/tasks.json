@@ -1,122 +1,107 @@
 // FIXME: DEMO DATEN -> NOCH ANPASSEN
-
-[
-  {
-    "id": 0,
-    "Column": "To Do",
-    "Title": "Projektinitialisierung",
-    "Description": "Initialisierung des JavaScript-Projekts mit npm und Git-Repository.",
-    "Date": "2024-10-10",
-    "Priority": "Medium",
-    "Category": "Technical Task",
-    "Subtasks": [],
-    "Persons": ["clara.peters@web.de"]
+"tasks": {
+    {
+    "board": "To Do",
+    "title": "Projektinitialisierung",
+    "description": "Initialisierung des JavaScript-Projekts mit npm und Git-Repository.",
+    "date": "2024-10-10",
+    "prio": "Medium",
+    "category": "Technical Task",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 1,
-    "Column": "In Progress",
-    "Title": "Erstellung der Grundstruktur",
-    "Description": "HTML, CSS und JavaScript-Dateien anlegen und grundlegende Struktur erstellen.",
-    "Date": "2024-10-11",
-    "Priority": "Urgent",
-    "Category": "Technical Task",
-    "Subtasks": [
-      { "Description": "HTML Dateien angelegt", "Done": true },
-      { "Description": "CSS Dateien angelegt", "Done": false },
-      { "Description": "Javascript Dateien angelegt", "Done": false }
+    "board": "In Progress",
+    "title": "Erstellung der Grundstruktur",
+    "description": "HTML, CSS und JavaScript-Dateien anlegen und grundlegende Struktur erstellen.",
+    "date": "2024-10-11",
+    "prio": "Urgent",
+    "category": "Technical Task",
+    "subtasks": [
+      { "title": "HTML Dateien angelegt", "checked": true },
+      { "title": "CSS Dateien angelegt", "checked": false },
+      { "title": "Javascript Dateien angelegt", "checked": false }
     ],
-    "Persons": ["max.schneider@gmx.de"]
+    "assignedTo": []
   },
   {
-    "id": 2,
-    "Column": "To Do",
-    "Title": "API-Integration",
-    "Description": "Eine externe API in das Projekt integrieren, um Daten abzurufen.",
-    "Date": "2024-10-13",
-    "Priority": "Urgent",
-    "Category": "Technical Task",
-    "Subtasks": [],
-    "Persons": ["max.schneider@gmx.de", "mia.koch@gmx.de"]
+    "board": "To Do",
+    "title": "API-Integration",
+    "description": "Eine externe API in das Projekt integrieren, um Daten abzurufen.",
+    "date": "2024-10-13",
+    "prio": "Urgent",
+    "category": "Technical Task",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 3,
-    "Column": "Await Feedback",
-    "Title": "Datenbankanbindung",
-    "Description": "Verbindung zur Datenbank herstellen und CRUD-Operationen implementieren.",
-    "Date": "2024-10-15",
-    "Priority": "Medium",
-    "Category": "Technical Task",
-    "Subtasks": [],
-    "Persons": ["nico.frank@yahoo.com", "andre@gmbh.de", "mia.koch@gmx.de"]
+    "board": "Await Feedback",
+    "title": "Datenbankanbindung",
+    "description": "Verbindung zur Datenbank herstellen und CRUD-Operationen implementieren.",
+    "date": "2024-10-15",
+    "prio": "Medium",
+    "category": "Technical Task",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 4,
-    "Column": "In Progress",
-    "Title": "UI-Design verbessern",
-    "Description": "Das User Interface für bessere Usability und ansprechendes Design optimieren.",
-    "Date": "2024-10-17",
-    "Priority": "Low",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": ["andre@gmbh.de", "mia.koch@gmx.de"]
+    "board": "In Progress",
+    "title": "UI-Design verbessern",
+    "description": "Das User Interface für bessere Usability und ansprechendes Design optimieren.",
+    "date": "2024-10-17",
+    "prio": "Low",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 5,
-    "Column": "To Do",
-    "Title": "Unit Tests schreiben",
-    "Description": "Unit Tests für kritische Funktionen im JavaScript-Code erstellen.",
-    "Date": "2024-10-19",
-    "Priority": "Medium",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": [
-      "hannah.zimmer@web.de",
-      "nico.frank@yahoo.com",
-      "mia.koch@gmx.de"
-    ]
+    "board": "To Do",
+    "title": "Unit Tests schreiben",
+    "description": "Unit Tests für kritische Funktionen im JavaScript-Code erstellen.",
+    "date": "2024-10-19",
+    "prio": "Medium",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 6,
-    "Column": "Await Feedback",
-    "Title": "Bugfixing",
-    "Description": "Bekannte Fehler im Projekt beheben, die durch Testing aufgedeckt wurden.",
-    "Date": "2024-10-21",
-    "Priority": "Urgent",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": ["anna.mueller@example.com"]
+    "board": "Await Feedback",
+    "title": "Bugfixing",
+    "description": "Bekannte Fehler im Projekt beheben, die durch Testing aufgedeckt wurden.",
+    "date": "2024-10-21",
+    "prio": "Urgent",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 7,
-    "Column": "To Do",
-    "Title": "Dokumentation erstellen",
-    "Description": "Erstellung der technischen Dokumentation und Benutzeranleitung.",
-    "Date": "2024-10-23",
-    "Priority": "Low",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": ["jonas.wolf@yahoo.com", "hannah.zimmer@web.de"]
+    "board": "To Do",
+    "title": "Dokumentation erstellen",
+    "description": "Erstellung der technischen Dokumentation und Benutzeranleitung.",
+    "date": "2024-10-23",
+    "prio": "Low",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 8,
-    "Column": "In Progress",
-    "Title": "Code Review",
-    "Description": "Durchführen eines Code Reviews zur Verbesserung der Codequalität.",
-    "Date": "2024-10-25",
-    "Priority": "Medium",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": ["lukas.fischer@outlook.com", "max.schneider@gmx.de"]
+    "board": "In Progress",
+    "title": "Code Review",
+    "description": "Durchführen eines Code Reviews zur Verbesserung der Codequalität.",
+    "date": "2024-10-25",
+    "prio": "Medium",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   },
   {
-    "id": 9,
-    "Column": "Done",
-    "Title": "Projektabschluss",
-    "Description": "Projektabnahme und Übergabe an den Kunden.",
-    "Date": "2024-10-30",
-    "Priority": "Urgent",
-    "Category": "User Story",
-    "Subtasks": [],
-    "Persons": ["lukas.fischer@outlook.com", "anna.mueller@example.com"]
+    "board": "done",
+    "title": "Projektabschluss",
+    "description": "Projektabnahme und Übergabe an den Kunden.",
+    "date": "2024-10-30",
+    "prio": "Urgent",
+    "category": "User Story",
+    "subtasks": [],
+    "assignedTo": []
   }
-]
+}
