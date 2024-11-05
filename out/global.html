@@ -711,6 +711,143 @@
     
 
     
+    <h4 class="name" id="capitalizeFirstLetter"><span class="type-signature"></span>capitalizeFirstLetter<span class="signature">(string)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Capitalizes the first letter of a given string
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The string to capitalize</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line85">line 85</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="checkEmail"><span class="type-signature">(async) </span>checkEmail<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -1546,6 +1683,146 @@
     
 
     
+    <h4 class="name" id="checkSubtasksArr"><span class="type-signature"></span>checkSubtasksArr<span class="signature">(subtasksArr)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks if the subtasks array is defined and adjusts the visibility of the task modal subtasks sectionIf the subtasks array is undefined, the subtasks section will be hidden. Otherwise, it will be displayed
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subtasksArr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">undefined</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The array of subtasks or `undefined` if no subtasks are present</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="checkUser"><span class="type-signature">(async) </span>checkUser<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -1775,6 +2052,94 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="contact.js.html">contact.js</a>, <a href="contact.js.html#line241">line 241</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="closeEditTaskModal"><span class="type-signature"></span>closeEditTaskModal<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Closes the edit task modal and displays the regular task modal
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line243">line 243</a>
     </li></ul></dd>
     
 
@@ -2760,6 +3125,143 @@
     
 
     
+    <h4 class="name" id="deleteTask"><span class="type-signature">(async) </span>deleteTask<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Deletes a task from the Firebase database using its ID, then closes the task modal and re-renders the board
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task to be deleted</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="disableSpacebar"><span class="type-signature"></span>disableSpacebar<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -3576,6 +4078,143 @@
     
 
     
+    <h4 class="name" id="editTask"><span class="type-signature">(async) </span>editTask<span class="signature">(taskId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the details of a specified task with the current values from the edit modalThe task is then updated in the Firebase database, and the modal view switches backto the default task modal with the updated task details
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task to be updated</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line255">line 255</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="filterContacts"><span class="type-signature"></span>filterContacts<span class="signature">(event)</span><span class="type-signature"></span></h4>
     
 
@@ -3991,6 +4630,231 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="contact.js.html">contact.js</a>, <a href="contact.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDataForSingleTask"><span class="type-signature"></span>getDataForSingleTask<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieves data for a single task by its ID and renders it in a modal
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The unique identifier of the task to retrieve</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getSelectedContactsEditTask"><span class="type-signature"></span>getSelectedContactsEditTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieves a list of selected contacts for the task being edited by matching assigned contact IDs with rendered contacts
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line294">line 294</a>
     </li></ul></dd>
     
 
@@ -5972,6 +6836,143 @@
     
 
     
+    <h4 class="name" id="openEditTaskModal"><span class="type-signature">(async) </span>openEditTaskModal<span class="signature">(taskId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens the edit modal for a specific task, populating it with the task's details for editingInitializes the input fields, priority, subtasks, and contacts associated with the task
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task to be edited</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line206">line 206</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="playLogoAnimation"><span class="type-signature"></span>playLogoAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -6945,6 +7946,143 @@
     
 
     
+    <h4 class="name" id="renderSingleTaskModal"><span class="type-signature"></span>renderSingleTaskModal<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Renders the details of a single task in a modal window
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object containing details to be displayed</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="renderSubtasksList"><span class="type-signature"></span>renderSubtasksList<span class="signature">(taskId)</span><span class="type-signature"></span></h4>
     
 
@@ -7047,6 +8185,143 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="add-task-subtasks.js.html">add-task-subtasks.js</a>, <a href="add-task-subtasks.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renderSubtasksModal"><span class="type-signature"></span>renderSubtasksModal<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Renders the subtasks of a given task in the modal and returns the HTML for the subtasksIf the task has no subtasks, the subtasks section will be hidden
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The task object containing subtasks to be rendered</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -7956,6 +9231,143 @@
     
 
     
+    <h4 class="name" id="setCategoryBackgroundColor"><span class="type-signature"></span>setCategoryBackgroundColor<span class="signature">(category)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Determines the background color for a task category based on the specified category type
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The category of the task</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line281">line 281</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="setContactInformation"><span class="type-signature">(async) </span>setContactInformation<span class="signature">(index)</span><span class="type-signature"></span></h4>
     
 
@@ -8703,6 +10115,143 @@
     
 
     
+    <h4 class="name" id="setPrioImg"><span class="type-signature"></span>setPrioImg<span class="signature">(prio)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the file path for the priority image based on the priority level
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prio</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The priority level of the task</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line94">line 94</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="setSelectedContactBackground"><span class="type-signature"></span>setSelectedContactBackground<span class="signature">(index)</span><span class="type-signature"></span></h4>
     
 
@@ -8805,6 +10354,166 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="contact.js.html">contact.js</a>, <a href="contact.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setSubtaskStatus"><span class="type-signature">(async) </span>setSubtaskStatus<span class="signature">(taskId, subtaskId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Toggles the completion status of a specific subtask and updates it in the Firebase databaseAfter updating, the function re-renders the task in the modal
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the task containing the subtask to update</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>subtaskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the subtask in the task's subtasks array</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -11203,6 +12912,166 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="updateTaskInFirebase"><span class="type-signature">(async) </span>updateTaskInFirebase<span class="signature">(taskId, updatedTask)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates a task in Firebase with the specified task ID and updated task data
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>taskId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The identifier of the task to be updated</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>updatedTask</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The updated task data to be sent to Firebase</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="board-single-task.js.html">board-single-task.js</a>, <a href="board-single-task.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -11218,13 +13087,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtasksArr">checkSubtasksArr</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#closeEditTaskModal">closeEditTaskModal</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getDataForSingleTask">getDataForSingleTask</a></li><li><a href="global.html#getSelectedContactsEditTask">getSelectedContactsEditTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#openEditTaskModal">openEditTaskModal</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSingleTaskModal">renderSingleTaskModal</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#renderSubtasksModal">renderSubtasksModal</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setCategoryBackgroundColor">setCategoryBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSubtaskStatus">setSubtaskStatus</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Nov 04 2024 21:01:52 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 05 2024 00:15:57 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>
