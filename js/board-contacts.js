@@ -451,7 +451,7 @@ function inspectCheckboxesAddTask(path) {
       renderAssignedContacts('assigned-contacts-list-addTask');
     }
   });
-
+}
 
 /**
  * removes all elements from assigned contact list and clears the inputlist
@@ -560,7 +560,7 @@ function assignedToContactsContentAddTask(contact, id, index) {
         <input onchange ="inspectCheckboxesAddTask('assigned-contacts-list-addTask')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
       </div>
   </label>
-    `;
+    `;    
 }
 
 function selectAllAssignedContacts(taskId) {
@@ -576,4 +576,4 @@ function selectAllAssignedContacts(taskId) {
     }
   });
 }
-}
+
