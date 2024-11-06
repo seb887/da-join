@@ -214,7 +214,6 @@ async function openEditTaskModal(taskId) {
   currentPrio = null;
   subtasks = [];
   renderSubtasksList([]);
-
   const contactsPromise = listContactsToAssignedTo();
 
   const task = tasks.find(element => element.id === taskId);
@@ -229,7 +228,7 @@ async function openEditTaskModal(taskId) {
     setPrio(currentPrio);
     renderSubtasksList(taskId);
 
-    editTaskSubmitBtn.onclick = () => editTask(taskId);
+    editTaskSubmitBtn.onclick = () => editTask(taskId) ;
   }
 
   await contactsPromise;
@@ -266,7 +265,7 @@ async function editTask(taskId) {
       
       // FIXME: disable animation, if change from edit task modal to default task modal
       closeEditTask();
-      openTaskModal(taskId);
+      // openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }
@@ -303,11 +302,11 @@ function getSelectedContactsEditTask() {
 }
 
 
-function closeEditTask(){
+function closeEditTask(id){
   taskModal.style.display = 'none';
   taskModalEditCard.style.display = 'none';
   taskModal.style.display = 'flex';
-  taskModalCard.style.display = 'flex';
+  taskModalCard.style.display = 'flex';  
   getDataForSingleTask(id);
   displayTaskModalContacts(id);
 }
