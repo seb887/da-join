@@ -134,7 +134,6 @@ function closeTaskModal() {
 
   setTimeout(() => {
     taskModal.style.display = 'none';
-
     taskModalEditCard.style.display = 'none';
   }, 250);
 
