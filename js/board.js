@@ -34,6 +34,11 @@ let animationActiveBoard = false;
 let modalActive = false;
 
 // FUNCTIONS
+
+/**
+ * Calls all necessary functions to display the board properly
+ * 
+ */
 async function renderBoard() {
   await loadTasksFromFirebase();
   await loadContactsFromFirebase();
@@ -44,6 +49,12 @@ async function renderBoard() {
   searchInput.value = '';
 }
 
+
+/**
+ * Creates an array of all contacts from the database
+ * 
+ * @returns 
+ */
 async function loadContactsFromFirebase() {
   let response = await fetch(BASE_URL + 'contacts' + '.json');
   let contactsFromFirebase = await response.json();
@@ -55,6 +66,12 @@ async function loadContactsFromFirebase() {
     pushDataFromFirebaseToArr(contactsFromFirebase, contacts);
   }
 }
+
+/**
+ * Creates an array of all tasks from the database
+ * 
+ * @returns 
+ */
 
 async function loadTasksFromFirebase() {
   let response = await fetch(BASE_URL + 'tasks' + '.json');
@@ -68,6 +85,12 @@ async function loadTasksFromFirebase() {
   }
 }
 
+/**
+ * Creates an object of the data from firebase and pushes them to an array
+ * 
+ * @param {*} dataFromFirebase 
+ * @param {*} arrToPush 
+ */
 function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
   let objectKeys = Object.keys(dataFromFirebase);
 
@@ -80,6 +103,12 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
   renderKanbanLists(tasks);
 }
 
+/**
+ * Clears all kanbanlists and creates the inner HTML content for all states on the board 
+ * 
+ * @param {array} tasksArr - Array with single task
+ */
+
 function renderKanbanLists(tasksArr) {
   clearKanbanLists();
   renderData(filterData('todo', tasksArr), kanbanListTodo);
@@ -88,6 +117,14 @@ function renderKanbanLists(tasksArr) {
   renderData(filterData('done', tasksArr), kanbanListDone);
 }
 
+
+/**
+ * Filters the 
+ * 
+ * @param {string} board - String of the specific board status
+ * @param {*} tasksArr - array of single task
+ * @returns 
+ */
 function filterData(board, tasksArr) {
   if (board == 'todo') {
     return tasksArr.filter((t) => t.data.board == 'todo');

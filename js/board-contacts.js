@@ -158,6 +158,11 @@ function openDropdownMenu(contactList) {
   }
 }
 
+
+/**
+ * checks if the animation is active or not and does changes to the modal background opacity and adds the slide in animation 
+ * 
+ */
 function checkIfAnimationActiveBoard() {
   let modal = document.getElementById('addContact');
   if (animationActive) {
@@ -174,6 +179,12 @@ function checkIfAnimationActiveBoard() {
   }
 }
 
+
+/**
+ * adds or deletes the classname for the slide in or slide out animation 
+ * 
+ * @param {string} modalId - Identifier for the modal
+ */
 function modalSlideInOrOut(modalId) {
   if (!modalActive) {
     document.getElementById(modalId).classList.add('task-modal-slide-in');
@@ -191,19 +202,11 @@ function modalSlideInOrOut(modalId) {
   }, 350);
 }
 
-function selectAllAssignedContacts(taskId) {
-  document.getElementById('assigned-contacts-list').innerHTML = '';
-  tasks.forEach((task) => {
-    if (task.data.assignedTo && task.id == taskId) {
-      task.data.assignedTo.forEach((contact) => {
-        document.getElementById(contact.id + 'cb')
-          ? (document.getElementById(contact.id + 'cb').checked = true)
-          : null;
-        inspectCheckboxes('assigned-contacts-list');
-      });
-    }
-  });
-}
+/**
+ * adds or removes the footer animation depending on the scroll position and total height of the screen
+ * 
+ * @param {*} ev 
+ */
 
 window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
@@ -544,6 +547,12 @@ function assignedToContactsContentAddTask(contact, id, index) {
     `;
 }
 
+
+/**
+ * selects all assigned contacts from a task and sets each checkbox to checked
+ * 
+ * @param {string} taskId - Identifier for the single task
+ */
 function selectAllAssignedContacts(taskId) {
   document.getElementById('assigned-contacts-list').innerHTML = '';
   tasks.forEach((task) => {
