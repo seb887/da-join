@@ -1,6 +1,6 @@
 /**
  * Converts the fetch response into an object and returns it
- * 
+ *
  * @returns Returns an array of all tasks
  */
 async function returnTasksFromFirebase() {
@@ -16,7 +16,7 @@ async function returnTasksFromFirebase() {
 
 /**
  * Creates an HTML element for each contact with their initials and specific background color.
- * 
+ *
  * @param {string} taskId text - Identifier of a single task
  * @param {Object} task - single task object
  * @param {string} path - path of the HTML- element
@@ -49,10 +49,9 @@ async function renderAssignedToInCard(taskId, task, path = '') {
   }
 }
 
-
 /**
  * Creates and returns an Array of all assigned contacts from all created tasks
- * 
+ *
  * @returns array
  */
 async function getAllAssignedTo() {
@@ -66,10 +65,9 @@ async function getAllAssignedTo() {
   return assignTo;
 }
 
-
 /**
  * Creates an HTML element for each contact with their initials, name, and a background color
- * 
+ *
  * @param {string} id - Identifier for the single task
  */
 async function displayTaskModalContacts(id) {
@@ -103,10 +101,9 @@ async function displayTaskModalContacts(id) {
   });
 }
 
-
 /**
  * toggles the visibility of the assigned contacts list
- * 
+ *
  */
 function dropDownContactsEditTask() {
   const contactList = document.getElementById('assigned-contacts-list');
@@ -119,10 +116,9 @@ function dropDownContactsEditTask() {
   }
 }
 
-
 /**
  * sets the display to none, sets the placeholder text and switches the source of the arrow picture
- * 
+ *
  * @param {element} contactList - the html path of the contact list
  */
 function closeDropdownMenu(contactList) {
@@ -141,10 +137,9 @@ function closeDropdownMenu(contactList) {
   }
 }
 
-
 /**
  * sets the display to flex, deletes the placeholder text and switches the source of the arrow picture
- * 
+ *
  * @param {element} contactList - the html path of the contact list
  */
 function openDropdownMenu(contactList) {
@@ -220,10 +215,9 @@ window.onscroll = function (ev) {
   }
 };
 
-
 /**
  * fetches and pushes all created contacts to the renderedContacts array
- * 
+ *
  */
 async function listContactsToAssignedToinBoard() {
   let allContacts = Object.values(await getContacts());
@@ -243,10 +237,9 @@ async function listContactsToAssignedToinBoard() {
   });
 }
 
-
 /**
  * creates HTML- elements for each renders contact to the input assigned to addTtask div container
- * 
+ *
  */
 function renderContactsinAddTask() {
   let list = document.getElementById('input-assigned-to-addTask');
@@ -255,10 +248,9 @@ function renderContactsinAddTask() {
   });
 }
 
-
 /**
  * creates one object with all assigned contacts from all tasks and all rendered contacts
- * 
+ *
  * @returns object
  */
 async function createCompareArray() {
@@ -300,10 +292,9 @@ async function deleteNonExistingContactsInTask() {
   console.log(result);
 }
 
-
 /**
  * compares the object entries 'example & pattern' then creates an array with that dont match the pattern
- * 
+ *
  * @returns array
  */
 async function compareArray() {
@@ -340,12 +331,11 @@ async function compareArray() {
   return assignedContactsToUpdate;
 }
 
-
 /**
- * returns the index of matching renderd contact id 
- * 
+ * returns the index of matching renderd contact id
+ *
  * @param {string} contactId - identifier for the contact
- * @returns number 
+ * @returns number
  */
 async function findMatchInRenderedContacts(contactId) {
   let indexOfRenderedContact = '';
@@ -358,10 +348,9 @@ async function findMatchInRenderedContacts(contactId) {
   return indexOfRenderedContact;
 }
 
-
 /**
  * returns the index of matching contact id in tasks
- * 
+ *
  * @param {string} taskId - indetifier of single task
  * @param {string} contactId - identifier for the contact
  * @returns number
@@ -380,10 +369,9 @@ async function findIndexInTaskAssignedTo(taskId, contactId) {
   return indexInAssignedTo;
 }
 
-
 /**
  * updates the compared assigned contacts in all tasks with the data of current contacts
- * 
+ *
  * @param {*} contactId - identifier for the contact
  * @param {*} taskId - identifier for the task
  * @returns null
@@ -413,10 +401,9 @@ async function updateComparedTasks(contactId, taskId) {
   }
 }
 
-
 /**
  * creates HTML-content for all existing contacts into the assigned contacts list div
- * 
+ *
  */
 function renderAllContactsInAddTask() {
   let inputChild = document.querySelector(
@@ -431,11 +418,10 @@ function renderAllContactsInAddTask() {
   });
 }
 
-
 /**
  * inspects all checkboxes and creates an HTML-element with contact initials and specific background color for each checked checkbox
- * 
- * @param {*} path 
+ *
+ * @param {*} path
  */
 function inspectCheckboxesAddTask(path) {
   let allDivs = document.getElementById('input-assigned-to-addTask');
@@ -451,7 +437,7 @@ function inspectCheckboxesAddTask(path) {
       renderAssignedContacts('assigned-contacts-list-addTask');
     }
   });
-
+}
 
 /**
  * removes all elements from assigned contact list and clears the inputlist
@@ -462,10 +448,9 @@ function removeAssignedList() {
   inputATAT.innerHTML = '';
 }
 
-
 /**
  * displayes or hides the contactlist on input or clear inputfield
- * 
+ *
  * @param {string} path - path for the HTML - element
  * @returns boolean
  */
@@ -491,7 +476,6 @@ function showOrHideContactsOnInputInBoard(path) {
   }
 }
 
-
 /**
  * compares input with contactname and displays matching contact
  */
@@ -515,18 +499,16 @@ function displayMatchingContactsInBoard() {
   });
 }
 
-
 /**
  * executes displayMatchingContactsInBoard if showOrHideContactsOnInputInBoard is true
- * 
- * @param {string} path - path for HTML- element 
+ *
+ * @param {string} path - path for HTML- element
  */
 function filterContactsInBoard(path) {
   if (showOrHideContactsOnInputInBoard(path)) {
     displayMatchingContactsInBoard(path);
   }
 }
-
 
 /**
  * clears the contactlist and inputs in add task and hides the dropdownlist of contacts
@@ -540,10 +522,9 @@ function clearAssignedContacts() {
   }
 }
 
-
 /**
  * HTML- content for a single assigned contact
- * 
+ *
  * @param {element} contact - element of the single contact
  * @param {string} id - identifier for the contact
  * @param {string} index - number as string
@@ -575,5 +556,4 @@ function selectAllAssignedContacts(taskId) {
       });
     }
   });
-}
 }
