@@ -119,7 +119,7 @@ function renderKanbanLists(tasksArr) {
 
 
 /**
- * Filters the 
+ * Filters the associated tasks for the kanban list
  * 
  * @param {string} board - String of the specific board status
  * @param {*} tasksArr - array of single task
@@ -140,6 +140,14 @@ function filterData(board, tasksArr) {
   }
 }
 
+
+/**
+ * Creates the HTML card element with the  for each task 
+ * 
+ * @param {array} tasksArr - Array
+ * @param {object} kanbanList 
+ * @param {string} path 
+ */
 function renderData(tasksArr, kanbanList, path = '') {
   if (tasksArr.length == 0) {
     kanbanList.innerHTML = `<div class="no-tasks-card">No tasks</div>`;
@@ -151,6 +159,11 @@ function renderData(tasksArr, kanbanList, path = '') {
   }
 }
 
+
+/**
+ * Clears the content in all kanban lists 
+ * 
+ */
 function clearKanbanLists() {
   kanbanListTodo.innerHTML = '';
   kanbanListInProgress.innerHTML = '';
@@ -158,6 +171,12 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
+
+/**
+ * Displays the task modal on click and  with the requested firebase content.
+ * 
+ * @param {string} id - The identifier for the specific task
+ */
 function openTaskModal(id) {
   taskModal.style.display = 'flex';
   taskModalCard.style.display = 'flex';
@@ -166,6 +185,10 @@ function openTaskModal(id) {
   displayTaskModalContacts(id);
 }
 
+/**
+ * Closes the task modal and renders the board content
+ * 
+ */
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
 
@@ -186,6 +209,13 @@ function closeTaskModal() {
   renderBoard();
 }
 
+
+/**
+ * Opens the add task modal with the selected kanban list
+ * 
+ * @param {object} kanbanBoard - Object of the kanban list
+ * @returns 
+ */
 function openAddTaskModal(kanbanBoard) {
   if (window.innerWidth < 890) {
     window.location.href = 'add-task.html';
@@ -197,6 +227,10 @@ function openAddTaskModal(kanbanBoard) {
   modalSlideInOrOut('add-task-modal-card');
 }
 
+/**
+ * hides the add task modal with a slide out animation and clears all inputs and assigned contacts
+ * 
+ */
 function closeAddTaskModal() {
   modalSlideInOrOut('add-task-modal-card');
   setTimeout(() => {
@@ -206,12 +240,23 @@ function closeAddTaskModal() {
   clearInputs();
 }
 
+
+/**
+ * closes the add task modal and clears the input and assigned contacts
+ * 
+ */
 function cancelAddTask() {
   clearInputs();
   clearAssignedContacts();
   closeAddTaskModal();
 }
 
+/**
+ * Creates a progressbar and displays the progrees of finished subtasks
+ * 
+ * @param {object} task - Specific task object
+ * @returns 
+ */
 function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
     return `
@@ -229,6 +274,13 @@ function renderSubtaskProgressBar(task) {
   }
 }
 
+
+/**
+ * This function checks the subtasks of a single task. If the subtask is checked the variable subtastkChecked is incremented by 1.
+ * 
+ * @param {object} task - Specific task object
+ * @returns 
+ */
 function calcSubtaskCounter(task) {
   let subtaskChecked = 0;
   let subtasksAll = task.data.subtasks.length;
@@ -242,6 +294,12 @@ function calcSubtaskCounter(task) {
   return `<div class="subtask-counter">${subtaskChecked}/${subtasksAll} Subtasks</div>`;
 }
 
+/**
+ * This function calculates the progress of the specific task between 0 to 100 
+ * 
+ * @param {object} task - task object
+ * @returns 
+ */
 function calcSubtaskProgressBar(task) {
   let progressBarFull = 100;
   let progressBarDone = 0;
@@ -259,14 +317,30 @@ function calcSubtaskProgressBar(task) {
 }
 
 // DRAG AND DROP
+
+/**
+ * Prevents the default behavior of the element 
+ * 
+ * @param {object} event - Event Object
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
 
+/**
+ * Adds the the event target id to the variable currentDraggedElementId 
+ * 
+ * @param {*} event - Event Object
+ */
 function drag(event) {
   currentDraggedElementId = event.target.id;
 }
 
+/**
+ * This function changes the path of the dropped element in the database and thereafter renders the board
+ * 
+ * @param {*} board 
+ */
 async function drop(board) {
   for (let element of tasks) {
     if (currentDraggedElementId == element.id) {
@@ -277,14 +351,26 @@ async function drop(board) {
   renderBoard();
 }
 
+/**
+ * Highlights the border with a dotted line while dragging and hovering over the actual kanbanlist
+ * 
+ * @param {*} id 
+ */
 function highlight(id) {
   document.getElementById(id).classList.add('highlight-kanban-list');
 }
-
+/**
+ * Removes the dotted line after leaving the kanban list container while dragging an element
+ * 
+ * @param {*} id 
+ */
 function removeHighlight(id) {
   document.getElementById(id).classList.remove('highlight-kanban-list');
 }
-
+/**
+ * This function filters the input text and renders the kanban list with the filtered data 
+ * 
+ */
 function searchTask() {
   clearKanbanLists();
   controlVisibilityInputClearBtn();
@@ -300,6 +386,10 @@ function searchTask() {
   renderKanbanLists(filteredData);
 }
 
+/**
+ * Switches the visibility of the clearInputBtn on input to visible and on an empty input field to invisible.
+ * 
+ */
 function controlVisibilityInputClearBtn() {
   if (searchInput.value.length > 0) {
     clearInputBtn.style.visibility = 'visible';
@@ -308,6 +398,10 @@ function controlVisibilityInputClearBtn() {
   }
 }
 
+/**
+ * Clears the search inputfield and renders the kanban list 
+ * 
+ */
 function cancelSearchTask() {
   searchInput.value = '';
   renderKanbanLists(tasks);
@@ -315,6 +409,12 @@ function cancelSearchTask() {
 }
 
 //showInfoToast('Task added to board') should be moved to the addTask function after creation
+
+/**
+ * Slides in an info toast with a defined text and slides out after 1.5 seconds
+ * 
+ * @param {string} text - Displayed text in the info toast
+ */
 function showInfoToast(text) {
   // event.preventDefault();
   const toast = document.getElementById('info-toast');
