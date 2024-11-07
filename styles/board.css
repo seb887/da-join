@@ -336,7 +336,9 @@
   font-size: 20px;
   font-weight: 400;
   overflow-y: auto;
+ 
 }
+
 
 .task-modal-edit-card {
   display: none;
@@ -372,9 +374,14 @@
 }
 
 .close-task-modal {
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
+  object-fit: scale-down;
   cursor: pointer;
+}
+.close-task-modal:hover{
+  background-color: rgb(213, 213, 213);
+  border-radius: 50px;
 }
 
 .task-modal-card-category {
@@ -502,6 +509,9 @@
   background-color: transparent;
   cursor: pointer;
 }
+.task-modal-card-buttons button:hover{
+  filter: invert(48%) sepia(51%) saturate(4178%) hue-rotate(164deg) brightness(98%) contrast(101%);
+}
 
 .task-modal-card-buttons img {
   width: 14px;
@@ -607,7 +617,6 @@
   align-items: center;
   padding: 8px 16px;
   gap: 8px;
-
   height: 49px;
   border: none;
   border-radius: 10px;
@@ -616,7 +625,10 @@
   font-size: 21px;
   font-weight: 700;
   cursor: pointer;
+  transition: ease-in-out 120ms;
 }
+
+
 
 #info-toast.show {
   opacity: 1;
@@ -655,6 +667,10 @@
   font-size: 20px;
   font-weight: 400;
   cursor: pointer;
+}
+.prio-buttons-board:hover,
+.prio-buttons-board-edit:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 #searchContact-board,
