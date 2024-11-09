@@ -1,0 +1,617 @@
+{
+  "contacts": {
+    "-OAsvr3sIc0i_AWWudpA": {
+      "color": "#32ea18",
+      "email": "max.schneider@gmx.de",
+      "initials": "MS",
+      "name": "Max Schneider",
+      "phone": "015298765432"
+    },
+    "-OAsw3-XESMhKtf5hyxN": {
+      "color": "#301d5e",
+      "email": "lukas.fischer@outlook.com",
+      "initials": "LF",
+      "name": "Lukas Fischer",
+      "phone": "017287654321"
+    },
+    "-OAsw9Qr70oBF9C6yagL": {
+      "color": "#18b88a",
+      "email": "lea.becker@gmx.de",
+      "initials": "LB",
+      "name": "Lea Becker",
+      "phone": "017147925813"
+    },
+    "-OAswGf1xEcv6YZDF2ek": {
+      "color": "#23dba3",
+      "email": "laura.lange@outlook.com",
+      "initials": "LL",
+      "name": "Laura Lange",
+      "phone": "016034680257"
+    },
+    "-OAswMik-mFrDh2RoXr-": {
+      "color": "#1cfcc2",
+      "email": "julia.weber@yahoo.de",
+      "initials": "JW",
+      "name": "Julia Weber",
+      "phone": "017154321678"
+    },
+    "-OAswS0qIyIemLQu7qZ0": {
+      "color": "#d8924e",
+      "email": "jonas.wolf@yahoo.com",
+      "initials": "JW",
+      "name": "Jonas Wolf",
+      "phone": "017135724680"
+    },
+    "-OAswXf-eXA7bI3okHS2": {
+      "color": "#51744e",
+      "email": "jan.neumann@gmail.com",
+      "initials": "JN",
+      "name": "Jan Neumann",
+      "phone": "016012345678"
+    },
+    "-OAswc80oFFqdXBUV0XH": {
+      "color": "#2b9117",
+      "email": "hannah.zimmer@web.de",
+      "initials": "HZ",
+      "name": "Hannah Zimmer",
+      "phone": "017212345678"
+    },
+    "-OAswi4_hTk9JnknAnze": {
+      "color": "#636c9e",
+      "email": "felix.mayer@gmail.com",
+      "initials": "FM",
+      "name": "Felix Mayer",
+      "phone": "015285792468"
+    },
+    "-OAswnLmDNttmw3GD33c": {
+      "color": "#24e435",
+      "email": "emma.hofmann@outlook.de",
+      "initials": "EH",
+      "name": "Emma Hofmann",
+      "phone": "017246802468"
+    },
+    "-OAswsCA970ziCQ9OM2T": {
+      "color": "#9b3843",
+      "email": "elena.schulz@gmx.de",
+      "initials": "ES",
+      "name": "Elena Schulz",
+      "phone": "015264798235"
+    },
+    "-OAswxXu7R64k3W0-Qh6": {
+      "color": "#beca82",
+      "email": "david.krause@gmail.com",
+      "initials": "DK",
+      "name": "David Krause",
+      "phone": "015195847631"
+    },
+    "-OAsx3i-BvSMs6QERc_S": {
+      "color": "#8d22d5",
+      "email": "clara.peters@web.de",
+      "initials": "CP",
+      "name": "Clara Peters",
+      "phone": "015112457896"
+    },
+    "-OAsx9TfFSHV471Poha0": {
+      "color": "#e1429b",
+      "email": "anna.mueller@gmail.com",
+      "initials": "AM",
+      "name": "Anna Müller",
+      "phone": "015123456789"
+    },
+    "-OAsxEVIrUeTaYMuNb1C": {
+      "color": "#649971",
+      "email": "andre@gmbh.de",
+      "initials": "AS",
+      "name": "Andre Schulze",
+      "phone": "34123456"
+    },
+    "-OAsxqiFS-ZtErS9xKAy": {
+      "color": "#b44048",
+      "email": "seb@join.mail",
+      "initials": "SM",
+      "name": "Seb Montag",
+      "phone": "123456789"
+    },
+    "-OAsxuqOm4Z-urHlA-kx": {
+      "color": "#562ffd",
+      "email": "felix@join.mail",
+      "initials": "FO",
+      "name": "Felix Oppermann",
+      "phone": "123456789"
+    },
+    "-OAsy8rOZ3QBEnJvOm_7": {
+      "color": "#2577bc",
+      "email": "bartosz@join.mail",
+      "initials": "BK",
+      "name": "Bartosz Kuczek",
+      "phone": "123456789"
+    }
+  },
+  "tasks": {
+    "-OB28v7CQb9C5JyLCSYP": {
+      "assignedTo": [
+        {
+          "color": "#649971",
+          "email": "andre@gmbh.de",
+          "id": "-OAsxEVIrUeTaYMuNb1C",
+          "initials": "AS",
+          "name": "Andre Schulze",
+          "phone": "34123456"
+        },
+        {
+          "color": "#beca82",
+          "email": "david.krause@gmail.com",
+          "id": "-OAswxXu7R64k3W0-Qh6",
+          "initials": "DK",
+          "name": "David Krause",
+          "phone": "015195847631"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        },
+        {
+          "color": "#1cfcc2",
+          "email": "julia.weber@yahoo.de",
+          "id": "-OAswMik-mFrDh2RoXr-",
+          "initials": "JW",
+          "name": "Julia Weber",
+          "phone": "017154321678"
+        },
+        {
+          "color": "#301d5e",
+          "email": "lukas.fischer@outlook.com",
+          "id": "-OAsw3-XESMhKtf5hyxN",
+          "initials": "LF",
+          "name": "Lukas Fischer",
+          "phone": "017287654321"
+        },
+        {
+          "color": "#32ea18",
+          "email": "max.schneider@gmx.de",
+          "id": "-OAsvr3sIc0i_AWWudpA",
+          "initials": "MS",
+          "name": "Max Schneider",
+          "phone": "015298765432"
+        }
+      ],
+      "board": "todo",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": " When you log in to Join, you'll find a default board. This board represents your project.",
+      "prio": "low",
+      "title": "Explore the Board"
+    },
+    "-OB28yDsj8PNsE41F8zE": {
+      "assignedTo": [
+        {
+          "color": "#24e435",
+          "email": "emma.hofmann@outlook.de",
+          "id": "-OAswnLmDNttmw3GD33c",
+          "initials": "EH",
+          "name": "Emma Hofmann",
+          "phone": "017246802468"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        }
+      ],
+      "board": "in progress",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "In Join, you can add contacts to collaborate on your projects",
+      "prio": "urgent",
+      "subtasks": [
+        {
+          "checked": true,
+          "title": "Switch to the contacts tab"
+        },
+        {
+          "checked": true,
+          "title": "Push the add contact button"
+        },
+        {
+          "checked": false,
+          "title": "Add a name"
+        },
+        {
+          "checked": false,
+          "title": "Add an email adress"
+        },
+        {
+          "checked": false,
+          "title": "Add a phone number"
+        }
+      ],
+      "title": "Create Contacts"
+    },
+    "-OB29-jWwITQGL6vFU3Q": {
+      "assignedTo": [
+        {
+          "color": "#24e435",
+          "email": "emma.hofmann@outlook.de",
+          "id": "-OAswnLmDNttmw3GD33c",
+          "initials": "EH",
+          "name": "Emma Hofmann",
+          "phone": "017246802468"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        }
+      ],
+      "board": "in progress",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "Cards in your project board show your tasks in the respective status. Add new cards for new tasks.",
+      "prio": "urgent",
+      "subtasks": [
+        {
+          "checked": true,
+          "title": "Push the add task button"
+        },
+        {
+          "checked": true,
+          "title": "Or switch to the tab add task"
+        },
+        {
+          "checked": false,
+          "title": "Add a title"
+        },
+        {
+          "checked": false,
+          "title": "Add description"
+        },
+        {
+          "checked": false,
+          "title": "Add due date"
+        },
+        {
+          "checked": true,
+          "title": "Select a prio"
+        },
+        {
+          "checked": false,
+          "title": "Select contacts to assign"
+        },
+        {
+          "checked": false,
+          "title": "Select a category"
+        },
+        {
+          "checked": true,
+          "title": "Add some subtasks"
+        }
+      ],
+      "title": "Add Cards"
+    },
+    "-OB292KbwJf7zg0ct2HM": {
+      "assignedTo": [
+        {
+          "color": "#24e435",
+          "email": "emma.hofmann@outlook.de",
+          "id": "-OAswnLmDNttmw3GD33c",
+          "initials": "EH",
+          "name": "Emma Hofmann",
+          "phone": "017246802468"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        }
+      ],
+      "board": "await feedback",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "As the task moves from one stage to another, you can reflect that on the board by dragging and dropping the card from one list to another. ",
+      "prio": "medium",
+      "subtasks": [
+        {
+          "checked": true,
+          "title": "Drag a card"
+        },
+        {
+          "checked": true,
+          "title": "Pull the card to an other board"
+        },
+        {
+          "checked": true,
+          "title": "Drop the card"
+        }
+      ],
+      "title": "Move Cards"
+    },
+    "-OB294s8RCKCW-w4o84n": {
+      "assignedTo": [
+        {
+          "color": "#24e435",
+          "email": "emma.hofmann@outlook.de",
+          "id": "-OAswnLmDNttmw3GD33c",
+          "initials": "EH",
+          "name": "Emma Hofmann",
+          "phone": "017246802468"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        }
+      ],
+      "board": "done",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "Once a task is completed, you can either move it to the \"Done\" list or delete it.",
+      "prio": "medium",
+      "subtasks": [
+        {
+          "checked": false,
+          "title": "Click a card"
+        },
+        {
+          "checked": false,
+          "title": "Push the delete button"
+        }
+      ],
+      "title": "Delete Cards"
+    },
+    "-OB297c4HAAxsutSJVva": {
+      "assignedTo": [
+        {
+          "color": "#649971",
+          "email": "andre@gmbh.de",
+          "id": "-OAsxEVIrUeTaYMuNb1C",
+          "initials": "AS",
+          "name": "Andre Schulze",
+          "phone": "34123456"
+        },
+        {
+          "color": "#beca82",
+          "email": "david.krause@gmail.com",
+          "id": "-OAswxXu7R64k3W0-Qh6",
+          "initials": "DK",
+          "name": "David Krause",
+          "phone": "015195847631"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        },
+        {
+          "color": "#1cfcc2",
+          "email": "julia.weber@yahoo.de",
+          "id": "-OAswMik-mFrDh2RoXr-",
+          "initials": "JW",
+          "name": "Julia Weber",
+          "phone": "017154321678"
+        },
+        {
+          "color": "#301d5e",
+          "email": "lukas.fischer@outlook.com",
+          "id": "-OAsw3-XESMhKtf5hyxN",
+          "initials": "LF",
+          "name": "Lukas Fischer",
+          "phone": "017287654321"
+        },
+        {
+          "color": "#32ea18",
+          "email": "max.schneider@gmx.de",
+          "id": "-OAsvr3sIc0i_AWWudpA",
+          "initials": "MS",
+          "name": "Max Schneider",
+          "phone": "015298765432"
+        }
+      ],
+      "board": "await feedback",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "... to customize data",
+      "prio": "medium",
+      "subtasks": [
+        {
+          "checked": false,
+          "title": "Click the card"
+        },
+        {
+          "checked": false,
+          "title": "Click the edit button"
+        },
+        {
+          "checked": false,
+          "title": "Make adjustments"
+        }
+      ],
+      "title": "Edit Cards"
+    },
+    "-OB29wvr4uDfDARCNFt8": {
+      "assignedTo": [
+        {
+          "color": "#24e435",
+          "email": "emma.hofmann@outlook.de",
+          "id": "-OAswnLmDNttmw3GD33c",
+          "initials": "EH",
+          "name": "Emma Hofmann",
+          "phone": "017246802468"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        }
+      ],
+      "board": "todo",
+      "category": "Tutorial",
+      "date": "2024-11-06",
+      "description": "... to get an own area for your tasks and contacts.",
+      "prio": "urgent",
+      "title": "Create a user profile"
+    },
+    "-OBEWYzH5bmEYuLiC7MA": {
+      "assignedTo": [
+        {
+          "color": "#649971",
+          "email": "andre@gmbh.de",
+          "id": "-OAsxEVIrUeTaYMuNb1C",
+          "initials": "AS",
+          "name": "Andre Schulze",
+          "phone": "34123456"
+        },
+        {
+          "color": "#beca82",
+          "email": "david.krause@gmail.com",
+          "id": "-OAswxXu7R64k3W0-Qh6",
+          "initials": "DK",
+          "name": "David Krause",
+          "phone": "015195847631"
+        },
+        {
+          "color": "#d8924e",
+          "email": "jonas.wolf@yahoo.com",
+          "id": "-OAswS0qIyIemLQu7qZ0",
+          "initials": "JW",
+          "name": "Jonas Wolf",
+          "phone": "017135724680"
+        },
+        {
+          "color": "#1cfcc2",
+          "email": "julia.weber@yahoo.de",
+          "id": "-OAswMik-mFrDh2RoXr-",
+          "initials": "JW",
+          "name": "Julia Weber",
+          "phone": "017154321678"
+        },
+        {
+          "color": "#301d5e",
+          "email": "lukas.fischer@outlook.com",
+          "id": "-OAsw3-XESMhKtf5hyxN",
+          "initials": "LF",
+          "name": "Lukas Fischer",
+          "phone": "017287654321"
+        },
+        {
+          "color": "#32ea18",
+          "email": "max.schneider@gmx.de",
+          "id": "-OAsvr3sIc0i_AWWudpA",
+          "initials": "MS",
+          "name": "Max Schneider",
+          "phone": "015298765432"
+        }
+      ],
+      "board": "done",
+      "category": "Tutorial",
+      "date": "2024-11-09",
+      "description": ".. to change name, email or phone number",
+      "prio": "low",
+      "subtasks": [
+        {
+          "checked": false,
+          "title": "Switch to the contacts tab"
+        },
+        {
+          "checked": false,
+          "title": "Click a contact"
+        },
+        {
+          "checked": false,
+          "title": "Push the edit button"
+        },
+        {
+          "checked": false,
+          "title": "Make adjustments"
+        }
+      ],
+      "title": "Edit contacts"
+    },
+    "-OBElOcbcRgvNrRlwztk": {
+      "board": "done",
+      "category": "Tutorial",
+      "date": "2024-11-09",
+      "description": "... to remove any contact from your contacts list.",
+      "prio": "low",
+      "title": "Delete contacts"
+    }
+  },
+  "users": {
+    "-O8d6ajvqEHZ3p6XQp98": {
+      "email": "bartosz.kuczek4@gmail.com",
+      "name": "Bartosz Kuczek",
+      "password": "asdfg"
+    },
+    "-O8dElN-KHh_B6OWTOIs": {
+      "email": "bartosz.kuczek4@gmail.comasd",
+      "name": "Bartosz Kuczekasdddddddddddddddddddddddddddddddddddddddddddddddd",
+      "password": "asdfg"
+    },
+    "-O8dFODWPx_BgNqLuhf4": {
+      "email": "bartosz.kuczek4@gmail.comaw",
+      "name": "aaaaaaaaaaaaaaaa",
+      "password": "asdfg"
+    },
+    "-O8hjyMKo8s7VvG9Opm2": {
+      "email": "bartosz.kuczek4@gmail.comw",
+      "name": "aaaaaaaaaaaaaaad",
+      "password": "asdfg"
+    },
+    "-O8kvQbFjmGH3sQj0xnY": {
+      "email": "bartosz.kuczek4@gmail.comaa",
+      "name": "Bartosz Kuczekaa",
+      "password": "asdfg"
+    },
+    "-O8t3JP2a3OfPMtRtyZM": {
+      "email": "SADFC@dddddddddddddddddd",
+      "name": "WWWWWWWWWWWWWWW WWWWWWWW",
+      "password": "asdfg"
+    },
+    "-O8t3YeD41oANc-Q55_H": {
+      "email": "bartosz.kuczek4@gmail.co",
+      "name": "Maximilian v Mustermann ",
+      "password": "asdfg"
+    },
+    "-O8t6Cksv3pziecmOiaK": {
+      "email": "bartosz.kuczek4@gmail.comW",
+      "name": "WWWWWWWWW WWWWWWWW",
+      "password": "asdfg"
+    },
+    "-O9B5fbvveC8ZmJWsLL9": {
+      "email": "felix@join.de",
+      "name": "Felix",
+      "password": "joinjoin"
+    },
+    "-OB7Goxabx6qQUQ_2UuA": {
+      "email": "testuser@test.de",
+      "name": "TestUser",
+      "password": "testtest"
+    },
+    "-OB7WgVGIY4Er5bxSWgD": {
+      "email": "testjoin@join.join",
+      "name": "Test Join",
+      "password": "join1234"
+    }
+  }
+}
