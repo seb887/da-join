@@ -184,17 +184,15 @@ async function setSubtaskStatus(taskId, subtaskId) {
 /**
  * Deletes a task from the Firebase database using its ID, then closes the task modal and re-renders the board
  *
- * @param {string} id - The ID of the task to be deleted
+ * @param {string} taskId - The ID of the task to be deleted
  */
-async function deleteTask(id) {
-  const taskId = id;
-
+async function deleteTask(taskId) {
   await fetch(BASE_URL + 'tasks/' + taskId + '.json', {
     method: 'DELETE',
   });
 
   closeTaskModal();
-  renderBoard();
+  await renderBoard();
 }
 
 /**
@@ -208,15 +206,15 @@ async function openEditTaskModal(taskId) {
   taskModalEditCard.style.display = 'flex';
   isEditOn = true;
 
-  editInputTitle.value = "";
-  editInputDescription.value = "";
-  editInputDate.value = "";
+  editInputTitle.value = '';
+  editInputDescription.value = '';
+  editInputDate.value = '';
   currentPrio = null;
   subtasks = [];
   renderSubtasksList([]);
   const contactsPromise = listContactsToAssignedTo();
 
-  const task = tasks.find(element => element.id === taskId);
+  const task = tasks.find((element) => element.id === taskId);
 
   if (task) {
     editInputTitle.value = task.data.title;
@@ -228,7 +226,7 @@ async function openEditTaskModal(taskId) {
     setPrio(currentPrio);
     renderSubtasksList(taskId);
 
-    editTaskSubmitBtn.onclick = () => editTask(taskId) ;
+    editTaskSubmitBtn.onclick = () => editTask(taskId);
   }
 
   await contactsPromise;
@@ -262,7 +260,7 @@ async function editTask(taskId) {
       element.data.assignedTo = getSelectedContactsEditTask();
 
       await updateTaskInFirebase(element.id, element.data);
-      
+
       // FIXME: disable animation, if change from edit task modal to default task modal
       closeEditTask();
       // openTaskModal(taskId);
@@ -278,12 +276,12 @@ async function editTask(taskId) {
  * @param {string} category - The category of the task
  */
 function setCategoryBackgroundColor(category) {
-  if (category == 'User Story') {
+  if (category === 'User Story') {
     return '#0038FF';
-  } else if (category == 'Technical Task') {
+  } else if (category === 'Technical Task') {
     return '#1FD7C1';
-  } else if (category == 'Tutorial') {
-    return '#1FD7C1';
+  } else if (category === 'Tutorial') {
+    return '#f14e4e';
   }
 }
 
@@ -301,12 +299,11 @@ function getSelectedContactsEditTask() {
   return selectedContacts;
 }
 
-
-function closeEditTask(id){
+function closeEditTask(id) {
   taskModal.style.display = 'none';
   taskModalEditCard.style.display = 'none';
   taskModal.style.display = 'flex';
-  taskModalCard.style.display = 'flex';  
+  taskModalCard.style.display = 'flex';
   getDataForSingleTask(id);
   displayTaskModalContacts(id);
 }

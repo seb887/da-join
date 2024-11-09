@@ -348,7 +348,7 @@ async function drop(board) {
       await updateTaskInFirebase(element.id, element.data);
     }
   }
-  renderBoard();
+  await renderBoard();
 }
 
 /**
@@ -359,6 +359,7 @@ async function drop(board) {
 function highlight(id) {
   document.getElementById(id).classList.add('highlight-kanban-list');
 }
+
 /**
  * Removes the dotted line after leaving the kanban list container while dragging an element
  * 
@@ -367,6 +368,7 @@ function highlight(id) {
 function removeHighlight(id) {
   document.getElementById(id).classList.remove('highlight-kanban-list');
 }
+
 /**
  * This function filters the input text and renders the kanban list with the filtered data 
  * 
