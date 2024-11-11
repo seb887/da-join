@@ -15,6 +15,7 @@ const buttonUrgent = document.getElementById('button-urgent');
 const buttonLowImg = document.getElementById('button-low-img');
 const buttonMediumImg = document.getElementById('button-medium-img');
 const buttonUrgentImg = document.getElementById('button-urgent-img');
+const assignedContactList = document.getElementById('assigned-contacts-list');
 let inputAssignedTo = document.getElementById('input-assigned-to');
 
 // VARIABLES
@@ -116,9 +117,12 @@ function clearInputs() {
   selectCategory.value = 'Select task category';
   inputSubtask.value = '';
   subtasks = [];
+  assignedContactList.innerHTML = '';
+  listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
   hideSubtaskIcons();
+
 }
 
 // PRIO

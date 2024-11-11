@@ -210,6 +210,7 @@
                     placeholder="Select contacts to assign"
                     type="text"
                     id="searchContact"
+                    onclick="dropDownContacts('searchContact')"
                   /><img
                     id="arrowAssignTo"
                     src="../assets/icons/arrow-down.png"
@@ -219,6 +220,7 @@
                 <div
                   class="add-task-select"
                   id="input-assigned-to"
+                  onclick="event.stopPropagation();"
                 ></div>
               </div>
               <!-- </select> -->

@@ -24,6 +24,19 @@ async function listContactsToAssignedTo() {
     setBackgroundColor(contact);
     renderedContacts.push(contact);
   });
+  closeDropdownOnclick()
+}
+
+
+function closeDropdownOnclick(){
+  const searchContactDiv = document.getElementById('searchContact');
+  document.addEventListener('click', (event) => {
+    if (!searchContactDiv.contains(event.target)) {
+        if(document.getElementById('input-assigned-to').style.display == "flex"){
+            dropDownContacts('searchContact');
+        }
+    }
+});
 }
 
 /**
@@ -65,13 +78,15 @@ function inspectCheckboxes(path) {
  */
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
+  event.stopPropagation();
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
-
   if (modal) {
     modal.addEventListener('click', (e) => {
       closeDropdownMenu(inputAssignedTo);
+      console.log('hier');
+      
     });
   }
   if (inputAssignedTo.style.display == 'flex') {
@@ -153,6 +168,7 @@ function renderAssignedContacts(path) {
   matches.forEach((match, index) => {
     container.innerHTML += assignedInitialContent(match, index);
   });
+
 }
 
 /**
@@ -170,4 +186,5 @@ function renderContactArray() {
       contact['id'] + '-container'
     ).style.backgroundColor = contact['color'];
   });
+
 }
