@@ -35,6 +35,7 @@
   .contact-list-container {
     width: unset;
     margin-left: 230px;
+    z-index: unset;
   }
   .contact-data h4 {
     font-size: 14px;

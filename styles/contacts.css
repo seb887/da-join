@@ -447,12 +447,9 @@ article {
     border: 1px solid #29abe2;
     outline: none;
   }
-<<<<<<< HEAD
-=======
   :nth-child(3){
     margin: 12px 0px;
   }
->>>>>>> 3221adf98c0725e825b65f821b3acd6b0c50e6e6
 }
 
 #closeAddContact {
