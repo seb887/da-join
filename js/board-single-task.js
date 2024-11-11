@@ -140,7 +140,15 @@ function renderSubtasksModal(task) {
   return subtasksHTML;
 }
 
-// TODO: add JS Docs
+/**
+ * This function creates the checkbox for the subtasks of the passed taskId and its content 
+ * 
+ * @param {string} i - Index as string
+ * @param {string} taskId - The ID of the task 
+ * @param {array} subtasksArr - Array of all subtasks
+ * @param {string} checkboxStatus - Status of the checkbox as string
+ * @returns 
+ */
 function createSubtaskCheckboxHTML(i, taskId, subtasksArr, checkboxStatus) {
   return `
         <div class="task-modal-subtask-container">
@@ -224,7 +232,10 @@ async function openEditTaskModal(taskId) {
   hideSubtaskIcons();
 }
 
-// TODO: add JS Docs
+/**
+ * Clears all input fields and subtasks and sets the currentProp to null
+ * 
+ */
 function clearEditInputs() {
   editInputTitle.value = '';
   editInputDescription.value = '';
@@ -233,7 +244,11 @@ function clearEditInputs() {
   subtasks = [];
 }
 
-// TODO: add JS Docs
+/**
+ * This function retrieves all required data from the tasks array that matches the passed taskId and populates the input fields with its values.
+ * 
+ * @param {string} taskId - The identifier for the task
+ */
 function getDataToEditTask(taskId) {
   const task = tasks.find((element) => element.id === taskId);
 
