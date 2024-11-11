@@ -67,17 +67,40 @@ function signUp() {
     let password = document.getElementById('password-id-sign-up');
     let passwordConfirm = document.getElementById('password-id-confirm');
     let checkBox = document.getElementById("check-box-accept");
+    let error = document.getElementById('sign-up-error');
+    let name = document.getElementById('name');
+    let email = document.getElementById('email-address');
+
+    if (name.value == '') {
+        error.innerText = 'Please enter a name'
+        return;
+    }
+    if (!validateEmail(email.value)) {
+        error.innerText = 'Please enter an email'
+        return;
+    }
     if (password.value === passwordConfirm.value) {
-        document.getElementById('sign-up-error').innerHTML = '';
+        error.innerHTML = '';
         if (checkBox.src.includes('checkbox-checked.svg')) {
             checkUser();
         } else {
-            document.getElementById('sign-up-error').innerHTML = 'Please accept the Privacy Policy';
+            error.innerHTML = 'Please accept the Privacy Policy';
         }
     } else {
-        document.getElementById('sign-up-error').innerHTML = 'Passwords do not match';
+        error.innerHTML = 'Passwords do not match';
     }
 }
+
+/**
+ * Checks if the input is a correct email format and returns true or false
+ * 
+ * @param {string} email - Value of the input field
+ * @returns boolean
+ */
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
 /**
  * This function checks if the username already exists in the firebase
@@ -299,14 +322,14 @@ function renderSignUp() {
         <div class="login-seperator"></div>
         <div class="login-form">
              <form id="form-inputs" onsubmit="signUp(); return false;">
-                <input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" required> 
-                <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
+                <input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" > 
+                <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="text" placeholder="Email" > 
                     <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" >
                         <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
+                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" >
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div id='sign-up-error'></div>

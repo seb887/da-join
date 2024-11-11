@@ -264,27 +264,29 @@ async function createContact() {
  * 
  * @returns - null
  */
-function checkInputs(){
+function checkInputs(status, contact, index){
 setVariables();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 if(inputContactName.value == ''){
-  nameError.innerText = 'Please enter a Name'
+  phoneError.innerText = 'Please enter a Name'
+  return;
 }else{
-  nameError.innerText = ''}
+  phoneError.innerText = ''}
 if(!validateEmail(inputEmail.value)){
-  emailError.innerText = 'Please enter an email address'
-}else{
-  emailError.innerText = ''
-}
-if (inputPhoneNumber.value == '') {
- phoneError.innerText = 'Please enter a phone number'
- return
+  phoneError.innerText = 'Please enter an email address'
+  return;
 }else{
   phoneError.innerText = ''
 }
-createContact();
+if (inputPhoneNumber.value == '') {
+ phoneError.innerText = 'Please enter a phone number'
+ return;
+}else{
+  phoneError.innerText = ''
 }
-
+status == 'add' ? createContact() : null ;
+status == 'edit' ? saveChangesOnContact(contact, index) : null ;
+}
 /**
  * Checks if the input is a correct email format and returns true or false
  * 

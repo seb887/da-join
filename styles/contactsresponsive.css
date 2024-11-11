@@ -23,6 +23,9 @@
   .input-field-right input {
     width: 360px;
   }
+  .input-fields{
+    gap: 12px;
+  }
   #inputContactName {
     background-position: 326px 18.2px;
   }
@@ -35,6 +38,7 @@
   .contact-list-container {
     width: unset;
     margin-left: 230px;
+    z-index: unset;
   }
   .contact-data h4 {
     font-size: 14px;
@@ -306,6 +310,9 @@
     margin-top: 15px;
     gap: 0px;
   }
+  .input-fields{
+    gap: 0px;
+  }
   .input-field-right input {
     width: 255px;
     height: 38px;
@@ -317,7 +324,7 @@
   }
   .add-contact-modal {
     width: 285px;
-    height: 440px;
+    height: 458px;
   }
   .modal-header-logo-left {
     height: 170px;
@@ -346,6 +353,7 @@
       width: 175px;
       height: 50px;
       font-size: 16px;
+      margin-top: 8px;
       padding: unset;
       justify-content: center;
   } 
