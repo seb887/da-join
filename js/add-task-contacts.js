@@ -84,9 +84,7 @@ function dropDownContacts(containerId, addTask) {
   }
   if (modal) {
     modal.addEventListener('click', (e) => {
-      closeDropdownMenu(inputAssignedTo);
-      console.log('hier');
-      
+      closeDropdownMenu(inputAssignedTo);      
     });
   }
   if (inputAssignedTo.style.display == 'flex') {
