@@ -71,11 +71,13 @@ function addContactCardContent() {
           </div>
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
-                  <p id="add-contact-error-message">Error Message</p>
+              <form onsubmit="event.preventDefault();checkInputs()" class="input-fields" action="">
+                  <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24">
+                  <span class= "error" id="contact-name-error"></span>
+                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="text">
+                  <span class= "error" id="email-error"></span>
+                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
+                  <span class= "error" id="phone-error"></span>
                 <div class="add-contact-button-bottom">
                   <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
                   <button type="submit">Create contact</button>
