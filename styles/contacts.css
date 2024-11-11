@@ -67,7 +67,9 @@ body::-webkit-scrollbar {
   height: calc(100vh - 96px);
   width: 456px;
   overflow-x: auto;
-  margin-left: 222px;
+  margin-left: 232px;
+  box-shadow: 4px 0px 6px 0px #00000014;
+  z-index: 20;
 }
 
 button {
