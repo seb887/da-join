@@ -37,6 +37,12 @@ body {
   gap: 24px;
 }
 
+.imprint-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .content-header {
   margin-bottom: 35px;
 }
