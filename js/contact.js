@@ -269,12 +269,10 @@ setVariables();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 if(inputContactName.value == ''){
   nameError.innerText = 'Please enter a Name'
-  return
 }else{
   nameError.innerText = ''}
 if(!validateEmail(inputEmail.value)){
   emailError.innerText = 'Please enter an email address'
-  return
 }else{
   emailError.innerText = ''
 }
