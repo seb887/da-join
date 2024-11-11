@@ -118,11 +118,11 @@ function clearInputs() {
   inputSubtask.value = '';
   subtasks = [];
   assignedContactList.innerHTML = '';
+  document.getElementById('searchContact').value = '';
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
   hideSubtaskIcons();
-
 }
 
 // PRIO
