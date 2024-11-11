@@ -64,7 +64,7 @@ function setActiveUserInitials() {
         if (document.getElementById('name')) {
             document.getElementById('name').innerHTML = activeUser.name;
         }
-    } else {
+    } else if(document.getElementById('user-initials')) {
         document.getElementById('user-initials').innerHTML = `<p>G</p>`
     }
 }
