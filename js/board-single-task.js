@@ -108,7 +108,6 @@ function setPrioImg(prio) {
  * @param {Object} task - The task object containing subtasks to be rendered
  */
 
-// FIXME: make smaller
 function renderSubtasksModal(task) {
   let subtasksArr = task.data.subtasks;
   let taskId = task.id;
@@ -122,31 +121,37 @@ function renderSubtasksModal(task) {
 
     for (let i = 0; i < subtasksArr.length; i++) {
       if (subtasksArr[i].checked) {
-        subtasksHTML += `
-        <div class="task-modal-subtask-container">
-          <img
-            src="../assets/icons/checkbox-checked.svg"
-            alt="checkbox icon"
-            onclick="setSubtaskStatus('${taskId}', '${i}')"
-          />
-          ${subtasksArr[i].title}
-        </div>
-    `;
+        subtasksHTML += createSubtaskCheckboxHTML(
+          i,
+          taskId,
+          subtasksArr,
+          'checked'
+        );
       } else {
-        subtasksHTML += `
+        subtasksHTML += createSubtaskCheckboxHTML(
+          i,
+          taskId,
+          subtasksArr,
+          'empty'
+        );
+      }
+    }
+  }
+  return subtasksHTML;
+}
+
+// TODO: add JS Docs
+function createSubtaskCheckboxHTML(i, taskId, subtasksArr, checkboxStatus) {
+  return `
         <div class="task-modal-subtask-container">
           <img
-            src="../assets/icons/checkbox-empty.svg"
+            src="../assets/icons/checkbox-${checkboxStatus}.svg"
             alt="checkbox icon"
             onclick="setSubtaskStatus('${taskId}', '${i}')"
           />
           ${subtasksArr[i].title}
         </div>
       `;
-      }
-    }
-  }
-  return subtasksHTML;
 }
 
 /**
@@ -203,21 +208,33 @@ async function deleteTask(taskId) {
  *
  * @param {string} taskId - The ID of the task to be edited
  */
-
-// FIXME: make smaller
 async function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
   isEditOn = true;
 
+  clearEditInputs();
+  renderSubtasksList([]);
+  const contactsPromise = listContactsToAssignedTo();
+
+  getDataToEditTask(taskId);
+
+  await contactsPromise;
+  selectAllAssignedContacts(taskId);
+  hideSubtaskIcons();
+}
+
+// TODO: add JS Docs
+function clearEditInputs() {
   editInputTitle.value = '';
   editInputDescription.value = '';
   editInputDate.value = '';
   currentPrio = null;
   subtasks = [];
-  renderSubtasksList([]);
-  const contactsPromise = listContactsToAssignedTo();
+}
 
+// TODO: add JS Docs
+function getDataToEditTask(taskId) {
   const task = tasks.find((element) => element.id === taskId);
 
   if (task) {
@@ -232,10 +249,6 @@ async function openEditTaskModal(taskId) {
 
     editTaskSubmitBtn.onclick = () => editTask(taskId);
   }
-
-  await contactsPromise;
-  selectAllAssignedContacts(taskId);
-  hideSubtaskIcons();
 }
 
 /**
