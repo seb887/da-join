@@ -100,6 +100,11 @@ button:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
 }
 
+.error{
+  color: red;
+  padding: 12px;
+}
+
 .add-new-contacts {
   background-color: white;
   display: flex;
@@ -441,8 +446,8 @@ article {
     border: 1px solid #29ABE2;
     outline: none;
   }
-  :nth-child(2){
-    margin: 24px 0px;
+  :nth-child(3){
+    margin: 12px 0px;
   }
 }
 
@@ -506,6 +511,7 @@ article {
     width: 126px;
     background-color: white;
     border: 1px solid black;
+    margin-top: 32px;
     margin-right: 16px;
     border-radius: 10px;
     color: black;
@@ -531,6 +537,7 @@ article {
     background-image: url(/assets/icons/check.png);
     background-repeat: no-repeat;
     background-position: 180px 22px;
+    margin-top: 32px;
     border: none;
     text-align: left;
     display: flex;

@@ -4,6 +4,15 @@ CONTACT_URL =
 let contactsArray = [];
 let animationActive = false;
 
+
+
+let inputContactName;
+let inputEmail;
+let inputPhoneNumber;
+let nameError;
+let emailError;
+let phoneError;
+
 /**
  * This function is active when the body loads. It sets up the user initials and renders
  * the contacts in the contact list
@@ -249,6 +258,56 @@ async function createContact() {
   });
   selectCreatedContact(document.getElementById('inputContactName').value);
   showInfoToast('Contact succesfully created');
+}
+/**
+ * Checking for missing inputs and creating an error message under the input field where the input is missing
+ * 
+ * @returns - null
+ */
+function checkInputs(){
+setVariables();
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if(inputContactName.value == ''){
+  nameError.innerText = 'Please enter a Name'
+  return
+}else{
+  nameError.innerText = ''}
+if(!validateEmail(inputEmail.value)){
+  emailError.innerText = 'Please enter an email address'
+  return
+}else{
+  emailError.innerText = ''
+}
+if (inputPhoneNumber.value == '') {
+ phoneError.innerText = 'Please enter a phone number'
+ return
+}else{
+  phoneError.innerText = ''
+}
+createContact();
+}
+
+/**
+ * Checks if the input is a correct email format and returns true or false
+ * 
+ * @param {string} email - Value of the input field
+ * @returns boolean
+ */
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Adding the correct path for the elements
+ */
+function setVariables(){
+inputContactName = document.querySelector("#inputContactName");
+inputEmail = document.querySelector("#inputMailAddress");
+inputPhoneNumber = document.querySelector("#inputPhoneNumber");
+nameError = document.getElementById('contact-name-error');
+emailError = document.getElementById('email-error');
+phoneError = document.getElementById('phone-error');
 }
 
 /**

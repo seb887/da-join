@@ -17,6 +17,7 @@ const buttonMediumImg = document.getElementById('button-medium-img');
 const buttonUrgentImg = document.getElementById('button-urgent-img');
 const assignedContactList = document.getElementById('assigned-contacts-list');
 let inputAssignedTo = document.getElementById('input-assigned-to');
+const searchContact = document.getElementById('searchContact');
 
 // VARIABLES
 const BASE_URL =
@@ -118,7 +119,7 @@ function clearInputs() {
   inputSubtask.value = '';
   subtasks = [];
   assignedContactList.innerHTML = '';
-  document.getElementById('searchContact').value = '';
+  searchContact ? searchContact.value = '': null;
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
