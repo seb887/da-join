@@ -499,7 +499,6 @@
                   id="arrowAssignTo"
                   src="../assets/icons/arrow-down.png"
                   alt="arrow-down"
-                  
                 />
                 <div
                   class="add-task-select-board"
@@ -566,6 +565,25 @@
             />
           </button>
         </div>
+      </div>
+    </section>
+
+    <!-- TODO: -->
+    <!-- TASK MOVE TO CARD -->
+    <section
+      class="task-modal-move-to"
+      id="task-modal-move-to"
+      onclick="closeMoveToCard();"
+    >
+      <div
+        class="task-move-to-card"
+        id="task-move-to-card"
+        onclick="event.stopPropagation()"
+      >
+        <ul
+          class="board-column-selection-list"
+          id="board-column-selection-list"
+        ></ul>
       </div>
     </section>
 

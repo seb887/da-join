@@ -24,6 +24,11 @@ const editSubtasksList = document.getElementById('edit-subtasks-list');
 const taskDeleteBtn = document.getElementById('task-delete-button');
 const taskEditBtn = document.getElementById('task-edit-button');
 const editTaskSubmitBtn = document.getElementById('edit-task-submit-button');
+const taskModalMoveTo = document.getElementById('task-modal-move-to');
+const taskMoveToCard = document.getElementById('task-move-to-card');
+const boardColumnSelectionList = document.getElementById(
+  'board-column-selection-list'
+);
 
 // VARIABLES
 
@@ -141,13 +146,13 @@ function renderSubtasksModal(task) {
 }
 
 /**
- * This function creates the checkbox for the subtasks of the passed taskId and its content 
- * 
+ * This function creates the checkbox for the subtasks of the passed taskId and its content
+ *
  * @param {string} i - Index as string
- * @param {string} taskId - The ID of the task 
+ * @param {string} taskId - The ID of the task
  * @param {array} subtasksArr - Array of all subtasks
  * @param {string} checkboxStatus - Status of the checkbox as string
- * @returns 
+ * @returns
  */
 function createSubtaskCheckboxHTML(i, taskId, subtasksArr, checkboxStatus) {
   return `
@@ -234,7 +239,7 @@ async function openEditTaskModal(taskId) {
 
 /**
  * Clears all input fields and subtasks and sets the currentProp to null
- * 
+ *
  */
 function clearEditInputs() {
   editInputTitle.value = '';
@@ -246,7 +251,7 @@ function clearEditInputs() {
 
 /**
  * This function retrieves all required data from the tasks array that matches the passed taskId and populates the input fields with its values.
- * 
+ *
  * @param {string} taskId - The identifier for the task
  */
 function getDataToEditTask(taskId) {
@@ -336,4 +341,58 @@ function closeEditTask(id) {
   taskModalCard.style.display = 'flex';
   getDataForSingleTask(id);
   displayTaskModalContacts(id);
+}
+
+function openMoveToCard(taskId, taskBoard) {
+  taskModalMoveTo.style.display = 'flex';
+  taskMoveToCard.style.display = 'flex';
+
+  boardColumnSelectionList.innerHTML = renderBoardSelectionList(
+    taskId,
+    taskBoard
+  );
+
+  console.log(taskId);
+  console.log(taskBoard);
+
+  // modalSlideInOrOut('task-modal-card');
+  // renderSubtasksList([]);
+}
+
+async function closeMoveToCard(selectedBoard, taskId) {
+  taskModalMoveTo.style.display = 'none';
+  taskMoveToCard.style.display = 'none';
+
+  for (let element of tasks) {
+    if (element.id == taskId) {
+      element.data.board = selectedBoard;
+
+      await updateTaskInFirebase(element.id, element.data);
+    }
+  }
+
+  renderBoard();
+}
+
+function renderBoardSelectionList(taskId, taskBoard) {
+  const boardArr = checkCurrentBoard(taskBoard);
+
+  return `
+    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[0]}', '${taskId}')">${boardArr[0]}</li>
+    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[1]}', '${taskId}')">${boardArr[1]}</li>
+    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[2]}', '${taskId}')">${boardArr[2]}</li>
+  `;
+}
+
+function checkCurrentBoard(taskBoard) {
+  switch (taskBoard) {
+    case 'todo':
+      return ['in progress', 'await feedback', 'done'];
+    case 'in progress':
+      return ['todo', 'await feedback', 'done'];
+    case 'await feedback':
+      return ['todo', 'in progress', 'done'];
+    case 'done':
+      return ['todo', 'in progress', 'await feedback'];
+  }
 }

@@ -7,9 +7,20 @@ function createCardHTML(element) {
         ondragstart="drag(event)"
       >
           <div class="card-label-container">
-              <div class="card-label" style="background-color: ${setCategoryBackgroundColor(
-                element.data.category
-              )}">${element.data.category}</div>
+            <div class="card-label" style="background-color: ${setCategoryBackgroundColor(
+              element.data.category
+            )}">${element.data.category}
+            </div>
+            <img
+              id="move-board-btn"
+              class="move-board-btn"
+              src="../assets/icons/dots-vertical.svg"
+              alt="dots vertical img"
+              onclick="openMoveToCard(
+                '${element.id}',
+                '${element.data.board}');
+                event.stopPropagation()"
+            >
           </div>
           <div class="task-modal-card-title-container">
             <div class="card-title">${element.data.title}</div>
