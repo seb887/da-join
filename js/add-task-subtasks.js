@@ -153,7 +153,11 @@ async function editSingleSubtask(taskId, index) {
   subtaskButtons.style.visibility = 'visible';
 }
 
-// TODO: add JS docs
+/**
+ * Checks if isSubtaskEdiOn is true and else sets it to true
+ * 
+ * @returns null
+ */
 function controlSubtaskIsEditStatus() {
   if (isSubtaskEditOn) {
     return;
@@ -162,7 +166,12 @@ function controlSubtaskIsEditStatus() {
   }
 }
 
-// TODO: add JS docs
+/**
+ * Sets the different styles on Subtasks
+ * 
+ * @param {number} index - index number
+ * @param {element} inputEditSubtask - input element
+ */
 function styleEditSingleSubtask(index, inputEditSubtask) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
@@ -223,7 +232,12 @@ async function submitEditedSingleSubtask(taskId, index) {
   isSubtaskEditOn = false;
 }
 
-// TODO: add JS docs
+/**
+ * Displays the element with the entered input and hides the input fields
+ * 
+ * @param {number} index - index number
+ * @param {element} inputEditSubtask - Input element path
+ */
 function styleSubmitEditedSingleSubtask(index, inputEditSubtask) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
