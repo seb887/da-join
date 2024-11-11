@@ -77,8 +77,6 @@ async function displayTaskModalContacts(id) {
   container.innerHTML = '';
   tasks.forEach((task) => {
     if (task.id == id) {
-      // if (task.data.assignedTo && task.id == id) {
-
       if (task.data.assignedTo == undefined) {
         assignedTo.style.display = 'none';
       } else {
@@ -92,11 +90,6 @@ async function displayTaskModalContacts(id) {
           </div> `;
         });
       }
-
-      // } else if (task.data.assignedTo == undefined) {
-      //   let assignedTo = document.getElementById('task-modal-card-assigned-to');
-
-      //   assignedTo.style.display = 'none';
     }
   });
 }
@@ -158,10 +151,9 @@ function openDropdownMenu(contactList) {
   }
 }
 
-
 /**
- * checks if the animation is active or not and does changes to the modal background opacity and adds the slide in animation 
- * 
+ * checks if the animation is active or not and does changes to the modal background opacity and adds the slide in animation
+ *
  */
 function checkIfAnimationActiveBoard() {
   let modal = document.getElementById('addContact');
@@ -179,10 +171,9 @@ function checkIfAnimationActiveBoard() {
   }
 }
 
-
 /**
- * adds or deletes the classname for the slide in or slide out animation 
- * 
+ * adds or deletes the classname for the slide in or slide out animation
+ *
  * @param {string} modalId - Identifier for the modal
  */
 function modalSlideInOrOut(modalId) {
@@ -204,8 +195,8 @@ function modalSlideInOrOut(modalId) {
 
 /**
  * adds or removes the footer animation depending on the scroll position and total height of the screen
- * 
- * @param {*} ev 
+ *
+ * @param {*} ev
  */
 
 window.onscroll = function (ev) {
@@ -282,8 +273,6 @@ async function createCompareArray() {
 }
 
 async function deleteNonExistingContactsInTask() {
-  // 1. Compare each ID of renderedContacts (which are all current existing contacts) with all assignedTo Contacts in Tasks
-  // 2. If an ID in a Task doesent match one of the renderedContacts it should get deleted out of the Task.
   const getAllAssignedContacts = await getAllAssignedTo();
 
   const renderedContactIds = renderedContacts.map((contact) => contact.id);
@@ -291,8 +280,6 @@ async function deleteNonExistingContactsInTask() {
   const result = getAllAssignedContacts.filter(
     (assignedContact) => !renderedContactIds.includes(assignedContact.id)
   );
-
-  console.log(result);
 }
 
 /**
@@ -382,7 +369,6 @@ async function findIndexInTaskAssignedTo(taskId, contactId) {
 async function updateComparedTasks(contactId, taskId) {
   let assignedContactsToUpdate = await compareArray();
   if (assignedContactsToUpdate.length > 0) {
-    console.log('Tasks updated.');
     assignedContactsToUpdate.forEach(async (contact, index) => {
       let contactToPut =
         renderedContacts[await findMatchInRenderedContacts(contact.contactId)];
@@ -547,10 +533,9 @@ function assignedToContactsContentAddTask(contact, id, index) {
     `;
 }
 
-
 /**
  * selects all assigned contacts from a task and sets each checkbox to checked
- * 
+ *
  * @param {string} taskId - Identifier for the single task
  */
 function selectAllAssignedContacts(taskId) {

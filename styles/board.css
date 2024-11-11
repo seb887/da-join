@@ -185,6 +185,7 @@
   min-width: 270px;
   height: calc(100vh - 96px - 209px - 25px - 16px);
   overflow-y: auto;
+  scrollbar-width: none;
   border-radius: 10px;
 }
 
@@ -336,9 +337,7 @@
   font-size: 20px;
   font-weight: 400;
   overflow-y: auto;
- 
 }
-
 
 .task-modal-edit-card {
   display: none;
@@ -379,7 +378,7 @@
   object-fit: scale-down;
   cursor: pointer;
 }
-.close-task-modal:hover{
+.close-task-modal:hover {
   background-color: rgb(213, 213, 213);
   border-radius: 50px;
 }
@@ -509,8 +508,9 @@
   background-color: transparent;
   cursor: pointer;
 }
-.task-modal-card-buttons button:hover{
-  filter: invert(48%) sepia(51%) saturate(4178%) hue-rotate(164deg) brightness(98%) contrast(101%);
+.task-modal-card-buttons button:hover {
+  filter: invert(48%) sepia(51%) saturate(4178%) hue-rotate(164deg)
+    brightness(98%) contrast(101%);
 }
 
 .task-modal-card-buttons img {
@@ -627,8 +627,6 @@
   cursor: pointer;
   transition: ease-in-out 120ms;
 }
-
-
 
 #info-toast.show {
   opacity: 1;

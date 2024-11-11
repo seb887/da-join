@@ -37,7 +37,7 @@ let modalActive = false;
 
 /**
  * Calls all necessary functions to display the board properly
- * 
+ *
  */
 async function renderBoard() {
   await loadTasksFromFirebase();
@@ -49,11 +49,10 @@ async function renderBoard() {
   searchInput.value = '';
 }
 
-
 /**
  * Creates an array of all contacts from the database
- * 
- * @returns 
+ *
+ * @returns
  */
 async function loadContactsFromFirebase() {
   let response = await fetch(BASE_URL + 'contacts' + '.json');
@@ -69,8 +68,8 @@ async function loadContactsFromFirebase() {
 
 /**
  * Creates an array of all tasks from the database
- * 
- * @returns 
+ *
+ * @returns
  */
 
 async function loadTasksFromFirebase() {
@@ -87,9 +86,9 @@ async function loadTasksFromFirebase() {
 
 /**
  * Creates an object of the data from firebase and pushes them to an array
- * 
- * @param {*} dataFromFirebase 
- * @param {*} arrToPush 
+ *
+ * @param {*} dataFromFirebase
+ * @param {*} arrToPush
  */
 function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
   let objectKeys = Object.keys(dataFromFirebase);
@@ -104,8 +103,8 @@ function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
 }
 
 /**
- * Clears all kanbanlists and creates the inner HTML content for all states on the board 
- * 
+ * Clears all kanbanlists and creates the inner HTML content for all states on the board
+ *
  * @param {array} tasksArr - Array with single task
  */
 
@@ -117,13 +116,12 @@ function renderKanbanLists(tasksArr) {
   renderData(filterData('done', tasksArr), kanbanListDone);
 }
 
-
 /**
  * Filters the associated tasks for the kanban list
- * 
+ *
  * @param {string} board - String of the specific board status
  * @param {*} tasksArr - array of single task
- * @returns 
+ * @returns
  */
 function filterData(board, tasksArr) {
   if (board == 'todo') {
@@ -140,13 +138,12 @@ function filterData(board, tasksArr) {
   }
 }
 
-
 /**
- * Creates the HTML card element with the  for each task 
- * 
+ * Creates the HTML card element with the  for each task
+ *
  * @param {array} tasksArr - Array
- * @param {object} kanbanList 
- * @param {string} path 
+ * @param {object} kanbanList
+ * @param {string} path
  */
 function renderData(tasksArr, kanbanList, path = '') {
   if (tasksArr.length == 0) {
@@ -159,10 +156,9 @@ function renderData(tasksArr, kanbanList, path = '') {
   }
 }
 
-
 /**
- * Clears the content in all kanban lists 
- * 
+ * Clears the content in all kanban lists
+ *
  */
 function clearKanbanLists() {
   kanbanListTodo.innerHTML = '';
@@ -171,10 +167,9 @@ function clearKanbanLists() {
   kanbanListDone.innerHTML = '';
 }
 
-
 /**
  * Displays the task modal on click and  with the requested firebase content.
- * 
+ *
  * @param {string} id - The identifier for the specific task
  */
 function openTaskModal(id) {
@@ -187,7 +182,7 @@ function openTaskModal(id) {
 
 /**
  * Closes the task modal and renders the board content
- * 
+ *
  */
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
@@ -209,12 +204,11 @@ function closeTaskModal() {
   renderBoard();
 }
 
-
 /**
  * Opens the add task modal with the selected kanban list
- * 
+ *
  * @param {object} kanbanBoard - Object of the kanban list
- * @returns 
+ * @returns
  */
 function openAddTaskModal(kanbanBoard) {
   if (window.innerWidth < 890) {
@@ -229,7 +223,7 @@ function openAddTaskModal(kanbanBoard) {
 
 /**
  * hides the add task modal with a slide out animation and clears all inputs and assigned contacts
- * 
+ *
  */
 function closeAddTaskModal() {
   modalSlideInOrOut('add-task-modal-card');
@@ -240,10 +234,9 @@ function closeAddTaskModal() {
   clearInputs();
 }
 
-
 /**
  * closes the add task modal and clears the input and assigned contacts
- * 
+ *
  */
 function cancelAddTask() {
   clearInputs();
@@ -253,9 +246,9 @@ function cancelAddTask() {
 
 /**
  * Creates a progressbar and displays the progrees of finished subtasks
- * 
+ *
  * @param {object} task - Specific task object
- * @returns 
+ * @returns
  */
 function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
@@ -274,12 +267,11 @@ function renderSubtaskProgressBar(task) {
   }
 }
 
-
 /**
  * This function checks the subtasks of a single task. If the subtask is checked the variable subtastkChecked is incremented by 1.
- * 
+ *
  * @param {object} task - Specific task object
- * @returns 
+ * @returns
  */
 function calcSubtaskCounter(task) {
   let subtaskChecked = 0;
@@ -295,10 +287,10 @@ function calcSubtaskCounter(task) {
 }
 
 /**
- * This function calculates the progress of the specific task between 0 to 100 
- * 
+ * This function calculates the progress of the specific task between 0 to 100
+ *
  * @param {object} task - task object
- * @returns 
+ * @returns
  */
 function calcSubtaskProgressBar(task) {
   let progressBarFull = 100;
@@ -319,8 +311,8 @@ function calcSubtaskProgressBar(task) {
 // DRAG AND DROP
 
 /**
- * Prevents the default behavior of the element 
- * 
+ * Prevents the default behavior of the element
+ *
  * @param {object} event - Event Object
  */
 function allowDrop(event) {
@@ -328,8 +320,8 @@ function allowDrop(event) {
 }
 
 /**
- * Adds the the event target id to the variable currentDraggedElementId 
- * 
+ * Adds the the event target id to the variable currentDraggedElementId
+ *
  * @param {*} event - Event Object
  */
 function drag(event) {
@@ -338,8 +330,8 @@ function drag(event) {
 
 /**
  * This function changes the path of the dropped element in the database and thereafter renders the board
- * 
- * @param {*} board 
+ *
+ * @param {*} board
  */
 async function drop(board) {
   for (let element of tasks) {
@@ -353,8 +345,8 @@ async function drop(board) {
 
 /**
  * Highlights the border with a dotted line while dragging and hovering over the actual kanbanlist
- * 
- * @param {*} id 
+ *
+ * @param {*} id
  */
 function highlight(id) {
   document.getElementById(id).classList.add('highlight-kanban-list');
@@ -362,16 +354,16 @@ function highlight(id) {
 
 /**
  * Removes the dotted line after leaving the kanban list container while dragging an element
- * 
- * @param {*} id 
+ *
+ * @param {*} id
  */
 function removeHighlight(id) {
   document.getElementById(id).classList.remove('highlight-kanban-list');
 }
 
 /**
- * This function filters the input text and renders the kanban list with the filtered data 
- * 
+ * This function filters the input text and renders the kanban list with the filtered data
+ *
  */
 function searchTask() {
   clearKanbanLists();
@@ -390,7 +382,7 @@ function searchTask() {
 
 /**
  * Switches the visibility of the clearInputBtn on input to visible and on an empty input field to invisible.
- * 
+ *
  */
 function controlVisibilityInputClearBtn() {
   if (searchInput.value.length > 0) {
@@ -401,8 +393,8 @@ function controlVisibilityInputClearBtn() {
 }
 
 /**
- * Clears the search inputfield and renders the kanban list 
- * 
+ * Clears the search inputfield and renders the kanban list
+ *
  */
 function cancelSearchTask() {
   searchInput.value = '';
@@ -410,11 +402,9 @@ function cancelSearchTask() {
   controlVisibilityInputClearBtn();
 }
 
-//showInfoToast('Task added to board') should be moved to the addTask function after creation
-
 /**
  * Slides in an info toast with a defined text and slides out after 1.5 seconds
- * 
+ *
  * @param {string} text - Displayed text in the info toast
  */
 function showInfoToast(text) {

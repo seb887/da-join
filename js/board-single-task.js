@@ -107,6 +107,8 @@ function setPrioImg(prio) {
  *
  * @param {Object} task - The task object containing subtasks to be rendered
  */
+
+// FIXME: make smaller
 function renderSubtasksModal(task) {
   let subtasksArr = task.data.subtasks;
   let taskId = task.id;
@@ -156,7 +158,7 @@ function renderSubtasksModal(task) {
 function checkSubtasksArr(subtasksArr) {
   if (subtasksArr == undefined) {
     taskModalSubtasks.style.display = 'none';
-    return;
+    // remove return;
   } else {
     taskModalSubtasks.style.display = 'flex';
   }
@@ -201,6 +203,8 @@ async function deleteTask(taskId) {
  *
  * @param {string} taskId - The ID of the task to be edited
  */
+
+// FIXME: make smaller
 async function openEditTaskModal(taskId) {
   taskModalCard.style.display = 'none';
   taskModalEditCard.style.display = 'flex';
@@ -261,9 +265,7 @@ async function editTask(taskId) {
 
       await updateTaskInFirebase(element.id, element.data);
 
-      // FIXME: disable animation, if change from edit task modal to default task modal
       closeEditTask();
-      // openTaskModal(taskId);
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }

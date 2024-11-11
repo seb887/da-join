@@ -1,5 +1,3 @@
-// SUBTASKS
-
 /**
  * Controls the visibility of subtask icons based on input values
  *
@@ -60,7 +58,7 @@ function hideSubtaskIcons() {
  * Clears the input field for subtasks based on the editing state
  * If in edit mode, it clears the edit input for the subtask
  * Otherwise, it clears the main input for adding a new subtask
- * 
+ *
  * This function also calls `controlSubtaskIcons()` to update the visibility of subtask icons
  */
 function cancelInputSubtask() {
@@ -86,10 +84,8 @@ function submitInputSubtask() {
   subtasks.push(subtaskObj);
 
   if (!isEditOn) {
-    console.log('clear inputSubtask', isEditOn);
     inputSubtask.value = '';
   } else {
-    console.log('clear editInputSubtask', isEditOn);
     editInputSubtask.value = '';
   }
 
@@ -101,7 +97,7 @@ function submitInputSubtask() {
  * Renders the list of subtasks based on the current editing state
  * Clears the existing list and populates it with subtasks
  * If no subtasks are defined, it exits early
- * 
+ *
  * @param {string} taskId - The ID of the task associated with the subtasks
  */
 function renderSubtasksList(taskId) {
@@ -124,112 +120,97 @@ function renderSubtasksList(taskId) {
   }
 }
 
-// FIXME:
-
 /**
  * Edits a single subtask by displaying an input field for editing
  * If the taskId is 'undefined', it uses the local subtasks array; otherwise, it fetches the subtask title from the specified task
- * 
+ *
  * @param {string} taskId - The ID of the task to which the subtask belongs
  *                          If 'undefined', the function uses the subtasks array directly
  * @param {number} index - The index of the subtask in the subtasks array or task's subtasks
  */
-async function editSingleSubtask(taskId, index) {
-  if (isSubtaskEditOn) {
-    return;
-  } else {
-    isSubtaskEditOn = true;
-  }
 
-  const singleSubtaskTitle = document.getElementById(
-    `single-subtask-title-${index}`
-  );
+async function editSingleSubtask(taskId, index) {
   const inputEditSubtask = document.getElementById(
     `input-edit-subtask-${index}`
   );
-  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
-  const submitEditSubtaskBtn = document.getElementById(
-    `submit-edit-subtask-${index}`
-  );
-  const subtask = document.getElementById(`subtask-${index}`);
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
-  if (taskId == 'undefined') {
-    singleSubtaskTitle.style.display = 'none';
-    inputEditSubtask.style.display = 'flex';
-    editSubtaskBtn.style.display = 'none';
-    submitEditSubtaskBtn.style.display = 'flex';
-    subtask.style.borderBottom = '1px solid #29abe2';
+  controlSubtaskIsEditStatus();
 
-    if (isSubtaskEditOn) {
-      let subtaskElement = document.getElementById(`subtask-${index}`);
-      subtaskElement.classList.remove('subtasks-hover');
-    }
+  if (taskId == 'undefined') {
+    styleEditSingleSubtask(index, inputEditSubtask);
+
     inputEditSubtask.value = subtasks[index].title;
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
-        singleSubtaskTitle.style.display = 'none';
-        inputEditSubtask.style.display = 'flex';
-        editSubtaskBtn.style.display = 'none';
-        submitEditSubtaskBtn.style.display = 'flex';
-        subtask.style.borderBottom = '1px solid #29abe2';
+        styleEditSingleSubtask(index, inputEditSubtask);
 
-        if (isSubtaskEditOn) {
-          let subtaskElement = document.getElementById(`subtask-${index}`);
-          subtaskElement.classList.remove('subtasks-hover');
-        }
         inputEditSubtask.value = element.data.subtasks[index].title;
-        // await updateTaskInFirebase(element.id, element.data);
       }
     }
   }
   subtaskButtons.style.visibility = 'visible';
 }
 
-// FIXME:
+// TODO: add JS docs
+function controlSubtaskIsEditStatus() {
+  if (isSubtaskEditOn) {
+    return;
+  } else {
+    isSubtaskEditOn = true;
+  }
+}
 
-/**
- * Submits the edited title of a single subtask. Updates the title in either
- * the local subtasks array or the specified task's subtasks, and reflects 
- * the changes in the UI
- * 
- * @param {string} taskId - The ID of the task to which the subtask belongs
- *                          If 'undefined', the function uses the local subtasks array directly
- * @param {number} index - The index of the subtask in the subtasks array or task's subtasks
- */
-async function submitEditedSingleSubtask(taskId, index) {
+// TODO: add JS docs
+function styleEditSingleSubtask(index, inputEditSubtask) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
-  const inputEditSubtask = document.getElementById(
-    `input-edit-subtask-${index}`
-  );
+
   const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
   const submitEditSubtaskBtn = document.getElementById(
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
+
+  singleSubtaskTitle.style.display = 'none';
+  inputEditSubtask.style.display = 'flex';
+  editSubtaskBtn.style.display = 'none';
+  submitEditSubtaskBtn.style.display = 'flex';
+  subtask.style.borderBottom = '1px solid #29abe2';
+
+  if (isSubtaskEditOn) {
+    let subtaskElement = document.getElementById(`subtask-${index}`);
+    subtaskElement.classList.remove('subtasks-hover');
+  }
+}
+
+/**
+ * Submits the edited title of a single subtask. Updates the title in either
+ * the local subtasks array or the specified task's subtasks, and reflects
+ * the changes in the UI
+ *
+ * @param {string} taskId - The ID of the task to which the subtask belongs
+ *                          If 'undefined', the function uses the local subtasks array directly
+ * @param {number} index - The index of the subtask in the subtasks array or task's subtasks
+ */
+
+async function submitEditedSingleSubtask(taskId, index) {
+  const inputEditSubtask = document.getElementById(
+    `input-edit-subtask-${index}`
+  );
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
     subtasks[index].title = inputEditSubtask.value;
 
-    singleSubtaskTitle.style.display = 'flex';
-    inputEditSubtask.style.display = 'none';
-    editSubtaskBtn.style.display = 'flex';
-    submitEditSubtaskBtn.style.display = 'none';
-    subtask.style.borderBottom = 'none';
-
+    styleSubmitEditedSingleSubtask(index, inputEditSubtask);
     renderSubtasksList();
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
-        singleSubtaskTitle.style.display = 'flex';
-        inputEditSubtask.style.display = 'none';
-        editSubtaskBtn.style.display = 'flex';
-        submitEditSubtaskBtn.style.display = 'none';
-        subtask.style.borderBottom = 'none';
+        styleSubmitEditedSingleSubtask(index, inputEditSubtask);
 
         element.data.subtasks[index].title = inputEditSubtask.value;
 
@@ -242,10 +223,29 @@ async function submitEditedSingleSubtask(taskId, index) {
   isSubtaskEditOn = false;
 }
 
+// TODO: add JS docs
+function styleSubmitEditedSingleSubtask(index, inputEditSubtask) {
+  const singleSubtaskTitle = document.getElementById(
+    `single-subtask-title-${index}`
+  );
+
+  const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
+  const submitEditSubtaskBtn = document.getElementById(
+    `submit-edit-subtask-${index}`
+  );
+  const subtask = document.getElementById(`subtask-${index}`);
+
+  singleSubtaskTitle.style.display = 'flex';
+  inputEditSubtask.style.display = 'none';
+  editSubtaskBtn.style.display = 'flex';
+  submitEditSubtaskBtn.style.display = 'none';
+  subtask.style.borderBottom = 'none';
+}
+
 /**
  * Deletes a single subtask from either the local subtasks array or a specific task's subtasks array
  * The function updates the relevant array and renders the updated list in the UI
- * 
+ *
  * @param {string} taskId - The ID of the task from which the subtask will be deleted
  *                          If 'undefined', the function deletes the subtask from the local subtasks array
  * @param {number} index - The index of the subtask to be deleted in the subtasks array
