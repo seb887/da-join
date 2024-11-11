@@ -36,25 +36,25 @@ body {
 
 /* Scrollbar im body für Firefox ausblenden */
 body {
-  -ms-overflow-style: none;  /* Für Internet Explorer/Edge */
-  scrollbar-width: none;     /* Für Firefox */
+  -ms-overflow-style: none; /* Für Internet Explorer/Edge */
+  scrollbar-width: none; /* Für Firefox */
 }
 
 /* Scrollbar im body für WebKit-basierte Browser (Chrome, Safari) ausblenden */
 body::-webkit-scrollbar {
-  display: none;             /* Für WebKit-basierte Browser */
+  display: none; /* Für WebKit-basierte Browser */
 }
 
 /* Scrollbar in der .contact-list-container wieder anzeigen */
 .contact-list-container {
-  -ms-overflow-style: auto;  /* Für IE/Edge */
-  scrollbar-width: auto;     /* Für Firefox */
+  -ms-overflow-style: auto; /* Für IE/Edge */
+  scrollbar-width: auto; /* Für Firefox */
 }
 
 /* Scrollbar in der .contact-list-container für WebKit-basierte Browser sichtbar machen */
 .contact-list-container::-webkit-scrollbar {
-  display: block;      /* Für WebKit-basierte Browser */
-  width: 22px;   /* Breite des vertikalen Scrollbalkens */
+  display: block; /* Für WebKit-basierte Browser */
+  width: 22px; /* Breite des vertikalen Scrollbalkens */
 }
 
 .contact-list-container {
@@ -230,7 +230,6 @@ input::-webkit-inner-spin-button {
   margin-top: 96px;
   width: calc(100% - 644px);
   background-color: var(--bg-primary);
-  
 }
 
 .contacts-title {
@@ -262,7 +261,7 @@ article {
   top: 311px;
   margin-left: 30px;
   height: 364px;
-  a{
+  a {
     text-decoration: none;
   }
   h2 {
@@ -312,7 +311,8 @@ article {
 
 .edit-contact:hover {
   img {
-    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg) brightness(90%) contrast(96%);
+    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg)
+      brightness(90%) contrast(96%);
   }
   cursor: pointer;
   color: #29abe2;
@@ -320,7 +320,8 @@ article {
 
 .del-contact:hover {
   img {
-    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg) brightness(90%) contrast(96%);
+    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg)
+      brightness(90%) contrast(96%);
   }
   cursor: pointer;
   color: #29abe2;
@@ -351,11 +352,11 @@ article {
 }
 
 #contactInformation a {
-    color: var(--accent-primary);
-    overflow-wrap: anywhere;
+  color: var(--accent-primary);
+  overflow-wrap: anywhere;
 }
 
-.add-contact-modal{
+.add-contact-modal {
   display: none;
   position: fixed;
   z-index: 2000;
@@ -377,32 +378,32 @@ article {
   border-radius: 30px 0 0 30px;
 }
 
-.logo-modal img{
+.logo-modal img {
   width: 60px;
   height: 70px;
 }
 
-.header-modal{
+.header-modal {
   color: white;
   gap: 16px;
-  h1{
+  h1 {
     font-size: 61px;
     font-weight: 700;
   }
-  h2{
+  h2 {
     font-size: 27px;
     font-weight: 400;
   }
 }
 
-.header-seperator{
+.header-seperator {
   height: 0px;
   width: 90px;
-  border-top: 3px solid #29ABE2;
+  border-top: 3px solid #29abe2;
   margin-top: 16px;
 }
 
-.add-contact-modal-right{
+.add-contact-modal-right {
   display: flex;
   align-items: center;
 }
@@ -412,7 +413,7 @@ article {
   justify-content: center;
   align-items: center;
   height: 100%;
-  img{
+  img {
     width: 120px;
     height: 120px;
   }
@@ -424,29 +425,26 @@ article {
   flex-direction: column;
   height: 215px;
   ::placeholder {
-    color: #D1D1D1;
+    color: #d1d1d1;
   }
 
-  input{
-    height: 50px ;
+  input {
+    height: 50px;
     width: 422px;
     border-radius: 10px;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     padding: 13px 21px 13px 21px;
     font-size: 20px;
-    
+
     background-repeat: no-repeat;
   }
-  input:focus{
-    border: 1px solid #29ABE2;
+  input:focus {
+    border: 1px solid #29abe2;
     outline: none;
-  }
-  :nth-child(2){
-    margin: 24px 0px;
   }
 }
 
-#closeAddContact{
+#closeAddContact {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -454,12 +452,12 @@ article {
   margin-bottom: 40px;
   outline: none;
   border: none;
-  :hover{
+  :hover {
     background-color: var(--bg-primary);
     cursor: pointer;
     border-radius: 50px;
   }
-  img{
+  img {
     object-fit: scale-down;
     width: 32px;
     height: 32px;
@@ -470,24 +468,25 @@ article {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  gap: 24px;
 }
 
 #inputContactName {
   background-image: url(/assets/icons/person.png);
-  background-position: 382px 18px; 
+  background-position: 382px 18px;
   background-repeat: no-repeat;
 }
 #inputMailAddress {
   background-image: url(/assets/icons/mail.png);
-  background-position: 380px 18px; 
+  background-position: 380px 18px;
   background-repeat: no-repeat;
 }
 #inputPhoneNumber {
   background-image: url(/assets/icons/phone.png);
-  background-position: 380px 15px; 
+  background-position: 380px 15px;
   background-repeat: no-repeat;
 }
-.add-contact-modal-person{
+.add-contact-modal-person {
   padding: 0 80px;
 }
 
@@ -496,13 +495,13 @@ article {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  button{
+  button {
     height: 56px;
     padding: 16px;
     font-size: 20px;
     transition: 125ms ease-in-out;
   }
-  button:nth-child(1){
+  button:nth-child(1) {
     width: 126px;
     background-color: white;
     border: 1px solid black;
@@ -515,17 +514,16 @@ article {
     text-align: left;
     display: flex;
     justify-content: unset;
-    &:hover{
+    &:hover {
       cursor: pointer;
-      color: #29ABE2;
-      border-color: #29ABE2;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);   
-    
+      color: #29abe2;
+      border-color: #29abe2;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
     }
   }
-  button:nth-child(2){
+  button:nth-child(2) {
     width: 214px;
-    background-color: #2A3647;
+    background-color: #2a3647;
     color: white;
     border-radius: 10px;
     background-image: url(/assets/icons/check.png);
@@ -535,9 +533,9 @@ article {
     text-align: left;
     display: flex;
     justify-content: unset;
-    &:hover{
+    &:hover {
       cursor: pointer;
-      background-color: #29ABE2;
+      background-color: #29abe2;
       border-color: 29ABE2;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
     }
@@ -549,7 +547,7 @@ article {
   justify-content: center;
   align-items: center;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.267); 
+  background-color: rgba(0, 0, 0, 0.267);
   top: 0px;
   left: 0px;
   width: 100%;
@@ -557,35 +555,35 @@ article {
   z-index: 1000;
 }
 
-.modal-background{
+.modal-background {
   display: none;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.267);  
+  background-color: rgba(0, 0, 0, 0.267);
   width: 100%;
   height: calc(100vh + 100%);
   z-index: 1000;
 }
 
-.display-add-contact{
-  display: flex ;
+.display-add-contact {
+  display: flex;
 }
 
-.animation-slide-in{
-  display: flex ;
+.animation-slide-in {
+  display: flex;
   animation-name: slideInAddContact;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
 }
 
-.animation-slide-out{
-  display: flex ;
+.animation-slide-out {
+  display: flex;
   animation-name: slideOutAddContact;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
 }
 
-.change-opacity{
-  display: flex ;
+.change-opacity {
+  display: flex;
   animation-name: changeOpacity;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
@@ -601,7 +599,7 @@ article {
   font-size: 20px;
   right: 0%;
   top: 70%;
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 20px;
   color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -627,7 +625,7 @@ article {
   width: 56px;
   height: 56px;
   margin: 14px;
-  background-color: #2A3647;
+  background-color: #2a3647;
   transition: ease-in-out 120ms;
   img {
     width: 32px;
@@ -635,7 +633,7 @@ article {
 }
 
 .add-contact-responsive:hover {
-  background: #29ABE2;
+  background: #29abe2;
   cursor: pointer;
   box-shadow: #8c8c8c 0px 5px 7px;
 }
@@ -684,34 +682,34 @@ article {
 }
 
 @keyframes slideInAddContact {
-  0%{
+  0% {
     opacity: 0;
     transform: translate(-50%, -50%) translateX(100vw);
   }
-  100%{
+  100% {
     opacity: 1;
-    transform: translate(-50%, -50%) translateX(0)
+    transform: translate(-50%, -50%) translateX(0);
   }
 }
 
 @keyframes slideOutAddContact {
-  0%{
+  0% {
     transform: translate(-50%, -50%) translateX(0);
   }
-  100%{
+  100% {
     transform: translate(-50%, -50%) translateX(100vw);
   }
 }
 
 @keyframes fadeAndSlideIn {
-    0% {
-      left: 100%;
-      opacity: 0.5;
-    }
-    100% {
-      left: 690px;
-      opacity: 1;
-    }
+  0% {
+    left: 100%;
+    opacity: 0.5;
+  }
+  100% {
+    left: 690px;
+    opacity: 1;
+  }
 }
 
 @keyframes changeOpacity {

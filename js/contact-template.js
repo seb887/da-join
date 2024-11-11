@@ -1,12 +1,12 @@
 /**
  * Generates the HTML content for a single contact entry, including initials,
  * name, and email link, which can be clicked to open the contact details
- * 
+ *
  * @param {number} index - The index of the contact in the list, used for
  *                         generating element IDs
  */
 function contactContent(index) {
-    return `
+  return `
         <div onclick ="openContact('${index}')" class="single-contact">
         <div id="initialsContainer${index}" class="initials-container">
             <span id="initials${index}"></span>
@@ -22,11 +22,11 @@ function contactContent(index) {
 /**
  * Generates the HTML content for a header section that displays a letter
  * and includes a separator line below it
- * 
+ *
  * @param {string} letter - The letter to be displayed as the header
  */
 function nameHeaderContent(letter) {
-    return`
+  return `
         <div class="nameHeader" id ="${letter}">
             <h3>${letter}</h3>
         </div>
@@ -34,27 +34,27 @@ function nameHeaderContent(letter) {
             <div class="line">
             </div>
         </div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for a section that allows users to add new contacts,
  * including a button that triggers the "Add Contact" modal
  */
-function addNewContactsContent () {
-    return `
+function addNewContactsContent() {
+  return `
         <div class="add-new-contacts">
             <button onclick="openAndCloseAddContact()">Add new contact<img src="../assets/icons/person_add.png"></img></button>
         </div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for the "Add Contact" modal, including the header,
- * input fields for contact details, and buttons for submitting or canceling the action 
+ * input fields for contact details, and buttons for submitting or canceling the action
  */
-function addContactCardContent(){
-    return ` 
+function addContactCardContent() {
+  return `
         <div class="modal-header-logo-left">
           <div class="logo-modal">
             <img src="../assets/img/logo-white.png" alt="logo-white">
@@ -65,7 +65,7 @@ function addContactCardContent(){
             <div class="header-seperator"></div>
           </div>
         </div>
-        <div class="add-contact-modal-right">   
+        <div class="add-contact-modal-right">
           <div class="add-contact-modal-person">
             <img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
           </div>
@@ -75,6 +75,7 @@ function addContactCardContent(){
                   <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
                   <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
                   <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
+                  <p id="add-contact-error-message">Error Message</p>
                 <div class="add-contact-button-bottom">
                   <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
                   <button type="submit">Create contact</button>
@@ -82,19 +83,19 @@ function addContactCardContent(){
               </form>
           </div>
         </div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for the "Edit Contact" modal, including the current contact's
  * information pre-filled in the input fields, initials, and buttons for saving changes or deleting the contact
- * 
+ *
  * @param {Object} contact - The contact object containing the details to be edited
  * @param {string} initials - The initials of the contact to display in the modal
  * @param {number} index - The index of the contact in the contacts array, used for identifying the contact during updates
  */
-function editContactCardContent(contact, initials, index){
-    return `
+function editContactCardContent(contact, initials, index) {
+  return `
         <div class="modal-header-logo-left">
           <div class="logo-modal">
             <img src="../assets/img/logo-white.png" alt="logo-white">
@@ -105,7 +106,7 @@ function editContactCardContent(contact, initials, index){
             <div class="header-seperator"></div>
           </div>
         </div>
-        <div class="add-contact-modal-right">   
+        <div class="add-contact-modal-right">
           <div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
           <span id="initialsArticle">${initials}</span>
         </div>
@@ -122,5 +123,5 @@ function editContactCardContent(contact, initials, index){
               </form>
           </div>
         </div>
-    `
+    `;
 }
