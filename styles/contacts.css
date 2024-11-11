@@ -312,7 +312,7 @@ article {
 
 .edit-contact:hover {
   img {
-    content: url(/assets/icons/edit-hover.svg);
+    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg) brightness(90%) contrast(96%);
   }
   cursor: pointer;
   color: #29abe2;
@@ -320,7 +320,7 @@ article {
 
 .del-contact:hover {
   img {
-    content: url(/assets/icons/delete-hover.svg);
+    filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg) brightness(90%) contrast(96%);
   }
   cursor: pointer;
   color: #29abe2;
