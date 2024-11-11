@@ -31,7 +31,7 @@ async function listContactsToAssignedTo() {
 function closeDropdownOnclick(){
   const searchContactDiv = document.getElementById('searchContact');
   document.addEventListener('click', (event) => {
-    if (!searchContactDiv.contains(event.target)) {
+    if (searchContactDiv && !searchContactDiv.contains(event.target)) {
         if(document.getElementById('input-assigned-to').style.display == "flex"){
             dropDownContacts('searchContact');
         }
