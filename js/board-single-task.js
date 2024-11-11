@@ -344,6 +344,9 @@ function closeEditTask(id) {
 }
 
 function openMoveToCard(taskId, taskBoard) {
+  const body = document.querySelector('body');
+  body.style.overflow = 'hidden';
+
   taskModalMoveTo.style.display = 'flex';
   taskMoveToCard.style.display = 'flex';
 
@@ -351,12 +354,6 @@ function openMoveToCard(taskId, taskBoard) {
     taskId,
     taskBoard
   );
-
-  console.log(taskId);
-  console.log(taskBoard);
-
-  // modalSlideInOrOut('task-modal-card');
-  // renderSubtasksList([]);
 }
 
 async function closeMoveToCard(selectedBoard, taskId) {
@@ -387,12 +384,12 @@ function renderBoardSelectionList(taskId, taskBoard) {
 function checkCurrentBoard(taskBoard) {
   switch (taskBoard) {
     case 'todo':
-      return ['in progress', 'await feedback', 'done'];
+      return ['In progress', 'Await feedback', 'Done'];
     case 'in progress':
-      return ['todo', 'await feedback', 'done'];
+      return ['Todo', 'Await feedback', 'Done'];
     case 'await feedback':
-      return ['todo', 'in progress', 'done'];
+      return ['Todo', 'In progress', 'Done'];
     case 'done':
-      return ['todo', 'in progress', 'await feedback'];
+      return ['Todo', 'In progress', 'Await feedback'];
   }
 }
