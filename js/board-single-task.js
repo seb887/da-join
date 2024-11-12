@@ -176,7 +176,6 @@ function createSubtaskCheckboxHTML(i, taskId, subtasksArr, checkboxStatus) {
 function checkSubtasksArr(subtasksArr) {
   if (subtasksArr == undefined) {
     taskModalSubtasks.style.display = 'none';
-    // remove return;
   } else {
     taskModalSubtasks.style.display = 'flex';
   }
