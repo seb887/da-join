@@ -386,8 +386,6 @@ function renderBoardSelectionList(taskId, taskBoard) {
   }
 }
 
-function createSelectionListHTML(i, boardArr, taskId) {}
-
 function checkCurrentBoard(taskBoard) {
   switch (taskBoard) {
     case 'todo':
