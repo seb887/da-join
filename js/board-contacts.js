@@ -22,7 +22,6 @@ async function returnTasksFromFirebase() {
  * @param {string} path - path of the HTML- element
  * @returns null
  */
-
 async function renderAssignedToInCard(taskId, task, path = '') {
   let card = document.getElementById(path + taskId);
   card.innerHTML = '';
@@ -99,7 +98,7 @@ async function displayTaskModalContacts(id) {
  *
  */
 function dropDownContactsEditTask() {
-  const contactList = document.getElementById('assigned-contacts-list');
+  const contactList = document.getElementById('input-assigned-to');
   const container = document.getElementById('task-modal-card');
   container.addEventListener('click', (e) => {});
   if (contactList.style.display == 'flex') {
@@ -550,4 +549,35 @@ function selectAllAssignedContacts(taskId) {
       });
     }
   });
+}
+
+/**
+ * Closes the assigned to contact list in a single task on click outside the list
+ * 
+ */
+function closeDropdownOnclickBoard(){
+  const searchContactDiv = document.getElementById('searchContact-board');
+  const searchContactDivAddTask = document.getElementById('searchContact-board-addTask')
+  document.getElementById('task-modal-edit-card').addEventListener('click', (event) => {
+    if (searchContactDiv && !searchContactDiv.contains(event.target)) {
+        if(document.getElementById('input-assigned-to').style.display == "flex"){
+            dropDownContactsEditTask();
+        }        
+    }
+});
+}
+
+/**
+ * Closes the assigned to contact list on the add task modal on click outside the list
+ * 
+ */
+function closeDropdownOnclickBoardAddTask(){
+  const searchContactDiv = document.getElementById('searchContact-board-addTask');
+  document.getElementById('add-task-modal-card').addEventListener('click', (event) => {
+    if (searchContactDiv && !searchContactDiv.contains(event.target)) {
+        if(document.getElementById('input-assigned-to-addTask').style.display == "flex"){
+          dropDownContacts('searchContact-board-addTask', 1)   
+        }        
+    }
+});
 }

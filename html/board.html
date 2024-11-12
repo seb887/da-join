@@ -489,7 +489,7 @@
                 onclick="dropDownContacts('searchContact-board')"
               >
                 <input
-                  oninput="filterContactsInBoard('input-assigned-to')"
+                  oninput="filterContactsInBoard('input-assigned-to')"                  
                   autocomplete="off"
                   placeholder="Select contacts to assign"
                   type="text"
@@ -503,6 +503,7 @@
                 <div
                   class="add-task-select-board"
                   id="input-assigned-to"
+                  onclick="event.stopPropagation();"
                 ></div>
               </div>
             </div>
@@ -676,6 +677,7 @@
                   style="display: none"
                   class="add-task-select-board"
                   id="input-assigned-to-addTask"
+                  onclick="event.stopPropagation();"
                 ></div>
               </div>
               <!-- </select> -->

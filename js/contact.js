@@ -264,7 +264,7 @@ async function createContact() {
  * 
  * @returns - null
  */
-function checkInputs(status, contact, index){
+function checkContactInputs(status, contact, index){
 setVariables();
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 if(inputContactName.value == ''){
