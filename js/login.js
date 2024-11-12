@@ -80,12 +80,14 @@ function signUp() {
 
     if (name.value == '') {
         error.innerText = 'Please enter a name'
-        return;
-    }
+        return;}
     if (!validateEmail(email.value)) {
         error.innerText = 'Please enter an email'
-        return;
-    }
+        return; }
+    if(password.value == '' || passwordConfirm.value == '')
+        {
+        error.innerHTML = 'Please enter a password'
+        return;}
     if (password.value === passwordConfirm.value) {
         error.innerHTML = '';
         if (checkBox.src.includes('checkbox-checked.svg')) {
