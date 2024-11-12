@@ -71,7 +71,7 @@ function addContactCardContent() {
           </div>
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();checkInputs('add')" class="input-fields" action="">
+              <form onsubmit="event.preventDefault();checkContactInputs('add')" class="input-fields" action="">
                   <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24">
                   <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="text">
                   <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
@@ -112,7 +112,7 @@ function editContactCardContent(contact, initials, index) {
         </div>
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
-              <form onsubmit="event.preventDefault();checkInputs('edit', '${contact.id}','${index}')" class="input-fields" action="">
+              <form onsubmit="event.preventDefault();checkContactInputs('edit', '${contact.id}','${index}')" class="input-fields" action="">
                   <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24">
                   <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="text" minlength="3" maxlength="32">
                   <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6">

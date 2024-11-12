@@ -48,6 +48,13 @@ async function logIn() {
     let password = document.getElementById('current-password').value;
     let response = await fetch(BASE_URL + ".json");
     let users = await response.json();
+    if (email == '') {
+        document.getElementById('login-error').innerHTML = 'Please enter a email';
+        return
+    }else if (password == '') {
+        document.getElementById('login-error').innerHTML = 'Please enter a password';
+        return
+    }
     for (let key in users) {
         if (users[key].email === email && users[key].password === password) {
             document.getElementById('login-error').innerHTML = '';
@@ -126,7 +133,7 @@ async function checkUser() {
  * This function checks if the E-Mail address already exists in the firebase
  */
 async function checkEmail() {
-    let email = document.querySelector('input[type="email"]').value;
+    let email = document.querySelector('#email-address').value;
     let response = await fetch(BASE_URL + ".json");
     let users = await response.json();
     let emailExists = false;
@@ -284,9 +291,9 @@ function renderLogIn() {
             <div class="login-seperator"></div>
             <div class="login-form">
                 <form onsubmit="logIn(); return false;">
-                    <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" required> 
+                    <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" > 
                     <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
+                        <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
                         <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
                     </div>
                     <div id='login-error'></div>
