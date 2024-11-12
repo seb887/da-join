@@ -27,7 +27,10 @@ async function listContactsToAssignedTo() {
   closeDropdownOnclick()
 }
 
-
+/**
+ * Closes the assigned to contact list on click outside the list
+ * 
+ */
 function closeDropdownOnclick(){
   const searchContactDiv = document.getElementById('searchContact');
   document.addEventListener('click', (event) => {

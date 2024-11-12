@@ -178,6 +178,7 @@ function openTaskModal(id) {
   modalSlideInOrOut('task-modal-card');
   getDataForSingleTask(id);
   displayTaskModalContacts(id);
+  closeDropdownOnclickBoard()
 }
 
 /**
@@ -219,6 +220,7 @@ function openAddTaskModal(kanbanBoard) {
   renderAllContactsInAddTask();
   currentKanbanBoard = kanbanBoard;
   modalSlideInOrOut('add-task-modal-card');
+  closeDropdownOnclickBoardAddTask()
 }
 
 /**
