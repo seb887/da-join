@@ -350,15 +350,16 @@ function openMoveToCard(taskId, taskBoard) {
   taskModalMoveTo.style.display = 'flex';
   taskMoveToCard.style.display = 'flex';
 
-  boardColumnSelectionList.innerHTML = renderBoardSelectionList(
-    taskId,
-    taskBoard
-  );
+  renderBoardSelectionList(taskId, taskBoard);
 }
 
 async function closeMoveToCard(selectedBoard, taskId) {
+  const body = document.querySelector('body');
+  body.style.overflow = 'auto';
+
   taskModalMoveTo.style.display = 'none';
   taskMoveToCard.style.display = 'none';
+  boardColumnSelectionList.innerHTML = '';
 
   for (let element of tasks) {
     if (element.id == taskId) {
@@ -374,22 +375,28 @@ async function closeMoveToCard(selectedBoard, taskId) {
 function renderBoardSelectionList(taskId, taskBoard) {
   const boardArr = checkCurrentBoard(taskBoard);
 
-  return `
-    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[0]}', '${taskId}')">${boardArr[0]}</li>
-    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[1]}', '${taskId}')">${boardArr[1]}</li>
-    <li class="board-selection-item" onclick="closeMoveToCard('${boardArr[2]}', '${taskId}')">${boardArr[2]}</li>
-  `;
+  for (let i = 0; i < boardArr.length; i++) {
+    boardColumnSelectionList.innerHTML += `
+      <li
+        class="board-selection-item"
+        onclick="closeMoveToCard('${boardArr[i]}', '${taskId}')">
+        ${capitalizeFirstLetter(boardArr[i])}
+      </li>
+    `;
+  }
 }
+
+function createSelectionListHTML(i, boardArr, taskId) {}
 
 function checkCurrentBoard(taskBoard) {
   switch (taskBoard) {
     case 'todo':
-      return ['In progress', 'Await feedback', 'Done'];
+      return ['in progress', 'await feedback', 'done'];
     case 'in progress':
-      return ['Todo', 'Await feedback', 'Done'];
+      return ['todo', 'await feedback', 'done'];
     case 'await feedback':
-      return ['Todo', 'In progress', 'Done'];
+      return ['todo', 'in progress', 'done'];
     case 'done':
-      return ['Todo', 'In progress', 'Await feedback'];
+      return ['todo', 'in progress', 'await feedback'];
   }
 }
