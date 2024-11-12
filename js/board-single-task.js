@@ -334,6 +334,11 @@ function getSelectedContactsEditTask() {
   return selectedContacts;
 }
 
+/**
+ * Closes the the edit task modal and displays the task modal 
+ * 
+ * @param {string} id - Identifier for the single task
+ */
 function closeEditTask(id) {
   taskModal.style.display = 'none';
   taskModalEditCard.style.display = 'none';
@@ -343,6 +348,12 @@ function closeEditTask(id) {
   displayTaskModalContacts(id);
 }
 
+/**
+ * This function opens the move to card modal on smaller display sizes 
+ * 
+ * @param {string} taskId - ID for the single task
+ * @param {string} taskBoard - The actual board name 
+ */
 function openMoveToCard(taskId, taskBoard) {
   const body = document.querySelector('body');
   body.style.overflow = 'hidden';
@@ -353,6 +364,12 @@ function openMoveToCard(taskId, taskBoard) {
   renderBoardSelectionList(taskId, taskBoard);
 }
 
+/**
+ * This function moves the current task to the selected board and updates the firebase and renders the board.
+ * 
+ * @param {string} selectedBoard - Destinated board as string
+ * @param {string} taskId - ID for the current task
+ */
 async function closeMoveToCard(selectedBoard, taskId) {
   const body = document.querySelector('body');
   body.style.overflow = 'auto';
@@ -368,10 +385,15 @@ async function closeMoveToCard(selectedBoard, taskId) {
       await updateTaskInFirebase(element.id, element.data);
     }
   }
-
   renderBoard();
 }
 
+/**
+ * This function creates the content for the modal
+ * 
+ * @param {string} taskId - ID for the current task
+ * @param {string} taskBoard - The actual board name 
+ */
 function renderBoardSelectionList(taskId, taskBoard) {
   const boardArr = checkCurrentBoard(taskBoard);
 
@@ -386,6 +408,12 @@ function renderBoardSelectionList(taskId, taskBoard) {
   }
 }
 
+/**
+ * This function returns an array with the different board names excepted for the board the task is actual in
+ * 
+ * @param {string} taskBoard - The current board name as string
+ * @returns - array
+ */
 function checkCurrentBoard(taskBoard) {
   switch (taskBoard) {
     case 'todo':
