@@ -93,7 +93,6 @@ form {
     flex-direction: column;
     width: 422px;
     height: 196px;
-    gap: 20px;
 }
 
 input {
@@ -116,7 +115,7 @@ input {
 
 .password-icon {
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 21px;
     transform: translateY(-50%);
     width: 21px;
@@ -125,7 +124,9 @@ input {
     background-size: contain;
     cursor: default;
 }
-
+#password-id-sign-up{
+    margin-bottom: 16px;
+}
 .password-icon:hover {
     cursor: pointer;
 }
@@ -177,8 +178,10 @@ input {
 .check-box {
     display: flex;
     align-items: center;
-    gap: 8px;
     padding-left: 39px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+    gap: 8px;
 }
 
 .remember-true {
@@ -187,6 +190,7 @@ input {
     align-items: center;
     height: 15px;
     width: 15px;
+    margin: 0 !important;
 }
 
 .remember-true:hover {
@@ -292,6 +296,10 @@ input {
     transform: none;
 }
 
+#form-inputs{
+    display: flex;
+    gap: 0;
+}
 .sign-up-check-box-privacy-policy {
     text-decoration: none;
     color: #29ABE2;
@@ -306,6 +314,9 @@ input {
 }
 
 #sign-up-error, #login-error {
+    color: red;
+}
+.error{
     color: red;
 }
 

@@ -53,7 +53,7 @@ async function logIn() {
   let password = document.getElementById('current-password').value;
   let response = await fetch(BASE_URL + '.json');
   let users = await response.json();
-  if (email == '') {
+  if (!validateEmail(email)) {
     document.getElementById('login-error').style.visibility ='visible'
     document.getElementById('login-error').innerHTML = 'Please enter a email';
     document.querySelector('input[type="email"]').style.border = '1px solid #d22323'
@@ -87,28 +87,48 @@ function signUp() {
   let error = document.getElementById('sign-up-error');
   let name = document.getElementById('name');
   let email = document.getElementById('email-address');
+  let signupErrorName = document.getElementById('sign-up-error-name');
+  let singupErrorMail = document.getElementById('sign-up-error-email');
+  let isValid = true;
 
   if (name.value == '') {
-    error.innerText = 'Please enter a name';
-    return;
+    signupErrorName.style.visibility = 'visible'
+    name.style.border = '1px solid #d22323';
+    isValid = false;
+  }else{
+    signupErrorName.style.visibility = 'hidden'
+    name.style.border = '1px solid #d1d1d1';
   }
   if (!validateEmail(email.value)) {
-    error.innerText = 'Please enter an email';
-    return;
+    singupErrorMail.style.visibility = 'visible'
+    email.style.border = '1px solid #d22323';
+    isValid = false;
+  }else{
+    singupErrorMail.style.visibility = 'hidden'
+    email.style.border = '1px solid #d1d1d1';
   }
   if (password.value == '' || passwordConfirm.value == '') {
-    error.innerHTML = 'Please enter a password';
-    return;
+    error.style.visibility = 'visible'
+    password.style.border = '1px solid #d22323';
+    passwordConfirm.style.border = '1px solid #d22323';
+    error.innerHTML = 'Passwords do not match';
+    return
+  }else{
+    error.style.visibility = 'hidden'
+    password.style.border = '1px solid #d1d1d1';
+    passwordConfirm.style.border = '1px solid #d1d1d1';
   }
   if (password.value === passwordConfirm.value) {
     error.innerHTML = '';
     if (checkBox.src.includes('checkbox-checked.svg')) {
-      checkUser();
+      isValid ? checkUser() : null;
     } else {
       error.innerHTML = 'Please accept the Privacy Policy';
+      error.style.visibility = 'visible'
     }
   } else {
     error.innerHTML = 'Passwords do not match';
+     error.style.visibility = 'visible'
   }
 }
 
@@ -370,7 +390,9 @@ function renderSignUp() {
         <div class="login-form">
              <form novalidate id="form-inputs" onsubmit="signUp(); return false;">
                 <input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" >
+                <div class="error" style= "visibility: hidden" id='sign-up-error-name'>Please enter a name.</div>
                 <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="text" placeholder="Email" >
+                <div class="error" style= "visibility: hidden" id='sign-up-error-email'>Please enter an email.</div>
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" >
                         <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
@@ -379,7 +401,7 @@ function renderSignUp() {
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" >
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
-                    <div style= "visibility: hidden" id='sign-up-error'>Please enter an email</div>
+                    <div class="error" style="visibility: hidden" id='sign-up-error'>Your password dont match. Please try again.</div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="toggleCheckBoxAccept()" class="remember-true">
                     <img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
