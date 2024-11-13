@@ -65,6 +65,32 @@ body {
   outline: none;
 }
 
+.add-task-select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.add-task-select {
+  width: 100%;
+  appearance: none; /* Standard-Pfeil entfernen */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.add-task-select-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 24px; /* Icon-Breite anpassen */
+  height: 24px; /* Icon-Höhe anpassen */
+  background-image: url('../assets/icons/arrow-down.png'); /* Pfad zum PNG-Icon */
+  background-size: contain; /* Größe des Icons an den Container anpassen */
+  background-repeat: no-repeat;
+  pointer-events: none; /* Icon ist nicht anklickbar */
+}
+
 .add-task-input-description {
   max-width: 435px;
   max-height: 122px;
@@ -317,6 +343,7 @@ body {
 .add-task-cancel-button {
   display: flex;
   width: 126px;
+  justify-content: space-between;
   align-items: center;
   padding: 16px;
   gap: 4px;
@@ -327,9 +354,9 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: ease-in-out 125ms;
-  background-image: url(/assets/icons/close.png);
+  /* background-image: url(/assets/icons/close.png);
   background-repeat: no-repeat;
-  background-position: 90px 16px;
+  background-position: 90px 16px; */
 }
 .add-task-cancel-button:hover {
   cursor: pointer;
@@ -359,11 +386,10 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
 }
 
-
-.edit-task-submit-button:hover{
+.edit-task-submit-button:hover {
   background-color: #29abe2;
   border: 0px;
-  box-shadow: #8c8c8c 0px 5px 7px; 
+  box-shadow: #8c8c8c 0px 5px 7px;
 }
 
 /* INFO TOAST */
