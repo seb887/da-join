@@ -19,6 +19,8 @@ const assignedContactList = document.getElementById('assigned-contacts-list');
 let inputAssignedTo = document.getElementById('input-assigned-to');
 const searchContact = document.getElementById('searchContact');
 
+let error = document.getElementById('add-task-error');
+
 // VARIABLES
 const BASE_URL =
   'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -90,7 +92,6 @@ function createNewTask() {
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  */
 function checkInputs(taskObj) {
-  let error = document.getElementById('add-task-error');
   if (taskObj.title == '' || taskObj.category == 'Select task category') {
     if (taskObj.title == '') {
       error.innerHTML = 'Please insert a title';
@@ -119,7 +120,8 @@ function clearInputs() {
   inputSubtask.value = '';
   subtasks = [];
   assignedContactList.innerHTML = '';
-  searchContact ? searchContact.value = '': null;
+  searchContact ? (searchContact.value = '') : null;
+  error.innerHTML = '';
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');

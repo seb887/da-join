@@ -155,7 +155,7 @@ async function editSingleSubtask(taskId, index) {
 
 /**
  * Checks if isSubtaskEdiOn is true and else sets it to true
- * 
+ *
  * @returns null
  */
 function controlSubtaskIsEditStatus() {
@@ -168,7 +168,7 @@ function controlSubtaskIsEditStatus() {
 
 /**
  * Sets the different styles on Subtasks
- * 
+ *
  * @param {number} index - index number
  * @param {element} inputEditSubtask - input element
  */
@@ -212,7 +212,11 @@ async function submitEditedSingleSubtask(taskId, index) {
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
-    subtasks[index].title = inputEditSubtask.value;
+    if (inputEditSubtask.value == 0) {
+      inputEditSubtask.value = subtasks[index].title;
+    } else {
+      subtasks[index].title = inputEditSubtask.value;
+    }
 
     styleSubmitEditedSingleSubtask(index, inputEditSubtask);
     renderSubtasksList();
@@ -221,7 +225,11 @@ async function submitEditedSingleSubtask(taskId, index) {
       if (element.id == taskId) {
         styleSubmitEditedSingleSubtask(index, inputEditSubtask);
 
-        element.data.subtasks[index].title = inputEditSubtask.value;
+        if (inputEditSubtask.value == 0) {
+          inputEditSubtask.value = element.data.subtasks[index].title;
+        } else {
+          element.data.subtasks[index].title = inputEditSubtask.value;
+        }
 
         await updateTaskInFirebase(element.id, element.data);
         renderSubtasksList();
@@ -234,7 +242,7 @@ async function submitEditedSingleSubtask(taskId, index) {
 
 /**
  * Displays the element with the entered input and hides the input fields
- * 
+ *
  * @param {number} index - index number
  * @param {element} inputEditSubtask - Input element path
  */

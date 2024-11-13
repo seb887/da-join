@@ -1,213 +1,212 @@
 @media (max-width: 1280px) {
-    .add-task-submit-button {
-      font-size: 18px;
-    }
-    .add-task-cancel-button {
-      font-size: 18px;
-    }
-    .left-container {
-      width: unset;
-    }
-    .prio-buttons {
-      width: 80px;
-      font-size: 12px;
-    }
-    .prio-buttons-container {
-      gap: 0px;
-    }
-    .add-task-footer {
-      width: unset;
-    }
-    .add-task-form {
-      gap: 8px;
-      width: unset;
-    }
-    .add-task-input-title,
-    .add-task-input-date,
-    .add-task-input-description,
-    .add-task-input-subtasks,
-    .add-task-select,
-    #searchContact,
-    .add-task-input,
-    .prio-buttons-container {
-      font-size: 15px;
-      width: 280px;
-    }
-    #assigned-contacts-list {
-      width: 280px;
-    }
+  .add-task-submit-button {
+    font-size: 18px;
   }
-  
-  @media (max-width: 890px) {
-    body {
-      justify-content: center;
-    }
-    .content {
-      display: flex;
-      justify-content: flex-start;
-      width: 650px;
-      margin-left: 30px;
-      top: 30px;
-    }
-    .right-container {
-      width: unset;
-    }
-    h1 {
-      font-size: 47px;
-    }
-    .add-task-content-section {
-      padding: unset;
-      margin-left: unset;
-    }
-    .add-task-header {
-      padding: 80px 64px 55px 0px;
-    }
-    .add-task-footer {
-      width: 580px;
-    }
+  .add-task-cancel-button {
+    font-size: 18px;
   }
-  
-  @media (max-width: 650px) {
-    #add-task-error {
-      font-size: 16px;
-      padding-left: 20px;
-    }
-    body {
-      margin-bottom: 500px;
-    }
-    .content {
-      margin-left: unset;
-    }
-    .required-div {
-      font-size: 18px;
-    }
-    .add-task-content-section {
-      padding: unset;
-      width: unset;
-    }
-    .add-task-submit-button {
-      width: 183px;
-      height: 56px;
-    }
-    .add-task-cancel-button {
-      display: none;
-    }
-    .add-task-form {
-      width: unset;
-      flex-direction: column;
-    }
-    .add-task-footer {
-      width: unset;
-      align-items: center;
-      padding: 16px;
-      margin-top: 16px;
-    }
-    .seperator {
-      display: none;
-    }
-    .content {
-      width: 428px;
-    }
-    .left-container {
-      align-items: center;
-      width: unset;
-      gap: 12px;
-    }
-    .right-container {
-      align-items: center;
-      width: unset;
-      gap: 12px;
-    }
-    .add-task-input-title,
-    .add-task-input-date,
-    .add-task-input-description,
-    .add-task-input-subtasks,
-    .add-task-select,
-    #searchContact,
-    .add-task-input,
-    .prio-buttons-container {
-      font-size: 16px;
-      width: 396px;
-    }
-    #assigned-contacts-list {
-      width: 396px;
-    }
-    .prio-buttons {
-      width: 121.33px;
-      height: 41px;
-      font-size: 16px;
-    }
-    .add-task-header {
-      width: unset;
-      padding-left: 12px;
-    }
+  .left-container {
+    width: unset;
   }
-  
-  @media (max-width: 427px) {
-    .add-task-input-title,
-    .add-task-input-date,
-    .add-task-input-description,
-    .add-task-input-subtasks,
-    .add-task-select,
-    #searchContact,
-    .add-task-input,
-    .prio-buttons-container {
-      font-size: 14px;
-      width: 320px;
-    }
-    #assigned-contacts-list {
-      width: 320px;
-    }
-    .add-task-submit-button {
-      width: 135px;
-      padding: 12px;
-    }
-    .add-task-submit-button span {
-      font-size: 14px;
-    }
-    h1 {
-      font-size: 40px;
-    }
-    .add-task-header {
-      padding-left: 25px;
-    }
-    .prio-buttons {
-      width: 90px;
-      font-size: 14px;
-    }
-    .required-div {
-      font-size: 14px;
-    }
-    .add-task-footer {
-      padding: 20px;
-    }
-    #info-toast {
-      width: 290px;
-      height: 66px;
-      font-size: 14px;
-    }
+  .prio-buttons {
+    width: 80px;
+    font-size: 12px;
   }
-  
-  @media (max-width: 359px) {
-    .add-task-input-title,
-    .add-task-input-date,
-    .add-task-input-description,
-    .add-task-input-subtasks,
-    .add-task-select,
-    #searchContact,
-    .add-task-input,
-    .prio-buttons-container {
-      font-size: 14px;
-      width: 280px;
-    }
-    #assigned-contacts-list {
-      width: 280px;
-    }
-    .add-task-labels {
-      font-size: 14px;
-    }
-    .add-task-header {
-      padding-left: 18px;
-    }
+  .prio-buttons-container {
+    gap: 0px;
+  }
+  .add-task-footer {
+    width: unset;
+  }
+  .add-task-form {
+    gap: 8px;
+    width: unset;
+  }
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 15px;
+    width: 280px;
+  }
+  #assigned-contacts-list {
+    width: 280px;
+  }
+}
 
+@media (max-width: 890px) {
+  body {
+    justify-content: center;
   }
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    width: 650px;
+    margin-left: 30px;
+    top: 30px;
+  }
+  .right-container {
+    width: unset;
+  }
+  h1 {
+    font-size: 47px;
+  }
+  .add-task-content-section {
+    padding: unset;
+    margin-left: unset;
+  }
+  .add-task-header {
+    padding: 80px 64px 55px 0px;
+  }
+  .add-task-footer {
+    width: 580px;
+  }
+}
+
+@media (max-width: 650px) {
+  #add-task-error {
+    font-size: 16px;
+    padding-left: 20px;
+  }
+  body {
+    margin-bottom: 500px;
+  }
+  .content {
+    margin-left: unset;
+  }
+  .required-div {
+    font-size: 18px;
+  }
+  .add-task-content-section {
+    padding: unset;
+    width: unset;
+  }
+  .add-task-submit-button {
+    width: 183px;
+    height: 56px;
+  }
+  .add-task-cancel-button {
+    display: none;
+  }
+  .add-task-form {
+    width: unset;
+    flex-direction: column;
+  }
+  .add-task-footer {
+    width: unset;
+    align-items: center;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .seperator {
+    display: none;
+  }
+  .content {
+    width: 428px;
+  }
+  .left-container {
+    align-items: center;
+    width: unset;
+    gap: 12px;
+  }
+  .right-container {
+    align-items: center;
+    width: unset;
+    gap: 12px;
+  }
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 16px;
+    width: 396px;
+  }
+  #assigned-contacts-list {
+    width: 396px;
+  }
+  .prio-buttons {
+    width: 121.33px;
+    height: 41px;
+    font-size: 16px;
+  }
+  .add-task-header {
+    width: unset;
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 427px) {
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 14px;
+    width: 320px;
+  }
+  #assigned-contacts-list {
+    width: 320px;
+  }
+  .add-task-submit-button {
+    width: 135px;
+    padding: 12px;
+  }
+  .add-task-submit-button span {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  .add-task-header {
+    padding-left: 25px;
+  }
+  .prio-buttons {
+    width: 90px;
+    font-size: 14px;
+  }
+  .required-div {
+    font-size: 14px;
+  }
+  .add-task-footer {
+    padding: 20px;
+  }
+  #info-toast {
+    width: 290px;
+    height: 66px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 359px) {
+  .add-task-input-title,
+  .add-task-input-date,
+  .add-task-input-description,
+  .add-task-input-subtasks,
+  .add-task-select,
+  #searchContact,
+  .add-task-input,
+  .prio-buttons-container {
+    font-size: 14px;
+    width: 280px;
+  }
+  #assigned-contacts-list {
+    width: 280px;
+  }
+  .add-task-labels {
+    font-size: 14px;
+  }
+  .add-task-header {
+    padding-left: 18px;
+  }
+}
