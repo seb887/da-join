@@ -122,6 +122,7 @@ function clearInputs() {
   assignedContactList.innerHTML = '';
   searchContact ? (searchContact.value = '') : null;
   error.innerHTML = '';
+  inputDate.valueAsDate = currentDate;
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
