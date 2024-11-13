@@ -489,7 +489,7 @@
                 onclick="dropDownContacts('searchContact-board')"
               >
                 <input
-                  oninput="filterContactsInBoard('input-assigned-to')"                  
+                  oninput="filterContactsInBoard('input-assigned-to')"
                   autocomplete="off"
                   placeholder="Select contacts to assign"
                   type="text"
@@ -757,23 +757,26 @@
               >
                 Category<span class="required-marker">*</span>
               </div>
-              <select
-                type="text"
-                class="add-task-select-board"
-                id="select-category"
-                name="category"
-              >
-                <option
-                  value="Select task category"
-                  disabled
-                  selected
-                  hidden
+
+              <div class="add-task-select-container">
+                <select
+                  type="text"
+                  class="add-task-select-board"
+                  id="select-category"
+                  name="category"
                 >
-                  Select task category
-                </option>
-                <option value="User Story">User Story</option>
-                <option value="Technical Task">Technical Task</option>
-              </select>
+                  <option
+                    value="Select task category"
+                    disabled
+                    selected
+                    hidden
+                  >
+                    Select task category
+                  </option>
+                  <option value="User Story">User Story</option>
+                  <option value="Technical Task">Technical Task</option>
+                </select>
+              </div>
             </div>
 
             <div class="form-container subtasks-container">

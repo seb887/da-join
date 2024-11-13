@@ -65,14 +65,28 @@ body {
   outline: none;
 }
 
+.add-task-input-title:focus,
+.add-task-input-date:focus,
+.add-task-input-description:focus,
+.add-task-select:focus {
+  border: none;
+  outline: 1px solid var(--accent-primary);
+}
+
+.add-task-input-subtasks:focus > .add-task-input {
+  border: none;
+  outline: 1px solid var(--accent-primary);
+}
+
 .add-task-select-container {
   position: relative;
   display: inline-block;
 }
 
-.add-task-select {
+.add-task-select,
+.add-task-select-board {
   width: 100%;
-  appearance: none; /* Standard-Pfeil entfernen */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -83,12 +97,12 @@ body {
   top: 50%;
   right: 8px;
   transform: translateY(-50%);
-  width: 24px; /* Icon-Breite anpassen */
-  height: 24px; /* Icon-Höhe anpassen */
-  background-image: url('../assets/icons/arrow-down.png'); /* Pfad zum PNG-Icon */
-  background-size: contain; /* Größe des Icons an den Container anpassen */
+  width: 24px;
+  height: 24px;
+  background-image: url('../assets/icons/arrow-down.png');
+  background-size: contain;
   background-repeat: no-repeat;
-  pointer-events: none; /* Icon ist nicht anklickbar */
+  pointer-events: none;
 }
 
 .add-task-input-description {
@@ -283,16 +297,6 @@ body {
   width: 1px;
   height: 24px;
 }
-
-/* .subtask-hover {
-  background-color: #e7e7e7;
-  border-radius: 10px;
-}
-
-.subtask-no-hover {
-  background-color: transparent;
-  border-radius: none;
-} */
 
 .subtasks-hover:hover {
   background-color: #e7e7e7;
