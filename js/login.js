@@ -54,7 +54,10 @@ async function logIn() {
   let response = await fetch(BASE_URL + '.json');
   let users = await response.json();
   if (email == '') {
+    document.getElementById('login-error').style.visibility ='visible'
     document.getElementById('login-error').innerHTML = 'Please enter a email';
+    document.querySelector('input[type="email"]').style.border = '1px solid #d22323'
+    document.getElementById('current-password').style.border = '1px solid #d22323'
     return;
   } else if (password == '') {
     document.getElementById('login-error').innerHTML =
@@ -333,7 +336,7 @@ function renderLogIn() {
                         <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
                         <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
                     </div>
-                    <div id='login-error'></div>
+                    <div style= "visibility:hidden" id='login-error'>Please enter a email</div>
                     <div class="check-box">
                         <div onclick="toggleCheckBoxRemember()" class="remember-true">
                         <img id="check-box" src="../assets/icons/checkbox-empty.svg">
@@ -376,7 +379,7 @@ function renderSignUp() {
                         <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" >
                         <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
                     </div>
-                    <div id='sign-up-error'></div>
+                    <div style= "visibility: hidden" id='sign-up-error'>Please enter an email</div>
                 <div class="check-box" style="padding-left: 0px; justify-content: center;">
                     <div onclick="toggleCheckBoxAccept()" class="remember-true">
                     <img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
