@@ -292,7 +292,7 @@ function renderLogIn() {
             <b class="login-signup-title">Log in</b>
             <div class="login-seperator"></div>
             <div class="login-form">
-                <form onsubmit="logIn(); return false;">
+                <form novalidate onsubmit="logIn(); return false;">
                     <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" > 
                     <div class="password-input-wrapper">
                         <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
@@ -330,7 +330,7 @@ function renderSignUp() {
        </div>
         <div class="login-seperator"></div>
         <div class="login-form">
-             <form id="form-inputs" onsubmit="signUp(); return false;">
+             <form novalidate id="form-inputs" onsubmit="signUp(); return false;">
                 <input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" > 
                 <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="text" placeholder="Email" > 
                     <div class="password-input-wrapper">
