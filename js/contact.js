@@ -264,28 +264,42 @@ async function createContact() {
  * 
  * @returns - null
  */
-function checkContactInputs(status, contact, index){
-setVariables();
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if(inputContactName.value == ''){
-  phoneError.innerText = 'Please enter a Name'
-  return;
-}else{
-  phoneError.innerText = ''}
-if(!validateEmail(inputEmail.value)){
-  phoneError.innerText = 'Please enter an email address'
-  return;
-}else{
-  phoneError.innerText = ''
-}
-if (inputPhoneNumber.value == '') {
- phoneError.innerText = 'Please enter a phone number'
- return;
-}else{
-  phoneError.innerText = ''
-}
-status == 'add' ? createContact() : null ;
-status == 'edit' ? saveChangesOnContact(contact, index) : null ;
+function checkContactInputs(status, contact, index) {
+  setVariables();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let isValid = true;
+
+  if (inputContactName.value == '') {
+    nameError.style.visibility = 'visible';
+    inputContactName.style.border = '1px solid #d22323';
+    isValid = false;
+  } else {
+    nameError.style.visibility = 'hidden';
+    inputContactName.style.border = '1px solid #d1d1d1';
+  }
+
+  if (!validateEmail(inputEmail.value)) {
+    emailError.style.visibility = 'visible';
+    inputEmail.style.border = '1px solid #d22323';
+    isValid = false;
+  } else {
+    emailError.style.visibility = 'hidden';
+    inputEmail.style.border = '1px solid #d1d1d1';
+  }
+
+  if (inputPhoneNumber.value == '') {
+    phoneError.style.visibility = 'visible';
+    inputPhoneNumber.style.border = '1px solid #d22323';
+    isValid = false;
+  } else {
+    phoneError.style.visibility = 'hidden';
+    inputPhoneNumber.style.border = '1px solid #d1d1d1';
+  }
+  if (!isValid) {
+    return;
+  }
+  status == 'add' ? createContact() : null;
+  status == 'edit' ? saveChangesOnContact(contact, index) : null;
 }
 /**
  * Checks if the input is a correct email format and returns true or false

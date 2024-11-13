@@ -472,8 +472,11 @@ article {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 32px;
+  span{
+    margin-bottom: 16px;
+  }
 }
+
 
 #inputContactName {
   background-image: url(/assets/icons/person.png);

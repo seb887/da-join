@@ -72,12 +72,12 @@ function addContactCardContent() {
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form novalidate onsubmit="event.preventDefault();checkContactInputs('add')" class="input-fields" action="">
-                  <input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24">
-                  <span class= "error" id="name-error"></span>
-                  <input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="text">
-                  <span class= "error" id="email-error"></span>
-                  <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
-                  <span class= "error" id="phone-error"></span>
+                  <input onchange ="checkContactInputs('add')" placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24">
+                  <span style ="visibility:hidden" class= "error" id="contact-name-error">Please enter a name</span>
+                  <input onchange ="checkContactInputs('add')" placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="text">
+                  <span style ="visibility:hidden" class= "error" id="email-error">Check your email. Please try again.</span>
+                  <input onchange ="checkContactInputs('add')" placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
+                  <span style ="visibility:hidden" class= "error" id="phone-error">Please enter a phone number</span>
                 <div class="add-contact-button-bottom">
                   <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
                   <button type="submit">Create contact</button>
@@ -115,12 +115,12 @@ function editContactCardContent(contact, initials, index) {
           <div class="input-field-right">
               <div id="closeAddContact"><img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button"></div>
               <form novalidate onsubmit="event.preventDefault();checkContactInputs('edit', '${contact.id}','${index}')" class="input-fields" action="">
-                  <input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24">
-                  <span class= "error" id="name-error"></span>
-                  <input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="text" minlength="3" maxlength="32">
-                  <span class= "error" id="email-error"></span>
-                  <input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6">
-                  <span class= "error" id="phone-error"></span>
+                  <input onchange="checkContactInputs('edit', '${contact.id}','${index}')" placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24">
+                  <span style ="visibility:hidden" class= "error" id="contact-name-error">Please enter a name</span>
+                  <input onchange ="checkContactInputs('edit', '${contact.id}','${index}')" placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="text" minlength="3" maxlength="32">
+                  <span style ="visibility:hidden" class= "error" id="email-error">Check your email. Please try again.</span>
+                  <input onchange ="checkContactInputs('edit', '${contact.id}','${index}')" placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6">
+                  <span style ="visibility:hidden" class= "error" id="phone-error">Please enter a phone number</span>
                 <div class="add-contact-button-bottom">
                   <button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete</button>
                   <button style="justify-content: center; width: 111px;" type="submit">Save</button>
