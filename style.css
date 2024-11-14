@@ -14,12 +14,33 @@
   --font-primary: #000000;
   --font-secondary: #cdcdcd;
   --accent-primary: #29abe2;
+
 }
+
+
+
 
 * {
   font-family: inter;
   box-sizing: border-box;
   margin: 0;
+  --sb-track-color: #ffffff;
+  --sb-thumb-color: #a8a8a8;
+  --sb-size: 10px;
+}
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 25px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 25px;
+  border: 2px solid #ffffff;
 }
 
 body {
