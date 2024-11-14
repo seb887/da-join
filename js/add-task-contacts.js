@@ -81,7 +81,7 @@ function inspectCheckboxes(path) {
  */
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
-  event.stopPropagation();
+  // event.stopPropagation();
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }

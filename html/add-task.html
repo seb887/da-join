@@ -202,7 +202,7 @@
               >
                 <div
                   style="cursor: pointer"
-                  onclick="dropDownContacts('searchContact')"
+                  onclick="dropDownContacts('searchContact');event.stopPropagation();"
                 >
                   <input
                     oninput="filterContacts(event)"
@@ -210,7 +210,6 @@
                     placeholder="Select contacts to assign"
                     type="text"
                     id="searchContact"
-                    onclick="dropDownContacts('searchContact')"
                   /><img
                     id="arrowAssignTo"
                     src="../assets/icons/arrow-down.png"

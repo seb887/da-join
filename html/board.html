@@ -482,11 +482,11 @@
 
             <div
               id="add-task-contact-container"
-              class="add-task-select-board"
+              class="add-task-select-board"              
+              onclick="dropDownContacts('searchContact-board');event.stopPropagation();"
             >
               <div
                 style="cursor: pointer"
-                onclick="dropDownContacts('searchContact-board')"
               >
                 <input
                   oninput="filterContactsInBoard('input-assigned-to')"
@@ -654,13 +654,11 @@
                 Assigned to
               </div>
               <div
+                onclick="dropDownContacts('searchContact-board-addTask', 1);event.stopPropagation();"
                 id="add-task-contact-container-addTask"
                 class="add-task-select-board"
               >
-                <div
-                  style="cursor: pointer"
-                  onclick="dropDownContacts('searchContact-board-addTask', 1)"
-                >
+                
                   <input
                     oninput="filterContactsInBoard('input-assigned-to-addTask')"
                     autocomplete="off"
