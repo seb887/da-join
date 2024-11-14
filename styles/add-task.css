@@ -43,6 +43,7 @@ body {
   display: flex;
   gap: 48px;
   width: 968px;
+  min-height: 470px;
 }
 
 .form-container {
