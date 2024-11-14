@@ -116,9 +116,13 @@ function windowClose() {
 window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
-  if (scrollPosition >= totalHeight) {
-    document.getElementById('footer').classList.add('footer-animation');
+  const footer = document.getElementById('footer');
+  if(footer){
+    if (scrollPosition >= totalHeight) {
+   footer.classList.add('footer-animation');
   } else {
-    document.getElementById('footer').classList.remove('footer-animation');
+   footer.classList.remove('footer-animation');
   }
 };
+  }
+  
