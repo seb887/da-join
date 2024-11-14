@@ -518,7 +518,7 @@ body {
 
 .initial-div {
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   justify-content: center;
   align-items: center;
   background-color: #2a3647;
