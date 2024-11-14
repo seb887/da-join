@@ -167,7 +167,15 @@ function renderAssignedContacts(path) {
     assignedContacts.some((id) => id.slice(0, -2) === contact.id)
   );
   matches.forEach((match, index) => {
+    if(index <4){
     container.innerHTML += assignedInitialContent(match, index);
+    }else if(index == 4){      
+      container.innerHTML += `<div id="addContactList${index}" class ="assigned-contacts-initial-container">
+        <div>
+          <div style="background-color: #2A3647" id= "${match['id']}-container" class= "initial-div">+${matches.length - 4}</div>
+        </div>
+    </div>`
+    }
   });
 
 }
