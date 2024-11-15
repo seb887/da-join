@@ -472,11 +472,10 @@ article {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  span{
+  span {
     margin-bottom: 16px;
   }
 }
-
 
 #inputContactName {
   background-image: url(/assets/icons/person.png);
@@ -502,48 +501,66 @@ article {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 16px;
   button {
-    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 16px;
+    gap: 4px;
+    height: 56px;
     font-size: 20px;
     transition: 125ms ease-in-out;
   }
+  span {
+    margin: 0;
+  }
+  img {
+    width: 24px;
+    height: 24px;
+  }
   button:nth-child(1) {
+    display: flex;
+    justify-content: center;
     width: 126px;
     background-color: white;
     border: 1px solid black;
-    margin-right: 16px;
     border-radius: 10px;
     color: black;
-    background-image: url(/assets/icons/close.png);
+    /* background-image: url(/assets/icons/close.png);
     background-repeat: no-repeat;
-    background-position: 90px 16px;
+    background-position: 90px 16px; */
     text-align: left;
-    display: flex;
-    justify-content: unset;
+
     &:hover {
       cursor: pointer;
       color: #29abe2;
       border-color: #29abe2;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
+
+      img {
+        filter: invert(59%) sepia(68%) saturate(1150%) hue-rotate(165deg)
+          brightness(90%) contrast(96%);
+      }
     }
   }
   button:nth-child(2) {
+    display: flex;
+    justify-content: center;
     width: 214px;
     background-color: #2a3647;
     color: white;
     border-radius: 10px;
-    background-image: url(/assets/icons/check.png);
+    /* background-image: url(/assets/icons/check.png);
     background-repeat: no-repeat;
-    background-position: 180px 22px;
+    background-position: 180px 22px; */
     border: none;
     text-align: left;
-    display: flex;
-    justify-content: unset;
+
     &:hover {
       cursor: pointer;
       background-color: #29abe2;
-      border-color: 29ABE2;
+      border-color: #29abe2;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.336);
     }
   }

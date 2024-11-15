@@ -79,8 +79,14 @@ function addContactCardContent() {
                   <input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
                   <span style ="visibility:hidden" class= "error" id="phone-error">Please enter a phone number</span>
                 <div class="add-contact-button-bottom">
-                  <button type="button" onclick="openAndCloseAddContact()">Cancel</button>
-                  <button type="submit">Create contact</button>
+                  <button type="button" onclick="openAndCloseAddContact()">
+                    <span>Cancel</span>
+                    <img src="../assets/icons/close.png" alt="close icon">
+                  </button>
+                  <button type="submit">
+                  <span>Create contact</span>
+                    <img src="../assets/icons/check.png" alt="close icon">
+                  </button>
                 </div>
               </form>
           </div>
