@@ -201,7 +201,6 @@
   min-width: 270px;
   height: calc(100vh - 96px - 209px - 25px - 16px);
   overflow-y: auto;
-  scrollbar-width: none;
   border-radius: 10px;
 }
 
