@@ -394,7 +394,11 @@
               name="title"
             />
           </div>
-          <span class="error-edit" id="error-title-edit">This field is required</span>
+          <span
+            class="error-edit"
+            id="error-title-edit"
+            >This field is required</span
+          >
           <div class="form-container description-container">
             <div
               for="description"
@@ -425,7 +429,11 @@
               name="date"
             />
           </div>
-          <span class="error-edit" id="error-date-edit">This field is required</span>
+          <span
+            class="error-edit"
+            id="error-date-edit"
+            >This field is required</span
+          >
 
           <div class="form-container prio-container">
             <div
@@ -484,12 +492,10 @@
 
             <div
               id="add-task-contact-container"
-              class="add-task-select-board"              
+              class="add-task-select-board"
               onclick="dropDownContacts('searchContact-board');event.stopPropagation();"
             >
-              <div
-                style="cursor: pointer"
-              >
+              <div style="cursor: pointer">
                 <input
                   oninput="filterContactsInBoard('input-assigned-to')"
                   autocomplete="off"
@@ -632,7 +638,11 @@
                 placeholder="Enter a title"
               />
             </div>
-            <span class="error-required" id="error-title-add-task">This field is required</span>
+            <span
+              class="error-required"
+              id="error-title-add-task"
+              >This field is required</span
+            >
             <div class="form-container description-container">
               <div
                 for="description"
@@ -661,10 +671,7 @@
                 id="add-task-contact-container-addTask"
                 class="add-task-select-board"
               >
-                <div
-                  style="cursor: pointer"
-                  
-                >
+                <div style="cursor: pointer">
                   <input
                     oninput="filterContactsInBoard('input-assigned-to-addTask')"
                     autocomplete="off"
@@ -684,7 +691,6 @@
                   onclick="event.stopPropagation();"
                 ></div>
               </div>
-              <!-- </select> -->
             </div>
             <div id="assigned-contacts-list-addTask"></div>
           </div>
@@ -704,7 +710,11 @@
                 name="date"
               />
             </div>
-            <span class="error-required" id="error-date-add-task">This field is required</span>
+            <span
+              class="error-required"
+              id="error-date-add-task"
+              >This field is required</span
+            >
             <div class="form-container date-container">
               <div
                 for="prio"
@@ -782,7 +792,11 @@
                 </select>
               </div>
             </div>
-            <span class="error-required" id="error-category-add-task">This field is required</span>
+            <span
+              class="error-required"
+              id="error-category-add-task"
+              >This field is required</span
+            >
             <div class="form-container subtasks-container">
               <div
                 for="subtasks"
@@ -835,7 +849,11 @@
               class="add-task-cancel-button"
               onclick="cancelAddTask()"
             >
-              Cancel
+              <span>Cancel</span>
+              <img
+                src="../assets/icons/cancel.png"
+                alt=""
+              />
             </button>
             <div
               class="add-task-submit-button"

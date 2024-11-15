@@ -55,19 +55,18 @@
   background-color: white;
 }
 
-
 .add-task-input-date-board:focus,
 .add-task-input-title-board:focus,
 .add-task-input-date:focus,
 .add-task-input-description-board:focus,
-.add-task-select-board:has(input:focus),
+.add-task-select-board:focus,
 .input-container:focus {
   outline: 1px solid var(--accent-primary);
   outline-offset: -1px;
 }
 
 .add-task-input:has(input:focus),
-.input-container:has(input:focus){
+.input-container:has(input:focus) {
   outline: 1px solid var(--accent-primary);
   outline-offset: -1px;
 }
@@ -821,7 +820,7 @@
   flex-wrap: wrap;
 }
 
-.error-edit{
+.error-edit {
   color: red;
   font-size: 14px;
   visibility: hidden;

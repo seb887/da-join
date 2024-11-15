@@ -17,7 +17,7 @@ body {
   display: flex;
 }
 
-.error-required{
+.error-required {
   color: red;
   font-size: 14px;
   margin-top: -24px;
@@ -73,7 +73,7 @@ body {
   outline: 1px solid transparent;
 }
 
-.add-task-input:has(input:focus){
+.add-task-input:has(input:focus) {
   outline: 1px solid var(--accent-primary);
   outline-offset: -1px;
 }
@@ -360,7 +360,7 @@ body {
 .add-task-cancel-button {
   display: flex;
   width: 126px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 16px;
   gap: 4px;
@@ -384,7 +384,7 @@ body {
 
 .add-task-submit-button {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 16px;
   width: 183px;
