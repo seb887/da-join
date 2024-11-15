@@ -20,6 +20,9 @@ let inputAssignedTo = document.getElementById('input-assigned-to');
 const searchContact = document.getElementById('searchContact');
 
 let error = document.getElementById('add-task-error');
+const errorTitle = document.getElementById('error-title-add-task');
+const errorDate = document.getElementById('error-date-add-task');
+const errorCategory = document.getElementById('error-category-add-task');
 
 // VARIABLES
 const BASE_URL =
@@ -92,13 +95,9 @@ function createNewTask() {
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  */
 function checkInputs(taskObj) {
-  if (taskObj.title == '' || taskObj.category == 'Select task category') {
-    if (taskObj.title == '') {
-      error.innerHTML = 'Please insert a title';
-    } else if (taskObj.category == 'Select task category') {
-      error.innerHTML = 'Please select a category';
+    if(!checkForRequiredInputAddTask(taskObj)){
+      return;
     }
-  } else {
     document.body.style.pointerEvents = 'none';
     error.innerHTML = '';
     saveTaskToFirebase(taskObj);
@@ -107,7 +106,37 @@ function checkInputs(taskObj) {
     clearInputs();
     showInfoToast('Task added to board');
     setTimeout(() => (window.location.href = 'board.html'), 1200);
+
+}
+
+
+/**
+ * If a required input field has no entry it returns false
+ * 
+ * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
+ * @returns boolean
+ */
+function checkForRequiredInputAddTask(taskObj){
+  let isValid = true;
+  if(taskObj.title == ''){
+    errorTitle.style.visibility = 'visible';
+    isValid = false ;
+  }else{
+    errorTitle.style.visibility = 'hidden';
   }
+  if(taskObj.date == ''){
+    errorDate.style.visibility = 'visible'
+    isValid = false;
+  }else{errorDate.style.visibility = 'hidden' }
+  if(taskObj.date == ''){
+    errorDate.style.visibility = 'visible'
+    isValid = false;
+  }else{errorDate.style.visibility = 'hidden' }
+  if(taskObj.category == 'Select task category'){
+    errorCategory.style.visibility = 'visible'
+    isValid = false;
+  }else{errorCategory.style.visibility = 'hidden' }
+  return isValid;
 }
 
 /**

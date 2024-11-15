@@ -17,6 +17,13 @@ body {
   display: flex;
 }
 
+.error-required{
+  color: red;
+  font-size: 14px;
+  margin-top: -24px;
+  visibility: hidden;
+}
+
 .add-task-header {
   display: flex;
   align-items: center;
