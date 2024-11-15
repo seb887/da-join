@@ -522,6 +522,13 @@ body {
     height: 24px;
     width: 24px;
   }
+  input {
+    outline: none;
+  }
+  input:focus {
+    outline: none;
+    border-color: #29abe2;
+  }
 }
 
 .add-task-contact-list:hover {
