@@ -54,10 +54,12 @@ async function logIn() {
   let response = await fetch(BASE_URL + '.json');
   let users = await response.json();
   if (!validateEmail(email)) {
-    document.getElementById('login-error').style.visibility ='visible'
+    document.getElementById('login-error').style.visibility = 'visible';
     document.getElementById('login-error').innerHTML = 'Please enter a email';
-    document.querySelector('input[type="email"]').style.border = '1px solid #d22323'
-    document.getElementById('current-password').style.border = '1px solid #d22323'
+    document.querySelector('input[type="email"]').style.border =
+      '1px solid #d22323';
+    document.getElementById('current-password').style.border =
+      '1px solid #d22323';
     return;
   } else if (password == '') {
     document.getElementById('login-error').innerHTML =
@@ -92,29 +94,29 @@ function signUp() {
   let isValid = true;
 
   if (name.value == '') {
-    signupErrorName.style.visibility = 'visible'
+    signupErrorName.style.visibility = 'visible';
     name.style.border = '1px solid #d22323';
     isValid = false;
-  }else{
-    signupErrorName.style.visibility = 'hidden'
+  } else {
+    signupErrorName.style.visibility = 'hidden';
     name.style.border = '1px solid #d1d1d1';
   }
   if (!validateEmail(email.value)) {
-    singupErrorMail.style.visibility = 'visible'
+    singupErrorMail.style.visibility = 'visible';
     email.style.border = '1px solid #d22323';
     isValid = false;
-  }else{
-    singupErrorMail.style.visibility = 'hidden'
+  } else {
+    singupErrorMail.style.visibility = 'hidden';
     email.style.border = '1px solid #d1d1d1';
   }
   if (password.value == '' || passwordConfirm.value == '') {
-    error.style.visibility = 'visible'
+    error.style.visibility = 'visible';
     password.style.border = '1px solid #d22323';
     passwordConfirm.style.border = '1px solid #d22323';
     error.innerHTML = 'Passwords do not match';
-    return
-  }else{
-    error.style.visibility = 'hidden'
+    return;
+  } else {
+    error.style.visibility = 'hidden';
     password.style.border = '1px solid #d1d1d1';
     passwordConfirm.style.border = '1px solid #d1d1d1';
   }
@@ -124,11 +126,11 @@ function signUp() {
       isValid ? checkUser() : null;
     } else {
       error.innerHTML = 'Please accept the Privacy Policy';
-      error.style.visibility = 'visible'
+      error.style.visibility = 'visible';
     }
   } else {
     error.innerHTML = 'Passwords do not match';
-     error.style.visibility = 'visible'
+    error.style.visibility = 'visible';
   }
 }
 
@@ -351,22 +353,22 @@ function renderLogIn() {
             <div class="login-seperator"></div>
             <div class="login-form">
                 <form novalidate onsubmit="logIn(); return false;">
-                    <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" >
-                    <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
-                        <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
+                  <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" >
+                  <div class="password-input-wrapper">
+                      <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
+                      <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
+                  </div>
+                  <div style= "visibility:hidden" id='login-error'>Please enter a email</div>
+                  <div class="check-box">
+                    <div onclick="toggleCheckBoxRemember()" class="remember-true">
+                      <img id="check-box" src="../assets/icons/checkbox-empty.svg">
                     </div>
-                    <div style= "visibility:hidden" id='login-error'>Please enter a email</div>
-                    <div class="check-box">
-                        <div onclick="toggleCheckBoxRemember()" class="remember-true">
-                        <img id="check-box" src="../assets/icons/checkbox-empty.svg">
-                        </div>
-                        <span>Remember me</span>
-                    </div>
-                    <div class="what-kind-of-login">
-                        <button class="just-login">Log in</button>
-                        <a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in</a>
-                    </div>
+                    <span>Remember me</span>
+                  </div>
+                  <div class="what-kind-of-login">
+                    <button class="just-login">Log in</button>
+                    <a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in</a>
+                  </div>
                 </form>
             </div>
     </div>
