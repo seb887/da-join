@@ -152,6 +152,9 @@ function clearInputs() {
   searchContact ? (searchContact.value = '') : null;
   error.innerHTML = '';
   inputDate.valueAsDate = currentDate;
+  errorCategory.style.visibility = 'hidden'
+  errorTitle.style.visibility = 'hidden'
+  errorDate.style.visibility = 'hidden'
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
