@@ -63,14 +63,19 @@ body {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   background-color: white;
-  outline: none;
+  outline: 1px solid transparent;
+}
+
+.add-task-input:has(input:focus){
+  outline: 1px solid var(--accent-primary);
+  outline-offset: -1px;
 }
 
 .add-task-input-title:focus,
 .add-task-input-date:focus,
 .add-task-input-description:focus,
 .add-task-select:focus {
-  border: none;
+  border: 1px solid transparent;
   outline: 1px solid var(--accent-primary);
 }
 
