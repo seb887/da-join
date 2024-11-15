@@ -141,6 +141,10 @@
     width: unset;
     padding-left: 12px;
   }
+  .error-required {
+    margin-top: -12px;
+    width: 396px;
+  }
 }
 
 @media (max-width: 427px) {
@@ -186,6 +190,10 @@
     height: 66px;
     font-size: 14px;
   }
+  .error-required {
+    margin-top: -12px;
+    width: 320px;
+  }
 }
 
 @media (max-width: 359px) {
@@ -208,5 +216,9 @@
   }
   .add-task-header {
     padding-left: 18px;
+  }
+  .error-required {
+    margin-top: -12px;
+    width: 280px;
   }
 }
