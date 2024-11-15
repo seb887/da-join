@@ -821,6 +821,13 @@
   flex-wrap: wrap;
 }
 
+.error-edit{
+  color: red;
+  font-size: 14px;
+  visibility: hidden;
+  margin-top: -24px;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(300%);

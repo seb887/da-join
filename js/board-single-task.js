@@ -29,6 +29,8 @@ const taskMoveToCard = document.getElementById('task-move-to-card');
 const boardColumnSelectionList = document.getElementById(
   'board-column-selection-list'
 );
+const errorTitleEdit = document.getElementById('error-title-edit');
+const errorDateEdit = document.getElementById('error-date-edit');
 
 // VARIABLES
 
@@ -288,19 +290,36 @@ function closeEditTaskModal() {
 async function editTask(taskId) {
   for (let element of tasks) {
     if (taskId == element.id) {
-      element.data.title = editInputTitle.value;
+      if(checkForRequiredInput(editInputTitle, errorTitleEdit)){
+         element.data.title = editInputTitle.value ;}else{
+          return
+         }
       element.data.description = editInputDescription.value;
-      element.data.date = editInputDate.value;
+      if(checkForRequiredInput(editInputDate, errorDateEdit)){ 
+        element.data.date = editInputDate.value;}else{
+        return
+       }
       element.data.prio = currentPrio;
       element.data.subtasks = subtasks;
       element.data.assignedTo = getSelectedContactsEditTask();
-
       await updateTaskInFirebase(element.id, element.data);
-
       closeEditTask();
       renderBoard();
       renderAssignedContacts('assigned-contacts-list');
     }
+  }
+}
+/**
+ * Inspects the input field for entries and returns true or false
+ * 
+ */
+function checkForRequiredInput(inputElement, errorText){
+  if(inputElement.value == ''){
+    errorText.style.visibility = 'visible';
+    return false 
+      }else{
+        errorText.style.visibility = 'hidden';
+        return true
   }
 }
 
