@@ -478,17 +478,17 @@ article {
 }
 
 #inputContactName {
-  background-image: url(/assets/icons/person.png);
+  background-image: url(../assets/icons/person.png);
   background-position: 382px 18px;
   background-repeat: no-repeat;
 }
 #inputMailAddress {
-  background-image: url(/assets/icons/mail.png);
+  background-image: url(../assets/icons/mail.png);
   background-position: 380px 18px;
   background-repeat: no-repeat;
 }
 #inputPhoneNumber {
-  background-image: url(/assets/icons/phone.png);
+  background-image: url(../assets/icons/phone.png);
   background-position: 380px 15px;
   background-repeat: no-repeat;
 }
