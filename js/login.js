@@ -19,13 +19,9 @@ function init() {
 function playLogoAnimation() {
   document.getElementById('logo').classList.remove('loading-logo-animation');
   document.getElementById('logo').classList.add('loading-logo-animation');
-  document
-    .getElementById('logo-white')
-    .classList.remove('loading-logo-animation');
+  document.getElementById('logo-white').classList.remove('loading-logo-animation');
   document.getElementById('logo-white').classList.add('loading-logo-animation');
-  document
-    .getElementById('loading-overlay-id')
-    .classList.add('loading-overlay-animation');
+  document.getElementById('loading-overlay-id').classList.add('loading-overlay-animation');
 }
 
 /**
@@ -46,37 +42,83 @@ function goTosignUp() {
 }
 
 /**
- * Logs the user in. An existing account in Firebase is required; otherwise, login will fail
+ * Main function for login 
  */
 async function logIn() {
   let email = document.querySelector('input[type="email"]').value;
   let password = document.getElementById('current-password').value;
-  let response = await fetch(BASE_URL + '.json');
-  let users = await response.json();
-  if (!validateEmail(email)) {
-    document.getElementById('login-error').style.visibility = 'visible';
-    document.getElementById('login-error').innerHTML = 'Please enter a email';
-    document.querySelector('input[type="email"]').style.border =
-      '1px solid #d22323';
-    document.getElementById('current-password').style.border =
-      '1px solid #d22323';
-    return;
-  } else if (password == '') {
-    document.getElementById('login-error').innerHTML =
-      'Please enter a password';
-    return;
+  if (!validateLoginInputs(email, password)) return;
+
+  let users = await fetchUsers();
+  if (!authenticateUser(email, password, users)) {
+    displayLoginError('Wrong E-Mail or Password');
   }
+}
+
+/**
+ * This function validates the login input
+ */
+function validateLoginInputs(email, password) {
+  if (!validateEmail(email)) {
+    displayLoginError('Please enter a valid email');
+    styleInvalidInputs('input[type="email"]', 'current-password');
+    return false;
+  }
+  if (password === '') {
+    displayLoginError('Please enter a password');
+    styleInvalidInputs('current-password');
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Gets the response from firebase
+ */
+async function fetchUsers() {
+  let response = await fetch(BASE_URL + '.json');
+  return await response.json();
+}
+
+/**
+ * Authenticates the user 
+ */
+function authenticateUser(email, password, users) {
   for (let key in users) {
     if (users[key].email === email && users[key].password === password) {
-      document.getElementById('login-error').innerHTML = '';
-      saveActiveUserToLocalStorage(users[key]);
-      localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
-      window.location.href = 'summary.html';
-      break;
-    } else
-      document.getElementById('login-error').innerHTML =
-        'Wrong E-Mail or Password';
+      loginSuccessful(users[key]);
+      return true;
+    }
   }
+  return false;
+}
+
+/**
+ * 
+ */
+function loginSuccessful(user) {
+  saveActiveUserToLocalStorage(user);
+  localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
+  window.location.href = 'summary.html';
+}
+
+/**
+ * Shows an error message
+ */
+function displayLoginError(message) {
+  let errorElement = document.getElementById('login-error');
+  errorElement.style.visibility = 'visible';
+  errorElement.innerHTML = message;
+}
+
+/**
+ *This function marks incorrect inputs
+ */
+function styleInvalidInputs(...selectors) {
+  selectors.forEach(selector => {
+    let element = document.querySelector(selector) || document.getElementById(selector);
+    element.style.border = '1px solid #d22323';
+  });
 }
 
 /**
@@ -317,15 +359,9 @@ function showSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'text';
   document.getElementById('password-id-confirm').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document
-    .getElementById('icon-password')
-    .classList.remove('eye-password-non-visible');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.add('eye-password');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password-confirm').classList.add('eye-password');
+  document.getElementById('icon-password-confirm').classList.remove('eye-password-non-visible');
 }
 
 /**
@@ -333,9 +369,7 @@ function showSignUpPassword() {
  */
 function hideLoginPassword() {
   document.getElementById('current-password').type = 'password';
-  document
-    .getElementById('icon-password')
-    .classList.add('eye-password-non-visible');
+  document.getElementById('icon-password').classList.add('eye-password-non-visible');
 }
 
 /**
@@ -344,12 +378,8 @@ function hideLoginPassword() {
 function hideSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'password';
   document.getElementById('password-id-confirm').type = 'password';
-  document
-    .getElementById('icon-password')
-    .classList.add('eye-password-non-visible');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.add('eye-password-non-visible');
+  document.getElementById('icon-password').classList.add('eye-password-non-visible');
+  document.getElementById('icon-password-confirm').classList.add('eye-password-non-visible');
 }
 
 /**

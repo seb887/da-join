@@ -4,9 +4,7 @@
  */
 async function createContact() {
     const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    const initials = generateInitials(
-      document.getElementById('inputContactName').value
-    );
+    const initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(CONTACT_URL, {
       method: 'POST',
       header: {
@@ -24,47 +22,111 @@ async function createContact() {
     showInfoToast('Contact succesfully created');
   }
   /**
-   * Checking for missing inputs and creating an error message under the input field where the input is missing
-   * 
-   * @returns - null
-   */
-  function checkContactInputs(status, contact, index) {
-    setVariables();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let isValid = true;
-  
-    if (inputContactName.value == '') {
-      nameError.style.visibility = 'visible';
-      inputContactName.style.border = '1px solid #d22323';
-      isValid = false;
-    } else {
-      nameError.style.visibility = 'hidden';
-      inputContactName.style.border = '1px solid #d1d1d1';
-    }
-  
-    if (!validateEmail(inputEmail.value)) {
-      emailError.style.visibility = 'visible';
-      inputEmail.style.border = '1px solid #d22323';
-      isValid = false;
-    } else {
-      emailError.style.visibility = 'hidden';
-      inputEmail.style.border = '1px solid #d1d1d1';
-    }
-  
-    if (inputPhoneNumber.value == '') {
-      phoneError.style.visibility = 'visible';
-      inputPhoneNumber.style.border = '1px solid #d22323';
-      isValid = false;
-    } else {
-      phoneError.style.visibility = 'hidden';
-      inputPhoneNumber.style.border = '1px solid #d1d1d1';
-    }
-    if (!isValid) {
-      return;
-    }
-    status == 'add' ? createContact() : null;
-    status == 'edit' ? saveChangesOnContact(contact, index) : null;
+ * Validates the contact input fields and calls the appropriate action based on the status.
+ * 
+ * @param {string} status - The action to perform ("add" or "edit").
+ * @param {object} contact - The contact object to edit (only used in "edit" mode).
+ * @param {number} index - The index of the contact being edited (only used in "edit" mode).
+ * @returns {void}
+ */
+function checkContactInputs(status, contact, index) {
+  setVariables();
+  let isValid = true;
+
+  isValid &= validateName(inputContactName, nameError);
+  isValid &= validateEmailField(inputEmail, emailError);
+  isValid &= validatePhoneNumber(inputPhoneNumber, phoneError);
+
+  if (!isValid) return;
+
+  if (status === 'add') createContact();
+  if (status === 'edit') saveChangesOnContact(contact, index);
+}
+
+/**
+ * Validates the name input field.
+ * 
+ * @param {HTMLElement} inputElement - The input field for the name.
+ * @param {HTMLElement} errorElement - The element displaying error messages for the name.
+ * @returns {boolean} True if the name input is valid, false otherwise.
+ */
+function validateName(inputElement, errorElement) {
+  if (inputElement.value.trim() === '') {
+    showError(inputElement, errorElement, 'Name is required');
+    return false;
   }
+  hideError(inputElement, errorElement);
+  return true;
+}
+
+/**
+ * Validates the email input field.
+ * 
+ * @param {HTMLElement} inputElement - The input field for the email.
+ * @param {HTMLElement} errorElement - The element displaying error messages for the email.
+ * @returns {boolean} True if the email input is valid, false otherwise.
+ */
+function validateEmailField(inputElement, errorElement) {
+  if (!validateEmail(inputElement.value)) {
+    showError(inputElement, errorElement, 'Invalid email address');
+    return false;
+  }
+  hideError(inputElement, errorElement);
+  return true;
+}
+
+/**
+ * Validates the phone number input field.
+ * 
+ * @param {HTMLElement} inputElement - The input field for the phone number.
+ * @param {HTMLElement} errorElement - The element displaying error messages for the phone number.
+ * @returns {boolean} True if the phone number input is valid, false otherwise.
+ */
+function validatePhoneNumber(inputElement, errorElement) {
+  if (inputElement.value.trim() === '') {
+    showError(inputElement, errorElement, 'Phone number is required');
+    return false;
+  }
+  hideError(inputElement, errorElement);
+  return true;
+}
+
+/**
+ * Displays an error message for an invalid input field.
+ * 
+ * @param {HTMLElement} inputElement - The input field to mark as invalid.
+ * @param {HTMLElement} errorElement - The element to display the error message.
+ * @param {string} errorMessage - The error message to display.
+ */
+function showError(inputElement, errorElement, errorMessage) {
+  errorElement.style.visibility = 'visible';
+  errorElement.innerText = errorMessage;
+  inputElement.style.border = '1px solid #d22323';
+}
+
+/**
+ * Hides the error message for a valid input field.
+ * 
+ * @param {HTMLElement} inputElement - The input field to mark as valid.
+ * @param {HTMLElement} errorElement - The element to hide the error message.
+ */
+function hideError(inputElement, errorElement) {
+  errorElement.style.visibility = 'hidden';
+  errorElement.innerText = '';
+  inputElement.style.border = '1px solid #d1d1d1';
+}
+
+/**
+ * Validates if a string is a valid email format.
+ * 
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email is valid, false otherwise.
+ */
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
   /**
    * Checks if the input is a correct email format and returns true or false
    * 
