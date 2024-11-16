@@ -80,15 +80,12 @@ function submitInputSubtask() {
     title: isEditOn ? editInputSubtask.value : inputSubtask.value,
     checked: false,
   };
-
   subtasks.push(subtaskObj);
-
   if (!isEditOn) {
     inputSubtask.value = '';
   } else {
     editInputSubtask.value = '';
   }
-
   controlSubtaskIcons();
   renderSubtasksList();
 }
@@ -102,15 +99,12 @@ function submitInputSubtask() {
  */
 function renderSubtasksList(taskId) {
   let list = subtasksList;
-
   if (isEditOn) {
     list = editSubtasksList;
   } else {
     list = subtasksList;
   }
-
   list.innerHTML = '';
-
   if (subtasks == undefined) {
     return;
   } else {
@@ -134,18 +128,14 @@ async function editSingleSubtask(taskId, index) {
     `input-edit-subtask-${index}`
   );
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
-
   controlSubtaskIsEditStatus();
-
   if (taskId == 'undefined') {
     styleEditSingleSubtask(index, inputEditSubtask);
-
     inputEditSubtask.value = subtasks[index].title;
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
         styleEditSingleSubtask(index, inputEditSubtask);
-
         inputEditSubtask.value = element.data.subtasks[index].title;
       }
     }
@@ -176,19 +166,16 @@ function styleEditSingleSubtask(index, inputEditSubtask) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
-
   const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
   const submitEditSubtaskBtn = document.getElementById(
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
-
   singleSubtaskTitle.style.display = 'none';
   inputEditSubtask.style.display = 'flex';
   editSubtaskBtn.style.display = 'none';
   submitEditSubtaskBtn.style.display = 'flex';
   subtask.style.borderBottom = '1px solid #29abe2';
-
   if (isSubtaskEditOn) {
     let subtaskElement = document.getElementById(`subtask-${index}`);
     subtaskElement.classList.remove('subtasks-hover');
@@ -206,7 +193,6 @@ function styleEditSingleSubtask(index, inputEditSubtask) {
  */
 async function submitEditedSingleSubtask(taskId, index) {
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
-
   if (taskId == 'undefined') {
     editSubtaskTitleNewTask(index);
   } else {
@@ -264,13 +250,11 @@ function styleSubmitEditedSingleSubtask(index, inputEditSubtask) {
   const singleSubtaskTitle = document.getElementById(
     `single-subtask-title-${index}`
   );
-
   const editSubtaskBtn = document.getElementById(`edit-subtask-${index}`);
   const submitEditSubtaskBtn = document.getElementById(
     `submit-edit-subtask-${index}`
   );
   const subtask = document.getElementById(`subtask-${index}`);
-
   singleSubtaskTitle.style.display = 'flex';
   inputEditSubtask.style.display = 'none';
   editSubtaskBtn.style.display = 'flex';

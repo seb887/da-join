@@ -1,3 +1,7 @@
+
+let allDivs = document.getElementById('input-assigned-to');
+const contactList = document.getElementById('input-assigned-to');
+
 /**
  * Fetches contact data from a specified URL
  */
@@ -81,7 +85,6 @@ function inspectCheckboxes(path) {
  */
 function dropDownContacts(containerId, addTask) {
   let modal = document.getElementById(containerId);
-  // event.stopPropagation();
   if (addTask) {
     inputAssignedTo = document.getElementById('input-assigned-to-addTask');
   }
@@ -115,20 +118,16 @@ function filterContacts(event) {
  * If the search field is empty, the contact list is hidden and checkboxes are reset to visible
  */
 function showOrHideContactsOnInput() {
-  let allDivs = document.getElementById('input-assigned-to');
-  const contactList = document.getElementById('input-assigned-to');
   if (document.getElementById('searchContact').value.length > 0) {
     contactList.style.display = 'flex';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-up.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-up.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = 'none';
     });
-    return true;
+return true;
   } else {
     document.getElementById('input-assigned-to').style.display = 'none';
-    document.getElementById('arrowAssignTo').src =
-      '../assets/icons/arrow-down.png';
+    document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = '';
     });
@@ -170,14 +169,9 @@ function renderAssignedContacts(path) {
     if(index <4){
     container.innerHTML += assignedInitialContent(match, index);
     }else if(index == 4){      
-      container.innerHTML += `<div id="addContactList${index}" class ="assigned-contacts-initial-container">
-        <div>
-          <div style="background-color: #2A3647" id= "${match['id']}-container" class= "initial-div">+${matches.length - 4}</div>
-        </div>
-    </div>`
+      container.innerHTML += returnAssignedContactContent(match, index);
     }
   });
-
 }
 
 /**
@@ -195,5 +189,12 @@ function renderContactArray() {
       contact['id'] + '-container'
     ).style.backgroundColor = contact['color'];
   });
+}
 
+function returnAssignedContactContent(match, index){
+  return `<div id="addContactList${index}" class ="assigned-contacts-initial-container">
+        <div>
+          <div style="background-color: #2A3647" id= "${match['id']}-container" class= "initial-div">+${matches.length - 4}</div>
+        </div>
+    </div>`
 }
