@@ -58,22 +58,44 @@ function renderAllContactsInAddTask() {
     let allDivs = document.getElementById(path);
     const contactList = document.getElementById(path);
     if (input1.value.length > 0 || input2.value.length > 0) {
-      contactList.style.display = 'flex';
-      arrow.src = '../assets/icons/arrow-up.png';
-      allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-        cb.parentElement.parentElement.style.display = 'none';
-      });
+        displayContactsInList(contactList, arrow, allDivs);
       return true;
     } else {
-      document.getElementById(path).style.display = 'none';
-      arrow.src = '../assets/icons/arrow-down.png';
-      allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
-        cb.parentElement.parentElement.style.display = '';
-      });
+        hideContactsinList(path, arrow, allDivs);
       return false;
     }
   }
   
+/**
+ * Displays the each checked contact in the div container
+ * 
+ * @param {HTMLElement} contactList - DOM element for the contact list
+ * @param {HTMLElement} arrow - DOM img element
+ * @param {Array} allDivs - Array of all DIV container
+ */
+  function displayContactsInList(contactList, arrow, allDivs){
+    contactList.style.display = 'flex';
+    arrow.src = '../assets/icons/arrow-up.png';
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      cb.parentElement.parentElement.style.display = 'none';
+    });
+  }
+
+  /**
+   * Hides each unchecked contact in the div container
+   * 
+   * @param {*} path - Path for the img file
+   * @param {HTMLElement} arrow - DOM img element
+   * @param {Array} allDivs - Array of all DIV container
+   */
+  function hideContactsinList(path, arrow, allDivs){
+    document.getElementById(path).style.display = 'none';
+      arrow.src = '../assets/icons/arrow-down.png';
+      allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+        cb.parentElement.parentElement.style.display = '';
+      });
+  }
+
   /**
    * compares input with contactname and displays matching contact
    */
@@ -83,16 +105,12 @@ function renderAllContactsInAddTask() {
         contact.name.toLowerCase().slice(0, 2) ==
         input1.value.toLowerCase().slice(0, 2)
       ) {
-        document.getElementById(
-          `${contact.id}cb`
-        ).parentElement.parentElement.style.display = '';
+        document.getElementById(`${contact.id}cb`).parentElement.parentElement.style.display = '';
       } else if (
         contact.name.toLowerCase().slice(0, 2) ==
         input2.value.toLowerCase().slice(0, 2)
       ) {
-        document.getElementById(
-          `${contact.id}cb`
-        ).parentElement.parentElement.style.display = '';
+        document.getElementById(`${contact.id}cb`).parentElement.parentElement.style.display = '';
       }
     });
   }
