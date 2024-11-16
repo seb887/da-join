@@ -191,6 +191,12 @@ function renderContactArray() {
   });
 }
 
+/**
+ * Generates an HTML string for displaying an assigned contact container
+ *
+ * @param {Object} match - The match object representing the contact details
+ * @param {number} index - The index of the contact in the list
+ */
 function returnAssignedContactContent(match, index){
   return `<div id="addContactList${index}" class ="assigned-contacts-initial-container">
         <div>
