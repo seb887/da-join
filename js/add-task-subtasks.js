@@ -204,40 +204,54 @@ function styleEditSingleSubtask(index, inputEditSubtask) {
  *                          If 'undefined', the function uses the local subtasks array directly
  * @param {number} index - The index of the subtask in the subtasks array or task's subtasks
  */
-
 async function submitEditedSingleSubtask(taskId, index) {
-  const inputEditSubtask = document.getElementById(
-    `input-edit-subtask-${index}`
-  );
   const subtaskButtons = document.getElementById(`subtask-buttons-${index}`);
 
   if (taskId == 'undefined') {
-    if (inputEditSubtask.value == 0) {
-      inputEditSubtask.value = subtasks[index].title;
-    } else {
-      subtasks[index].title = inputEditSubtask.value;
-    }
-
-    styleSubmitEditedSingleSubtask(index, inputEditSubtask);
-    renderSubtasksList();
+    editSubtaskTitleNewTask(index);
   } else {
     for (let element of tasks) {
       if (element.id == taskId) {
-        styleSubmitEditedSingleSubtask(index, inputEditSubtask);
-
-        if (inputEditSubtask.value == 0) {
-          inputEditSubtask.value = element.data.subtasks[index].title;
-        } else {
-          element.data.subtasks[index].title = inputEditSubtask.value;
-        }
-
-        await updateTaskInFirebase(element.id, element.data);
-        renderSubtasksList();
+        editSubtaskTitle(index, element);
       }
     }
   }
   subtaskButtons.style.visibility = 'hidden';
   isSubtaskEditOn = false;
+}
+
+// TODO: JS docs
+function editSubtaskTitleNewTask(index) {
+  const inputEditSubtask = document.getElementById(
+    `input-edit-subtask-${index}`
+  );
+
+  if (inputEditSubtask.value == 0) {
+    inputEditSubtask.value = subtasks[index].title;
+  } else {
+    subtasks[index].title = inputEditSubtask.value;
+  }
+
+  styleSubmitEditedSingleSubtask(index, inputEditSubtask);
+  renderSubtasksList();
+}
+
+// TODO: JS docs
+async function editSubtaskTitle(index, element) {
+  const inputEditSubtask = document.getElementById(
+    `input-edit-subtask-${index}`
+  );
+
+  styleSubmitEditedSingleSubtask(index, inputEditSubtask);
+
+  if (inputEditSubtask.value == 0) {
+    inputEditSubtask.value = element.data.subtasks[index].title;
+  } else {
+    element.data.subtasks[index].title = inputEditSubtask.value;
+  }
+
+  await updateTaskInFirebase(element.id, element.data);
+  renderSubtasksList();
 }
 
 /**

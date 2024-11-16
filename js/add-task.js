@@ -95,47 +95,53 @@ function createNewTask() {
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  */
 function checkInputs(taskObj) {
-    if(!checkForRequiredInputAddTask(taskObj)){
-      return;
-    }
-    document.body.style.pointerEvents = 'none';
-    error.innerHTML = '';
-    saveTaskToFirebase(taskObj);
-    subtasksList.innerHTML = '';
-    currentKanbanBoard = 'todo';
-    clearInputs();
-    showInfoToast('Task added to board');
-    setTimeout(() => (window.location.href = 'board.html'), 1200);
-
+  if (!checkForRequiredInputAddTask(taskObj)) {
+    return;
+  }
+  document.body.style.pointerEvents = 'none';
+  error.innerHTML = '';
+  saveTaskToFirebase(taskObj);
+  subtasksList.innerHTML = '';
+  currentKanbanBoard = 'todo';
+  clearInputs();
+  showInfoToast('Task added to board');
+  setTimeout(() => (window.location.href = 'board.html'), 1200);
 }
-
 
 /**
  * If a required input field has no entry it returns false
- * 
+ *
  * @param {object} taskObj - This is the object parameter for the saveTaskToFirebase call.
  * @returns boolean
  */
-function checkForRequiredInputAddTask(taskObj){
+// FIXME: Wie gehen wir mit dieser Function um?
+function checkForRequiredInputAddTask(taskObj) {
   let isValid = true;
-  if(taskObj.title == ''){
+  if (taskObj.title == '') {
     errorTitle.style.visibility = 'visible';
-    isValid = false ;
-  }else{
+    isValid = false;
+  } else {
     errorTitle.style.visibility = 'hidden';
   }
-  if(taskObj.date == ''){
-    errorDate.style.visibility = 'visible'
+
+  if (taskObj.date == '') {
+    errorDate.style.visibility = 'visible';
     isValid = false;
-  }else{errorDate.style.visibility = 'hidden' }
-  if(taskObj.date == ''){
-    errorDate.style.visibility = 'visible'
+  } else {
+    errorDate.style.visibility = 'hidden';
+  }
+  if (taskObj.date == '') {
+    errorDate.style.visibility = 'visible';
     isValid = false;
-  }else{errorDate.style.visibility = 'hidden' }
-  if(taskObj.category == 'Select task category'){
-    errorCategory.style.visibility = 'visible'
+  } else {
+    errorDate.style.visibility = 'hidden';
+  }
+  if (taskObj.category == 'Select task category') {
+    errorCategory.style.visibility = 'visible';
     isValid = false;
-  }else{errorCategory.style.visibility = 'hidden' }
+  } else {
+    errorCategory.style.visibility = 'hidden';
+  }
   return isValid;
 }
 
@@ -152,9 +158,9 @@ function clearInputs() {
   searchContact ? (searchContact.value = '') : null;
   error.innerHTML = '';
   inputDate.valueAsDate = currentDate;
-  errorCategory.style.visibility = 'hidden'
-  errorTitle.style.visibility = 'hidden'
-  errorDate.style.visibility = 'hidden'
+  errorCategory.style.visibility = 'hidden';
+  errorTitle.style.visibility = 'hidden';
+  errorDate.style.visibility = 'hidden';
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
