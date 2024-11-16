@@ -19,9 +19,13 @@ function init() {
 function playLogoAnimation() {
   document.getElementById('logo').classList.remove('loading-logo-animation');
   document.getElementById('logo').classList.add('loading-logo-animation');
-  document.getElementById('logo-white').classList.remove('loading-logo-animation');
+  document
+    .getElementById('logo-white')
+    .classList.remove('loading-logo-animation');
   document.getElementById('logo-white').classList.add('loading-logo-animation');
-  document.getElementById('loading-overlay-id').classList.add('loading-overlay-animation');
+  document
+    .getElementById('loading-overlay-id')
+    .classList.add('loading-overlay-animation');
 }
 
 /**
@@ -45,99 +49,34 @@ function goTosignUp() {
  * Logs the user in. An existing account in Firebase is required; otherwise, login will fail
  */
 async function logIn() {
-  let email = getInputValue('email');
-  let password = getInputValue('current-password');
-  let users = await fetchUsers();
-  if (!validateLoginInputs(email, password)) return;
-  for (let key in users) {
-    if (isUserValid(users[key], email, password)) {
-      onSuccessfulLogin(users[key]);
-      return;
-    }
-  }
-  showError('Wrong E-Mail or Password');
-}
-
-/**
- * Retrieves the value of an input field based on its type or ID
- */
-function getInputValue(type) {
-  return document.querySelector(type === 'email' ? 'input[type="email"]' : `#${type}`).value;
-}
-
-/**
- * Fetches the users data from the database and returns it as a JSON object
- */
-async function fetchUsers() {
+  let email = document.querySelector('input[type="email"]').value;
+  let password = document.getElementById('current-password').value;
   let response = await fetch(BASE_URL + '.json');
-  return response.json();
-}
-
-/**
- * Validates the email and password inputs for the login form
- * Checks if the email is valid and if the password is not empty
- * 
- * @param {string} email - The email entered by the user
- * @param {string} password - The password entered by the user
- */
-function validateLoginInputs(email, password) {
+  let users = await response.json();
   if (!validateEmail(email)) {
-    showError('Please enter a valid email');
-    styleInputError('email');
-    styleInputError('current-password');
-    return false;
+    document.getElementById('login-error').style.visibility = 'visible';
+    document.getElementById('login-error').innerHTML = 'Please enter a email';
+    document.querySelector('input[type="email"]').style.border =
+      '1px solid #d22323';
+    document.getElementById('current-password').style.border =
+      '1px solid #d22323';
+    return;
+  } else if (password == '') {
+    document.getElementById('login-error').innerHTML =
+      'Please enter a password';
+    return;
   }
-  if (password === '') {
-    showError('Please enter a password');
-    return false;
+  for (let key in users) {
+    if (users[key].email === email && users[key].password === password) {
+      document.getElementById('login-error').innerHTML = '';
+      saveActiveUserToLocalStorage(users[key]);
+      localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
+      window.location.href = 'summary.html';
+      break;
+    } else
+      document.getElementById('login-error').innerHTML =
+        'Wrong E-Mail or Password';
   }
-  return true;
-}
-
-/**
- * Validates if the user's email and password match the provided credentials
- * 
- * @param {Object} user - The user object containing user data
- * @param {string} email - The email to validate against the user's email
- * @param {string} password - The password to validate against the user's password
- */
-function isUserValid(user, email, password) {
-  return user.email === email && user.password === password;
-}
-
-/**
- * Handles the actions to be performed after a successful login
- * Saves the active user to local storage, sets a 'firstLogin' flag, 
- * and redirects the user to the 'summary.html' page
- * 
- * @param {Object} user - The user object that contains the logged-in user's data
- */
-function onSuccessfulLogin(user) {
-  saveActiveUserToLocalStorage(user);
-  localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
-  window.location.href = 'summary.html';
-}
-
-/**
- * Displays an error message on the login form
- * Makes the error message visible and sets the inner HTML to the provided message
- * 
- * @param {string} message - The error message to display
- */
-function showError(message) {
-  const errorElement = document.getElementById('login-error');
-  errorElement.style.visibility = 'visible';
-  errorElement.innerHTML = message;
-}
-
-/**
- * Applies a red border to the input field specified by the type
- * The input field is identified either by its type ('email') or by its ID
- * 
- * @param {string} type - The type of the input field ('email' for email input or ID for other inputs)
- */
-function styleInputError(type) {
-  document.querySelector(type === 'email' ? 'input[type="email"]' : `#${type}`).style.border = '1px solid #d22323';
 }
 
 /**
@@ -148,10 +87,13 @@ function signUp() {
   let passwordConfirm = document.getElementById('password-id-confirm');
   let error = document.getElementById('sign-up-error');
   let isValid = true;
-  checkNameValue();
-  checkEmailValue();
-  if(!checkPasswordValueEmptyInput(password, passwordConfirm, error)){return};
-  comparePasswords(password, passwordConfirm, error,isValid);
+  isValid = checkNameValue();
+  isValid = checkEmailValue();
+  if(checkPasswordValueEmptyInput(password, passwordConfirm, error)){ 
+   }else {
+    return    
+   }
+  comparePasswords(password, passwordConfirm, error, isValid);
 }
 
 /**
@@ -170,7 +112,8 @@ function checkNameValue(){
   } else {
     signupErrorName.style.visibility = 'hidden';
     name.style.border = '1px solid #d1d1d1';
-  }return isValid;
+  }
+  return isValid;
 };
 
 /**
@@ -189,6 +132,7 @@ function checkEmailValue(){
     singupErrorMail.style.visibility = 'hidden';
     email.style.border = '1px solid #d1d1d1';
   }
+  return isValid;
 };
 
 /**
@@ -259,9 +203,11 @@ async function checkUser() {
   for (let key in users) {
     if (users[key].name === name) {
       nameExists = true;
-      document.getElementById('sign-up-error').innerHTML = 'Username already in use';
+      document.getElementById('sign-up-error').innerHTML =
+        'Username already in use';
       break;
-    }}
+    }
+  }
   if (!nameExists) {
     document.getElementById('sign-up-error').innerHTML = '';
     checkEmail();
@@ -279,9 +225,11 @@ async function checkEmail() {
   for (let key in users) {
     if (users[key].email === email) {
       emailExists = true;
-      document.getElementById('sign-up-error').innerHTML = 'E-Mail already in use';
+      document.getElementById('sign-up-error').innerHTML =
+        'E-Mail already in use';
       break;
-    }}
+    }
+  }
   if (!emailExists) {
     document.getElementById('sign-up-error').innerHTML = '';
     await postUser();
@@ -313,8 +261,12 @@ async function postUser() {
 function playSignedUpAnimation() {
   document.getElementById('signed-up-overlay').classList.remove('d-none');
   document.getElementById('signed-up-overlay').style.zIndex = 5;
-  document.getElementById('signed-up-overlay').classList.add('signed-up-animation-overlay');
-  document.getElementById('signed-up-container').classList.add('signed-up-animation-container');
+  document
+    .getElementById('signed-up-overlay')
+    .classList.add('signed-up-animation-overlay');
+  document
+    .getElementById('signed-up-container')
+    .classList.add('signed-up-animation-container');
   setTimeout(function () {
     window.location.href = 'login.html';
   }, 1500);
@@ -353,7 +305,9 @@ function toggleSignUpPasswordVisibility() {
 function showLoginPassword() {
   document.getElementById('current-password').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
+  document
+    .getElementById('icon-password')
+    .classList.remove('eye-password-non-visible');
 }
 
 /**
@@ -363,9 +317,15 @@ function showSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'text';
   document.getElementById('password-id-confirm').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
-  document.getElementById('icon-password-confirm').classList.add('eye-password');
-  document.getElementById('icon-password-confirm').classList.remove('eye-password-non-visible');
+  document
+    .getElementById('icon-password')
+    .classList.remove('eye-password-non-visible');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.add('eye-password');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.remove('eye-password-non-visible');
 }
 
 /**
@@ -384,8 +344,12 @@ function hideLoginPassword() {
 function hideSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'password';
   document.getElementById('password-id-confirm').type = 'password';
-  document.getElementById('icon-password').classList.add('eye-password-non-visible');
-  document.getElementById('icon-password-confirm').classList.add('eye-password-non-visible');
+  document
+    .getElementById('icon-password')
+    .classList.add('eye-password-non-visible');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.add('eye-password-non-visible');
 }
 
 /**
