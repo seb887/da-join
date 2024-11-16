@@ -19,13 +19,9 @@ function init() {
 function playLogoAnimation() {
   document.getElementById('logo').classList.remove('loading-logo-animation');
   document.getElementById('logo').classList.add('loading-logo-animation');
-  document
-    .getElementById('logo-white')
-    .classList.remove('loading-logo-animation');
+  document.getElementById('logo-white').classList.remove('loading-logo-animation');
   document.getElementById('logo-white').classList.add('loading-logo-animation');
-  document
-    .getElementById('loading-overlay-id')
-    .classList.add('loading-overlay-animation');
+  document.getElementById('loading-overlay-id').classList.add('loading-overlay-animation');
 }
 
 /**
@@ -49,34 +45,99 @@ function goTosignUp() {
  * Logs the user in. An existing account in Firebase is required; otherwise, login will fail
  */
 async function logIn() {
-  let email = document.querySelector('input[type="email"]').value;
-  let password = document.getElementById('current-password').value;
-  let response = await fetch(BASE_URL + '.json');
-  let users = await response.json();
-  if (!validateEmail(email)) {
-    document.getElementById('login-error').style.visibility = 'visible';
-    document.getElementById('login-error').innerHTML = 'Please enter a email';
-    document.querySelector('input[type="email"]').style.border =
-      '1px solid #d22323';
-    document.getElementById('current-password').style.border =
-      '1px solid #d22323';
-    return;
-  } else if (password == '') {
-    document.getElementById('login-error').innerHTML =
-      'Please enter a password';
-    return;
-  }
+  let email = getInputValue('email');
+  let password = getInputValue('current-password');
+  let users = await fetchUsers();
+  if (!validateLoginInputs(email, password)) return;
   for (let key in users) {
-    if (users[key].email === email && users[key].password === password) {
-      document.getElementById('login-error').innerHTML = '';
-      saveActiveUserToLocalStorage(users[key]);
-      localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
-      window.location.href = 'summary.html';
-      break;
-    } else
-      document.getElementById('login-error').innerHTML =
-        'Wrong E-Mail or Password';
+    if (isUserValid(users[key], email, password)) {
+      onSuccessfulLogin(users[key]);
+      return;
+    }
   }
+  showError('Wrong E-Mail or Password');
+}
+
+/**
+ * Retrieves the value of an input field based on its type or ID
+ */
+function getInputValue(type) {
+  return document.querySelector(type === 'email' ? 'input[type="email"]' : `#${type}`).value;
+}
+
+/**
+ * Fetches the users data from the database and returns it as a JSON object
+ */
+async function fetchUsers() {
+  let response = await fetch(BASE_URL + '.json');
+  return response.json();
+}
+
+/**
+ * Validates the email and password inputs for the login form
+ * Checks if the email is valid and if the password is not empty
+ * 
+ * @param {string} email - The email entered by the user
+ * @param {string} password - The password entered by the user
+ */
+function validateLoginInputs(email, password) {
+  if (!validateEmail(email)) {
+    showError('Please enter a valid email');
+    styleInputError('email');
+    styleInputError('current-password');
+    return false;
+  }
+  if (password === '') {
+    showError('Please enter a password');
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Validates if the user's email and password match the provided credentials
+ * 
+ * @param {Object} user - The user object containing user data
+ * @param {string} email - The email to validate against the user's email
+ * @param {string} password - The password to validate against the user's password
+ */
+function isUserValid(user, email, password) {
+  return user.email === email && user.password === password;
+}
+
+/**
+ * Handles the actions to be performed after a successful login
+ * Saves the active user to local storage, sets a 'firstLogin' flag, 
+ * and redirects the user to the 'summary.html' page
+ * 
+ * @param {Object} user - The user object that contains the logged-in user's data
+ */
+function onSuccessfulLogin(user) {
+  saveActiveUserToLocalStorage(user);
+  localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
+  window.location.href = 'summary.html';
+}
+
+/**
+ * Displays an error message on the login form
+ * Makes the error message visible and sets the inner HTML to the provided message
+ * 
+ * @param {string} message - The error message to display
+ */
+function showError(message) {
+  const errorElement = document.getElementById('login-error');
+  errorElement.style.visibility = 'visible';
+  errorElement.innerHTML = message;
+}
+
+/**
+ * Applies a red border to the input field specified by the type
+ * The input field is identified either by its type ('email') or by its ID
+ * 
+ * @param {string} type - The type of the input field ('email' for email input or ID for other inputs)
+ */
+function styleInputError(type) {
+  document.querySelector(type === 'email' ? 'input[type="email"]' : `#${type}`).style.border = '1px solid #d22323';
 }
 
 /**
@@ -197,11 +258,9 @@ async function checkUser() {
   for (let key in users) {
     if (users[key].name === name) {
       nameExists = true;
-      document.getElementById('sign-up-error').innerHTML =
-        'Username already in use';
+      document.getElementById('sign-up-error').innerHTML = 'Username already in use';
       break;
-    }
-  }
+    }}
   if (!nameExists) {
     document.getElementById('sign-up-error').innerHTML = '';
     checkEmail();
@@ -219,11 +278,9 @@ async function checkEmail() {
   for (let key in users) {
     if (users[key].email === email) {
       emailExists = true;
-      document.getElementById('sign-up-error').innerHTML =
-        'E-Mail already in use';
+      document.getElementById('sign-up-error').innerHTML = 'E-Mail already in use';
       break;
-    }
-  }
+    }}
   if (!emailExists) {
     document.getElementById('sign-up-error').innerHTML = '';
     await postUser();
@@ -255,12 +312,8 @@ async function postUser() {
 function playSignedUpAnimation() {
   document.getElementById('signed-up-overlay').classList.remove('d-none');
   document.getElementById('signed-up-overlay').style.zIndex = 5;
-  document
-    .getElementById('signed-up-overlay')
-    .classList.add('signed-up-animation-overlay');
-  document
-    .getElementById('signed-up-container')
-    .classList.add('signed-up-animation-container');
+  document.getElementById('signed-up-overlay').classList.add('signed-up-animation-overlay');
+  document.getElementById('signed-up-container').classList.add('signed-up-animation-container');
   setTimeout(function () {
     window.location.href = 'login.html';
   }, 1500);
@@ -299,9 +352,7 @@ function toggleSignUpPasswordVisibility() {
 function showLoginPassword() {
   document.getElementById('current-password').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document
-    .getElementById('icon-password')
-    .classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
 }
 
 /**
@@ -311,15 +362,9 @@ function showSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'text';
   document.getElementById('password-id-confirm').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document
-    .getElementById('icon-password')
-    .classList.remove('eye-password-non-visible');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.add('eye-password');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password-confirm').classList.add('eye-password');
+  document.getElementById('icon-password-confirm').classList.remove('eye-password-non-visible');
 }
 
 /**
@@ -338,12 +383,8 @@ function hideLoginPassword() {
 function hideSignUpPassword() {
   document.getElementById('password-id-sign-up').type = 'password';
   document.getElementById('password-id-confirm').type = 'password';
-  document
-    .getElementById('icon-password')
-    .classList.add('eye-password-non-visible');
-  document
-    .getElementById('icon-password-confirm')
-    .classList.add('eye-password-non-visible');
+  document.getElementById('icon-password').classList.add('eye-password-non-visible');
+  document.getElementById('icon-password-confirm').classList.add('eye-password-non-visible');
 }
 
 /**
@@ -379,82 +420,4 @@ function toggleCheckBoxAccept() {
   } else {
     checkBox.src = '../assets/icons/checkbox-empty.svg';
   }
-}
-
-/**
- * Renders the HTML markup for the login form, including inputs for email and password,
- * a "Remember me" checkbox, and options for logging in as a guest.
- * The function does not take any parameters and returns a string containing the HTML structure.
- * @returns {string} The HTML markup string for the login form.
- */
-function renderLogIn() {
-  return `
-    <div class="login-mask">
-            <b class="login-signup-title">Log in</b>
-            <div class="login-seperator"></div>
-            <div class="login-form">
-                <form novalidate onsubmit="logIn(); return false;">
-                  <input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" >
-                  <div class="password-input-wrapper">
-                      <input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
-                      <div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon"></div>
-                  </div>
-                  <div style= "visibility:hidden" id='login-error'>Please enter a email</div>
-                  <div class="check-box">
-                    <div onclick="toggleCheckBoxRemember()" class="remember-true">
-                      <img id="check-box" src="../assets/icons/checkbox-empty.svg">
-                    </div>
-                    <span>Remember me</span>
-                  </div>
-                  <div class="what-kind-of-login">
-                    <button class="just-login">Log in</button>
-                    <a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in</a>
-                  </div>
-                </form>
-            </div>
-    </div>
-    `;
-}
-
-/**
- * Renders the HTML markup for the sign-up form, including inputs for name, email, password,
- * a password confirmation field, and a checkbox for accepting the Privacy Policy.
- * This function returns a string containing the HTML structure of the sign-up form.
- * @returns {string} The HTML markup string for the sign-up form.
- */
-function renderSignUp() {
-  return `
-       <div class="sign-up-mask">
-       <div class="sign-up-title">
-            <img onclick="goToLogin()" src="../assets/icons/back.png">
-            <b class="login-signup-title">Sign Up</b>
-       </div>
-        <div class="login-seperator"></div>
-        <div class="login-form">
-             <form novalidate id="form-inputs" onsubmit="signUp(); return false;">
-                <input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" >
-                <div class="error" style= "visibility: hidden" id='sign-up-error-name'>Please enter a name.</div>
-                <input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="text" placeholder="Email" >
-                <div class="error" style= "visibility: hidden" id='sign-up-error-email'>Please enter an email.</div>
-                    <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" >
-                        <div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
-                    </div>
-                    <div class="password-input-wrapper">
-                        <input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" >
-                        <div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon"></div>
-                    </div>
-                    <div class="error" style="visibility: hidden" id='sign-up-error'>Your password dont match. Please try again.</div>
-                <div class="check-box" style="padding-left: 0px; justify-content: center;">
-                    <div onclick="toggleCheckBoxAccept()" class="remember-true">
-                    <img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
-                    </div>
-                    <span class="sign-up-check-box">I accept the <a class="sign-up-check-box-privacy-policy" href="privacy-policy-startpage.html" target="_blanc">Privacy Policy</a></span>
-                </div>
-                <div class="what-kind-of-login">
-                    <button class="just-login">Sign Up</button>
-                </div>
-            </form>
-        </div>
-    `;
 }
