@@ -272,6 +272,9 @@ async function createCompareArray() {
   return taskArray;
 }
 
+/**
+ * Filters out assigned contacts that are not present in the rendered contacts list
+ */
 async function deleteNonExistingContactsInTask() {
   const getAllAssignedContacts = await getAllAssignedTo();
 

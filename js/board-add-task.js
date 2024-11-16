@@ -12,6 +12,9 @@ const boardButtonLowImg = document.getElementById('board-button-low-img');
 const boardButtonMediumImg = document.getElementById('board-button-medium-img');
 const boardButtonUrgentImg = document.getElementById('board-button-urgent-img');
 
+/**
+ * Creates a new task object using values from the board input fields
+ */
 function boardCreateNewTask() {
   let newTask = {
     title: boardInputTitle.value,

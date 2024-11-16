@@ -122,7 +122,6 @@ function renderSubtasksList(taskId) {
  *                          If 'undefined', the function uses the subtasks array directly
  * @param {number} index - The index of the subtask in the subtasks array or task's subtasks
  */
-
 async function editSingleSubtask(taskId, index) {
   const inputEditSubtask = document.getElementById(
     `input-edit-subtask-${index}`
@@ -206,7 +205,9 @@ async function submitEditedSingleSubtask(taskId, index) {
   isSubtaskEditOn = false;
 }
 
-// TODO: JS docs
+/**
+ * Updates the title of a subtask in the new task based on user input
+ */
 function editSubtaskTitleNewTask(index) {
   const inputEditSubtask = document.getElementById(
     `input-edit-subtask-${index}`
@@ -222,7 +223,13 @@ function editSubtaskTitleNewTask(index) {
   renderSubtasksList();
 }
 
-// TODO: JS docs
+/**
+ * Edits the title of a subtask within a task and updates the task data in Firebase
+ * After updating the title, it re-renders the subtasks list
+ *
+ * @param {number} index - The index of the subtask to be edited.
+ * @param {Object} element - The task object containing the subtask data.
+ */
 async function editSubtaskTitle(index, element) {
   const inputEditSubtask = document.getElementById(
     `input-edit-subtask-${index}`
