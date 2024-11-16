@@ -150,7 +150,7 @@ function signUp() {
   let isValid = true;
   checkNameValue();
   checkEmailValue();
-  if(!checkPasswordValueEmptyInput(password, passwordConfirm, error)){ return };
+  if(!checkPasswordValueEmptyInput(password, passwordConfirm, error)){return};
   comparePasswords(password, passwordConfirm, error,isValid);
 }
 
@@ -211,6 +211,7 @@ function checkPasswordValueEmptyInput(password, passwordConfirm, error){
     password.style.border = '1px solid #d1d1d1';
     passwordConfirm.style.border = '1px solid #d1d1d1';
   }
+  return true;
 };
 
 /**
