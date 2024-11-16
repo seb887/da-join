@@ -85,14 +85,23 @@ async function logIn() {
 function signUp() {
   let password = document.getElementById('password-id-sign-up');
   let passwordConfirm = document.getElementById('password-id-confirm');
-  let checkBox = document.getElementById('check-box-accept');
   let error = document.getElementById('sign-up-error');
-  let name = document.getElementById('name');
-  let email = document.getElementById('email-address');
-  let signupErrorName = document.getElementById('sign-up-error-name');
-  let singupErrorMail = document.getElementById('sign-up-error-email');
   let isValid = true;
+  checkNameValue();
+  checkEmailValue();
+  if(!checkPasswordValueEmptyInput(password, passwordConfirm, error)){ return };
+  comparePasswords(password, passwordConfirm, error,isValid);
+}
 
+/**
+ * Checks for empty name field
+ * 
+ * @returns isValid true or false
+ */
+function checkNameValue(){
+  let name = document.getElementById('name');
+  let signupErrorName = document.getElementById('sign-up-error-name');
+  let isValid = true;
   if (name.value == '') {
     signupErrorName.style.visibility = 'visible';
     name.style.border = '1px solid #d22323';
@@ -100,7 +109,17 @@ function signUp() {
   } else {
     signupErrorName.style.visibility = 'hidden';
     name.style.border = '1px solid #d1d1d1';
-  }
+  }return isValid;
+};
+
+/**
+ * Verifies if email input is not emtpy and has a correct email format
+ * 
+ */
+function checkEmailValue(){
+  let email = document.getElementById('email-address');
+  let singupErrorMail = document.getElementById('sign-up-error-email');
+  let isValid = true;
   if (!validateEmail(email.value)) {
     singupErrorMail.style.visibility = 'visible';
     email.style.border = '1px solid #d22323';
@@ -109,17 +128,39 @@ function signUp() {
     singupErrorMail.style.visibility = 'hidden';
     email.style.border = '1px solid #d1d1d1';
   }
+};
+
+/**
+ * Checks for empty input fields and returns false on empty input fields
+ * 
+ * @param {element} password - DOM span element 
+ * @param {element} passwordConfirm - DOM input element 
+ * @param {element} error - DOM span element 
+ * @returns false if password or passwordConfirnm input field is empty
+ */
+function checkPasswordValueEmptyInput(password, passwordConfirm, error){
   if (password.value == '' || passwordConfirm.value == '') {
     error.style.visibility = 'visible';
     password.style.border = '1px solid #d22323';
     passwordConfirm.style.border = '1px solid #d22323';
     error.innerHTML = 'Passwords do not match';
-    return;
+    return false;
   } else {
     error.style.visibility = 'hidden';
     password.style.border = '1px solid #d1d1d1';
     passwordConfirm.style.border = '1px solid #d1d1d1';
   }
+};
+
+/**
+ * 
+ * @param {element} password - DOM span element 
+ * @param {element} passwordConfirm - DOM input element 
+ * @param {element} error - DOM span element 
+ * @param {boolean} isValid -Boolean
+ */
+function comparePasswords(password, passwordConfirm, error,isValid){
+  let checkBox = document.getElementById('check-box-accept');
   if (password.value === passwordConfirm.value) {
     error.innerHTML = '';
     if (checkBox.src.includes('checkbox-checked.svg')) {

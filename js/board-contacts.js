@@ -373,13 +373,8 @@ async function updateComparedTasks(contactId, taskId) {
     assignedContactsToUpdate.forEach(async (contact, index) => {
       let contactToPut =
         renderedContacts[await findMatchInRenderedContacts(contact.contactId)];
-      let fetchURL =
-        BASE_URL +
-        'tasks/' +
-        contact.taskId +
-        '/assignedTo/' +
-        (await findIndexInTaskAssignedTo(contact.taskId, contact.contactId)) +
-        '.json';
+      let fetchURL = BASE_URL + 'tasks/' + contact.taskId + '/assignedTo/' +
+      (await findIndexInTaskAssignedTo(contact.taskId, contact.contactId)) + '.json';
       await fetch(fetchURL, {
         method: 'PUT',
         body: JSON.stringify(contactToPut),
