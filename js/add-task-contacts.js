@@ -124,7 +124,7 @@ function showOrHideContactsOnInput() {
     allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
       cb.parentElement.parentElement.style.display = 'none';
     });
-    return true;
+return true;
   } else {
     document.getElementById('input-assigned-to').style.display = 'none';
     document.getElementById('arrowAssignTo').src = '../assets/icons/arrow-down.png';
