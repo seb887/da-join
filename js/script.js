@@ -125,4 +125,19 @@ window.onscroll = function (ev) {
   }
 };
   }
-  
+
+/**
+ * Slides in an info toast with a defined text and slides out after 1.5 seconds
+ *
+ * @param {string} text - Displayed text in the info toast
+ */
+function showInfoToast(text) {
+  // event.preventDefault();
+  const toast = document.getElementById('info-toast');
+  // const infoText = document.getElementById('infoText');
+  toast.innerText = text;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 1500);
+}

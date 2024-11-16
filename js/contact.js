@@ -474,27 +474,19 @@ async function setActiveUserInitials() {
  * Updates the visibility of relevant UI elements based on the current state
  */
 function goBackToList() {
-  document
-    .getElementById('goBackToList')
-    .classList.add('hide-z-index-responsive');
+  document.getElementById('goBackToList').classList.add('hide-z-index-responsive');
   let editDelContact = document.getElementById('edit-del-contact-responsive');
   let container = document.getElementById('contactInformation');
-  let responsiveButtonBottom = document.getElementById(
-    'responsive-button-bottom'
-  );
+  let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
   if ((responsiveButtonBottom.src = '../assets/icons/more.png')) {
     container.classList.remove('contactFadeAndSlideIn');
-    document
-      .getElementById('contact-information-responsive')
-      .classList.remove('fadeAndSlideInResponsive');
+    document.getElementById('contact-information-responsive').classList.remove('fadeAndSlideInResponsive');
     responsiveButtonBottom.src = '../assets/icons/add-contact.png';
     editDelContact.style.display = 'none';
   }
   setTimeout(() => {
     container.classList.remove('fadeAndSlideIn');
-    document
-      .getElementById('contact-information-responsive')
-      .classList.remove('contactFadeAndSlideIn');
+    document.getElementById('contact-information-responsive').classList.remove('contactFadeAndSlideIn');
     responsiveButtonBottom.src = '../assets/icons/add-contact.png';
     editDelContact.style.display = 'none';
   }, 50);
