@@ -106,7 +106,6 @@ function checkInputs(taskObj) {
     clearInputs();
     showInfoToast('Task added to board');
     setTimeout(() => (window.location.href = 'board.html'), 1200);
-
 }
 
 
@@ -121,13 +120,11 @@ function checkForRequiredInputAddTask(taskObj){
   if(taskObj.title == ''){
     errorTitle.style.visibility = 'visible';
     isValid = false ;
-  }else{
-    errorTitle.style.visibility = 'hidden';
-  }
+  }else{ errorTitle.style.visibility = 'hidden'}
   if(taskObj.date == ''){
     errorDate.style.visibility = 'visible'
     isValid = false;
-  }else{errorDate.style.visibility = 'hidden' }
+  }else{ errorDate.style.visibility = 'hidden'}
   if(taskObj.date == ''){
     errorDate.style.visibility = 'visible'
     isValid = false;
@@ -152,15 +149,21 @@ function clearInputs() {
   searchContact ? (searchContact.value = '') : null;
   error.innerHTML = '';
   inputDate.valueAsDate = currentDate;
-  errorCategory.style.visibility = 'hidden'
-  errorTitle.style.visibility = 'hidden'
-  errorDate.style.visibility = 'hidden'
+  clearVisibility();
   listContactsToAssignedTo();
   renderSubtasksList();
   setPrio('medium');
   hideSubtaskIcons();
 }
 
+/**
+ * This function sets the visibility for the selected elements to hidden
+ */
+function clearVisibility (){
+  errorCategory.style.visibility = 'hidden'
+  errorTitle.style.visibility = 'hidden'
+  errorDate.style.visibility = 'hidden'
+}
 // PRIO
 
 /**
@@ -195,13 +198,11 @@ function checkIfEditIsOnPrio(prio, color) {
   if (isEditOn) {
     const button = document.getElementById(`edit-button-${prio}`);
     const buttonImg = document.getElementById(`edit-button-${prio}-img`);
-
     stylePrioButton(prio, color, button, buttonImg);
     setNoPrio(prio);
   } else {
     const button = document.getElementById(`button-${prio}`);
     const buttonImg = document.getElementById(`button-${prio}-img`);
-
     stylePrioButton(prio, color, button, buttonImg);
     setNoPrio(prio);
   }
@@ -255,12 +256,10 @@ function checkIfEditIsOnNoPrio(noPrio) {
       const noPrioButtonImg = document.getElementById(
         `edit-button-${element}-img`
       );
-
       styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
     } else {
       const noPrioButton = document.getElementById(`button-${element}`);
       const noPrioButtonImg = document.getElementById(`button-${element}-img`);
-
       styleNoPrioButtons(element, noPrioButton, noPrioButtonImg);
     }
   }
