@@ -145,7 +145,7 @@ async function setDeadlineDate() {
     allTasksAsObject.forEach((task) =>{
         let date = new Date(task[1]['date']).getTime()
         deadlines.push(date);
-    })
+    });
     let upcomingDeadline = Math.min(...deadlines);
     let day = new Date(upcomingDeadline).getDate();
     let month = new Date(upcomingDeadline).getMonth();

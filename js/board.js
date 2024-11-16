@@ -182,18 +182,13 @@ function openTaskModal(id) {
  */
 function closeTaskModal() {
   taskModalCard.style.display = 'flex';
-
   setTimeout(() => {
     taskModal.style.display = 'none';
     taskModalEditCard.style.display = 'none';
   }, 250);
-
-  if (document.getElementById('task-modal-edit-card').style.display == 'flex') {
-    taskModalCard.style.display = 'none';
-    modalSlideInOrOut('task-modal-edit-card');
-  } else {
-    modalSlideInOrOut('task-modal-card');
-  }
+  const modal = document.getElementById('task-modal-edit-card').style.display == 'flex' ? 'task-modal-edit-card' : 'task-modal-card';
+  taskModalCard.style.display = modal === 'task-modal-edit-card' ? 'none' : 'flex';
+  modalSlideInOrOut(modal);
   isEditOn = false;
   removeAssignedList();
   clearAssignedContacts();
@@ -270,13 +265,11 @@ function renderSubtaskProgressBar(task) {
 function calcSubtaskCounter(task) {
   let subtaskChecked = 0;
   let subtasksAll = task.data.subtasks.length;
-
   for (const element of task.data.subtasks) {
     if (element.checked) {
       subtaskChecked++;
     }
   }
-
   return `<div class="subtask-counter">${subtaskChecked}/${subtasksAll} Subtasks</div>`;
 }
 
@@ -297,7 +290,6 @@ function calcSubtaskProgressBar(task) {
     }
   }
   progressBarDone = (progressBarFull / subtasksAll) * subtaskChecked;
-
   return progressBarDone;
 }
 

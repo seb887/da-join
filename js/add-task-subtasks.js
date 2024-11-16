@@ -98,19 +98,11 @@ function submitInputSubtask() {
  * @param {string} taskId - The ID of the task associated with the subtasks
  */
 function renderSubtasksList(taskId) {
-  let list = subtasksList;
-  if (isEditOn) {
-    list = editSubtasksList;
-  } else {
-    list = subtasksList;
-  }
+  let list = isEditOn ? editSubtasksList : subtasksList;
   list.innerHTML = '';
-  if (subtasks == undefined) {
-    return;
-  } else {
-    for (let i = 0; i < subtasks.length; i++) {
-      list.innerHTML += createSubtasksListHTML(i, taskId);
-    }
+  if (!subtasks) return;
+  for (let i = 0; i < subtasks.length; i++) {
+    list.innerHTML += createSubtasksListHTML(i, taskId);
   }
 }
 

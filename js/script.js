@@ -124,7 +124,7 @@ window.onscroll = function (ev) {
    footer.classList.remove('footer-animation');
   }
 };
-  }
+}
 
 /**
  * Slides in an info toast with a defined text and slides out after 1.5 seconds
