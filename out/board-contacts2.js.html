@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-task-template.js</title>
+    <title>JSDoc: Source: board-contacts2.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-task-template.js</h1>
+    <h1 class="page-title">Source: board-contacts2.js</h1>
 
     
 
@@ -26,81 +26,199 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Generates the HTML for a subtask list item
- *
- * @param {number} index - The index of the subtask in the list
- * @param {string} id - The unique identifier for the parent task or subtask
- */
-function createSubtasksListHTML(index, id) {
-  return `
-    &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
-      &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
-        &lt;img
-        src="../assets/icons/edit-subtask.png"
-        alt="edit icon"
-        id="edit-subtask-${index}"
-        class="edit-subtask"
-        onclick="editSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/submit-subtask.png"
-        alt="submit icon"
-        id="submit-edit-subtask-${index}"
-        class="submit-edit-subtask"
-        onclick="submitEditedSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/delete-subtask.png"
-        alt="trash icon"
-        id="delete-subtask-${index}"
-        class="delete-subtask"
-        onclick="deleteSingleSubtask('${id}', '${index}')"
-        />
-      &lt;/div>
-    &lt;/li>
-    `;
-}
-
+            <pre class="prettyprint source linenums"><code>
 /**
- * Generates the HTML content for displaying a contact in the "Assigned To" contacts list with a checkbox
+ * creates HTML-content for all existing contacts into the assigned contacts list div
  *
- * @param {Object} contact - The contact object containing information about the contact
- * @param {string} id - The unique ID of the parent element
- * @param {number} index - The index of the contact in the list
  */
-function assignedToContactsContent(contact, id, index) {
-  return `
+function renderAllContactsInAddTask() {
+    let inputChild = document.querySelector(
+      '#input-assigned-to-addTask > label:nth-child(1)'
+    );
+    inputAssignedTo.innerHTML = '';
+    document.getElementById('assigned-contacts-list').innerHTML = '';
+    inputATAT.innerHTML = '';
+    renderedContacts.forEach((contact) => {
+      inputATAT.innerHTML += assignedToContactsContentAddTask(contact);
+      setBackgroundColor(contact);
+    });
+  }
+  
+  /**
+   * inspects all checkboxes and creates an HTML-element with contact initials and specific background color for each checked checkbox
+   *
+   * @param {*} path
+   */
+  function inspectCheckboxesAddTask(path) {
+    let allDivs = document.getElementById('input-assigned-to-addTask');
+    assignedContacts = [];
+    allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+      if (cb.checked) {
+        assignedContacts.push(cb.value);
+        cb.parentElement.parentElement.classList.add('selected');
+        renderAssignedContacts('assigned-contacts-list-addTask');
+      }
+      if (!cb.checked) {
+        cb.parentElement.parentElement.classList.remove('selected');
+        renderAssignedContacts('assigned-contacts-list-addTask');
+      }
+    });
+  }
+  
+  /**
+   * removes all elements from assigned contact list and clears the inputlist
+   */
+  function removeAssignedList() {
+    inputAssignedTo.innerHTML = '';
+    document.getElementById('assigned-contacts-list').innerHTML = '';
+    inputATAT.innerHTML = '';
+  }
+  
+  /**
+   * displayes or hides the contactlist on input or clear inputfield
+   *
+   * @param {string} path - path for the HTML - element
+   * @returns boolean
+   */
+  function showOrHideContactsOnInputInBoard(path) {
+    let arrow = document.getElementById('arrowAssignTo');
+    let arrowAddTask = document.getElementById('arrowAssignToAddTask');
+    let allDivs = document.getElementById(path);
+    const contactList = document.getElementById(path);
+    if (input1.value.length > 0 || input2.value.length > 0) {
+      contactList.style.display = 'flex';
+      arrow.src = '../assets/icons/arrow-up.png';
+      allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+        cb.parentElement.parentElement.style.display = 'none';
+      });
+      return true;
+    } else {
+      document.getElementById(path).style.display = 'none';
+      arrow.src = '../assets/icons/arrow-down.png';
+      allDivs.querySelectorAll('input[type = "checkbox"]').forEach((cb) => {
+        cb.parentElement.parentElement.style.display = '';
+      });
+      return false;
+    }
+  }
+  
+  /**
+   * compares input with contactname and displays matching contact
+   */
+  function displayMatchingContactsInBoard() {
+    renderedContacts.forEach((contact) => {
+      if (
+        contact.name.toLowerCase().slice(0, 2) ==
+        input1.value.toLowerCase().slice(0, 2)
+      ) {
+        document.getElementById(
+          `${contact.id}cb`
+        ).parentElement.parentElement.style.display = '';
+      } else if (
+        contact.name.toLowerCase().slice(0, 2) ==
+        input2.value.toLowerCase().slice(0, 2)
+      ) {
+        document.getElementById(
+          `${contact.id}cb`
+        ).parentElement.parentElement.style.display = '';
+      }
+    });
+  }
+  
+  /**
+   * executes displayMatchingContactsInBoard if showOrHideContactsOnInputInBoard is true
+   *
+   * @param {string} path - path for HTML- element
+   */
+  function filterContactsInBoard(path) {
+    if (showOrHideContactsOnInputInBoard(path)) {
+      displayMatchingContactsInBoard(path);
+    }
+  }
+  
+  /**
+   * clears the contactlist and inputs in add task and hides the dropdownlist of contacts
+   */
+  function clearAssignedContacts() {
+    document.getElementById('assigned-contacts-list-addTask').innerHTML = '';
+    input1 ? (input1.value = '') : null;
+    input2 ? (input2.value = '') : null;
+    if ((inputATAT.style.display = 'flex')) {
+      dropDownContacts('searchContact-board-addTask', 1);
+    }
+  }
+  
+  /**
+   * HTML- content for a single assigned contact
+   *
+   * @param {element} contact - element of the single contact
+   * @param {string} id - identifier for the contact
+   * @param {string} index - number as string
+   * @returns null
+   */
+  function assignedToContactsContentAddTask(contact, id, index) {
+    return `
     &lt;label for ="${contact['id']}cb">
         &lt;div class ="add-task-contact-list">
           &lt;div>
             &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
             &lt;div>${contact['name']}&lt;/div>
           &lt;/div>
-          &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
+          &lt;input onchange ="inspectCheckboxesAddTask('assigned-contacts-list-addTask')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
         &lt;/div>
     &lt;/label>
       `;
-}
-
-/**
- * Generates the HTML content for displaying a contact's initials in the assigned contacts list
- *
- * @param {Object} match - The contact object containing information about the contact
- * @param {number} index - The index of the contact in the list
- */
-function assignedInitialContent(match, index) {
-  return `
-    &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
-        &lt;div>
-          &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
-        &lt;/div>
-    &lt;/div>
-  `;
-}
-</code></pre>
+  }
+  
+  /**
+   * selects all assigned contacts from a task and sets each checkbox to checked
+   *
+   * @param {string} taskId - Identifier for the single task
+   */
+  function selectAllAssignedContacts(taskId) {
+    document.getElementById('assigned-contacts-list').innerHTML = '';
+    tasks.forEach((task) => {
+      if (task.data.assignedTo &amp;&amp; task.id == taskId) {
+        task.data.assignedTo.forEach((contact) => {
+          document.getElementById(contact.id + 'cb')
+            ? (document.getElementById(contact.id + 'cb').checked = true)
+            : null;
+          inspectCheckboxes('assigned-contacts-list');
+        });
+      }
+    });
+  }
+  
+  /**
+   * Closes the assigned to contact list in a single task on click outside the list
+   * 
+   */
+  function closeDropdownOnclickBoard(){
+    const searchContactDiv = document.getElementById('searchContact-board');
+    const searchContactDivAddTask = document.getElementById('searchContact-board-addTask')
+    document.getElementById('task-modal-edit-card').addEventListener('click', (event) => {
+      if (searchContactDiv &amp;&amp; !searchContactDiv.contains(event.target)) {
+          if(document.getElementById('input-assigned-to').style.display == "flex"){
+              dropDownContactsEditTask();
+          }        
+      }
+  });
+  }
+  
+  /**
+   * Closes the assigned to contact list on the add task modal on click outside the list
+   * 
+   */
+  function closeDropdownOnclickBoardAddTask(){
+    const searchContactDiv = document.getElementById('searchContact-board-addTask');
+    document.getElementById('add-task-modal-card').addEventListener('click', (event) => {
+      if (searchContactDiv &amp;&amp; !searchContactDiv.contains(event.target)) {
+          if(document.getElementById('input-assigned-to-addTask').style.display == "flex"){
+            dropDownContacts('searchContact-board-addTask', 1)   
+          }        
+      }
+  });
+  }</code></pre>
         </article>
     </section>
 

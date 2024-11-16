@@ -26,227 +26,320 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
+            <pre class="prettyprint source linenums"><code>const BASE_URL =
+  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 /**
  * This function is active when the body loads. It sets up the whole login page
  */
 function init() {
-    document.getElementById("signed-up-overlay").classList.add("d-none");
-    document.getElementById("signed-up-overlay").style.zIndex = -5;
-    setTimeout(playLogoAnimation, 250);
-    document.getElementById("whole-body-id").innerHTML = renderLogIn();
-    localStorage.removeItem('firstLogin');
-    firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
+  document.getElementById('signed-up-overlay').classList.add('d-none');
+  document.getElementById('signed-up-overlay').style.zIndex = -5;
+  setTimeout(playLogoAnimation, 250);
+  document.getElementById('whole-body-id').innerHTML = renderLogIn();
+  localStorage.removeItem('firstLogin');
+  firstLogin = JSON.parse(localStorage.getItem('firstLogin'));
 }
 
 /**
  * This function makes the animation of the JOIN logo play at the very beginning
  */
 function playLogoAnimation() {
-    document.getElementById("logo").classList.remove("loading-logo-animation");
-    document.getElementById("logo").classList.add("loading-logo-animation");
-    document.getElementById("logo-white").classList.remove("loading-logo-animation");
-    document.getElementById("logo-white").classList.add("loading-logo-animation");
-    document.getElementById("loading-overlay-id").classList.add("loading-overlay-animation");
+  document.getElementById('logo').classList.remove('loading-logo-animation');
+  document.getElementById('logo').classList.add('loading-logo-animation');
+  document
+    .getElementById('logo-white')
+    .classList.remove('loading-logo-animation');
+  document.getElementById('logo-white').classList.add('loading-logo-animation');
+  document
+    .getElementById('loading-overlay-id')
+    .classList.add('loading-overlay-animation');
 }
 
 /**
  * This function only works when you were trying to sign up and you want to go back to the login mask
  */
 function goToLogin() {
-    document.getElementById("whole-body-id").innerHTML = renderLogIn();
-    document.getElementById("sign-up-top-right-id").classList.remove("d-none");
-    renderLogIn();
+  document.getElementById('whole-body-id').innerHTML = renderLogIn();
+  document.getElementById('sign-up-top-right-id').classList.remove('d-none');
+  renderLogIn();
 }
 
 /**
  * This function changes the login mask into a sign up mask
  */
 function goTosignUp() {
-    document.getElementById("sign-up-top-right-id").classList.add("d-none");
-    document.getElementById("whole-body-id").innerHTML = renderSignUp();
+  document.getElementById('sign-up-top-right-id').classList.add('d-none');
+  document.getElementById('whole-body-id').innerHTML = renderSignUp();
 }
 
 /**
  * Logs the user in. An existing account in Firebase is required; otherwise, login will fail
  */
 async function logIn() {
-    let email = document.querySelector('input[type="email"]').value;
-    let password = document.getElementById('current-password').value;
-    let response = await fetch(BASE_URL + ".json");
-    let users = await response.json();
-    for (let key in users) {
-        if (users[key].email === email &amp;&amp; users[key].password === password) {
-            document.getElementById('login-error').innerHTML = '';
-            saveActiveUserToLocalStorage(users[key]);
-            localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
-            window.location.href = 'summary.html';
-            break;
+  let email = document.querySelector('input[type="email"]').value;
+  let password = document.getElementById('current-password').value;
+  let response = await fetch(BASE_URL + '.json');
+  let users = await response.json();
+  if (!validateEmail(email)) {
+    document.getElementById('login-error').style.visibility = 'visible';
+    document.getElementById('login-error').innerHTML = 'Please enter a email';
+    document.querySelector('input[type="email"]').style.border =
+      '1px solid #d22323';
+    document.getElementById('current-password').style.border =
+      '1px solid #d22323';
+    return;
+  } else if (password == '') {
+    document.getElementById('login-error').innerHTML =
+      'Please enter a password';
+    return;
+  }
+  for (let key in users) {
+    if (users[key].email === email &amp;&amp; users[key].password === password) {
+      document.getElementById('login-error').innerHTML = '';
+      saveActiveUserToLocalStorage(users[key]);
+      localStorage.setItem('firstLogin', JSON.stringify('firstLogin'));
+      window.location.href = 'summary.html';
+      break;
     } else
-        document.getElementById('login-error').innerHTML = 'Wrong E-Mail or Password';
-    }
+      document.getElementById('login-error').innerHTML =
+        'Wrong E-Mail or Password';
+  }
 }
 
 /**
  * Signs a new account up. The check mark about the privacy policy is required - the passwords need to be the same
  */
 function signUp() {
-    let password = document.getElementById('password-id-sign-up');
-    let passwordConfirm = document.getElementById('password-id-confirm');
-    let checkBox = document.getElementById("check-box-accept");
-    if (password.value === passwordConfirm.value) {
-        document.getElementById('sign-up-error').innerHTML = '';
-        if (checkBox.src.includes('checkbox-checked.svg')) {
-            checkUser();
-        } else {
-            document.getElementById('sign-up-error').innerHTML = 'Please accept the Privacy Policy';
-        }
+  let password = document.getElementById('password-id-sign-up');
+  let passwordConfirm = document.getElementById('password-id-confirm');
+  let checkBox = document.getElementById('check-box-accept');
+  let error = document.getElementById('sign-up-error');
+  let name = document.getElementById('name');
+  let email = document.getElementById('email-address');
+  let signupErrorName = document.getElementById('sign-up-error-name');
+  let singupErrorMail = document.getElementById('sign-up-error-email');
+  let isValid = true;
+
+  if (name.value == '') {
+    signupErrorName.style.visibility = 'visible';
+    name.style.border = '1px solid #d22323';
+    isValid = false;
+  } else {
+    signupErrorName.style.visibility = 'hidden';
+    name.style.border = '1px solid #d1d1d1';
+  }
+  if (!validateEmail(email.value)) {
+    singupErrorMail.style.visibility = 'visible';
+    email.style.border = '1px solid #d22323';
+    isValid = false;
+  } else {
+    singupErrorMail.style.visibility = 'hidden';
+    email.style.border = '1px solid #d1d1d1';
+  }
+  if (password.value == '' || passwordConfirm.value == '') {
+    error.style.visibility = 'visible';
+    password.style.border = '1px solid #d22323';
+    passwordConfirm.style.border = '1px solid #d22323';
+    error.innerHTML = 'Passwords do not match';
+    return;
+  } else {
+    error.style.visibility = 'hidden';
+    password.style.border = '1px solid #d1d1d1';
+    passwordConfirm.style.border = '1px solid #d1d1d1';
+  }
+  if (password.value === passwordConfirm.value) {
+    error.innerHTML = '';
+    if (checkBox.src.includes('checkbox-checked.svg')) {
+      isValid ? checkUser() : null;
     } else {
-        document.getElementById('sign-up-error').innerHTML = 'Passwords do not match';
+      error.innerHTML = 'Please accept the Privacy Policy';
+      error.style.visibility = 'visible';
     }
+  } else {
+    error.innerHTML = 'Passwords do not match';
+    error.style.visibility = 'visible';
+  }
+}
+
+/**
+ * Checks if the input is a correct email format and returns true or false
+ *
+ * @param {string} email - Value of the input field
+ * @returns boolean
+ */
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 /**
  * This function checks if the username already exists in the firebase
  */
 async function checkUser() {
-    let name = document.querySelector('input[type="text"]').value;
-    let response = await fetch(BASE_URL + ".json");
-    let users = await response.json();
-    let nameExists = false;
-    for (let key in users) {
-        if (users[key].name === name) {
-            nameExists = true;
-            document.getElementById('sign-up-error').innerHTML='Username already in use';
-            break;
-        }}
-        if (!nameExists) {
-            document.getElementById('sign-up-error').innerHTML = '';
-            checkEmail();
-        }
+  let name = document.querySelector('input[type="text"]').value;
+  let response = await fetch(BASE_URL + '.json');
+  let users = await response.json();
+  let nameExists = false;
+  for (let key in users) {
+    if (users[key].name === name) {
+      nameExists = true;
+      document.getElementById('sign-up-error').innerHTML =
+        'Username already in use';
+      break;
+    }
+  }
+  if (!nameExists) {
+    document.getElementById('sign-up-error').innerHTML = '';
+    checkEmail();
+  }
 }
 
 /**
  * This function checks if the E-Mail address already exists in the firebase
  */
 async function checkEmail() {
-    let email = document.querySelector('input[type="email"]').value;
-    let response = await fetch(BASE_URL + ".json");
-    let users = await response.json();
-    let emailExists = false;
-    for (let key in users) {
-        if (users[key].email === email) {
-            emailExists = true;
-            document.getElementById('sign-up-error').innerHTML='E-Mail already in use';
-            break;
-        }}
-        if (!emailExists) {
-            document.getElementById('sign-up-error').innerHTML = '';
-            await postUser();
-            playSignedUpAnimation();
-        }
+  let email = document.querySelector('#email-address').value;
+  let response = await fetch(BASE_URL + '.json');
+  let users = await response.json();
+  let emailExists = false;
+  for (let key in users) {
+    if (users[key].email === email) {
+      emailExists = true;
+      document.getElementById('sign-up-error').innerHTML =
+        'E-Mail already in use';
+      break;
+    }
+  }
+  if (!emailExists) {
+    document.getElementById('sign-up-error').innerHTML = '';
+    await postUser();
+    playSignedUpAnimation();
+  }
 }
 
 /**
  * A new user is added to the firebase
  */
 async function postUser() {
-    let response = await fetch(BASE_URL + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "name" :  document.getElementById('name').value,
-            "email" : document.getElementById('email-address').value,
-            "password" : document.getElementById('password-id-sign-up').value,
-        })
-    });
-    return responseToJson = await response.json();
+  let response = await fetch(BASE_URL + '.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: document.getElementById('name').value,
+      email: document.getElementById('email-address').value,
+      password: document.getElementById('password-id-sign-up').value,
+    }),
+  });
+  return (responseToJson = await response.json());
 }
 
 /**
  * An animation of an info toast starts if signing up is successful. After that, the user is redirected to the login mask
  */
 function playSignedUpAnimation() {
-    document.getElementById("signed-up-overlay").classList.remove("d-none");
-    document.getElementById("signed-up-overlay").style.zIndex = 5;
-    document.getElementById("signed-up-overlay").classList.add("signed-up-animation-overlay");
-    document.getElementById("signed-up-container").classList.add("signed-up-animation-container");
-    setTimeout(function() {window.location.href = 'login.html';}, 1500);
+  document.getElementById('signed-up-overlay').classList.remove('d-none');
+  document.getElementById('signed-up-overlay').style.zIndex = 5;
+  document
+    .getElementById('signed-up-overlay')
+    .classList.add('signed-up-animation-overlay');
+  document
+    .getElementById('signed-up-container')
+    .classList.add('signed-up-animation-container');
+  setTimeout(function () {
+    window.location.href = 'login.html';
+  }, 1500);
 }
 
 /**
  * This function checks if the user wants to see the password in the login mask
  */
 function toggleLoginPasswordVisibility() {
-    let passwordField = document.getElementById("current-password");
-    if (passwordField.type === "password") {
-        showLoginPassword();
-    } else {
-        hideLoginPassword();
-    }
+  let passwordField = document.getElementById('current-password');
+  if (passwordField.type === 'password') {
+    showLoginPassword();
+  } else {
+    hideLoginPassword();
+  }
 }
 
 /**
  * This function checks if the user wants to see the password in the sign up mask
  */
 function toggleSignUpPasswordVisibility() {
-    let passwordField = document.getElementById("password-id-sign-up", "password-id-confirm");
-    if (passwordField.type === "password") {
-        showSignUpPassword();
-    } else {
-        hideSignUpPassword();
-    }
+  let passwordField = document.getElementById(
+    'password-id-sign-up',
+    'password-id-confirm'
+  );
+  if (passwordField.type === 'password') {
+    showSignUpPassword();
+  } else {
+    hideSignUpPassword();
+  }
 }
 
 /**
  * This function makes the password visible in the login mask
  */
 function showLoginPassword() {
-    document.getElementById("current-password").type = "text";
-    document.getElementById("icon-password").classList.add("eye-password");
-    document.getElementById("icon-password").classList.remove("eye-password-non-visible");
+  document.getElementById('current-password').type = 'text';
+  document.getElementById('icon-password').classList.add('eye-password');
+  document
+    .getElementById('icon-password')
+    .classList.remove('eye-password-non-visible');
 }
 
 /**
  * This function makes the password visible in the sign up mask
  */
 function showSignUpPassword() {
-    document.getElementById("password-id-sign-up").type = "text";
-    document.getElementById("password-id-confirm").type = "text";
-    document.getElementById("icon-password").classList.add("eye-password");
-    document.getElementById("icon-password").classList.remove("eye-password-non-visible");
-    document.getElementById("icon-password-confirm").classList.add("eye-password");
-    document.getElementById("icon-password-confirm").classList.remove("eye-password-non-visible");
+  document.getElementById('password-id-sign-up').type = 'text';
+  document.getElementById('password-id-confirm').type = 'text';
+  document.getElementById('icon-password').classList.add('eye-password');
+  document
+    .getElementById('icon-password')
+    .classList.remove('eye-password-non-visible');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.add('eye-password');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.remove('eye-password-non-visible');
 }
 
 /**
  * This function hides the password in the login mask
  */
 function hideLoginPassword() {
-    document.getElementById("current-password").type = "password";
-    document.getElementById("icon-password").classList.add("eye-password-non-visible");
+  document.getElementById('current-password').type = 'password';
+  document
+    .getElementById('icon-password')
+    .classList.add('eye-password-non-visible');
 }
 
 /**
  * This function hides the password in the sign up mask
  */
 function hideSignUpPassword() {
-    document.getElementById("password-id-sign-up").type = "password";
-    document.getElementById("password-id-confirm").type = "password";
-    document.getElementById("icon-password").classList.add("eye-password-non-visible");
-    document.getElementById("icon-password-confirm").classList.add("eye-password-non-visible");
+  document.getElementById('password-id-sign-up').type = 'password';
+  document.getElementById('password-id-confirm').type = 'password';
+  document
+    .getElementById('icon-password')
+    .classList.add('eye-password-non-visible');
+  document
+    .getElementById('icon-password-confirm')
+    .classList.add('eye-password-non-visible');
 }
 
 /**
  * This prevents the user from using space bar while typing in the password or something else
  */
 function disableSpacebar() {
-    if (event.keyCode == 32) {
-        return false;
-    }
+  if (event.keyCode == 32) {
+    return false;
+  }
 }
 
 /**
@@ -254,12 +347,12 @@ function disableSpacebar() {
  * Updates the checkbox image source based on its current state
  */
 function toggleCheckBoxRemember() {
-    let checkBox = document.getElementById("check-box");
-    if (checkBox.src.includes('checkbox-empty.svg')) {
-        checkBox.src = '../assets/icons/checkbox-checked.svg';
-    } else {
-        checkBox.src = '../assets/icons/checkbox-empty.svg';
-    }
+  let checkBox = document.getElementById('check-box');
+  if (checkBox.src.includes('checkbox-empty.svg')) {
+    checkBox.src = '../assets/icons/checkbox-checked.svg';
+  } else {
+    checkBox.src = '../assets/icons/checkbox-empty.svg';
+  }
 }
 
 /**
@@ -267,14 +360,13 @@ function toggleCheckBoxRemember() {
  * Updates the checkbox image source based on its current state
  */
 function toggleCheckBoxAccept() {
-    let checkBox = document.getElementById("check-box-accept");
-    if (checkBox.src.includes('checkbox-empty.svg')) {
-        checkBox.src = '../assets/icons/checkbox-checked.svg';
-    } else {
-        checkBox.src = '../assets/icons/checkbox-empty.svg';
-    }
+  let checkBox = document.getElementById('check-box-accept');
+  if (checkBox.src.includes('checkbox-empty.svg')) {
+    checkBox.src = '../assets/icons/checkbox-checked.svg';
+  } else {
+    checkBox.src = '../assets/icons/checkbox-empty.svg';
+  }
 }
-
 
 /**
  * Renders the HTML markup for the login form, including inputs for email and password,
@@ -283,28 +375,28 @@ function toggleCheckBoxAccept() {
  * @returns {string} The HTML markup string for the login form.
  */
 function renderLogIn() {
-    return `
+  return `
     &lt;div class="login-mask">
             &lt;b class="login-signup-title">Log in&lt;/b>
             &lt;div class="login-seperator">&lt;/div>
             &lt;div class="login-form">
-                &lt;form onsubmit="logIn(); return false;">
-                    &lt;input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" required> 
-                    &lt;div class="password-input-wrapper">
-                        &lt;input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password" required>
-                        &lt;div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon">&lt;/div>
+                &lt;form novalidate onsubmit="logIn(); return false;">
+                  &lt;input onkeypress="return disableSpacebar()" autocomplete="email" class="email-input" type="email" placeholder="Email" >
+                  &lt;div class="password-input-wrapper">
+                      &lt;input onkeypress="return disableSpacebar()" autocomplete="current-password" id="current-password" class="password-input" type="password" placeholder="Password">
+                      &lt;div id="icon-password" onclick="toggleLoginPasswordVisibility()" class="password-icon">&lt;/div>
+                  &lt;/div>
+                  &lt;div style= "visibility:hidden" id='login-error'>Please enter a email&lt;/div>
+                  &lt;div class="check-box">
+                    &lt;div onclick="toggleCheckBoxRemember()" class="remember-true">
+                      &lt;img id="check-box" src="../assets/icons/checkbox-empty.svg">
                     &lt;/div>
-                    &lt;div id='login-error'>&lt;/div>
-                    &lt;div class="check-box">
-                        &lt;div onclick="toggleCheckBoxRemember()" class="remember-true">
-                        &lt;img id="check-box" src="../assets/icons/checkbox-empty.svg">
-                        &lt;/div>
-                        &lt;span>Remember me&lt;/span>
-                    &lt;/div>
-                    &lt;div class="what-kind-of-login">
-                        &lt;button class="just-login">Log in&lt;/button>
-                        &lt;a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in&lt;/a>
-                    &lt;/div>
+                    &lt;span>Remember me&lt;/span>
+                  &lt;/div>
+                  &lt;div class="what-kind-of-login">
+                    &lt;button class="just-login">Log in&lt;/button>
+                    &lt;a onclick="guestLogInOrLogOut()" class="guest-login" style="color: black;" href="summary.html">Guest Log in&lt;/a>
+                  &lt;/div>
                 &lt;/form>
             &lt;/div>
     &lt;/div>
@@ -318,7 +410,7 @@ function renderLogIn() {
  * @returns {string} The HTML markup string for the sign-up form.
  */
 function renderSignUp() {
-    return `
+  return `
        &lt;div class="sign-up-mask">
        &lt;div class="sign-up-title">
             &lt;img onclick="goToLogin()" src="../assets/icons/back.png">
@@ -326,23 +418,25 @@ function renderSignUp() {
        &lt;/div>
         &lt;div class="login-seperator">&lt;/div>
         &lt;div class="login-form">
-             &lt;form id="form-inputs" onsubmit="signUp(); return false;">
-                &lt;input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" required> 
-                &lt;input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="email" placeholder="Email" required> 
+             &lt;form novalidate id="form-inputs" onsubmit="signUp(); return false;">
+                &lt;input minlength="5" maxlength="18" id="name" class="name-input" type="text" placeholder="Name" >
+                &lt;div class="error" style= "visibility: hidden" id='sign-up-error-name'>Please enter a name.&lt;/div>
+                &lt;input id="email-address" onkeypress="return disableSpacebar()" class="email-input" type="text" placeholder="Email" >
+                &lt;div class="error" style= "visibility: hidden" id='sign-up-error-email'>Please enter an email.&lt;/div>
                     &lt;div class="password-input-wrapper">
-                        &lt;input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" required>
+                        &lt;input onkeypress="return disableSpacebar()" minlength="5" id="password-id-sign-up" class="password-input" type="password" placeholder="Password" >
                         &lt;div id="icon-password" onclick="toggleSignUpPasswordVisibility()" class="password-icon">&lt;/div>
                     &lt;/div>
                     &lt;div class="password-input-wrapper">
-                        &lt;input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" required>
+                        &lt;input onkeypress="return disableSpacebar()" minlength="5" id="password-id-confirm" class="password-input" type="password" placeholder="Confirm Password" >
                         &lt;div id="icon-password-confirm" onclick="toggleSignUpPasswordVisibility()" class="password-icon">&lt;/div>
                     &lt;/div>
-                    &lt;div id='sign-up-error'>&lt;/div>
+                    &lt;div class="error" style="visibility: hidden" id='sign-up-error'>Your password dont match. Please try again.&lt;/div>
                 &lt;div class="check-box" style="padding-left: 0px; justify-content: center;">
                     &lt;div onclick="toggleCheckBoxAccept()" class="remember-true">
                     &lt;img id="check-box-accept" src="../assets/icons/checkbox-empty.svg">
                     &lt;/div>
-                    &lt;span class="sign-up-check-box">I accept the &lt;a class="sign-up-check-box-privacy-policy" href="privacy-policy.html">Privacy Policy&lt;/a>&lt;/span>
+                    &lt;span class="sign-up-check-box">I accept the &lt;a class="sign-up-check-box-privacy-policy" href="privacy-policy-startpage.html" target="_blanc">Privacy Policy&lt;/a>&lt;/span>
                 &lt;/div>
                 &lt;div class="what-kind-of-login">
                     &lt;button class="just-login">Sign Up&lt;/button>
@@ -350,7 +444,8 @@ function renderSignUp() {
             &lt;/form>
         &lt;/div>
     `;
-}</code></pre>
+}
+</code></pre>
         </article>
     </section>
 
@@ -360,13 +455,13 @@ function renderSignUp() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtasksArr">checkSubtasksArr</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#closeEditTaskModal">closeEditTaskModal</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getDataForSingleTask">getDataForSingleTask</a></li><li><a href="global.html#getSelectedContactsEditTask">getSelectedContactsEditTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#openEditTaskModal">openEditTaskModal</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSingleTaskModal">renderSingleTaskModal</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#renderSubtasksModal">renderSubtasksModal</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setCategoryBackgroundColor">setCategoryBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSubtaskStatus">setSubtaskStatus</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#assignedToContactsContentAddTask">assignedToContactsContentAddTask</a></li><li><a href="global.html#boardCreateNewTask">boardCreateNewTask</a></li><li><a href="global.html#calcSubtaskCounter">calcSubtaskCounter</a></li><li><a href="global.html#calcSubtaskProgressBar">calcSubtaskProgressBar</a></li><li><a href="global.html#cancelAddTask">cancelAddTask</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#cancelSearchTask">cancelSearchTask</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#checkContactInputs">checkContactInputs</a></li><li><a href="global.html#checkCurrentBoard">checkCurrentBoard</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkForRequiredInput">checkForRequiredInput</a></li><li><a href="global.html#checkForRequiredInputAddTask">checkForRequiredInputAddTask</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfAnimationActiveBoard">checkIfAnimationActiveBoard</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtasksArr">checkSubtasksArr</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearAssignedContacts">clearAssignedContacts</a></li><li><a href="global.html#clearEditInputs">clearEditInputs</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#clearKanbanLists">clearKanbanLists</a></li><li><a href="global.html#clearVisibility">clearVisibility</a></li><li><a href="global.html#closeAddTaskModal">closeAddTaskModal</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#closeDropdownMenu">closeDropdownMenu</a></li><li><a href="global.html#closeDropdownOnclick">closeDropdownOnclick</a></li><li><a href="global.html#closeDropdownOnclickBoard">closeDropdownOnclickBoard</a></li><li><a href="global.html#closeDropdownOnclickBoardAddTask">closeDropdownOnclickBoardAddTask</a></li><li><a href="global.html#closeEditTask">closeEditTask</a></li><li><a href="global.html#closeEditTaskModal">closeEditTaskModal</a></li><li><a href="global.html#closeMoveToCard">closeMoveToCard</a></li><li><a href="global.html#closeTaskModal">closeTaskModal</a></li><li><a href="global.html#compareArray">compareArray</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#controlSubtaskIsEditStatus">controlSubtaskIsEditStatus</a></li><li><a href="global.html#controlVisibilityInputClearBtn">controlVisibilityInputClearBtn</a></li><li><a href="global.html#createCardHTML">createCardHTML</a></li><li><a href="global.html#createCompareArray">createCompareArray</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtaskCheckboxHTML">createSubtaskCheckboxHTML</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteNonExistingContactsInTask">deleteNonExistingContactsInTask</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#displayMatchingContactsInBoard">displayMatchingContactsInBoard</a></li><li><a href="global.html#displayTaskModalContacts">displayTaskModalContacts</a></li><li><a href="global.html#drag">drag</a></li><li><a href="global.html#drop">drop</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#dropDownContactsEditTask">dropDownContactsEditTask</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#editSubtaskTitle">editSubtaskTitle</a></li><li><a href="global.html#editSubtaskTitleNewTask">editSubtaskTitleNewTask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#filterContactsInBoard">filterContactsInBoard</a></li><li><a href="global.html#filterData">filterData</a></li><li><a href="global.html#findIndexInTaskAssignedTo">findIndexInTaskAssignedTo</a></li><li><a href="global.html#findMatchInRenderedContacts">findMatchInRenderedContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getAllAssignedTo">getAllAssignedTo</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getDataForSingleTask">getDataForSingleTask</a></li><li><a href="global.html#getDataToEditTask">getDataToEditTask</a></li><li><a href="global.html#getSelectedContactsEditTask">getSelectedContactsEditTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#inspectCheckboxesAddTask">inspectCheckboxesAddTask</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#listContactsToAssignedToinBoard">listContactsToAssignedToinBoard</a></li><li><a href="global.html#loadContactsFromFirebase">loadContactsFromFirebase</a></li><li><a href="global.html#loadTasksFromFirebase">loadTasksFromFirebase</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#modalSlideInOrOut">modalSlideInOrOut</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAddTaskModal">openAddTaskModal</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#openDropdownMenu">openDropdownMenu</a></li><li><a href="global.html#openEditTaskModal">openEditTaskModal</a></li><li><a href="global.html#openMoveToCard">openMoveToCard</a></li><li><a href="global.html#openTaskModal">openTaskModal</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#pushDataFromFirebaseToArr">pushDataFromFirebaseToArr</a></li><li><a href="global.html#removeAssignedList">removeAssignedList</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAllContactsInAddTask">renderAllContactsInAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderAssignedToInCard">renderAssignedToInCard</a></li><li><a href="global.html#renderBoard">renderBoard</a></li><li><a href="global.html#renderBoardSelectionList">renderBoardSelectionList</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsinAddTask">renderContactsinAddTask</a></li><li><a href="global.html#renderData">renderData</a></li><li><a href="global.html#renderKanbanLists">renderKanbanLists</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSingleTaskModal">renderSingleTaskModal</a></li><li><a href="global.html#renderSubtaskProgressBar">renderSubtaskProgressBar</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#renderSubtasksModal">renderSubtasksModal</a></li><li><a href="global.html#returnAssignedContactContent">returnAssignedContactContent</a></li><li><a href="global.html#returnTasksFromFirebase">returnTasksFromFirebase</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#searchTask">searchTask</a></li><li><a href="global.html#selectAllAssignedContacts">selectAllAssignedContacts</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setCategoryBackgroundColor">setCategoryBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSubtaskStatus">setSubtaskStatus</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#setVariables">setVariables</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showOrHideContactsOnInputInBoard">showOrHideContactsOnInputInBoard</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleEditSingleSubtask">styleEditSingleSubtask</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#styleSubmitEditedSingleSubtask">styleSubmitEditedSingleSubtask</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li><li><a href="global.html#updateComparedTasks">updateComparedTasks</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li><li><a href="global.html#validateEmail">validateEmail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 05 2024 00:15:57 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 20:51:26 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -154,7 +154,6 @@ function renderSubtasksModal(task) {
  * @param {string} taskId - The ID of the task
  * @param {array} subtasksArr - Array of all subtasks
  * @param {string} checkboxStatus - Status of the checkbox as string
- * @returns
  */
 function createSubtaskCheckboxHTML(i, taskId, subtasksArr, checkboxStatus) {
   return `

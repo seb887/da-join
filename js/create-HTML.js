@@ -1,3 +1,9 @@
+/**
+ * Generates the HTML structure for a Kanban card element
+ *
+ * @param {Object} element - The task element to create the card for
+ */
+
 function createCardHTML(element) {
   return `
       <div

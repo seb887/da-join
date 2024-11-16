@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-task-template.js</title>
+    <title>JSDoc: Source: board-add-task.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-task-template.js</h1>
+    <h1 class="page-title">Source: board-add-task.js</h1>
 
     
 
@@ -26,79 +26,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Generates the HTML for a subtask list item
- *
- * @param {number} index - The index of the subtask in the list
- * @param {string} id - The unique identifier for the parent task or subtask
- */
-function createSubtasksListHTML(index, id) {
-  return `
-    &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
-      &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
-        &lt;img
-        src="../assets/icons/edit-subtask.png"
-        alt="edit icon"
-        id="edit-subtask-${index}"
-        class="edit-subtask"
-        onclick="editSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/submit-subtask.png"
-        alt="submit icon"
-        id="submit-edit-subtask-${index}"
-        class="submit-edit-subtask"
-        onclick="submitEditedSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/delete-subtask.png"
-        alt="trash icon"
-        id="delete-subtask-${index}"
-        class="delete-subtask"
-        onclick="deleteSingleSubtask('${id}', '${index}')"
-        />
-      &lt;/div>
-    &lt;/li>
-    `;
-}
+            <pre class="prettyprint source linenums"><code>const boardInputTitle = document.getElementById('board-input-title');
+const boardInputDescription = document.getElementById(
+  'board-input-description'
+);
+const boardInputDate = document.getElementById('board-input-date');
+const boardSubtasksList = document.getElementById('board-subtasks-list');
+const boardInputSubtask = document.getElementById('board-input-subtask');
+const boardButtonLow = document.getElementById('board-button-low');
+const boardButtonMedium = document.getElementById('board-button-medium');
+const boardButtonUrgent = document.getElementById('board-button-urgent');
+const boardButtonLowImg = document.getElementById('board-button-low-img');
+const boardButtonMediumImg = document.getElementById('board-button-medium-img');
+const boardButtonUrgentImg = document.getElementById('board-button-urgent-img');
 
 /**
- * Generates the HTML content for displaying a contact in the "Assigned To" contacts list with a checkbox
- *
- * @param {Object} contact - The contact object containing information about the contact
- * @param {string} id - The unique ID of the parent element
- * @param {number} index - The index of the contact in the list
+ * Creates a new task object using values from the board input fields
  */
-function assignedToContactsContent(contact, id, index) {
-  return `
-    &lt;label for ="${contact['id']}cb">
-        &lt;div class ="add-task-contact-list">
-          &lt;div>
-            &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
-            &lt;div>${contact['name']}&lt;/div>
-          &lt;/div>
-          &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
-        &lt;/div>
-    &lt;/label>
-      `;
-}
-
-/**
- * Generates the HTML content for displaying a contact's initials in the assigned contacts list
- *
- * @param {Object} match - The contact object containing information about the contact
- * @param {number} index - The index of the contact in the list
- */
-function assignedInitialContent(match, index) {
-  return `
-    &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
-        &lt;div>
-          &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
-        &lt;/div>
-    &lt;/div>
-  `;
+function boardCreateNewTask() {
+  let newTask = {
+    title: boardInputTitle.value,
+    description: boardInputDescription.value,
+    date: boardInputDate.value,
+    board: currentKanbanBoard,
+    subtasks: subtasks,
+    assignedTo: matches,
+  };
 }
 </code></pre>
         </article>

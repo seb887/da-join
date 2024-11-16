@@ -29,12 +29,12 @@
             <pre class="prettyprint source linenums"><code>/**
  * Generates the HTML content for a single contact entry, including initials,
  * name, and email link, which can be clicked to open the contact details
- * 
+ *
  * @param {number} index - The index of the contact in the list, used for
  *                         generating element IDs
  */
 function contactContent(index) {
-    return `
+  return `
         &lt;div onclick ="openContact('${index}')" class="single-contact">
         &lt;div id="initialsContainer${index}" class="initials-container">
             &lt;span id="initials${index}">&lt;/span>
@@ -50,11 +50,11 @@ function contactContent(index) {
 /**
  * Generates the HTML content for a header section that displays a letter
  * and includes a separator line below it
- * 
+ *
  * @param {string} letter - The letter to be displayed as the header
  */
 function nameHeaderContent(letter) {
-    return`
+  return `
         &lt;div class="nameHeader" id ="${letter}">
             &lt;h3>${letter}&lt;/h3>
         &lt;/div>
@@ -62,27 +62,27 @@ function nameHeaderContent(letter) {
             &lt;div class="line">
             &lt;/div>
         &lt;/div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for a section that allows users to add new contacts,
  * including a button that triggers the "Add Contact" modal
  */
-function addNewContactsContent () {
-    return `
+function addNewContactsContent() {
+  return `
         &lt;div class="add-new-contacts">
             &lt;button onclick="openAndCloseAddContact()">Add new contact&lt;img src="../assets/icons/person_add.png">&lt;/img>&lt;/button>
         &lt;/div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for the "Add Contact" modal, including the header,
- * input fields for contact details, and buttons for submitting or canceling the action 
+ * input fields for contact details, and buttons for submitting or canceling the action
  */
-function addContactCardContent(){
-    return ` 
+function addContactCardContent() {
+  return `
         &lt;div class="modal-header-logo-left">
           &lt;div class="logo-modal">
             &lt;img src="../assets/img/logo-white.png" alt="logo-white">
@@ -93,36 +93,45 @@ function addContactCardContent(){
             &lt;div class="header-seperator">&lt;/div>
           &lt;/div>
         &lt;/div>
-        &lt;div class="add-contact-modal-right">   
+        &lt;div class="add-contact-modal-right">
           &lt;div class="add-contact-modal-person">
             &lt;img src="../assets/icons/add-contact-person.png" alt="profile-add-contact">
           &lt;/div>
           &lt;div class="input-field-right">
               &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
-              &lt;form onsubmit="event.preventDefault();createContact()" class="input-fields" action="">
-                  &lt;input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24" required>
-                  &lt;input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="email" required>
-                  &lt;input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6" required>
+              &lt;form novalidate onsubmit="event.preventDefault();checkContactInputs('add')" class="input-fields" action="">
+                  &lt;input placeholder="Name" id="inputContactName" type="text" type="text" minlength="3" maxlength="24">
+                  &lt;span style ="visibility:hidden" class= "error" id="contact-name-error">Please enter a name&lt;/span>
+                  &lt;input placeholder="Email" id="inputMailAddress"  minlength="3" maxlength="32" type="text">
+                  &lt;span style ="visibility:hidden" class= "error" id="email-error">Check your email. Please try again.&lt;/span>
+                  &lt;input placeholder="Phone" id="inputPhoneNumber" type="number" minlength="6">
+                  &lt;span style ="visibility:hidden" class= "error" id="phone-error">Please enter a phone number&lt;/span>
                 &lt;div class="add-contact-button-bottom">
-                  &lt;button type="button" onclick="openAndCloseAddContact()">Cancel&lt;/button>
-                  &lt;button type="submit">Create contact&lt;/button>
+                  &lt;button type="button" onclick="openAndCloseAddContact()">
+                    &lt;span>Cancel&lt;/span>
+                    &lt;img src="../assets/icons/close.png" alt="close icon">
+                  &lt;/button>
+                  &lt;button type="submit">
+                  &lt;span>Create contact&lt;/span>
+                    &lt;img src="../assets/icons/check.png" alt="close icon">
+                  &lt;/button>
                 &lt;/div>
               &lt;/form>
           &lt;/div>
         &lt;/div>
-    `
+    `;
 }
 
 /**
  * Generates the HTML content for the "Edit Contact" modal, including the current contact's
  * information pre-filled in the input fields, initials, and buttons for saving changes or deleting the contact
- * 
+ *
  * @param {Object} contact - The contact object containing the details to be edited
  * @param {string} initials - The initials of the contact to display in the modal
  * @param {number} index - The index of the contact in the contacts array, used for identifying the contact during updates
  */
-function editContactCardContent(contact, initials, index){
-    return `
+function editContactCardContent(contact, initials, index) {
+  return `
         &lt;div class="modal-header-logo-left">
           &lt;div class="logo-modal">
             &lt;img src="../assets/img/logo-white.png" alt="logo-white">
@@ -133,16 +142,19 @@ function editContactCardContent(contact, initials, index){
             &lt;div class="header-seperator">&lt;/div>
           &lt;/div>
         &lt;/div>
-        &lt;div class="add-contact-modal-right">   
+        &lt;div class="add-contact-modal-right">
           &lt;div id="bgInitials" class="initials-container-edit" style="background-color: ${contact.color};">
           &lt;span id="initialsArticle">${initials}&lt;/span>
         &lt;/div>
           &lt;div class="input-field-right">
               &lt;div id="closeAddContact">&lt;img onclick="openAndCloseAddContact()" src="../assets/icons/close.png" alt="close-button">&lt;/div>
-              &lt;form onsubmit="event.preventDefault();saveChangesOnContact('${contact.id}','${index}')" class="input-fields" action="">
-                  &lt;input placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24" required>
-                  &lt;input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="email" minlength="3" maxlength="32"  required>
-                  &lt;input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6" required>
+              &lt;form novalidate onsubmit="event.preventDefault();checkContactInputs('edit', '${contact.id}','${index}')" class="input-fields" action="">
+                  &lt;input  placeholder="Name" value = "${contact.name}" id="inputContactName" type="text" minlength="3" maxlength="24">
+                  &lt;span style ="visibility:hidden" class= "error" id="contact-name-error">Please enter a name&lt;/span>
+                  &lt;input placeholder="Email" value = "${contact.email}" id="inputMailAddress" type="text" minlength="3" maxlength="32">
+                  &lt;span style ="visibility:hidden" class= "error" id="email-error">Check your email. Please try again.&lt;/span>
+                  &lt;input placeholder="Phone" value = "${contact.phone}" id="inputPhoneNumber" type="number" minlength="6">
+                  &lt;span style ="visibility:hidden" class= "error" id="phone-error">Please enter a phone number&lt;/span>
                 &lt;div class="add-contact-button-bottom">
                   &lt;button style="background-image: none; justify-content: center; text-align: center;" type ="button"onclick="deleteContact('${contact.id}')">Delete&lt;/button>
                   &lt;button style="justify-content: center; width: 111px;" type="submit">Save&lt;/button>
@@ -150,8 +162,9 @@ function editContactCardContent(contact, initials, index){
               &lt;/form>
           &lt;/div>
         &lt;/div>
-    `
-}</code></pre>
+    `;
+}
+</code></pre>
         </article>
     </section>
 
@@ -161,13 +174,13 @@ function editContactCardContent(contact, initials, index){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtasksArr">checkSubtasksArr</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#closeEditTaskModal">closeEditTaskModal</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getDataForSingleTask">getDataForSingleTask</a></li><li><a href="global.html#getSelectedContactsEditTask">getSelectedContactsEditTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#openEditTaskModal">openEditTaskModal</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSingleTaskModal">renderSingleTaskModal</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#renderSubtasksModal">renderSubtasksModal</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setCategoryBackgroundColor">setCategoryBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSubtaskStatus">setSubtaskStatus</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactCardContent">addContactCardContent</a></li><li><a href="global.html#addNewContactsContent">addNewContactsContent</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#assignedInitialContent">assignedInitialContent</a></li><li><a href="global.html#assignedToContactsContent">assignedToContactsContent</a></li><li><a href="global.html#assignedToContactsContentAddTask">assignedToContactsContentAddTask</a></li><li><a href="global.html#boardCreateNewTask">boardCreateNewTask</a></li><li><a href="global.html#calcSubtaskCounter">calcSubtaskCounter</a></li><li><a href="global.html#calcSubtaskProgressBar">calcSubtaskProgressBar</a></li><li><a href="global.html#cancelAddTask">cancelAddTask</a></li><li><a href="global.html#cancelInputSubtask">cancelInputSubtask</a></li><li><a href="global.html#cancelSearchTask">cancelSearchTask</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#checkContactInputs">checkContactInputs</a></li><li><a href="global.html#checkCurrentBoard">checkCurrentBoard</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkFirstLogin">checkFirstLogin</a></li><li><a href="global.html#checkForExistingLetter">checkForExistingLetter</a></li><li><a href="global.html#checkForRequiredInput">checkForRequiredInput</a></li><li><a href="global.html#checkForRequiredInputAddTask">checkForRequiredInputAddTask</a></li><li><a href="global.html#checkIfAnimationActive">checkIfAnimationActive</a></li><li><a href="global.html#checkIfAnimationActiveBoard">checkIfAnimationActiveBoard</a></li><li><a href="global.html#checkIfEditIsOnNoPrio">checkIfEditIsOnNoPrio</a></li><li><a href="global.html#checkIfEditIsOnPrio">checkIfEditIsOnPrio</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtasksArr">checkSubtasksArr</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#clearAssignedContacts">clearAssignedContacts</a></li><li><a href="global.html#clearEditInputs">clearEditInputs</a></li><li><a href="global.html#clearInputs">clearInputs</a></li><li><a href="global.html#clearKanbanLists">clearKanbanLists</a></li><li><a href="global.html#clearVisibility">clearVisibility</a></li><li><a href="global.html#closeAddTaskModal">closeAddTaskModal</a></li><li><a href="global.html#closeAndClear">closeAndClear</a></li><li><a href="global.html#closeDropdownMenu">closeDropdownMenu</a></li><li><a href="global.html#closeDropdownOnclick">closeDropdownOnclick</a></li><li><a href="global.html#closeDropdownOnclickBoard">closeDropdownOnclickBoard</a></li><li><a href="global.html#closeDropdownOnclickBoardAddTask">closeDropdownOnclickBoardAddTask</a></li><li><a href="global.html#closeEditTask">closeEditTask</a></li><li><a href="global.html#closeEditTaskModal">closeEditTaskModal</a></li><li><a href="global.html#closeMoveToCard">closeMoveToCard</a></li><li><a href="global.html#closeTaskModal">closeTaskModal</a></li><li><a href="global.html#compareArray">compareArray</a></li><li><a href="global.html#contactContent">contactContent</a></li><li><a href="global.html#controlSubtaskIcons">controlSubtaskIcons</a></li><li><a href="global.html#controlSubtaskIsEditStatus">controlSubtaskIsEditStatus</a></li><li><a href="global.html#controlVisibilityInputClearBtn">controlVisibilityInputClearBtn</a></li><li><a href="global.html#createCardHTML">createCardHTML</a></li><li><a href="global.html#createCompareArray">createCompareArray</a></li><li><a href="global.html#createContact">createContact</a></li><li><a href="global.html#createNewTask">createNewTask</a></li><li><a href="global.html#createSubtaskCheckboxHTML">createSubtaskCheckboxHTML</a></li><li><a href="global.html#createSubtasksListHTML">createSubtasksListHTML</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteNonExistingContactsInTask">deleteNonExistingContactsInTask</a></li><li><a href="global.html#deleteSingleSubtask">deleteSingleSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disableSpacebar">disableSpacebar</a></li><li><a href="global.html#displayMatchingContacts">displayMatchingContacts</a></li><li><a href="global.html#displayMatchingContactsInBoard">displayMatchingContactsInBoard</a></li><li><a href="global.html#displayTaskModalContacts">displayTaskModalContacts</a></li><li><a href="global.html#drag">drag</a></li><li><a href="global.html#drop">drop</a></li><li><a href="global.html#dropDownContacts">dropDownContacts</a></li><li><a href="global.html#dropDownContactsEditTask">dropDownContactsEditTask</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactCardContent">editContactCardContent</a></li><li><a href="global.html#editSingleSubtask">editSingleSubtask</a></li><li><a href="global.html#editSubtaskTitle">editSubtaskTitle</a></li><li><a href="global.html#editSubtaskTitleNewTask">editSubtaskTitleNewTask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#filterContacts">filterContacts</a></li><li><a href="global.html#filterContactsInBoard">filterContactsInBoard</a></li><li><a href="global.html#filterData">filterData</a></li><li><a href="global.html#findIndexInTaskAssignedTo">findIndexInTaskAssignedTo</a></li><li><a href="global.html#findMatchInRenderedContacts">findMatchInRenderedContacts</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getAllAssignedTo">getAllAssignedTo</a></li><li><a href="global.html#getContacts">getContacts</a></li><li><a href="global.html#getDataForSingleTask">getDataForSingleTask</a></li><li><a href="global.html#getDataToEditTask">getDataToEditTask</a></li><li><a href="global.html#getSelectedContactsEditTask">getSelectedContactsEditTask</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#goBackToList">goBackToList</a></li><li><a href="global.html#goToLogin">goToLogin</a></li><li><a href="global.html#goTosignUp">goTosignUp</a></li><li><a href="global.html#greeting">greeting</a></li><li><a href="global.html#guestLogInOrLogOut">guestLogInOrLogOut</a></li><li><a href="global.html#hideLoginPassword">hideLoginPassword</a></li><li><a href="global.html#hideSignUpPassword">hideSignUpPassword</a></li><li><a href="global.html#hideSubtaskIcons">hideSubtaskIcons</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#inspectCheckboxes">inspectCheckboxes</a></li><li><a href="global.html#inspectCheckboxesAddTask">inspectCheckboxesAddTask</a></li><li><a href="global.html#listContactsToAssignedTo">listContactsToAssignedTo</a></li><li><a href="global.html#listContactsToAssignedToinBoard">listContactsToAssignedToinBoard</a></li><li><a href="global.html#loadContactsFromFirebase">loadContactsFromFirebase</a></li><li><a href="global.html#loadTasksFromFirebase">loadTasksFromFirebase</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#modalSlideInOrOut">modalSlideInOrOut</a></li><li><a href="global.html#nameHeaderContent">nameHeaderContent</a></li><li><a href="global.html#openAddTaskModal">openAddTaskModal</a></li><li><a href="global.html#openAndCloseAddContact">openAndCloseAddContact</a></li><li><a href="global.html#openContact">openContact</a></li><li><a href="global.html#openContactOrOpenMore">openContactOrOpenMore</a></li><li><a href="global.html#openDropdownMenu">openDropdownMenu</a></li><li><a href="global.html#openEditTaskModal">openEditTaskModal</a></li><li><a href="global.html#openMoveToCard">openMoveToCard</a></li><li><a href="global.html#openTaskModal">openTaskModal</a></li><li><a href="global.html#playLogoAnimation">playLogoAnimation</a></li><li><a href="global.html#playSignedUpAnimation">playSignedUpAnimation</a></li><li><a href="global.html#postUser">postUser</a></li><li><a href="global.html#pushDataFromFirebaseToArr">pushDataFromFirebaseToArr</a></li><li><a href="global.html#removeAssignedList">removeAssignedList</a></li><li><a href="global.html#removeFirstLogin">removeFirstLogin</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#renderAddTask">renderAddTask</a></li><li><a href="global.html#renderAllContactsInAddTask">renderAllContactsInAddTask</a></li><li><a href="global.html#renderAssignedContacts">renderAssignedContacts</a></li><li><a href="global.html#renderAssignedToInCard">renderAssignedToInCard</a></li><li><a href="global.html#renderBoard">renderBoard</a></li><li><a href="global.html#renderBoardSelectionList">renderBoardSelectionList</a></li><li><a href="global.html#renderContactArray">renderContactArray</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsinAddTask">renderContactsinAddTask</a></li><li><a href="global.html#renderData">renderData</a></li><li><a href="global.html#renderKanbanLists">renderKanbanLists</a></li><li><a href="global.html#renderLogIn">renderLogIn</a></li><li><a href="global.html#renderSignUp">renderSignUp</a></li><li><a href="global.html#renderSingleTaskModal">renderSingleTaskModal</a></li><li><a href="global.html#renderSubtaskProgressBar">renderSubtaskProgressBar</a></li><li><a href="global.html#renderSubtasksList">renderSubtasksList</a></li><li><a href="global.html#renderSubtasksModal">renderSubtasksModal</a></li><li><a href="global.html#returnAssignedContactContent">returnAssignedContactContent</a></li><li><a href="global.html#returnTasksFromFirebase">returnTasksFromFirebase</a></li><li><a href="global.html#saveActiveUserToLocalStorage">saveActiveUserToLocalStorage</a></li><li><a href="global.html#saveChangesOnContact">saveChangesOnContact</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#searchTask">searchTask</a></li><li><a href="global.html#selectAllAssignedContacts">selectAllAssignedContacts</a></li><li><a href="global.html#selectCreatedContact">selectCreatedContact</a></li><li><a href="global.html#setActiveUserInitials">setActiveUserInitials</a></li><li><a href="global.html#setAwaitingFeedbackNumber">setAwaitingFeedbackNumber</a></li><li><a href="global.html#setBackgroundColor">setBackgroundColor</a></li><li><a href="global.html#setCategoryBackgroundColor">setCategoryBackgroundColor</a></li><li><a href="global.html#setContactInformation">setContactInformation</a></li><li><a href="global.html#setDataOfContact">setDataOfContact</a></li><li><a href="global.html#setDeadlineDate">setDeadlineDate</a></li><li><a href="global.html#setDoneNumber">setDoneNumber</a></li><li><a href="global.html#setNoPrio">setNoPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setSelectedContactBackground">setSelectedContactBackground</a></li><li><a href="global.html#setSubtaskStatus">setSubtaskStatus</a></li><li><a href="global.html#setSummaries">setSummaries</a></li><li><a href="global.html#setTasksInProgressNumber">setTasksInProgressNumber</a></li><li><a href="global.html#setTasksinBoardNumber">setTasksinBoardNumber</a></li><li><a href="global.html#setToDoANumber">setToDoANumber</a></li><li><a href="global.html#setUrgentNumber">setUrgentNumber</a></li><li><a href="global.html#setVariables">setVariables</a></li><li><a href="global.html#showInfoToast">showInfoToast</a></li><li><a href="global.html#showLoginPassword">showLoginPassword</a></li><li><a href="global.html#showOrHideContactsOnInput">showOrHideContactsOnInput</a></li><li><a href="global.html#showOrHideContactsOnInputInBoard">showOrHideContactsOnInputInBoard</a></li><li><a href="global.html#showProfileDropDownMenu">showProfileDropDownMenu</a></li><li><a href="global.html#showSignUpPassword">showSignUpPassword</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#styleEditSingleSubtask">styleEditSingleSubtask</a></li><li><a href="global.html#styleNoPrioButtons">styleNoPrioButtons</a></li><li><a href="global.html#stylePrioButton">stylePrioButton</a></li><li><a href="global.html#styleSubmitEditedSingleSubtask">styleSubmitEditedSingleSubtask</a></li><li><a href="global.html#submitEditedSingleSubtask">submitEditedSingleSubtask</a></li><li><a href="global.html#submitInputSubtask">submitInputSubtask</a></li><li><a href="global.html#toggleCheckBoxAccept">toggleCheckBoxAccept</a></li><li><a href="global.html#toggleCheckBoxRemember">toggleCheckBoxRemember</a></li><li><a href="global.html#toggleLoginPasswordVisibility">toggleLoginPasswordVisibility</a></li><li><a href="global.html#toggleSignUpPasswordVisibility">toggleSignUpPasswordVisibility</a></li><li><a href="global.html#updateAndRenderContacts">updateAndRenderContacts</a></li><li><a href="global.html#updateComparedTasks">updateComparedTasks</a></li><li><a href="global.html#updateTaskInFirebase">updateTaskInFirebase</a></li><li><a href="global.html#validateEmail">validateEmail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 05 2024 00:15:57 GMT+0100 (czas środkowoeuropejski standardowy)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 20:51:26 GMT+0100 (czas środkowoeuropejski standardowy)
 </footer>
 
 <script> prettyPrint(); </script>

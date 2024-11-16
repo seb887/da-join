@@ -198,7 +198,6 @@ function modalSlideInOrOut(modalId) {
  *
  * @param {*} ev
  */
-
 window.onscroll = function (ev) {
   const scrollPosition = window.innerHeight + Math.round(window.scrollY);
   const totalHeight = document.documentElement.scrollHeight;
@@ -211,7 +210,6 @@ window.onscroll = function (ev) {
 
 /**
  * fetches and pushes all created contacts to the renderedContacts array
- *
  */
 async function listContactsToAssignedToinBoard() {
   let allContacts = Object.values(await getContacts());

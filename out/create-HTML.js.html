@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-task-template.js</title>
+    <title>JSDoc: Source: create-HTML.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-task-template.js</h1>
+    <h1 class="page-title">Source: create-HTML.js</h1>
 
     
 
@@ -27,78 +27,53 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Generates the HTML for a subtask list item
+ * Generates the HTML structure for a Kanban card element
  *
- * @param {number} index - The index of the subtask in the list
- * @param {string} id - The unique identifier for the parent task or subtask
+ * @param {Object} element - The task element to create the card for
  */
-function createSubtasksListHTML(index, id) {
-  return `
-    &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
-      &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
-        &lt;img
-        src="../assets/icons/edit-subtask.png"
-        alt="edit icon"
-        id="edit-subtask-${index}"
-        class="edit-subtask"
-        onclick="editSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/submit-subtask.png"
-        alt="submit icon"
-        id="submit-edit-subtask-${index}"
-        class="submit-edit-subtask"
-        onclick="submitEditedSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/delete-subtask.png"
-        alt="trash icon"
-        id="delete-subtask-${index}"
-        class="delete-subtask"
-        onclick="deleteSingleSubtask('${id}', '${index}')"
-        />
-      &lt;/div>
-    &lt;/li>
-    `;
-}
 
-/**
- * Generates the HTML content for displaying a contact in the "Assigned To" contacts list with a checkbox
- *
- * @param {Object} contact - The contact object containing information about the contact
- * @param {string} id - The unique ID of the parent element
- * @param {number} index - The index of the contact in the list
- */
-function assignedToContactsContent(contact, id, index) {
+function createCardHTML(element) {
   return `
-    &lt;label for ="${contact['id']}cb">
-        &lt;div class ="add-task-contact-list">
-          &lt;div>
-            &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
-            &lt;div>${contact['name']}&lt;/div>
+      &lt;div
+        class="kanban-card" id="${element.id}"
+        onclick="openTaskModal('${element.id}')"
+        draggable="true"
+        ondragstart="drag(event)"
+      >
+          &lt;div class="card-label-container">
+            &lt;div class="card-label" style="background-color: ${setCategoryBackgroundColor(
+              element.data.category
+            )}">${element.data.category}
+            &lt;/div>
+            &lt;img
+              id="move-board-btn"
+              class="move-board-btn"
+              src="../assets/icons/dots-vertical.svg"
+              alt="dots vertical img"
+              onclick="openMoveToCard(
+                '${element.id}',
+                '${element.data.board}');
+                event.stopPropagation()"
+            >
           &lt;/div>
-          &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
-        &lt;/div>
-    &lt;/label>
+          &lt;div class="task-modal-card-title-container">
+            &lt;div class="card-title">${element.data.title}&lt;/div>
+            &lt;div class="card-description">${element.data.description}&lt;/div>
+          &lt;/div>
+          ${renderSubtaskProgressBar(element)}
+          &lt;div class="card-footer">
+              &lt;div id="card-footer${element.id}" class="task-collaborators">
+              &lt;/div>
+              &lt;div class="task-prio">
+              &lt;img
+                  src="../assets/icons/prio-${element.data.prio}.png"
+                  alt="prio icon"
+                  class="button-${element.data.prio}-img"
+              />
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
       `;
-}
-
-/**
- * Generates the HTML content for displaying a contact's initials in the assigned contacts list
- *
- * @param {Object} match - The contact object containing information about the contact
- * @param {number} index - The index of the contact in the list
- */
-function assignedInitialContent(match, index) {
-  return `
-    &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
-        &lt;div>
-          &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
-        &lt;/div>
-    &lt;/div>
-  `;
 }
 </code></pre>
         </article>

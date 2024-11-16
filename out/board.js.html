@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-task-template.js</title>
+    <title>JSDoc: Source: board.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: add-task-template.js</h1>
+    <h1 class="page-title">Source: board.js</h1>
 
     
 
@@ -26,81 +26,402 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Generates the HTML for a subtask list item
+            <pre class="prettyprint source linenums"><code>// DOM ELEMENTS
+const kanbanListTodo = document.getElementById('kanban-list-todo');
+const kanbanListInProgress = document.getElementById('kanban-list-in-progress');
+const kanbanListAwaitFeedback = document.getElementById(
+  'kanban-list-await-feedback'
+);
+const kanbanListDone = document.getElementById('kanban-list-done');
+const taskModal = document.getElementById('task-modal');
+const taskModalCard = document.getElementById('task-modal-card');
+const taskModalEditCard = document.getElementById('task-modal-edit-card');
+const addTaskModal = document.getElementById('add-task-modal');
+const searchInput = document.getElementById('search-input');
+const clearInputBtn = document.getElementById('search-clear-btn');
+let sContactAdd = document.getElementById('searchContact');
+let sContactBoard = document.getElementById('searchContact-board');
+let sContactBoardAddTask = document.getElementById(
+  'searchContact-board-addTask'
+);
+const taskModalSubtasks = document.getElementById('task-modal-card-subtasks');
+const taskModalSubtasksList = document.getElementById(
+  'task-modal-card-subtasks-list'
+);
+const contactContainer = document.getElementById('assigned-contacts-list');
+const inputATAT = document.getElementById('input-assigned-to-addTask');
+const input1 = document.getElementById('searchContact-board');
+const input2 = document.getElementById('searchContact-board-addTask');
+
+// VARIABLES
+const tasks = [];
+const contacts = [];
+let currentDraggedElementId = '';
+let currentKanbanBoard = 'todo';
+let animationActiveBoard = false;
+let modalActive = false;
+
+// FUNCTIONS
+
+/**
+ * Calls all necessary functions to display the board properly
  *
- * @param {number} index - The index of the subtask in the list
- * @param {string} id - The unique identifier for the parent task or subtask
  */
-function createSubtasksListHTML(index, id) {
-  return `
-    &lt;li id="subtask-${index}" class="subtasks subtasks-hover">
-      &lt;div id="single-subtask-title-${index}" class="subtask-title">${subtasks[index].title}&lt;/div>
-        &lt;input id="input-edit-subtask-${index}" class="input-edit-subtask" type="text"/>
-        &lt;div id="subtask-buttons-${index}" class="subtask-buttons">
-        &lt;img
-        src="../assets/icons/edit-subtask.png"
-        alt="edit icon"
-        id="edit-subtask-${index}"
-        class="edit-subtask"
-        onclick="editSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/submit-subtask.png"
-        alt="submit icon"
-        id="submit-edit-subtask-${index}"
-        class="submit-edit-subtask"
-        onclick="submitEditedSingleSubtask('${id}', '${index}')"
-        />
-        &lt;img
-        src="../assets/icons/delete-subtask.png"
-        alt="trash icon"
-        id="delete-subtask-${index}"
-        class="delete-subtask"
-        onclick="deleteSingleSubtask('${id}', '${index}')"
-        />
+async function renderBoard() {
+  await loadTasksFromFirebase();
+  await loadContactsFromFirebase();
+  await listContactsToAssignedTo();
+  clearInputs();
+  setActiveUserInitials();
+  await updateComparedTasks();
+  searchInput.value = '';
+}
+
+/**
+ * Creates an array of all contacts from the database
+ */
+async function loadContactsFromFirebase() {
+  let response = await fetch(BASE_URL + 'contacts' + '.json');
+  let contactsFromFirebase = await response.json();
+
+  if (contactsFromFirebase == null) {
+    return;
+  } else {
+    contacts.length = 0;
+    pushDataFromFirebaseToArr(contactsFromFirebase, contacts);
+  }
+}
+
+/**
+ * Creates an array of all tasks from the database
+ */
+
+async function loadTasksFromFirebase() {
+  let response = await fetch(BASE_URL + 'tasks' + '.json');
+  let tasksDataFromFirebase = await response.json();
+
+  if (tasksDataFromFirebase == null) {
+    return;
+  } else {
+    tasks.length = 0;
+    pushDataFromFirebaseToArr(tasksDataFromFirebase, tasks);
+  }
+}
+
+/**
+ * Creates an object of the data from firebase and pushes them to an array
+ *
+ * @param {*} dataFromFirebase
+ * @param {*} arrToPush
+ */
+function pushDataFromFirebaseToArr(dataFromFirebase, arrToPush) {
+  let objectKeys = Object.keys(dataFromFirebase);
+
+  for (let i = 0; i &lt; objectKeys.length; i++) {
+    arrToPush.push({
+      id: objectKeys[i],
+      data: dataFromFirebase[objectKeys[i]],
+    });
+  }
+  renderKanbanLists(tasks);
+}
+
+/**
+ * Clears all kanbanlists and creates the inner HTML content for all states on the board
+ *
+ * @param {array} tasksArr - Array with single task
+ */
+
+function renderKanbanLists(tasksArr) {
+  clearKanbanLists();
+  renderData(filterData('todo', tasksArr), kanbanListTodo);
+  renderData(filterData('in progress', tasksArr), kanbanListInProgress);
+  renderData(filterData('await feedback', tasksArr), kanbanListAwaitFeedback);
+  renderData(filterData('done', tasksArr), kanbanListDone);
+}
+
+/**
+ * Filters the associated tasks for the kanban list
+ *
+ * @param {string} board - String of the specific board status
+ * @param {*} tasksArr - array of single task
+ */
+function filterData(board, tasksArr) {
+  if (board == 'todo') {
+    return tasksArr.filter((t) => t.data.board == 'todo');
+  }
+  if (board == 'in progress') {
+    return tasksArr.filter((p) => p.data.board == 'in progress');
+  }
+  if (board == 'await feedback') {
+    return tasksArr.filter((f) => f.data.board == 'await feedback');
+  }
+  if (board == 'done') {
+    return tasksArr.filter((d) => d.data.board == 'done');
+  }
+}
+
+/**
+ * Creates the HTML card element with the  for each task
+ *
+ * @param {array} tasksArr - Array
+ * @param {object} kanbanList
+ * @param {string} path
+ */
+function renderData(tasksArr, kanbanList, path = '') {
+  if (tasksArr.length == 0) {
+    kanbanList.innerHTML = `&lt;div class="no-tasks-card">No tasks&lt;/div>`;
+  } else {
+    for (let i = 0; i &lt; tasksArr.length; i++) {
+      kanbanList.innerHTML += createCardHTML(tasksArr[i]);
+      renderAssignedToInCard(tasksArr[i].id, tasksArr[i], 'card-footer');
+    }
+  }
+}
+
+/**
+ * Clears the content in all kanban lists
+ *
+ */
+function clearKanbanLists() {
+  kanbanListTodo.innerHTML = '';
+  kanbanListInProgress.innerHTML = '';
+  kanbanListAwaitFeedback.innerHTML = '';
+  kanbanListDone.innerHTML = '';
+}
+
+/**
+ * Displays the task modal on click and  with the requested firebase content.
+ *
+ * @param {string} id - The identifier for the specific task
+ */
+function openTaskModal(id) {
+  taskModal.style.display = 'flex';
+  taskModalCard.style.display = 'flex';
+  modalSlideInOrOut('task-modal-card');
+  getDataForSingleTask(id);
+  displayTaskModalContacts(id);
+  closeDropdownOnclickBoard()
+}
+
+/**
+ * Closes the task modal and renders the board content
+ *
+ */
+function closeTaskModal() {
+  taskModalCard.style.display = 'flex';
+
+  setTimeout(() => {
+    taskModal.style.display = 'none';
+    taskModalEditCard.style.display = 'none';
+  }, 250);
+
+  if (document.getElementById('task-modal-edit-card').style.display == 'flex') {
+    taskModalCard.style.display = 'none';
+    modalSlideInOrOut('task-modal-edit-card');
+  } else {
+    modalSlideInOrOut('task-modal-card');
+  }
+  isEditOn = false;
+  removeAssignedList();
+  clearAssignedContacts();
+  renderBoard();
+}
+
+/**
+ * Opens the add task modal with the selected kanban list
+ *
+ * @param {object} kanbanBoard - Object of the kanban list
+ */
+function openAddTaskModal(kanbanBoard) {
+  if (window.innerWidth &lt; 890) {
+    window.location.href = 'add-task.html';
+    return;
+  }
+  addTaskModal.style.display = 'flex';
+  renderAllContactsInAddTask();
+  currentKanbanBoard = kanbanBoard;
+  modalSlideInOrOut('add-task-modal-card');
+  closeDropdownOnclickBoardAddTask()
+}
+
+/**
+ * hides the add task modal with a slide out animation and clears all inputs and assigned contacts
+ *
+ */
+function closeAddTaskModal() {
+  modalSlideInOrOut('add-task-modal-card');
+  setTimeout(() => {
+    addTaskModal.style.display = 'none';
+  }, 250);
+  clearAssignedContacts();
+  clearInputs();
+}
+
+/**
+ * closes the add task modal and clears the input and assigned contacts
+ *
+ */
+function cancelAddTask() {
+  clearInputs();
+  clearAssignedContacts();
+  closeAddTaskModal();
+}
+
+/**
+ * Creates a progressbar and displays the progrees of finished subtasks
+ *
+ * @param {object} task - Specific task object
+ */
+function renderSubtaskProgressBar(task) {
+  if (task.data.subtasks &amp;&amp; task.data.subtasks.length > 0) {
+    return `
+      &lt;div class="subtask-progress-bar-container">
+        &lt;div class="subtask-progress-bar">
+            &lt;div class="subtask-progress-bar-done" style="width: ${calcSubtaskProgressBar(
+              task
+            )}%">&lt;/div>
+        &lt;/div>
+        ${calcSubtaskCounter(task)}
       &lt;/div>
-    &lt;/li>
     `;
+  } else {
+    return '';
+  }
 }
 
 /**
- * Generates the HTML content for displaying a contact in the "Assigned To" contacts list with a checkbox
+ * This function checks the subtasks of a single task. If the subtask is checked the variable subtastkChecked is incremented by 1.
  *
- * @param {Object} contact - The contact object containing information about the contact
- * @param {string} id - The unique ID of the parent element
- * @param {number} index - The index of the contact in the list
+ * @param {object} task - Specific task object
  */
-function assignedToContactsContent(contact, id, index) {
-  return `
-    &lt;label for ="${contact['id']}cb">
-        &lt;div class ="add-task-contact-list">
-          &lt;div>
-            &lt;div id= "${contact['id']}-container" class= "initial-div">${contact['initials']}&lt;/div>
-            &lt;div>${contact['name']}&lt;/div>
-          &lt;/div>
-          &lt;input onchange ="inspectCheckboxes('assigned-contacts-list')" value="${contact['id']}cb" id="${contact['id']}cb" type ="checkbox">
-        &lt;/div>
-    &lt;/label>
-      `;
+function calcSubtaskCounter(task) {
+  let subtaskChecked = 0;
+  let subtasksAll = task.data.subtasks.length;
+
+  for (const element of task.data.subtasks) {
+    if (element.checked) {
+      subtaskChecked++;
+    }
+  }
+
+  return `&lt;div class="subtask-counter">${subtaskChecked}/${subtasksAll} Subtasks&lt;/div>`;
 }
 
 /**
- * Generates the HTML content for displaying a contact's initials in the assigned contacts list
+ * This function calculates the progress of the specific task between 0 to 100
  *
- * @param {Object} match - The contact object containing information about the contact
- * @param {number} index - The index of the contact in the list
+ * @param {object} task - task object
  */
-function assignedInitialContent(match, index) {
-  return `
-    &lt;div id="addContactList${index}" class ="assigned-contacts-initial-container">
-        &lt;div>
-          &lt;div style="background-color:${match['color']}" id= "${match['id']}-container" class= "initial-div">${match['initials']}&lt;/div>
-        &lt;/div>
-    &lt;/div>
-  `;
+function calcSubtaskProgressBar(task) {
+  let progressBarFull = 100;
+  let progressBarDone = 0;
+  let subtaskChecked = 0;
+  let subtasksAll = task.data.subtasks.length;
+
+  for (const element of task.data.subtasks) {
+    if (element.checked) {
+      subtaskChecked++;
+    }
+  }
+  progressBarDone = (progressBarFull / subtasksAll) * subtaskChecked;
+
+  return progressBarDone;
 }
-</code></pre>
+
+// DRAG AND DROP
+
+/**
+ * Prevents the default behavior of the element
+ *
+ * @param {object} event - Event Object
+ */
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+/**
+ * Adds the the event target id to the variable currentDraggedElementId
+ *
+ * @param {*} event - Event Object
+ */
+function drag(event) {
+  currentDraggedElementId = event.target.id;
+}
+
+/**
+ * This function changes the path of the dropped element in the database and thereafter renders the board
+ *
+ * @param {*} board
+ */
+async function drop(board) {
+  for (let element of tasks) {
+    if (currentDraggedElementId == element.id) {
+      element.data.board = board;
+      await updateTaskInFirebase(element.id, element.data);
+    }
+  }
+  await renderBoard();
+}
+
+/**
+ * Highlights the border with a dotted line while dragging and hovering over the actual kanbanlist
+ *
+ * @param {*} id
+ */
+function highlight(id) {
+  document.getElementById(id).classList.add('highlight-kanban-list');
+}
+
+/**
+ * Removes the dotted line after leaving the kanban list container while dragging an element
+ *
+ * @param {*} id
+ */
+function removeHighlight(id) {
+  document.getElementById(id).classList.remove('highlight-kanban-list');
+}
+
+/**
+ * This function filters the input text and renders the kanban list with the filtered data
+ *
+ */
+function searchTask() {
+  clearKanbanLists();
+  controlVisibilityInputClearBtn();
+
+  let inputText = searchInput.value.toLowerCase();
+
+  const filteredData = tasks.filter(
+    (element) =>
+      element.data.title.toLowerCase().includes(inputText) ||
+      element.data.description.toLowerCase().includes(inputText)
+  );
+
+  renderKanbanLists(filteredData);
+}
+
+/**
+ * Switches the visibility of the clearInputBtn on input to visible and on an empty input field to invisible.
+ *
+ */
+function controlVisibilityInputClearBtn() {
+  if (searchInput.value.length > 0) {
+    clearInputBtn.style.visibility = 'visible';
+  } else {
+    clearInputBtn.style.visibility = 'hidden';
+  }
+}
+
+/**
+ * Clears the search inputfield and renders the kanban list
+ *
+ */
+function cancelSearchTask() {
+  searchInput.value = '';
+  renderKanbanLists(tasks);
+  controlVisibilityInputClearBtn();
+}</code></pre>
         </article>
     </section>
 

@@ -51,8 +51,6 @@ async function renderBoard() {
 
 /**
  * Creates an array of all contacts from the database
- *
- * @returns
  */
 async function loadContactsFromFirebase() {
   let response = await fetch(BASE_URL + 'contacts' + '.json');
@@ -68,8 +66,6 @@ async function loadContactsFromFirebase() {
 
 /**
  * Creates an array of all tasks from the database
- *
- * @returns
  */
 
 async function loadTasksFromFirebase() {
@@ -121,7 +117,6 @@ function renderKanbanLists(tasksArr) {
  *
  * @param {string} board - String of the specific board status
  * @param {*} tasksArr - array of single task
- * @returns
  */
 function filterData(board, tasksArr) {
   if (board == 'todo') {
@@ -209,7 +204,6 @@ function closeTaskModal() {
  * Opens the add task modal with the selected kanban list
  *
  * @param {object} kanbanBoard - Object of the kanban list
- * @returns
  */
 function openAddTaskModal(kanbanBoard) {
   if (window.innerWidth < 890) {
@@ -250,7 +244,6 @@ function cancelAddTask() {
  * Creates a progressbar and displays the progrees of finished subtasks
  *
  * @param {object} task - Specific task object
- * @returns
  */
 function renderSubtaskProgressBar(task) {
   if (task.data.subtasks && task.data.subtasks.length > 0) {
@@ -273,7 +266,6 @@ function renderSubtaskProgressBar(task) {
  * This function checks the subtasks of a single task. If the subtask is checked the variable subtastkChecked is incremented by 1.
  *
  * @param {object} task - Specific task object
- * @returns
  */
 function calcSubtaskCounter(task) {
   let subtaskChecked = 0;
@@ -292,7 +284,6 @@ function calcSubtaskCounter(task) {
  * This function calculates the progress of the specific task between 0 to 100
  *
  * @param {object} task - task object
- * @returns
  */
 function calcSubtaskProgressBar(task) {
   let progressBarFull = 100;
