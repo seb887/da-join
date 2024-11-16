@@ -294,29 +294,13 @@ async function compareArray() {
   comparsion.forEach((element) => {
     let example = element[0]['example'];
     let pattern = element[0]['pattern'];
-    example['name'] !== pattern['name']
-      ? assignedContactsToUpdate.push({
-          taskId: element[0]['taskId'],
-          contactId: pattern['id'],
-        })
+    example['name'] !== pattern['name'] ? assignedContactsToUpdate.push({taskId: element[0]['taskId'],contactId: pattern['id'],})
       : null;
-    example['email'] !== pattern['email']
-      ? assignedContactsToUpdate.push({
-          taskId: element[0]['taskId'],
-          contactId: pattern['id'],
-        })
+    example['email'] !== pattern['email'] ? assignedContactsToUpdate.push({ taskId: element[0]['taskId'],contactId: pattern['id'],})
       : null;
-    example['initials'] !== pattern['initials']
-      ? assignedContactsToUpdate.push({
-          taskId: element[0]['taskId'],
-          contactId: pattern['id'],
-        })
+    example['initials'] !== pattern['initials'] ? assignedContactsToUpdate.push({ taskId: element[0]['taskId'], contactId: pattern['id'], })
       : null;
-    example['phone'] !== pattern['phone']
-      ? assignedContactsToUpdate.push({
-          taskId: element[0]['taskId'],
-          contactId: pattern['id'],
-        })
+    example['phone'] !== pattern['phone'] ? assignedContactsToUpdate.push({taskId: element[0]['taskId'], contactId: pattern['id'],})
       : null;
   });
   return assignedContactsToUpdate;
