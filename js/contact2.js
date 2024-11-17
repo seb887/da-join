@@ -21,7 +21,8 @@ async function createContact() {
     selectCreatedContact(document.getElementById('inputContactName').value);
     showInfoToast('Contact succesfully created');
   }
-  /**
+  
+ /**
  * Validates the contact input fields and calls the appropriate action based on the status.
  * 
  * @param {string} status - The action to perform ("add" or "edit").
@@ -227,16 +228,12 @@ function validateEmail(email) {
    * @param {number} index - The index of the contact in `contactsArray` to update and re-render
    */
   async function saveChangesOnContact(id, index) {
-    let initials = generateInitials(
-      document.getElementById('inputContactName').value
-    );
+    let initials = generateInitials(document.getElementById('inputContactName').value);
     let response = await fetch(
       `https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts/${id}.json`,
       {
         method: 'PUT',
-        header: {
-          'Content-Type': 'application/json',
-        },
+        header: {'Content-Type': 'application/json',},
         body: JSON.stringify({
           name: document.getElementById('inputContactName').value,
           email: document.getElementById('inputMailAddress').value,

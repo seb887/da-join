@@ -132,9 +132,7 @@ window.onscroll = function (ev) {
  * @param {string} text - Displayed text in the info toast
  */
 function showInfoToast(text) {
-  // event.preventDefault();
   const toast = document.getElementById('info-toast');
-  // const infoText = document.getElementById('infoText');
   toast.innerText = text;
   toast.classList.add('show');
   setTimeout(() => {

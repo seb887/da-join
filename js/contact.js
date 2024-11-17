@@ -96,28 +96,16 @@ function checkForExistingLetter(contact) {
  */
 function openContact(index) {
   let container = document.getElementById('contactInformation');
-  let responsiveButtonBottom = document.getElementById(
-    'responsive-button-bottom'
-  );
-  let isSameContact =
-    document.getElementById('contactName').innerText ==
-    contactsArray[index].name.trim();
-
+  let responsiveButtonBottom = document.getElementById('responsive-button-bottom');
+  let isSameContact = document.getElementById('contactName').innerText == contactsArray[index].name.trim();
   container.classList.toggle('contactFadeAndSlideIn', isSameContact);
-  document
-    .getElementById('contact-information-responsive')
-    .classList.toggle('fadeAndSlideInResponsive', isSameContact);
+  document.getElementById('contact-information-responsive').classList.toggle('fadeAndSlideInResponsive', isSameContact);
   responsiveButtonBottom.src = '../assets/icons/more.png';
-  document
-    .getElementById('goBackToList')
-    .classList.remove('hide-z-index-responsive');
-
+  document.getElementById('goBackToList').classList.remove('hide-z-index-responsive');
   if (!isSameContact) {
     setTimeout(() => {
       container.classList.add('contactFadeAndSlideIn');
-      document
-        .getElementById('contact-information-responsive')
-        .classList.add('fadeAndSlideInResponsive');
+      document.getElementById('contact-information-responsive').classList.add('fadeAndSlideInResponsive');
     }, 50);
   }
   setContactInformation(index);
@@ -131,27 +119,24 @@ function openContact(index) {
  * @param {number} index - The index of the contact in the `contactsArray`
  */
 async function setContactInformation(index) {
-  document.getElementById('bgInitials').style.backgroundColor =
-    contactsArray[index].color;
+  document.getElementById('bgInitials').style.backgroundColor = contactsArray[index].color;
+  setContactInformationsInnerText(index);
+  document.getElementById('delContact').onclick = () => {deleteContact(contactsArray[index].id);};
+  document.getElementById('editContact').onclick = () => { editContact(index);};
+  document.getElementById('edit-contact-responsive').onclick = () => {editContact(index);};
+  document.getElementById('del-contact-responsive').onclick = () => { deleteContact(contactsArray[index].id); };
+  setSelectedContactBackground(index);
+}
+
+/**
+ * 
+ * @param {number} index -
+ */
+function setContactInformationsInnerText(index){
   document.getElementById('contactName').innerText = contactsArray[index].name;
   document.getElementById('mailAddress').innerText = contactsArray[index].email;
   document.getElementById('phoneNumber').innerText = contactsArray[index].phone;
-  document.getElementById('initialsArticle').innerText = generateInitials(
-    contactsArray[index].name
-  );
-  document.getElementById('delContact').onclick = () => {
-    deleteContact(contactsArray[index].id);
-  };
-  document.getElementById('editContact').onclick = () => {
-    editContact(index);
-  };
-  document.getElementById('edit-contact-responsive').onclick = () => {
-    editContact(index);
-  };
-  document.getElementById('del-contact-responsive').onclick = () => {
-    deleteContact(contactsArray[index].id);
-  };
-  setSelectedContactBackground(index);
+  document.getElementById('initialsArticle').innerText = generateInitials(contactsArray[index].name);
 }
 
 /**

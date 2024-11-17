@@ -245,8 +245,7 @@ async function checkUser() {
   for (let key in users) {
     if (users[key].name === name) {
       nameExists = true;
-      document.getElementById('sign-up-error').innerHTML =
-        'Username already in use';
+      document.getElementById('sign-up-error').innerHTML = 'Username already in use';
       break;
     }
   }
@@ -267,8 +266,7 @@ async function checkEmail() {
   for (let key in users) {
     if (users[key].email === email) {
       emailExists = true;
-      document.getElementById('sign-up-error').innerHTML =
-        'E-Mail already in use';
+      document.getElementById('sign-up-error').innerHTML = 'E-Mail already in use';
       break;
     }
   }
@@ -303,12 +301,8 @@ async function postUser() {
 function playSignedUpAnimation() {
   document.getElementById('signed-up-overlay').classList.remove('d-none');
   document.getElementById('signed-up-overlay').style.zIndex = 5;
-  document
-    .getElementById('signed-up-overlay')
-    .classList.add('signed-up-animation-overlay');
-  document
-    .getElementById('signed-up-container')
-    .classList.add('signed-up-animation-container');
+  document.getElementById('signed-up-overlay').classList.add('signed-up-animation-overlay');
+  document.getElementById('signed-up-container').classList.add('signed-up-animation-container');
   setTimeout(function () {
     window.location.href = 'login.html';
   }, 1500);
@@ -347,9 +341,7 @@ function toggleSignUpPasswordVisibility() {
 function showLoginPassword() {
   document.getElementById('current-password').type = 'text';
   document.getElementById('icon-password').classList.add('eye-password');
-  document
-    .getElementById('icon-password')
-    .classList.remove('eye-password-non-visible');
+  document.getElementById('icon-password').classList.remove('eye-password-non-visible');
 }
 
 /**
